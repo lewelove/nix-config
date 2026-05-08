@@ -7,13 +7,13 @@ function M.process_metadata()
 
   -- Read buffer lines
   local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-  local has_album_gain = vim.fn.search('^REPLAYGAIN_ALBUM_GAIN = ', 'nw') > 0
-  local has_albumartists = vim.fn.search('^ALBUMARTISTS = ', 'nw') > 0
+  local has_album_gain = vim.fn.search('^replaygain_album_gain = ', 'nw') > 0
+  local has_albumartists = vim.fn.search('^albumartists = ', 'nw') > 0
 
   -- Identify all ARTIST lines
   local artist_lines = {}
   for _, line in ipairs(lines) do
-    if line:match("^ARTIST = ") then
+    if line:match("^artist = ") then
       table.insert(artist_lines, line)
     end
   end
@@ -27,31 +27,31 @@ function M.process_metadata()
   end
 
   -- 1. General Deletions (Black hole)
-  vim.cmd([[silent! %g/^\(REPLAYGAIN_TRACK_PEAK\|REPLAYGAIN_ALBUM_PEAK\|ORIGINAL_DATE\|ORIGINAL_YYYY_MM\|DATE_ADDED\) = /d _]])
+  vim.cmd([[silent! %g/^\(replaygain_track_peak\|replaygain_album_peak\|original_date\|original_yyyy_mm\|date_added\) = /d _]])
 
   -- 2. Conditional Artist Deletion
   if all_artists_same then
-    vim.cmd([[silent! %g/^ARTIST = /d _]])
+    vim.cmd([[silent! %g/^artist = /d _]])
   end
 
   -- 3. Conditional Gain Removal
   if has_album_gain then
-    vim.cmd([[silent! %g/^REPLAYGAIN_TRACK_GAIN = /d _]])
+    vim.cmd([[silent! %g/^replaygain_track_gain = /d _]])
   end
-  vim.cmd([[silent! %g/^REPLAYGAIN_ALBUM_GAIN = /d _]])
+  vim.cmd([[silent! %g/^replaygain_album_gain = /d _]])
 
   -- 4. Tag Duplication/Renaming
   if not has_albumartists then
-    vim.cmd([[silent! %s/^\(CUSTOM_ALBUMARTIST\) = \(.*\)/ALBUMARTISTS = \2\r\1 = \2/ge]])
+    vim.cmd([[silent! %s/^\(custom_albumartist\) = \(.*\)/albumartists = \2\r\1 = \2/ge]])
   end
 
   -- 5. Swap Album/Artist Order
-  vim.cmd([[silent! %s/^\(ALBUM = .*\)\n\(ALBUMARTISTS\? = .*\)/\2\r\1/ge]])
+  vim.cmd([[silent! %s/^\(album = .*\)\n\(albumartists\? = .*\)/\2\r\1/ge]])
 
   -- 6. Formatting (Numbers & Quotes)
-  vim.cmd([[silent! %s/TRACKNUMBER = "0*\(\d\+\)"/TRACKNUMBER = \1/ge]])
-  vim.cmd([[silent! %s/DISCNUMBER = "0*\(\d\+\)"/DISCNUMBER = \1/ge]])
-  vim.cmd([[silent! %g/^UNIX_ADDED_\(FOOBAR\|APPLEMUSIC\|YOUTUBE\)/s/"//ge]])
+  vim.cmd([[silent! %s/tracknumber = "0*\(\d\+\)"/tracknumber = \1/ge]])
+  vim.cmd([[silent! %s/discnumber = "0*\(\d\+\)"/discnumber = \1/ge]])
+  vim.cmd([[silent! %g/^unix_added_\(foobar\|applemusic\|youtube\)/s/"//ge]])
 
   -- 7. Whitespace Management
   vim.cmd([[silent! %s/^\[album\]$/[album]\r/ge]])

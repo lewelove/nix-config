@@ -71,7 +71,9 @@
     imagemagick
     puddletag
     roomeqwizard
+    transmission_4
     ffmpeg
+    intermodal
 
     # Web
     ayugram-desktop

@@ -10,22 +10,36 @@
     pkgs = nixpkgs.legacyPackages.${system};
   in {
     lib = {
+      copyFlac = ''find . -maxdepth 2 -name "*.flac" -exec cp {} $out/ \;'';
+
       mkAlbum = { 
         pname, 
-        src, 
+        sourceDisk ? null,
+        sourceTorrent ? null,
+        sourceMagnet ? null,
+        sha256 ? null,
+        fetchCommand ? null,
         metadata ? null, 
         metadataString ? null, 
         cover ? null, 
-        ops ? "cp -r ./* $out/" 
+        ops ? self.lib.copyFlac
       }:
         let
           unwrap = s: if builtins.isString s && builtins.substring 0 1 s == "/" 
                       then /. + s 
                       else s;
 
-          realSrc = builtins.path {
-            name = pname;
-            path = unwrap src;
+          rawSrc = if (builtins.getEnv "VELLUM_STAGING_SRC") != "" then
+                      /. + (builtins.getEnv "VELLUM_STAGING_SRC")
+                    else if sourceDisk != null then 
+                      unwrap sourceDisk
+                    else 
+                      throw "No source found for ${pname}";
+
+          realSrc = builtins.path { 
+            name = "${pname}-source"; 
+            path = rawSrc; 
+            inherit sha256; 
           };
 
           realMetadata = if metadata != null 
@@ -36,7 +50,6 @@
                       then builtins.path { name = "${pname}-cover"; path = unwrap cover; } 
                       else null;
 
-          # Explicitly extract extension from the original path string/literal
           coverExt = if cover != null then 
                        let 
                          base = builtins.baseNameOf (unwrap cover);
@@ -56,15 +69,25 @@
           buildInputs = [ pkgs.flac pkgs.shntool pkgs.ffmpeg ];
           
           passAsFile = if metadataString != null then [ "metadataContent" ] else [];
+
+          passthru = {
+            inherit pname sourceMagnet sourceTorrent sha256 fetchCommand;
+            sourceDisk = if (builtins.getEnv "VELLUM_STAGING_SRC") != "" then (builtins.getEnv "VELLUM_STAGING_SRC") else sourceDisk;
+            usingMetadataFile = metadata != null;
+          };
           
           buildPhase = ''
             mkdir -p $out
             
+            if [ -d "$src" ]; then
+              cd "$src"
+            fi
+
             ${ops}
             
             if [ -n "$metadataPath" ]; then
               cp "$metadataPath" "$out/metadata.toml"
-            elif [ -f "$metadataContentPath" ]; then
+            elif [ -n "''${metadataContentPath:-}" ] && [ -f "$metadataContentPath" ]; then
               cp "$metadataContentPath" "$out/metadata.toml"
             fi
 

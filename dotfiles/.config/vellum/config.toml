@@ -5,8 +5,15 @@ environment = "~/.secrets/vellum.env"
 
 
 [nix]
-store = "/run/media/lewelove/1000xhome/backup-everything/FB2K/.vellum-store/"
-flake = "~/.config/vellum/nix"
+flake = "/home/lewelove/dev/vellum/nix/flake.nix"
+store = "/run/media/lewelove/1000xhome/backup-everything/FB2K/.vellum/store/"
+stage = "/run/media/lewelove/1000xhome/backup-everything/FB2K/.vellum/stage/"
+
+[nix.commands]
+get_torrent = "transmission-remote -a '${sourceTorrent.file}' -w '${sourceDisk.path}'"
+verify_torrent = "imdl -q torrent verify '${sourceTorrent.file}' --content '${sourceDisk.path}/${sourceTorrent.name}/'"
+seed_torrent = ""
+
 
 [theme]
 thumbnail_size = 190
@@ -35,11 +42,11 @@ unix_added = [ "unix_added_youtube", "unix_added_applemusic", "unix_added_foobar
 date_added = "%B %d %Y"
 manifests = [ "mbid.toml", "cover_palette.toml" ]
 file_subset_match = [
-  "ALBUM", "ALBUMARTIST", "DATE", "GENRE",
-  "COMMENT", "TITLE", "ARTIST", "TRACKNUMBER",
-  "MUSICBRAINZ_ALBUMARTISTID", "MUSICBRAINZ_ALBUMID",
-  "MUSICBRAINZ_RELEASEGROUPID", "MUSICBRAINZ_ARTISTID",
-  "MUSICBRAINZ_RELEASETRACKID", "MUSICBRAINZ_TRACKID"
+  "album", "albumartist", "date", "genre",
+  "comment", "title", "artist", "tracknumber",
+  "musicbrainz_albumartistid", "musicbrainz_albumid",
+  "musicbrainz_releasegroupid", "musicbrainz_artistid",
+  "musicbrainz_releasetrackid", "musicbrainz_trackid"
 ]
 
 
