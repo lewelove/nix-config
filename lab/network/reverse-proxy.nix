@@ -60,6 +60,14 @@
         '';
       };
 
+      "call.{$DUCKDNS_DOMAIN}" = {
+        extraConfig = ''
+          import logging
+          import drop_scanners
+          reverse_proxy 127.0.0.1:3000
+        '';
+      };
+
       "vellum.{$DUCKDNS_DOMAIN}" = {
         extraConfig = ''
           import logging
