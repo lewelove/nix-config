@@ -45,6 +45,7 @@ if status is-interactive
 
   # album curation utils
   # alias discid="/home/lewelove/dev/album_curation/discid/.build/bin/discid"
+  alias vellcro="/home/lewelove/dev/vellcro/rust/target/release/vellcro"
   alias discid="/home/lewelove/dev/album_curation/rsdiscid/target/release/rsdiscid"
   alias albumset="/home/lewelove/dev/album_curation/album_setup/.build/bin/album_setup"
   alias albumw="/home/lewelove/dev/album_curation/album_write/.build/bin/album_write"

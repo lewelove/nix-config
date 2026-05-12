@@ -1,7 +1,7 @@
 [window]
 padding = { x = 16, y = 16 }
 dynamic_padding = true
-opacity = 0.95
+opacity = 0.85
 blur = true
 
 [terminal.shell]

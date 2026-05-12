@@ -74,6 +74,7 @@
     transmission_4
     ffmpeg
     intermodal
+    aria2
 
     # Web
     ayugram-desktop

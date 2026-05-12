@@ -1,14 +1,13 @@
 { pkgs, identity, ... }:
 
 let
-  awgr = pkgs.writeShellApplication {
-    name = "awgr";
+  awg = pkgs.writeShellApplication {
+    name = "awg";
     runtimeInputs = with pkgs; [ 
       coreutils 
       findutils 
       gum 
-      curl 
-      jq 
+      iputils
       amneziawg-go
       amneziawg-tools 
       psmisc
@@ -42,20 +41,17 @@ let
 
       awg-quick up "$TARGET_CONF" 2>/dev/null || true
 
-      if INFO=$(curl -s --interface active --max-time 5 http://ip-api.com/json); then
-        IP=$(echo "$INFO" | jq -r .query)
-        COUNTRY=$(echo "$INFO" | jq -r .country)
+      if ping -c 1 -W 5 google.com > /dev/null 2>&1; then
         echo ""
         gum join --horizontal ":: " "$(gum style --foreground 2 --bold "SUCCESS")" " - Tunnel LIVE"
         echo ":: Config:  $SELECTED"
-        echo ":: VPN IP:  $IP ($COUNTRY)"
       else
         echo ""
-        gum join --horizontal ":: " "$(gum style --foreground 3 --bold "WARNING")" " - Tunnel UP, check failed"
+        gum join --horizontal ":: " "$(gum style --foreground 3 --bold "WARNING")" " - Tunnel UP, ping failed"
       fi
     '';
   };
 in
 {
-  environment.systemPackages = [ awgr ];
+  environment.systemPackages = [ awg ];
 }

@@ -15,7 +15,7 @@
       users = [ "${username}" ];
       commands = [
         { 
-          command = "/run/current-system/sw/bin/awgr";
+          command = "/run/current-system/sw/bin/awg";
           options = [ "NOPASSWD" ];
         }
       ];
