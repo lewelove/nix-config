@@ -1,39 +1,13 @@
-{ pkgs, identity, ... }:
+{ pkgs, username, dot, ... }:
 
 {
-
   programs.ssh.startAgent = true;
-
-  programs.git = {
-    enable = true;
-    config = {
-      user = {
-        name = identity.username;
-        email = identity.email;
-      };
-      init.defaultBranch = "main";
-      safe.directory = "*";
-    };
-  };
-
   programs.dconf.enable = true;
   
   programs.direnv = {
     enable = true;
     enableBashIntegration = true;
-  };
-  
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ 
-      pkgs.xdg-desktop-portal-hyprland
-      pkgs.kdePackages.xdg-desktop-portal-kde
-    ];
-    config = {
-      common = {
-        default = [ "gtk" ];
-      };
-    };
+    enableFishIntegration = true;
   };
 
   programs.fuse.userAllowOther = true;
@@ -43,4 +17,28 @@
     keybindings = true;
   };
 
+  home-manager.users.${username} = { config, ... }: {
+
+    programs.ssh = {
+      enable = true;
+      enableDefaultConfig = false;
+      matchBlocks = {
+        "lab" = {
+          hostname = "192.168.1.100";
+          user = "lewelove";
+          forwardAgent = true;
+        };
+      };
+    };
+
+    home.file = {
+      ".bashrc".source = config.lib.file.mkOutOfStoreSymlink "${dot}/.bashrc";
+      ".scripts".source = config.lib.file.mkOutOfStoreSymlink "${dot}/.scripts";
+      ".applications".source = config.lib.file.mkOutOfStoreSymlink "${dot}/.applications";
+      ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${dot}/.config/starship.toml";
+      ".config/mimeapps.list".source = config.lib.file.mkOutOfStoreSymlink "${dot}/.config/mimeapps.list";
+      ".config/repomix".source = config.lib.file.mkOutOfStoreSymlink "${dot}/.config/repomix";
+    };
+  };
 }
+
