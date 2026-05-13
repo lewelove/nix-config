@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, stable, ... }:
 
 {
 
@@ -62,7 +62,7 @@
     fzf
 
     # Media
-    mpv
+    stable.mpv
     # imv
     # mpc
     # rmpc

@@ -1,8 +1,6 @@
-
-{ config, pkgs, inputs, username, ... }:
+{ inputs, username, ... }:
 
 {
-
   imports = [ inputs.home-manager.nixosModules.default ];
 
   home-manager = {
@@ -11,7 +9,13 @@
     users.${username} = { config, ... }: {
       home.stateVersion = "25.05";
 
+      xdg.userDirs = {
+        enable = true;
+        setSessionVariables = true;
+        createDirectories = true;
+        download = "/run/media/${username}/1000xhome/downloads";
+      };
     };
   };
-
 }
+

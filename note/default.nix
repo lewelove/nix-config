@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, lib, ... }:
 
 {
 
@@ -15,6 +15,7 @@
     ./modules/hardware-configuration.nix
     ./modules/disko.nix
 
+    ./modules/tilde.nix
     ./modules/networking.nix
     ./modules/bluetooth.nix
 
@@ -24,37 +25,23 @@
     ./modules/packages.nix
 
     # Programs
-    ./programs/chromium.nix
-    ./programs/sway.nix
-    ./programs/thunar.nix
-    ./programs/system.nix
+    (lib.pipe inputs.import-tree [
+      (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
+      (i: i ./programs)
+    ])
 
-    # Web Applications
-    ./programs/web-applications/youtube.nix
-    ./programs/web-applications/figma.nix
-
-    # Local Web Applications
-    ./programs/web-applications/qbittorrent.nix
-    ./programs/web-applications/jellyfin.nix
-    ./programs/web-applications/mympd.nix
-
-    # System Services
-    # ./services/xremap.nix
-    # ./services/mympd.nix
-
-    # User Services
-    # ./services/user/mpd.nix
-    ./services/user/chromium-service.nix
-    ./services/user/swww.nix
-    ./services/user/wlsunset.nix
-    # ./services/user/listenbrainz-mpd-90-no4m.nix
-    ./services/user/polkit-agent.nix
+    # Services
+    (lib.pipe inputs.import-tree [
+      (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
+      (i: i ./services)
+    ])
 
     # Scripts
-    ../common/scripts/tilde-stow.nix
     ../common/scripts/nrs.nix
     ../common/scripts/ns.nix
     ../common/scripts/nt.nix
+    ../common/scripts/sync.nix
+    ./scripts/awg.nix
   ];
 
 }

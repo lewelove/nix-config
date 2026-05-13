@@ -1,8 +1,6 @@
 { config, pkgs, lib, username, hostname, ... }:
 
 {
-
-  # --- Boot ---
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = false;
   boot.loader.efi.canTouchEfiVariables = false;
@@ -15,5 +13,4 @@
   };
 
   zramSwap.enable = true;
-
 }

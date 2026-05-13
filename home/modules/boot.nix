@@ -1,8 +1,6 @@
 { config, pkgs, username, hostname, ... }:
 
 {
-
-  # --- Boot ---
   boot.kernelPackages = pkgs.linuxPackages;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub = {
@@ -17,5 +15,4 @@
     "bluetooth.disable_ertm=1"
     "bluetooth.disable_esco=1"
   ];
-
 }
