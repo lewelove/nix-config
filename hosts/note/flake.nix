@@ -2,23 +2,24 @@
   description = "Entry Point for NixOS Configuration";
 
   inputs = {
+    # System
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     home-manager.url = "github:nix-community/home-manager";
     import-tree.url = "github:vic/import-tree";
-
+    # Disko
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
+    # Other Flakes
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    # photogimp.url = "github:Libadoxon/nix-photo-gimp";
     xremap.url = "github:xremap/nix-flake";
-    nvibrant.url = "github:mikaeladev/nix-nvibrant";
-
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, nixpkgs-stable, ... }@inputs:
   let
-    identity = import ./identity.nix;
-    hostPath = "${identity.repoPath}/${identity.hostname}";
+    identity = import ../../identity.nix;
+    hostPath = "${identity.repoPath}/hosts/${identity.hostname}";
     dot = "${identity.repoPath}/dotfiles";
   in {
     nixosConfigurations.${identity.hostname} = nixpkgs.lib.nixosSystem {
@@ -30,7 +31,10 @@
           config.allowUnfree = true;
         };
       };
-      modules = [ ./default.nix ];
+      modules = [ 
+        inputs.disko.nixosModules.disko
+        ./default.nix 
+      ];
     };
   };
 }

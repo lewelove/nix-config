@@ -1,7 +1,6 @@
 { inputs, lib, ... }:
 
 {
-
   imports = [
 
     # System
@@ -29,21 +28,32 @@
     # Programs
     (lib.pipe inputs.import-tree[
       (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
+      (i: i ../../programs)
+    ])
+    (lib.pipe inputs.import-tree[
+      (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
       (i: i ./programs)
     ])
 
     # Services
+    (lib.pipe inputs.import-tree[
+      (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
+      (i: i ../../services)
+    ])
     (lib.pipe inputs.import-tree [
       (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
       (i: i ./services)
     ])
 
     # Scripts
-    ../common/scripts/nrs.nix
-    ../common/scripts/ns.nix
-    ../common/scripts/nt.nix
-    ../common/scripts/sync.nix
-    ./scripts/awg.nix
-  ];
+    (lib.pipe inputs.import-tree[
+      (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
+      (i: i ../../scripts)
+    ])
+    (lib.pipe inputs.import-tree [
+      (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
+      (i: i ./scripts)
+    ])
 
+  ];
 }

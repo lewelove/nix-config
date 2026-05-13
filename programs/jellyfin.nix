@@ -2,15 +2,15 @@
 
 let
   wrapper = config.my.chromium.wrapper;
-  url = "https://youtube.com";
-  name = "YouTube";
-  icon = "youtube";
+  url = "https://jellyfin.lewelaboratory.duckdns.org/";
+  name = "Jellyfin";
+  icon = "jellyfin";
 in
 {
   home-manager.users.${username} = {
     xdg.desktopEntries.${name} = {
       inherit name icon;
-      genericName = "Video Player";
+      genericName = "Media Server";
       exec = "${wrapper}/bin/chromium-browser --app=${url}";
       terminal = false;
     };
