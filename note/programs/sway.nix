@@ -1,7 +1,6 @@
-{ pkgs, ... }:
+{ pkgs, username, dot, ... }:
 
 {
-
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
@@ -16,4 +15,10 @@
 
   services.displayManager.sessionPackages = [ pkgs.sway ];
 
+  home-manager.users.${username} = { config, ... }: {
+    home.file = {
+      ".config/sway".source = config.lib.file.mkOutOfStoreSymlink "${dot}/.config/sway";
+      ".config/waybar".source = config.lib.file.mkOutOfStoreSymlink "${dot}/.config/waybar";
+    };
+  };
 }
