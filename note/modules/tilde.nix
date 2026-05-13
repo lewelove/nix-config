@@ -20,11 +20,6 @@
       ".config/qt5ct".source = link "${dot}/.config/qt5ct";
       ".config/qt6ct".source = link "${dot}/.config/qt6ct";
       ".config/containers".source = link "${dot}/.config/containers";
-
-      # --- External Storage Symlinks ---
-      # "downloads/1000xhome".source = link "/run/media/${username}/1000xhome/downloads";
-      # "downloads/x2000".source    = link "/run/media/${username}/x2000/downloads";
-      # "downloads/1000xlab".source = link "/mnt/servers/1000xlab/downloads";
     };
   };
 }
