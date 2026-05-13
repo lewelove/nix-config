@@ -18,7 +18,7 @@
 
   outputs = { self, nixpkgs, nixpkgs-stable, ... }@inputs:
   let
-    identity = import ../../identity.nix;
+    identity = import ./identity.nix;
     hostPath = "${identity.repoPath}/hosts/${identity.hostname}";
     dot = "${identity.repoPath}/dotfiles";
   in {
