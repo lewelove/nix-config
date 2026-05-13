@@ -38,8 +38,7 @@ supported_extensions = [ ".flac" ]
 
 
 [compiler]
-unix_added = [ "unix_added_youtube", "unix_added_applemusic", "unix_added_foobar" ]
-date_added = "%B %d %Y"
+date_added = [ "unix_added_youtube", "unix_added_applemusic", "unix_added_foobar" ]
 manifests = [ "mbid.toml", "cover_palette.toml" ]
 file_subset_match = [
   "album", "albumartist", "date", "genre",
@@ -75,9 +74,9 @@ label = { level = "album" }
 catalognumber = { level = "album" }
 release_yyyy_mm = { level = "album" }
 
-discogs_url = { level = "album", newline = true }
-musicbrainz_url = { level = "album" }
-ctdbid_url = { level = "album" }
+discogs_url = { level = "album", newline = true, manifests = "url" }
+musicbrainz_url = { level = "album", manifests = "url" }
+ctdbid_url = { level = "album", manifests = "url" }
 
 tracknumber = { level = "track" }
 title = { level = "track" }
@@ -93,9 +92,9 @@ media = { level = "album" }
 discogs_url = { level = "album" }
 musicbrainz_url = { level = "album" }
 ctdbid_url = { level = "album" }
-unix_added_foobar = { level = "album", type = "integer" }
-unix_added_applemusic = { level = "album", type = "integer" }
-unix_added_youtube = { level = "album", type = "integer" }
+unix_added_foobar = { level = "album", type = "time" }
+unix_added_applemusic = { level = "album", type = "time" }
+unix_added_youtube = { level = "album", type = "time" }
 custom_id = { level = "album" }
 custom_albumartist = { level = "album", args = "custom_albumartist,artistartist,albumartist" }
 custom_string = { level = "album" }

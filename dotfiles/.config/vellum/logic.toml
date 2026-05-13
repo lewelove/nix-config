@@ -23,7 +23,7 @@ select = "CAST(COALESCE(${album.info.total_discs}, 1) AS TEXT)"
 
 [groupers.year_added]
 label = "Year Added"
-select = "strftime({%Y}, datetime(${album.info.unix_added}, {unixepoch}))"
+select = "substr(${album.info.date_added}, 1, 4)"
 
 [groupers.chroma]
 label = "Chroma"
@@ -57,7 +57,7 @@ order_by = "CAST(${album.tags.cover_entropy} AS INT) DESC"
 
 [sorters.date_added]
 label = "Date Added"
-order_by = "COALESCE(CAST(${album.tags.unix_added_youtube} AS INT), CAST(${album.tags.unix_added_applemusic} AS INT), CAST(${album.tags.unix_added_foobar} AS INT), CAST(${album.info.unix_added} AS INT)) DESC"
+order_by = "${album.info.date_added} DESC"
 
 [sorters.last_edited]
 label = "Last Edited"
@@ -87,17 +87,17 @@ filter = "COALESCE(${album.genre}, '') LIKE %{Signalwave}"
 label = "Apple Music"
 filter = "${album.tags.unix_added_applemusic} IS NOT NULL"
 strict = true
-groupers =["year_added_applemusic", "genre", "decade"]
+groupers = ["year_added_applemusic", "genre", "decade"]
 sorters = ["unix_added_applemusic", "default", "az", "year"]
 
 [groupers.year_added_applemusic]
 label = "Year Added"
-select = "strftime({%Y}, datetime(${album.tags.unix_added_applemusic}, {unixepoch}))"
+select = "substr(${album.tags.unix_added_applemusic}, 1, 4)"
 strict = true
 
 [sorters.unix_added_applemusic]
 label = "Date Added"
-order_by = "CAST(${album.tags.unix_added_applemusic} AS INT) DESC"
+order_by = "${album.tags.unix_added_applemusic} DESC"
 strict = true
 
 # Foobar2000 Collection
@@ -107,16 +107,16 @@ label = "Foobar2000"
 filter = "${album.tags.unix_added_foobar} IS NOT NULL"
 strict = true
 groupers = ["year_added_foobar"]
-sorters =["unix_added_foobar"]
+sorters = ["unix_added_foobar"]
 
 [groupers.year_added_foobar]
 label = "Year Added"
-select = "strftime({%Y}, datetime(${album.tags.unix_added_foobar}, {unixepoch}))"
+select = "substr(${album.tags.date_added_foobar}, 1, 4)"
 strict = true
 
 [sorters.unix_added_foobar]
 label = "Date Added"
-order_by = "CAST(${album.tags.unix_added_foobar} AS INT) DESC"
+order_by = "${album.tags.unix_added_foobar} DESC"
 strict = true
 
 # My Year
@@ -135,7 +135,12 @@ strict = true
 
 # -- SHELVES --
 
+[shelves.recently_added]
+label = "Recently Added"
+filter = "1=1"
+order_by = "${album.info.date_added} DESC"
+
 [shelves.ambient50]
 label = "Ambient 50"
-file = "/home/lewelove/nix-hosts/dotfiles/.config/vellum/shelves/Ambient50.txt"
+file = "~/.config/vellum/shelves/Ambient50.txt"
 
