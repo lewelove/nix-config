@@ -1,6 +1,9 @@
 { pkgs, username, ... }:
 
 {
+  environment.systemPackages = [
+    pkgs.awww
+  ];
 
   home-manager.users.${username} = {
     systemd.user.services.awww = {
