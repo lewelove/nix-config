@@ -1,6 +1,6 @@
 # --- Variables ---
 set $mainMod Mod4
-set $terminal foot
+set $terminal alacritty
 set $menu fuzzel
 set $fileManager thunar
 
@@ -43,19 +43,9 @@ bindsym $mainMod+Shift+1 move container to workspace number 1
 bindsym $mainMod+Shift+2 move container to workspace number 2
 bindsym $mainMod+Shift+3 move container to workspace number 3
 
-# --- Special Workspaces (Scratchpads) ---
-# Notes
-for_window [app_id="nvim-notes"] move scratchpad
-bindsym $mainMod+n [app_id="nvim-notes"] scratchpad show
-
 # --- Status Bar ---
 bar {
     swaybar_command waybar
 }
-
-# --- Background ---
-# Uses your existing swww setup if the service is running, 
-# or use sway's native setter:
-# output * bg /path/to/wallpaper.png fill
 
 include /etc/sway/config.d/*
