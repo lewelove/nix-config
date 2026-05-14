@@ -56,6 +56,7 @@
     lazygit
     git-filter-repo
     taplo
+    amneziawg-tools
 
     # Virtualization
     distrobox

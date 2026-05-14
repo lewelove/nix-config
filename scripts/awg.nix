@@ -1,8 +1,8 @@
 { pkgs, identity, ... }:
 
 let
-  awg = pkgs.writeShellApplication {
-    name = "awg";
+  vpn = pkgs.writeShellApplication {
+    name = "vpn";
     runtimeInputs = with pkgs; [ 
       coreutils 
       findutils 
@@ -53,5 +53,5 @@ let
   };
 in
 {
-  environment.systemPackages = [ awg ];
+  environment.systemPackages = [ vpn ];
 }

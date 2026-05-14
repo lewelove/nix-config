@@ -67,12 +67,12 @@ date = { level = "album" }
 genre = { level = "album", type = "list", newline = true }
 styles = { level = "album", type = "list" }
 
-original_yyyy_mm = { level = "album", newline = true }
+original_date = { level = "album", newline = true }
 
 country = { level = "album", newline = true }
 label = { level = "album" }
 catalognumber = { level = "album" }
-release_yyyy_mm = { level = "album" }
+release_date = { level = "album" }
 
 discogs_url = { level = "album", newline = true, manifests = "url" }
 musicbrainz_url = { level = "album", manifests = "url" }

@@ -19,6 +19,7 @@ if status is-interactive
   alias clr="set -e _starship_rendered; clear"
   alias clear="set -e _starship_rendered; command clear"
 
+  alias ls="ls -la"
   alias x+="chmod +x"
   alias nv="nvim"
   alias lg="lazygit"
