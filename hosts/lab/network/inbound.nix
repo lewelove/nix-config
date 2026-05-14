@@ -41,6 +41,8 @@
 
       ip rule add to 192.168.1.0/24 lookup main priority 400 || true
       
+      ip rule add to 10.10.10.0/24 lookup main priority 410 || true
+      
       iptables -t mangle -D PREROUTING -i server -j MARK --set-mark 100 || true
       iptables -t mangle -A PREROUTING -i server -j MARK --set-mark 100
       
@@ -49,17 +51,27 @@
       iptables -t nat -D POSTROUTING -s 10.10.10.0/24 -o enp2s0 -j MASQUERADE || true
       iptables -t nat -A POSTROUTING -s 10.10.10.0/24 -o enp2s0 -j MASQUERADE
 
+      iptables -D FORWARD -i server -j ACCEPT || true
+      iptables -A FORWARD -i server -j ACCEPT
+      iptables -D FORWARD -o server -j ACCEPT || true
+      iptables -A FORWARD -o server -j ACCEPT
+
       iptables -t mangle -D FORWARD -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu || true
       iptables -t mangle -A FORWARD -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
     '';
 
     postStop = ''
       ip rule del from 10.10.10.1 lookup main || true
+      ip rule del to 192.168.1.0/24 lookup main || true
+      ip rule del to 10.10.10.0/24 lookup main || true
       ip rule del fwmark 100 lookup 100 || true
       
       iptables -t mangle -D PREROUTING -i server -j MARK --set-mark 100 || true
       iptables -t mangle -D FORWARD -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu || true
       iptables -t nat -D POSTROUTING -s 10.10.10.0/24 -o enp2s0 -j MASQUERADE || true
+      
+      iptables -D FORWARD -i server -j ACCEPT || true
+      iptables -D FORWARD -o server -j ACCEPT || true
       
       ip link delete server || true
       pkill -9 -f "amneziawg-go server" || true

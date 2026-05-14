@@ -2,7 +2,7 @@
 
 {
   systemd.services.awg-vpn = {
-    description = "AmneziaWG Outbound (Spain Room)";
+    description = "AmneziaWG Outbound";
     after = [ "network.target" ];
     
     path = with pkgs; [ 
