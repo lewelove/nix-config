@@ -20,29 +20,29 @@
     };
 
     script = ''
-      CONF="/etc/amneziawg/awg-phone.conf"
+      CONF="/etc/amneziawg/server.conf"
       
-      pkill -9 -f "amneziawg-go awg-phone" || true
-      ip link delete awg-phone || true
+      pkill -9 -f "amneziawg-go server" || true
+      ip link delete server || true
       
-      amneziawg-go awg-phone &
+      amneziawg-go server &
       sleep 2
       
-      grep -v -E "^(Address|DNS|MTU|Table)" "$CONF" | awg setconf awg-phone /dev/stdin
+      grep -v -E "^(Address|DNS|MTU|Table)" "$CONF" | awg setconf server /dev/stdin
 
       EXTRACTED_IP=$(grep '^Address' "$CONF" | cut -d'=' -f2 | tr -d ' ' | cut -d',' -f1)
       FINAL_IP=''${EXTRACTED_IP:-10.10.10.1/24}
       
-      ip addr add "$FINAL_IP" dev awg-phone || true
-      ip link set mtu 1280 dev awg-phone
-      ip link set awg-phone up
+      ip addr add "$FINAL_IP" dev server || true
+      ip link set mtu 1280 dev server
+      ip link set server up
 
       ip rule add from 10.10.10.1 lookup main priority 100 || true
 
       ip rule add to 192.168.1.0/24 lookup main priority 400 || true
       
-      iptables -t mangle -D PREROUTING -i awg-phone -j MARK --set-mark 100 || true
-      iptables -t mangle -A PREROUTING -i awg-phone -j MARK --set-mark 100
+      iptables -t mangle -D PREROUTING -i server -j MARK --set-mark 100 || true
+      iptables -t mangle -A PREROUTING -i server -j MARK --set-mark 100
       
       ip rule add fwmark 100 lookup 100 priority 500 || true
       
@@ -57,12 +57,12 @@
       ip rule del from 10.10.10.1 lookup main || true
       ip rule del fwmark 100 lookup 100 || true
       
-      iptables -t mangle -D PREROUTING -i awg-phone -j MARK --set-mark 100 || true
+      iptables -t mangle -D PREROUTING -i server -j MARK --set-mark 100 || true
       iptables -t mangle -D FORWARD -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu || true
       iptables -t nat -D POSTROUTING -s 10.10.10.0/24 -o enp2s0 -j MASQUERADE || true
       
-      ip link delete awg-phone || true
-      pkill -9 -f "amneziawg-go awg-phone" || true
+      ip link delete server || true
+      pkill -9 -f "amneziawg-go server" || true
     '';
   };
 }
