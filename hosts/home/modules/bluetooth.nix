@@ -10,15 +10,15 @@
       General = {
         AutoEnable = true;
         AutoConnect = true;
-        Privacy = "off";
-        JustWorksRepairing = "always";
-        FastConnectable = true;
-        ControllerMode = "bredr";
-        UserspaceHID = "false";
+        # Privacy = "off";
+        # JustWorksRepairing = "always";
+        # FastConnectable = true;
+        # ControllerMode = "bredr";
+        # UserspaceHID = "false";
       };
-      Input = {
-        ClassicBondedOnly = false;
-      };
+      # Input = {
+      #   ClassicBondedOnly = false;
+      # };
       Policy = {
         AutoEnable = true;
         ReconnectAttempts = 7;
