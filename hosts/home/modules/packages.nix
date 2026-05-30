@@ -61,6 +61,9 @@
     # Virtualization
     distrobox
 
+    # AI
+    pi-coding-agent
+
     # Media
     stable.mpv
     imv

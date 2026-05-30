@@ -8,13 +8,15 @@
     powerOnBoot = true;
     settings = {
       General = {
+        Experimental = true;
         AutoEnable = true;
         AutoConnect = true;
+        UserspaceHID = true;
         # Privacy = "off";
         # JustWorksRepairing = "always";
         # FastConnectable = true;
-        # ControllerMode = "bredr";
-        # UserspaceHID = "false";
+        ControllerMode = "bredr";
+        Enable = "Source,Sink,Media,Socket";
       };
       # Input = {
       #   ClassicBondedOnly = false;

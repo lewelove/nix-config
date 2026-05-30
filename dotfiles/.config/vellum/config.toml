@@ -1,31 +1,18 @@
 [storage]
 library_root = "/run/media/lewelove/1000xhome/backup-everything/FB2K/Library Historyfied!/"
-library_export = "~/dev/vellum-test-library/metadata_output"
 environment = "~/.secrets/vellum.env"
-
-
-[nix]
-flake = "/home/lewelove/dev/vellum/nix/flake.nix"
-store = "/run/media/lewelove/1000xhome/backup-everything/FB2K/.vellum/store/"
-stage = "/run/media/lewelove/1000xhome/backup-everything/FB2K/.vellum/stage/"
-
-[nix.commands]
-get_torrent = "transmission-remote -a '${sourceTorrent.file}' -w '${sourceDisk.path}'"
-verify_torrent = "imdl -q torrent verify '${sourceTorrent.file}' --content '${sourceDisk.path}/${sourceTorrent.name}/'"
-seed_torrent = ""
 
 
 [theme]
 thumbnail_size = 190
-
 
 [theme.shader]
 order = "original"
 path = "shaders/mountain_eq.frag"
 speed = 0.5
 zoom = 0.2
-blur = 0.6
-grain = 0.2
+blur = 0.8
+grain = 0.1
 
 # path = "shaders/simplex.frag"
 # speed = 0.005
@@ -48,6 +35,10 @@ file_subset_match = [
   "musicbrainz_releasetrackid", "musicbrainz_trackid"
 ]
 
+
+[compiler.covers]
+thumbnail = { interpolation = "lanczos", size = 190 }
+modal = { interpolation = "mitchell", size = 627 }
 
 [compiler.cover_palette]
 # type = "kmeansnh"
