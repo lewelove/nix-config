@@ -10,6 +10,10 @@
 
     interfaces.enp3s0.wakeOnLan.enable = true;
 
+    firewall.extraCommands = ''
+      iptables -t mangle -A OUTPUT -m owner --gid-owner novpn -j MARK --set-mark 0xca6c
+      iptables -t nat -A POSTROUTING -o enp3s0 -m mark --mark 0xca6c -j MASQUERADE
+    '';
   };
 
   systemd.services.wol-enp3s0 = {

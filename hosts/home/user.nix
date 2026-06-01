@@ -3,9 +3,11 @@
 {
   services.getty.autologinUser = "${username}";
 
+  users.groups.novpn = {};
+
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel"  "input" "uinput" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "uinput" "novpn" ];
     shell = pkgs.fish; 
     autoSubUidGidRange = true;
   };
@@ -14,14 +16,8 @@
     {
       users = [ "${username}" ];
       commands = [
-        { 
-          command = "/run/current-system/sw/bin/vpn";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "/run/current-system/sw/bin/awgd";
-          options = [ "NOPASSWD" ];
-        }
+        { command = "/run/current-system/sw/bin/awgu"; options = [ "NOPASSWD" ]; }
+        { command = "/run/current-system/sw/bin/awgd"; options = [ "NOPASSWD" ]; }
       ];
     }
   ];

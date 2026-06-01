@@ -26,7 +26,7 @@ if status is-interactive
   alias gs="git status"
 
   alias clients="hyprctl clients | rg -A 3 'class'"
-  alias awgd="sudo killall amneziawg-go"
+  alias vpnd="sudo killall amneziawg-go"
   alias ipcheck="curl ip-api.com"
   alias scus="systemctl --user status"
   alias scur="systemctl --user restart"

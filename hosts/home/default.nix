@@ -15,7 +15,6 @@
     ./modules/nvidia.nix
 
     ./modules/tilde.nix
-    ./modules/networking.nix
     ./modules/bluetooth.nix
     ./modules/virtualization.nix
 
@@ -53,6 +52,12 @@
     (lib.pipe inputs.import-tree [
       (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
       (i: i ./scripts)
+    ])
+
+    # Network
+    (lib.pipe inputs.import-tree [
+      (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
+      (i: i ./network)
     ])
 
   ];
