@@ -73,45 +73,46 @@ tracknumber = { level = "track" }
 title = { level = "track" }
 
 
-[compiler.keys]
-albumartists = { level = "album", type = "list" }
-styles = { level = "album", type = "list" }
-country = { level = "album" }
-label = { level = "album" }
-catalognumber = { level = "album" }
-media = { level = "album" }
-discogs_url = { level = "album" }
-musicbrainz_url = { level = "album" }
-ctdbid_url = { level = "album" }
-unix_added_foobar = { level = "album", type = "time" }
-unix_added_applemusic = { level = "album", type = "time" }
-unix_added_youtube = { level = "album", type = "time" }
-custom_id = { level = "album" }
-custom_albumartist = { level = "album", args = "custom_albumartist,artistartist,albumartist" }
-custom_string = { level = "album" }
-old_comment = { level = "album" }
-collection = { level = "album", type = "list" }
-shelves = { level = "album", type = "list" }
-my_year = { level = "album", type = "list" }
-replaygain_album_gain = { level = "album" }
-replaygain_album_peak = { level = "album" }
-musicbrainz_albumid = { level = "album" }
-musicbrainz_albumartistid = { level = "album" }
-musicbrainz_releasegroupid = { level = "album" }
+[compiler.keys.album]
+albumartists = { type = "array" }
+styles = { type = "array" }
+country = { type = "string" }
+label = { type = "string" }
+catalognumber = { type = "string" }
+media = { type = "string" }
+discogs_url = { type = "url" }
+musicbrainz_url = { type = "url" }
+ctdbid_url = { type = "url" }
+unix_added_foobar = { type = "datetime" }
+unix_added_applemusic = { type = "datetime" }
+unix_added_youtube = { type = "datetime" }
+custom_id = { type = "string" }
+custom_albumartist = { type = "string", args = "custom_albumartist,artistartist,albumartist" }
+custom_string = { type = "string" }
+old_comment = { type = "string" }
+collection = { type = "array" }
+shelves = { type = "array" }
+my_year = { type = "array" }
+replaygain_album_gain = { type = "string" }
+replaygain_album_peak = { type = "string" }
+musicbrainz_albumid = { type = "string" }
+musicbrainz_albumartistid = { type = "string" }
+musicbrainz_releasegroupid = { type = "string" }
 
-lyrics = { level = "tracks" }
-accuripid = { level = "tracks" }
-ctdbid = { level = "tracks" }
-discid = { level = "tracks" }
-instrumental = { level = "tracks", type = "bool" }
-replaygain_track_gain = { level = "tracks" }
-replaygain_track_peak = { level = "tracks" }
-musicbrainz_trackid = { level = "tracks" }
-musicbrainz_releasetrackid = { level = "tracks" }
-musicbrainz_artistid = { level = "tracks" }
+cover_chroma = { type = "function" }
+cover_entropy = { type = "function" }
 
-cover_chroma = { level = "album", class = "function" }
-cover_entropy = { level = "album", class = "function" }
+[compiler.keys.tracks]
+lyrics = { type = "string" }
+accuripid = { type = "string" }
+ctdbid = { type = "string" }
+discid = { type = "string" }
+instrumental = { type = "boolean" }
+replaygain_track_gain = { type = "string" }
+replaygain_track_peak = { type = "string" }
+musicbrainz_trackid = { type = "string" }
+musicbrainz_releasetrackid = { type = "string" }
+musicbrainz_artistid = { type = "array" }
 # cover_palette = { level = "album", class = "function", args = "k=12,noise=0.0,conv=0.05,filter=0.002,bias=0.0" }
 # cover_palette = { level = "album", class = "function", args = "type=kmeans,sort=C,k=8" }
 # cover_palette = { level = "album", class = "function", args = "type=kmeans,sort=gradient,k=8,Hb=35,Ht=108,Cb=12,Ct=60,Tb=0,Tt=50" }

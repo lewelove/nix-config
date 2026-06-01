@@ -15,7 +15,11 @@
       users = [ "${username}" ];
       commands = [
         { 
-          command = "/run/current-system/sw/bin/awg";
+          command = "/run/current-system/sw/bin/vpn";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "/run/current-system/sw/bin/awgd";
           options = [ "NOPASSWD" ];
         }
       ];
