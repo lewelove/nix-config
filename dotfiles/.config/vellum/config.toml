@@ -25,7 +25,7 @@ supported_extensions = [ ".flac" ]
 
 
 [compiler]
-date_added = [ "unix_added_youtube", "unix_added_applemusic", "unix_added_foobar" ]
+date_added = [ "date_added_youtube", "date_added_applemusic", "date_added_foobar" ]
 manifests = [ "mbid.toml", "cover_palette.toml" ]
 file_subset_match = [
   "album", "albumartist", "date", "genre",
@@ -83,9 +83,9 @@ media = { type = "string" }
 discogs_url = { type = "url" }
 musicbrainz_url = { type = "url" }
 ctdbid_url = { type = "url" }
-unix_added_foobar = { type = "datetime" }
-unix_added_applemusic = { type = "datetime" }
-unix_added_youtube = { type = "datetime" }
+date_added_foobar = { type = "datetime" }
+date_added_applemusic = { type = "datetime" }
+date_added_youtube = { type = "datetime" }
 custom_id = { type = "string" }
 custom_albumartist = { type = "string", args = "custom_albumartist,artistartist,albumartist" }
 custom_string = { type = "string" }
