@@ -16,7 +16,7 @@
     {
       users = [ "${username}" ];
       commands = [
-        { command = "/run/current-system/sw/bin/awgu"; options = [ "NOPASSWD" ]; }
+        { command = "/run/current-system/sw/bin/awgg"; options = [ "NOPASSWD" ]; }
         { command = "/run/current-system/sw/bin/awgd"; options = [ "NOPASSWD" ]; }
       ];
     }

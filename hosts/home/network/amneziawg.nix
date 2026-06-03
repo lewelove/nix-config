@@ -1,8 +1,8 @@
 { pkgs, identity, ... }:
 
 let
-  awgu = pkgs.writeShellApplication {
-    name = "awgu";
+  awgg = pkgs.writeShellApplication {
+    name = "awgg";
     runtimeInputs = with pkgs; [ 
       coreutils 
       findutils 
@@ -11,20 +11,44 @@ let
       amneziawg-go
       amneziawg-tools 
       psmisc
-      jq
-      curl
+      gawk
     ];
     text = ''
+      r() { gum style --foreground 1 "$*"; }
+      g() { gum style --foreground 2 "$*"; }
+      y() { gum style --foreground 3 "$*"; }
+      b() { gum style --foreground 4 "$*"; }
+      m() { gum style --foreground 5 "$*"; }
+      w() { gum style --foreground 7 "$*"; }
+
+      check_ping() {
+        local target="$1"
+        local ping_out
+        if ping_out=$(ping -c 1 -W 2 "$target" 2>&1); then
+          local rtt
+          rtt=$(printf "%s\n" "$ping_out" | awk -F'time=' '/time=/ {print $2}' | cut -d' ' -f1)
+          gum join --horizontal "$(g "[+] ")" "ping $target: " "$(g "OK ($rtt ms)")"
+          return 0
+        else
+          gum join --horizontal "$(r "[!] ")" "ping $target: " "$(r "FAILED")"
+          return 1
+        fi
+      }
+
       if [ "$EUID" -ne 0 ]; then
         exec sudo "$0" "$@"
       fi
+
+      awg-quick down /etc/amneziawg/active.conf >/dev/null 2>&1 || true
+      killall amneziawg-go >/dev/null 2>&1 || true
 
       SOURCE_DIR="/home/${identity.username}/vpn/amneziawg"
       TARGET_DIR="/etc/amneziawg"
       TARGET_CONF="$TARGET_DIR/active.conf"
 
       if [ ! -d "$SOURCE_DIR" ]; then
-        echo "Error: Directory $SOURCE_DIR does not exist."
+        echo
+        gum join --horizontal "$(r "[!] ")" "Error: Directory " "$(b "$SOURCE_DIR")" " does not exist."
         exit 1
       fi
 
@@ -34,7 +58,7 @@ let
         exit 0
       fi
 
-      echo ":: Switching to $SELECTED..."
+      gum join --horizontal "$(m "[>] ")" "Switching to " "$(b "$SELECTED")" "..."
 
       awg-quick down "$TARGET_CONF" 2>/dev/null || true
       killall amneziawg-go 2>/dev/null || true
@@ -55,40 +79,51 @@ let
       ip rule add not fwmark 0xca6c table 51820 priority 32760 || true
       ip rule add table main suppress_prefixlength 0 priority 32759 || true
 
-      echo ":: Verifying connection..."
-      if ping -c 2 -w 2 1.1.1.1 >/dev/null 2>&1 || \
-         ping -c 2 -w 2 8.8.8.8 >/dev/null 2>&1 || \
-         ping -c 2 -w 2 77.88.8.8 >/dev/null 2>&1; then
-        echo ""
-        echo ":: SUCCESS: Tunnel LIVE"
-        echo ":: Config: $SELECTED"
-        
-        if INFO=$(curl -s --interface active --max-time 2 http://ip-api.com/json 2>/dev/null); then
-          IP=$(echo "$INFO" | jq -r .query 2>/dev/null || echo "Unknown")
-          COUNTRY=$(echo "$INFO" | jq -r .country 2>/dev/null || echo "Unknown")
-          echo ":: VPN IP: $IP ($COUNTRY)"
-        fi
+      success=0
+
+      if check_ping "google.com"; then
+        success=1
+      fi
+
+      if check_ping "1.1.1.1"; then
+        success=1
+      fi
+
+      if check_ping "rutracker.org"; then
+        success=1
+      fi
+
+      if [ "$success" -eq 1 ]; then
+        gum join --horizontal "$(g "[+] ")" "SUCCESS - Tunnel LIVE"
       else
-        echo ""
-        echo ":: ERROR: Tunnel failed"
-        exit 1
+        gum join --horizontal "$(y "[~] ")" "WARNING - Tunnel UP, ping failed"
       fi
     '';
   };
 
   awgd = pkgs.writeShellApplication {
     name = "awgd";
-    runtimeInputs = with pkgs; [ amneziawg-tools psmisc ];
+    runtimeInputs = with pkgs; [ amneziawg-tools psmisc gum ];
     text = ''
+      r() { gum style --foreground 1 "$*"; }
+      g() { gum style --foreground 2 "$*"; }
+      y() { gum style --foreground 3 "$*"; }
+      b() { gum style --foreground 4 "$*"; }
+      m() { gum style --foreground 5 "$*"; }
+      w() { gum style --foreground 7 "$*"; }
+
       if [ "$EUID" -ne 0 ]; then
         exec sudo "$0" "$@"
       fi
+      
       awg-quick down /etc/amneziawg/active.conf 2>/dev/null || true
       killall amneziawg-go 2>/dev/null || true
-      echo "VPN Stopped"
+      
+      echo
+      gum join --horizontal "$(g "[+] ")" "VPN Stopped."
     '';
   };
 in
 {
-  environment.systemPackages = [ awgu awgd ];
+  environment.systemPackages = [ awgg awgd ];
 }
