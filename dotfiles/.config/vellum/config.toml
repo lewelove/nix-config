@@ -37,7 +37,7 @@ file_subset_match = [
 
 
 [compiler.covers]
-thumbnail = { interpolation = "lanczos", size = 190 }
+thumbnail = { interpolation = "lanczos", size = 200 }
 modal = { interpolation = "mitchell", size = 627 }
 
 [compiler.cover_palette]

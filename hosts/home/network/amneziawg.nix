@@ -81,16 +81,10 @@ let
 
       success=0
 
-      if check_ping "google.com"; then
-        success=1
-      fi
-
       if check_ping "1.1.1.1"; then
         success=1
-      fi
-
-      if check_ping "rutracker.org"; then
-        success=1
+        check_ping "google.com" || true
+        check_ping "rutracker.org" || true
       fi
 
       if [ "$success" -eq 1 ]; then

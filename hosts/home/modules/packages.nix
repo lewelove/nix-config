@@ -8,6 +8,7 @@
     unzip
     gcc
     tree
+    tree-sitter
     killall
     jq
     jaq
@@ -25,6 +26,7 @@
     waffle
     apitrace
     openssl
+    cryptsetup
 
     # Desktop
     fuzzel
