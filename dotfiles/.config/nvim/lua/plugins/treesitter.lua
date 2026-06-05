@@ -15,5 +15,13 @@ return {
       "markdown", "markdown_inline", "nix" 
     }
     ts.install(parsers)
+
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = parsers,
+      callback = function()
+        vim.treesitter.start()
+      end,
+    })
+
   end,
 }

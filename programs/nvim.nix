@@ -1,6 +1,14 @@
 { pkgs, config, lib, username, identity, ... }:
 
 let
+  nv = pkgs.writeShellScriptBin "nv" ''
+    if [ $# -eq 0 ]; then
+      exec ${pkgs.neovim}/bin/nvim .
+    else
+      exec ${pkgs.neovim}/bin/nvim "$@"
+    fi
+  '';
+
   nvl = pkgs.writeShellScriptBin "nvl" ''
     exec ${pkgs.alacritty}/bin/alacritty --class "nvim" -e ${pkgs.neovim}/bin/nvim "$@"
   '';
@@ -8,6 +16,7 @@ in
 {
   environment.systemPackages = [
     pkgs.neovim
+    nv
     nvl
   ];
 

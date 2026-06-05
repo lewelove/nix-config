@@ -21,7 +21,6 @@ if status is-interactive
 
   alias ls="ls -la"
   alias x+="chmod +x"
-  alias nv="nvim"
   alias lg="lazygit"
   alias gs="git status"
 
