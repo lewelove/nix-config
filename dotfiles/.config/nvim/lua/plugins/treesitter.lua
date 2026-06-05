@@ -2,7 +2,7 @@ return {
   "nvim-treesitter/nvim-treesitter",
   branch = "main",
   build = ":TSUpdate",
-  event = { "BufReadPre", "BufNewFile" },
+  lazy = false,
   config = function()
     local ts = require("nvim-treesitter")
     
@@ -22,6 +22,5 @@ return {
         vim.treesitter.start()
       end,
     })
-
   end,
 }
