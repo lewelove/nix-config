@@ -12,7 +12,7 @@ return {
 
     local parsers = { 
       "c", "lua", "vim", "vimdoc", "query", "python", "javascript", "html", "css", "json",
-      "markdown", "markdown_inline", "nix" 
+      "markdown", "markdown_inline", "nix", "toml"
     }
     ts.install(parsers)
 
