@@ -78,14 +78,12 @@ vim.keymap.set("n", "<leader>cfp", function()
 	print("file:", path)
 end)
 
--- =============================================================
 -- DIFF NAVIGATION & MERGING
 -- =============================================================
-
 -- Jump between hunks
 vim.keymap.set("n", "]", "]c", { desc = "Next Change" })
 vim.keymap.set("n", "[", "[c", { desc = "Prev Change" })
-
+--
 -- Smart Diff Merge (Leader m)
 -- If in DIFF_REVIEW -> Push to original (diffput)
 -- If in Original    -> Pull from review (diffget)
@@ -96,11 +94,10 @@ vim.keymap.set({ "n", "v" }, "<leader>m", function()
     vim.cmd("diffget")
   end
 end, { desc = "Smart Diff Put/Get" })
-
 -- =============================================================
+
 -- DIFF MERGE TOOL (Internal V-Split)
 -- =============================================================
-
 vim.keymap.set("n", "<leader>d", function()
   local ft = vim.bo.filetype
   local clipboard = vim.fn.getreg('+')
@@ -133,12 +130,17 @@ vim.keymap.set("n", "<leader>d", function()
   })
   
 end, { desc = "Diff Merge Tool (Internal)" })
-
 -- =============================================================
 
 -- Reload Configuration
 vim.keymap.set("n", "<leader>rl", function()
-  vim.cmd("source $MYVIMRC")
+  local config_dir = vim.fn.stdpath("config") .. "/lua/"
+
+  dofile(config_dir .. "options.lua")
+  dofile(config_dir .. "keymaps.lua")
+  dofile(config_dir .. "autocmds.lua")
+
+  vim.notify("Nvim configuration reloaded!", vim.log.levels.INFO)
 end, { desc = "Reload Config" })
 
 -- Smart Yank in Quotes

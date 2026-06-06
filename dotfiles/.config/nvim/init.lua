@@ -1,10 +1,10 @@
-require("config.options")
+require("options")
 
-require("config.keymaps")
+require("keymaps")
 
-require("config.lazy")
+require("lazy-init")
 
-require("config.autocmds")
+require("autocmds")
 
 local album_script = require("scripts.albumscript")
 
