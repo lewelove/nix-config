@@ -65,8 +65,6 @@ vim.keymap.set("n", "<leader>e", function()
   end)
 end, { desc = "Open oil and force refresh" })
 
-vim.keymap.set("n", "<leader>ff", ":find ", { desc = "Find file" })
-
 -- Quick config editing
 vim.keymap.set("n", "<leader>rc", ":e $MYVIMRC<CR>", { desc = "Edit config" })
 vim.keymap.set("n", "<leader>rl", ":so $MYVIMRC<CR>", { desc = "Reload config" })
