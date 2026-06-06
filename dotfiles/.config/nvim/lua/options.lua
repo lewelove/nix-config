@@ -2,12 +2,6 @@ vim.cmd([[set noswapfile]])
 
 -- Theme & Look
 vim.opt.shortmess:append("I")
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
-vim.api.nvim_set_hl(0, "LineNr", { bg = "none" })
-vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
-vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
 
 -- Visual separation for diff windows and splits
 vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#444444", bg = "none" })

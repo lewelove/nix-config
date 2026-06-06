@@ -21,9 +21,33 @@ return {
       overrides = function(colors) 
         local theme = colors.theme
         return {
-          -- Example: Remove the background for line numbers and sign column
+          -- Line numbers and sign column
           LineNr = { fg = theme.ui.fg_dim, bg = 'none' },
           SignColumn = { bg = 'none' },
+
+          -- General Floating Windows (LSP hover docs, Dressing, etc.)
+          NormalFloat = { bg = 'none' },
+          FloatBorder = { fg = theme.ui.border, bg = 'none' },
+          FloatTitle = { fg = theme.ui.fg, bold = true, bg = 'none' },
+
+          -- Telescope Main window
+          TelescopeNormal = { bg = 'none' },
+          TelescopeBorder = { fg = theme.ui.border, bg = 'none' },
+          
+          -- Telescope Prompt (Input bar)
+          TelescopePromptNormal = { bg = 'none' },
+          TelescopePromptBorder = { fg = theme.ui.border, bg = 'none' },
+          TelescopePromptTitle = { fg = theme.ui.special, bold = true, bg = 'none' },
+          
+          -- Telescope Results
+          TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = 'none' },
+          TelescopeResultsBorder = { fg = theme.ui.border, bg = 'none' },
+          TelescopeResultsTitle = { fg = theme.ui.fg, bg = 'none' },
+          
+          -- Telescope Preview
+          TelescopePreviewNormal = { bg = 'none' },
+          TelescopePreviewBorder = { fg = theme.ui.border, bg = 'none' },
+          TelescopePreviewTitle = { fg = theme.ui.fg, bg = 'none' },
         }
       end,
       -- ... other configuration options ...

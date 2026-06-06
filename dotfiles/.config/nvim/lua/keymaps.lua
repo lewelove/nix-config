@@ -170,11 +170,3 @@ vim.keymap.set("n", "<leader>'", function()
   end
 end, { desc = "Smart yank inside quotes" })
 
--- Telecope Keymaps
-vim.keymap.set("n", "<C-p>", function()
-  require("telescope.builtin").find_files()
-end, { desc = "Telescope Find Files" })
-
-vim.keymap.set("n", "<C-g>", function()
-  require("telescope.builtin").live_grep()
-end, { desc = "Telescope Live Grep" })

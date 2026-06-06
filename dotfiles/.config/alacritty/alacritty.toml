@@ -1,7 +1,7 @@
 [window]
 padding = { x = 16, y = 16 }
 dynamic_padding = true
-opacity = 0.85
+opacity = 1
 blur = true
 
 [terminal.shell]
@@ -22,29 +22,29 @@ style = { shape = "Beam", blinking = "Never" }
 renderer = "Gles2Pure"
 
 [colors.primary]
-background = "#111111"
-foreground = "#CCCCCC"
+background = "#191919"
+foreground = "#cccccc"
 
 [colors.cursor]
-cursor = "#CCCCCC"
-text = "#111111"
+cursor = "#cccccc"
+text = "#000000"
 
 [colors.normal]
-black   = "#333333"
-red     = "#EA4335"
-green   = "#34A853"
-yellow  = "#FBBC04"
-blue    = "#4285F4"
-magenta = "#A142F4"
-cyan    = "#4285F4"
-white   = "#CCCCCC"
+black   = "#000000"
+red     = "#ea4335"
+green   = "#34a853"
+yellow  = "#fbbc04"
+blue    = "#4285f4"
+magenta = "#a142f4"
+cyan    = "#4285f4"
+white   = "#cccccc"
 
 [colors.bright]
-black   = "#555555"
-red     = "#EA4335"
-green   = "#34A853"
-yellow  = "#FBBC04"
-blue    = "#4285F4"
-magenta = "#A142F4"
-cyan    = "#4285F4"
-white   = "#CCCCCC"
+black   = "#5a5a5a"
+red     = "#ea4335"
+green   = "#34a853"
+yellow  = "#fbbc04"
+blue    = "#4285f4"
+magenta = "#a142f4"
+cyan    = "#4285f4"
+white   = "#cccccc"
