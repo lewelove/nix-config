@@ -21,7 +21,6 @@
     ./modules/home-manager.nix
     ./modules/theme.nix
 
-    ./modules/packages.nix
     ./modules/games.nix
 
     # Programs
