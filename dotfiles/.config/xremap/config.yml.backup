@@ -1,0 +1,29 @@
+keymap:
+  - name: Global Keyboard Controls
+    remap:
+      Super-l:
+        remap:
+          v:
+            launch: ["nvim"]
+      Super-F1:
+        launch: ["pactl", "set-default-sink", "EDIFIER-R1380DB-EQ-MONO-SPL90"]
+      Super-Shift-F1:
+        launch: ["pactl", "set-default-sink", "EDIFIER-R1380DB-EQ-STEREO-SPL90"]
+      Super-F2:
+        launch: ["pactl", "set-default-sink", "AIYIMA-DAC-A5-PRO-SWAP"]
+      Super-Shift-F3:
+        launch: ["pactl", "set-default-sink", "REDMI-BUDS-6-ACTIVE"]
+      Super-F3:
+        launch: ["pactl", "set-default-sink", "REDMI-BUDS-6-ACTIVE-EQ"]
+      KPPLUS:
+        launch: ["wpctl", "set-volume", "-l", "1", "@DEFAULT_AUDIO_SINK@", "3%+" ]
+      KPMINUS:
+        launch: ["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "3%-"]
+      C-Space:
+        launch: ["rmpc", "togglepause"]
+      C-Pause:
+        launch: ["rmpc", "single", "oneshot"]
+      C-Shift-Pause:
+        launch: ["rmpc", "single", "off"]
+      C-M-Delete:
+        launch: ["powermenu.sh"]

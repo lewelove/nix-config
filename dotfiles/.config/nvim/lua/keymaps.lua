@@ -20,6 +20,12 @@ vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result (centered)" }
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Half page down (centered)" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up (centered)" })
 
+-- Easy window navigation
+vim.keymap.set('n', '<C-Left>', '<C-w>h', { desc = "Go to left window" })
+vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = "Go to lower window" })
+vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = "Go to upper window" })
+vim.keymap.set('n', '<C-Right>', '<C-w>l', { desc = "Go to right window" })
+
 -- Move lines up/down
 vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
 vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
@@ -55,15 +61,15 @@ vim.keymap.set('n', '<leader>y', 'ggVG"+y', { desc = 'Yank whole buffer to clipb
 vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
 vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
 
--- Quick file navigation
-vim.keymap.set("n", "<leader>e", function()
-  require("oil").open()
-  vim.schedule(function()
-    if vim.bo.filetype == "oil" then
-      vim.cmd.edit()
-    end
-  end)
-end, { desc = "Open oil and force refresh" })
+-- -- Quick file navigation
+-- vim.keymap.set("n", "<leader>e", function()
+--   require("oil").open()
+--   vim.schedule(function()
+--     if vim.bo.filetype == "oil" then
+--       vim.cmd.edit()
+--     end
+--   end)
+-- end, { desc = "Open oil and force refresh" })
 
 -- Quick config editing
 vim.keymap.set("n", "<leader>rc", ":e $MYVIMRC<CR>", { desc = "Edit config" })

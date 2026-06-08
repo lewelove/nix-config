@@ -10,5 +10,15 @@ vim.keymap.set("n", "<C-g>", function()
 end, { desc = "Telescope Live Grep" })
 
 -- Neo-Tree
-vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>')
+vim.keymap.set('n', '<C-e>', ':Neotree toggle<CR>')
+
+-- Oil
+vim.keymap.set("n", "<leader>o", function()
+  require("oil").open()
+  vim.schedule(function()
+    if vim.bo.filetype == "oil" then
+      vim.cmd.edit()
+    end
+  end)
+end, { desc = "Open oil and force refresh" })
 

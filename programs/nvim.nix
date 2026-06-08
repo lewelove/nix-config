@@ -2,11 +2,7 @@
 
 let
   nv = pkgs.writeShellScriptBin "nv" ''
-    if [ $# -eq 0 ]; then
-      exec ${pkgs.neovim}/bin/nvim .
-    else
-      exec ${pkgs.neovim}/bin/nvim "$@"
-    fi
+    exec ${pkgs.neovim}/bin/nvim "$@"
   '';
 
   nvl = pkgs.writeShellScriptBin "nvl" ''
