@@ -13,7 +13,7 @@
     partOf = [ "graphical-session.target" ];
     serviceConfig = {
       Type = "simple";
-      ExecStart = "${pkgs.xfce.thunar}/bin/thunar --daemon";
+      ExecStart = "${pkgs.thunar}/bin/thunar --daemon";
       Restart = "always";
     };
   };

@@ -7,7 +7,7 @@
   documentation = {
     enable = true;
     man.enable = true;
-    man.generateCaches = false;
+    man.cache.enable = false;
     nixos.enable = false;
   };
 
