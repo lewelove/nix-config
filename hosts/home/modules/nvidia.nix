@@ -21,9 +21,9 @@
     package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
   };
 
-  # environment.systemPackages = [
-  #   pkgs.nvidia-container-toolkit
-  # ];
+  environment.systemPackages = with pkgs;[
+    # nvibrant
+  ];
 
   environment.sessionVariables = {
     # NVD_BACKEND = "direct";

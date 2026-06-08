@@ -3,17 +3,17 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
+
     import-tree.url = "github:vic/import-tree";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    # photogimp.url = "github:Libadoxon/nix-photo-gimp";
-    nvibrant.url = "github:mikaeladev/nix-nvibrant";
 
     mangowm = {
       url = "github:mangowm/mango";
@@ -34,7 +34,12 @@
         inherit (identity) username hostname repoPath;
         stable = import nixpkgs-stable {
           system = "x86_64-linux"; 
-          config.allowUnfree = true;
+          config = {
+            allowUnfree = true;
+            permittedInsecurePackages = [
+              "electron-39.8.10"
+            ];
+          };
         };
       };
       modules = [ ./default.nix ];

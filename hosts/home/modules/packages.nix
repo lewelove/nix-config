@@ -37,7 +37,6 @@
     hyprshot
     hyprpicker
     wl-clipboard
-    bitwarden-desktop
     gnome-calculator
     gnome-clocks
     nicotine-plus
@@ -98,7 +97,6 @@
     nix-output-monitor
 
     # Flake Inputs
-    inputs.nvibrant.packages.${pkgs.stdenv.hostPlatform.system}.default
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }

@@ -22,6 +22,9 @@
 
   nixpkgs.config = {
     allowUnfree = true;
+    permittedInsecurePackages = [
+      "electron-39.8.10"
+    ];
   };
 
   services.udev.extraRules = ''
@@ -36,5 +39,5 @@
     "nix-command"
     "flakes"
   ];
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 }
