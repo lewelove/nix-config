@@ -54,11 +54,11 @@
     fd
     fastfetch
     starship
+    tmux
     hyperfine
     lazygit
     git-filter-repo
     taplo
-    amneziawg-tools
 
     # Virtualization
     distrobox
@@ -84,6 +84,9 @@
 
     # Web
     ayugram-desktop
+
+    # Network
+    amneziawg-tools
 
     # Themes and Icons
     nwg-look
