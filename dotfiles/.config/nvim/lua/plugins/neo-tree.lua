@@ -11,6 +11,12 @@ return {
     config = function()
       require("neo-tree").setup({
         filesystem = {
+          window = {
+            mappings = {
+              ["l"] = "set_root", 
+              ["h"] = "navigate_up",
+            },
+          },
           filtered_items = {
             visible = true,
             hide_gitignored = false,

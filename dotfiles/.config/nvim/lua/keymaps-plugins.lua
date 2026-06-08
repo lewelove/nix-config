@@ -10,7 +10,7 @@ vim.keymap.set("n", "<C-g>", function()
 end, { desc = "Telescope Live Grep" })
 
 -- Neo-Tree
-vim.keymap.set('n', '<C-e>', ':Neotree toggle<CR>')
+vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>')
 
 -- Oil
 vim.keymap.set("n", "<leader>o", function()
