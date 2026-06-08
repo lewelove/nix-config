@@ -12,8 +12,8 @@ Singleton {
   property int screensaverFadeTime: 300 
 
   // --- DIMENSIONS & SPACING ---
-  property int barHeight: 26
-  property int iconSize: 18
+  property int barHeight: 32
+  property int iconSize: 20
   property int workspaceSpacing: 12
   property int workspaceInnerSpacing: 4
   property int sectionSpacingLeft: 12

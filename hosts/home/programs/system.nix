@@ -4,12 +4,6 @@
   programs.ssh.startAgent = true;
   programs.dconf.enable = true;
   
-  programs.direnv = {
-    enable = true;
-    enableBashIntegration = true;
-    enableFishIntegration = true;
-  };
-
   programs.fuse.userAllowOther = true;
 
   programs.fzf = {

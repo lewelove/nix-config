@@ -15,7 +15,6 @@
       ".config/mpv".source = link "${dot}/.config/mpv";
       ".config/pipewire".source = link "${dot}/.config/pipewire";
       ".config/wireplumber".source = link "${dot}/.config/wireplumber";
-      ".config/xremap".source = link "${dot}/.config/xremap";
       ".config/imv".source = link "${dot}/.config/imv";
       ".config/qt5ct".source = link "${dot}/.config/qt5ct";
       ".config/qt6ct".source = link "${dot}/.config/qt6ct";

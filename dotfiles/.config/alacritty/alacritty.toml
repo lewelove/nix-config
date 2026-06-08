@@ -30,7 +30,7 @@ cursor = "#cccccc"
 text = "#000000"
 
 [colors.normal]
-black   = "#000000"
+black   = "#323232"
 red     = "#ea4335"
 green   = "#34a853"
 yellow  = "#fbbc04"

@@ -1,7 +1,7 @@
 require("options")
 
 require("keymaps")
-require("plugin-keymaps")
+require("keymaps-plugins")
 
 require("lazy-init")
 

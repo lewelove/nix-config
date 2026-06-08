@@ -9,3 +9,6 @@ vim.keymap.set("n", "<C-g>", function()
   require("telescope.builtin").live_grep()
 end, { desc = "Telescope Live Grep" })
 
+-- Neo-Tree
+vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>')
+
