@@ -5,8 +5,11 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Leader Keys
 vim.keymap.set('n', '<leader>w', ':w!<CR>')
-vim.keymap.set('n', '<leader>q', ':q!<CR>')
+vim.keymap.set('n', '<leader>q', ':qa!<CR>')
+vim.keymap.set('n', '<leader>l', ':Lazy<CR>')
 vim.keymap.set({ 'n', 'v', 'x' }, '<leader>y', '"+y<CR> ')
+
+vim.keymap.set('n', '<C-q>', ':q!<CR>')
 
 -- No clipboard override
 map("n", "x", '"_x')
@@ -22,8 +25,6 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up (centered)" })
 
 -- Easy window navigation
 vim.keymap.set('n', '<C-Left>', '<C-w>h', { desc = "Go to left window" })
-vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = "Go to lower window" })
-vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = "Go to upper window" })
 vim.keymap.set('n', '<C-Right>', '<C-w>l', { desc = "Go to right window" })
 
 -- Move lines up/down
@@ -42,12 +43,6 @@ vim.keymap.set({ "n", "v" }, "<Up>", "gk", { silent = true })
 vim.keymap.set("i", "<Down>", "<C-o>gj", { silent = true })
 vim.keymap.set("i", "<Up>", "<C-o>gk", { silent = true })
 
--- New buffer in same directory
-vim.keymap.set("n", "<leader>a", function() _G.NewBufferSameDir() end, { desc = "New buffer in current dir", silent = true })
-
--- Autorename by first line
-vim.keymap.set("n", "<leader>n", function() _G.RenameByContent() end, { silent = true })
-
 -- Quick Save Raw Idea
 vim.keymap.set("n", "<leader>s", function() _G.QuickSaveNote() end, { desc = "Quick Save Raw Note", silent = true })
 
@@ -61,35 +56,8 @@ vim.keymap.set('n', '<leader>y', 'ggVG"+y', { desc = 'Yank whole buffer to clipb
 vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
 vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
 
--- -- Quick file navigation
--- vim.keymap.set("n", "<leader>e", function()
---   require("oil").open()
---   vim.schedule(function()
---     if vim.bo.filetype == "oil" then
---       vim.cmd.edit()
---     end
---   end)
--- end, { desc = "Open oil and force refresh" })
-
--- Quick config editing
-vim.keymap.set("n", "<leader>rc", ":e $MYVIMRC<CR>", { desc = "Edit config" })
-vim.keymap.set("n", "<leader>rl", ":so $MYVIMRC<CR>", { desc = "Reload config" })
-
-vim.keymap.set("n", "<leader>z", ":ZenMode<CR>", { desc = "Toggle Zen Mode", silent = true })
-
--- Copy Full File-Path
-vim.keymap.set("n", "<leader>cfp", function()
-	local path = vim.fn.expand("%:p")
-	vim.fn.setreg("+", path)
-	print("file:", path)
-end)
-
 -- DIFF NAVIGATION & MERGING
 -- =============================================================
--- Jump between hunks
-vim.keymap.set("n", "]", "]c", { desc = "Next Change" })
-vim.keymap.set("n", "[", "[c", { desc = "Prev Change" })
---
 -- Smart Diff Merge (Leader m)
 -- If in DIFF_REVIEW -> Push to original (diffput)
 -- If in Original    -> Pull from review (diffget)
@@ -143,8 +111,9 @@ vim.keymap.set("n", "<leader>rl", function()
   local config_dir = vim.fn.stdpath("config") .. "/lua/"
 
   dofile(config_dir .. "options.lua")
-  dofile(config_dir .. "keymaps.lua")
   dofile(config_dir .. "autocmds.lua")
+  dofile(config_dir .. "keymaps.lua")
+  dofile(config_dir .. "keymaps-plugins.lua")
 
   vim.notify("Nvim configuration reloaded!", vim.log.levels.INFO)
 end, { desc = "Reload Config" })
