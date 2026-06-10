@@ -2,7 +2,7 @@
 
 {
   home-manager.users.${username} = { config, pkgs, ... }: {
-    home.file.".config/xremap/config.yml".source = config.lib.file.mkOutOfStoreSymlink "${dot}/.config/xremap/config.yml";
+    home.file.".config/xremap/".source = config.lib.file.mkOutOfStoreSymlink "${dot}/.config/xremap/";
 
     systemd.user.services.xremap = {
       Unit = {
@@ -10,7 +10,7 @@
         After = [ "default.target" ];
       };
       Service = {
-        ExecStart = "${pkgs.xremap}/bin/xremap --watch ${config.home.homeDirectory}/.config/xremap/config.yml";
+        ExecStart = "${pkgs.xremap}/bin/xremap --device \"SEM USB Keyboard\" xremap --device \"0Xbox Wireless Controller\" ${config.home.homeDirectory}/.config/xremap/config.yml";
         Restart = "always";
         RestartSec = "3s";
       };

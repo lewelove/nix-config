@@ -25,14 +25,16 @@ if status is-interactive
   alias gs="git status"
 
   alias clients="hyprctl clients | rg -A 3 'class'"
-  alias vpnd="sudo killall amneziawg-go"
   alias ipcheck="curl ip-api.com"
-  alias scus="systemctl --user status"
-  alias scur="systemctl --user restart"
-  alias scs="systemctl status"
-  alias scr="systemctl restart"
-  alias jc="journalctl -fu"
-  alias jcu="journalctl --user -fu"
+
+  alias st="systemctl --user status"
+  alias rs="systemctl --user restart"
+  alias jl="journalctl --user -fu"
+
+  alias sts="systemctl status"
+  alias rss="systemctl restart"
+  alias jls="journalctl -fu"
+
   alias sync="git-sync-bin"
   alias c="wl-copy"
 
@@ -40,11 +42,6 @@ if status is-interactive
     find . -type f -printf '%T@ %Tb %Td %TY %p\n' | sort -n | head -1 | string replace -r '^(\d+)\.\d+' \'\$1\'
   end
 
-  # vellum
-  # alias vellum="/home/lewelove/dev/vellum/rust/target/release/vellum"
-
-  # album curation utils
-  # alias discid="/home/lewelove/dev/album_curation/discid/.build/bin/discid"
   alias vellcro="/home/lewelove/dev/vellcro/rust/target/release/vellcro"
   alias mute="/home/lewelove/dev/mute/rust/target/release/mute"
   alias discid="/home/lewelove/dev/album_curation/rsdiscid/target/release/rsdiscid"

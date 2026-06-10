@@ -5,11 +5,11 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Leader Keys
 vim.keymap.set('n', '<leader>w', ':w!<CR>')
-vim.keymap.set('n', '<leader>q', ':qa!<CR>')
+vim.keymap.set('n', '<leader>q', ':q!<CR>')
 vim.keymap.set('n', '<leader>l', ':Lazy<CR>')
 vim.keymap.set({ 'n', 'v', 'x' }, '<leader>y', '"+y<CR> ')
 
-vim.keymap.set('n', '<C-q>', ':q!<CR>')
+vim.keymap.set('n', '<C-q>', ':qa!<CR>')
 
 -- No clipboard override
 map("n", "x", '"_x')
