@@ -24,3 +24,10 @@ vim.api.nvim_create_user_command('VaporMemory', function()
     vim.notify("VaporMemory: Skipped (Not Vaporwave).", vim.log.levels.WARN)
   end
 end, { desc = "Run specialized Vapor Memory cleanup" })
+
+local quicksave_script = require("scripts.QuickSaveNote")
+
+vim.api.nvim_create_user_command('QuickSaveNote', function()
+  quicksave_script.quick_save()
+  vim.notify("QuickSaveNote: Processed and saved.", vim.log.levels.INFO)
+end, { desc = "Run quicksave note process" })

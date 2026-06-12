@@ -13,8 +13,8 @@ return {
         filesystem = {
           window = {
             mappings = {
-              ["l"] = "set_root", 
-              ["h"] = "navigate_up",
+              ["<Right>"] = "set_root", 
+              ["<Left>"] = "navigate_up",
             },
           },
           filtered_items = {

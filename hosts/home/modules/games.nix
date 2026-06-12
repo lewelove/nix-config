@@ -5,6 +5,7 @@
   environment.systemPackages = with pkgs; [
     # lutris
     # luanti
+    rimsort
   ];
 
   programs.steam = {

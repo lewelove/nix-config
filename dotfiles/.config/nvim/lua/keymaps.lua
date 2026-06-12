@@ -44,7 +44,7 @@ vim.keymap.set("i", "<Down>", "<C-o>gj", { silent = true })
 vim.keymap.set("i", "<Up>", "<C-o>gk", { silent = true })
 
 -- Quick Save Raw Idea
-vim.keymap.set("n", "<leader>s", function() _G.QuickSaveNote() end, { desc = "Quick Save Raw Note", silent = true })
+vim.keymap.set("n", "<leader>s", function() require("scripts.QuickSaveNote").quick_save() end, { desc = "Quick Save Raw Note", silent = true })
 
 -- Replace whole file with clipboard paste
 vim.keymap.set('n', '<leader>v', 'ggVG"_dP | :w<CR>', { desc = 'Paste clipboard to whole buffer' })
@@ -144,4 +144,3 @@ vim.keymap.set("n", "<leader>'", function()
     end
   end
 end, { desc = "Smart yank inside quotes" })
-

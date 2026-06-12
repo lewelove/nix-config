@@ -63,27 +63,27 @@ order_by = "${album.info.date_added} DESC"
 label = "Last Edited"
 order_by = "COALESCE(${album.info.metadata_toml_mtime}, 0) DESC"
 
-# -- COLLECTIONS --
+# -- LIBRARIES --
 
-# [collections.library]
+# [libraries.library]
 # label = "Entire Library"
 # filter = "1=1"
 
-[collections.album_library]
+[libraries.album_library]
 label = "Main Library"
 filter = "COALESCE(${album.tags.collection}, '') NOT LIKE %{Vapor Memory} AND ${album.genre} NOT LIKE %{Signalwave} AND ${album.genre} NOT LIKE %{Vaporwave}"
 
-[collections.vapor_memory]
+[libraries.vapor_memory]
 label = "Vapor Memory"
 filter = "COALESCE(${album.tags.collection}, '') LIKE %{Vapor Memory} OR ${album.genre} LIKE %{Vaporwave}"
 
-[collections.signalwave]
+[libraries.signalwave]
 label = "Signal Memory"
 filter = "COALESCE(${album.genre}, '') LIKE %{Signalwave}"
 
 # Apple Music Collection
 
-[collections.apple_music]
+[libraries.apple_music]
 label = "Apple Music"
 filter = "${album.tags.unix_added_applemusic} IS NOT NULL"
 strict = true
@@ -102,7 +102,7 @@ strict = true
 
 # Foobar2000 Collection
 
-[collections.foobar]
+[libraries.foobar]
 label = "Foobar2000"
 filter = "${album.tags.unix_added_foobar} IS NOT NULL"
 strict = true
@@ -121,7 +121,7 @@ strict = true
 
 # My Year
 
-[collections.my_year]
+[libraries.my_year]
 label = "My Year"
 filter = "${album.tags.my_year} IS NOT NULL"
 strict = true
