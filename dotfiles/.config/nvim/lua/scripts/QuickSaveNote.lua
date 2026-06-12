@@ -37,6 +37,9 @@ function M.quick_save()
 
   local routes = {
     vellum = "~/dev/vellum/docs/ideas/",
+    mute = "~/dev/mute/docs/ideas/",
+    nv = "~/Notes/config/nv/",
+    hypr = "~/Notes/config/hypr/",
   }
 
   -- Route parsing based on first line

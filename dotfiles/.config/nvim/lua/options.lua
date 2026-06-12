@@ -121,7 +121,7 @@ vim.opt.title = true
 -- Modern Filetype Detection
 vim.filetype.add({
   filename = {
-    ["metadata.lock"] = "toml",
+    ["album.lock"] = "json",
   },
   pattern = {
     [".*/bin/.*"] = function(path, bufnr)
