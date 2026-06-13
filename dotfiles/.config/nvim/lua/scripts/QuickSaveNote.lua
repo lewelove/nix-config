@@ -79,14 +79,15 @@ function M.quick_save()
 
   -- Grab the new first line to generate filename
   local title_line = lines[1]
-  local clean_title = title_line:gsub('[<>:"/\\|%?%*]', "_")
-  clean_title = clean_title:gsub("^%.+", "")
-  clean_title = clean_title:gsub("%s+", " ")
+  local clean_title = title_line:gsub("^#+%s*", "")
   clean_title = vim.trim(clean_title)
+  clean_title = clean_title:gsub('[<>:"/\\|%?%*]', "_")
+  clean_title = clean_title:gsub("^%.+", "")
+  clean_title = clean_title:gsub("%s+", "-")
 
   -- Cap at 64 characters
   if #clean_title > 64 then
-    clean_title = vim.fn.strcharpart(clean_title, 0, 64):match("^(.-)%s*$")
+    clean_title = vim.fn.strcharpart(clean_title, 0, 64):match("^(.-)[-%s]*$")
   end
   if clean_title == "" then clean_title = "untitled" end
 
