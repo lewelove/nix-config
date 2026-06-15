@@ -27,6 +27,9 @@
 -- hl.bind("SUPER + ", hl.dsp.exec_cmd())
 -- hl.bind("SUPER + ", hl.dsp.window())
 
+-- kill hyprland and escape to tty
+hl.bind("CONTROL + ALT + Escape", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+
 hl.bind("SUPER + Q", hl.dsp.window.close())
 hl.bind("SUPER + E", hl.dsp.window.float({ action = "toggle" }))
 hl.bind("SUPER + Tab", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
@@ -50,7 +53,7 @@ local file_manager = "thunar"
 local menu = "fuzzel"
 local calculator = "gnome-calculator"
 local notes = "nvl -c 'cd ~/Notes' -c 'startinsert'"
-local music_player = "chromium-browser --app=http://localhost:5173/"
+local mpd_client = "chromium-browser --app=http://localhost:5173/"
 local browser = "zen-beta"
 local password_manager = "bitwarden"
 
@@ -61,11 +64,15 @@ hl.bind("SUPER + SHIFT + E", hl.dsp.exec_cmd(file_manager))
 hl.bind("SUPER + SHIFT + B", hl.dsp.exec_cmd(browser))
 hl.bind("SUPER + KP_Multiply", hl.dsp.exec_cmd(calculator))
 hl.bind("SUPER + SHIFT + P", hl.dsp.exec_cmd(password_manager))
+
+-- bookmarks
 hl.bind("SUPER + grave", hl.dsp.exec_cmd("fuzzel-bookmarks.sh"))
 
--- hl.workspace_rule({ workspace = "special:", on_created_empty =  })
--- hl.bind("SUPER + ", hl.dsp.workspace.toggle_special())
+-- mpd client
+hl.workspace_rule({ workspace = "special:mpd", on_created_empty = mpd_client })
+hl.bind("SUPER + M", hl.dsp.workspace.toggle_special("mpd"))
 
+-- notes
 hl.workspace_rule({ workspace = "special:notes", on_created_empty = notes })
 hl.bind("SUPER + N", hl.dsp.workspace.toggle_special("notes"))
 
@@ -80,6 +87,13 @@ hl.bind("SUPER + N", hl.dsp.workspace.toggle_special("notes"))
 
 --- Workspace Navigation ---------------------------------------
 
--- Scroll through existing workspaces with mainMod + scroll
+-- switch and move workspaces with SUPER + i
+for i = 1, 10 do
+    local key = i % 10
+    hl.bind("SUPER + " .. key,             hl.dsp.focus({ workspace = i}))
+    hl.bind("SUPER + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
+end
+
+-- scroll through existing workspaces with SUPER + scroll
 hl.bind("SUPER + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind("SUPER + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
