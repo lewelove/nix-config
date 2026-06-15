@@ -68,7 +68,7 @@ local file_manager = "thunar"
 local calculator = "gnome-calculator"
 local notes = "nvl -c 'cd ~/Notes' -c 'startinsert'"
 
-local password_manager = "bitwarden"
+local password_manager = "flatpak run com.bitwarden.desktop"
 local telegram_client = "AyuGram"
 local mpd_client = "chromium-browser --app=http://localhost:5173/"
 

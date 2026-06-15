@@ -6,6 +6,7 @@ hl.on("hyprland.start", function ()
 end)
 
 require("keybinds")
+require("window-rules")
 
 -- IO
 
