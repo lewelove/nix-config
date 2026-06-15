@@ -53,9 +53,10 @@ local file_manager = "thunar"
 local menu = "fuzzel"
 local calculator = "gnome-calculator"
 local notes = "nvl -c 'cd ~/Notes' -c 'startinsert'"
-local mpd_client = "chromium-browser --app=http://localhost:5173/"
 local browser = "zen-beta"
 local password_manager = "bitwarden"
+local telegram_client = "AyuGram"
+local mpd_client = "chromium-browser --app=http://localhost:5173/"
 
 -- hl.bind("SUPER + ", hl.dsp.exec_cmd())
 hl.bind("SUPER + return", hl.dsp.exec_cmd(terminal))
@@ -69,8 +70,8 @@ hl.bind("SUPER + SHIFT + P", hl.dsp.exec_cmd(password_manager))
 hl.bind("SUPER + grave", hl.dsp.exec_cmd("fuzzel-bookmarks.sh"))
 
 -- mpd client
-hl.workspace_rule({ workspace = "special:mpd", on_created_empty = mpd_client })
-hl.bind("SUPER + M", hl.dsp.workspace.toggle_special("mpd"))
+-- hl.workspace_rule({ workspace = "special:mpd", on_created_empty = mpd_client })
+-- hl.bind("SUPER + M", hl.dsp.workspace.toggle_special("mpd"))
 
 -- notes
 hl.workspace_rule({ workspace = "special:notes", on_created_empty = notes })
@@ -85,15 +86,81 @@ hl.bind("SUPER + N", hl.dsp.workspace.toggle_special("notes"))
 -- hl.bind("SUPER + ", hl.dsp.exec_cmd())
 -- hl.bind("SUPER + ", hl.dsp.exec_cmd())
 
---- Workspace Navigation ---------------------------------------
+--- Meta Workspaces --------------------------------------------
 
--- switch and move workspaces with SUPER + i
-for i = 1, 10 do
-    local key = i % 10
-    hl.bind("SUPER + " .. key,             hl.dsp.focus({ workspace = i}))
-    hl.bind("SUPER + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
+local current_meta = "Desktop"
+
+local meta_workspaces = {
+  Desktop = {
+    key = "D",
+    offset = 0,
+    last_active = 1,
+  },
+  Telecom = {
+    key = "T",
+    offset = 4,
+    last_active = 5,
+    on_created_empty = telegram_client,
+  },
+  Music = {
+    key = "M",
+    offset = 8,
+    last_active = 9,
+    on_created_empty = mpd_client,
+  }
+}
+
+-- Switching meta-workspaces retrieves and focuses the last active sub-workspace
+local function switch_meta_workspace(meta_name)
+  if current_meta == meta_name then return end
+  
+  current_meta = meta_name
+  local target_ws = meta_workspaces[current_meta].last_active
+  hl.dispatch(hl.dsp.focus({ workspace = tostring(target_ws) }))
 end
 
+-- Switch sub-workspace (1-10) using the current meta-workspace offset
+local function switch_sub_workspace(sub_idx)
+  local target_ws = meta_workspaces[current_meta].offset + sub_idx
+  meta_workspaces[current_meta].last_active = target_ws
+  hl.dispatch(hl.dsp.focus({ workspace = tostring(target_ws) }))
+end
+
+-- Create workspace rules for default applications on sub-workspace 1
+for _, meta in pairs(meta_workspaces) do
+  if meta.on_created_empty then
+    local target_ws = meta.offset + 1
+    hl.workspace_rule({
+      workspace = tostring(target_ws),
+      on_created_empty = meta.on_created_empty
+    })
+  end
+end
+
+-- Bind switching meta-workspaces (SUPER + D / T / M)
+for name, meta in pairs(meta_workspaces) do
+  hl.bind("SUPER + " .. meta.key, function()
+    switch_meta_workspace(name)
+  end, { description = "Switch to " .. name .. " meta-workspace" })
+end
+
+for i = 1, 4 do
+  local key = i
+  
+  hl.bind("SUPER + " .. key, function()
+    switch_sub_workspace(i)
+  end, { description = "Switch to sub-workspace " .. i })
+end
+
+--- Workspace Navigation ---------------------------------------
+
+-- -- switch and move workspaces with SUPER + i
+-- for i = 1, 10 do
+--     local key = i % 10
+--     hl.bind("SUPER + " .. key,             hl.dsp.focus({ workspace = i}))
+--     hl.bind("SUPER + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
+-- end
+
 -- scroll through existing workspaces with SUPER + scroll
-hl.bind("SUPER + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind("SUPER + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
+-- hl.bind("SUPER + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
+-- hl.bind("SUPER + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
