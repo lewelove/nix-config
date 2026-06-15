@@ -1,9 +1,15 @@
 return {
-  "kevincfisher/nvim-colorizer.lua",
+  "brenoprata10/nvim-highlight-colors",
   config = function()
-    require("colorizer").setup({
-      "*",
-      css = { rgb_fn = true; },
+    require("nvim-highlight-colors").setup({
+      render = "virtual",
+      virtual_symbol = "██",
+      enable_named_colors = true,
+      enable_tailwind = false,
+      exclude_filetypes = {
+        "lazy",
+        "oil",
+      },
     })
   end,
 }
