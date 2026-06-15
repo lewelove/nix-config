@@ -46,44 +46,68 @@ hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true })
 hl.bind("CONTROL + ALT + Delete", hl.dsp.exec_cmd("powermenu.sh"))
 
 
+--- Control ----------------------------------------------------
+
+-- hl.bind("SUPER + ", hl.dsp.exec_cmd(""))
+
+-- audio devices
+hl.bind("SUPER + F1", hl.dsp.exec_cmd("pactl set-default-sink EDIFIER-R1380DB-EQ-SPL90-20260609"))
+hl.bind("SUPER + F2", hl.dsp.exec_cmd("pactl set-default-sink AIYIMA-DAC-A5-PRO-SWAP"))
+hl.bind("SUPER + F3", hl.dsp.exec_cmd("pactl set-default-sink REDMI-BUDS-6-ACTIVE-EQ"))
+
+-- audio volume
+hl.bind("KP_Add", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 3%+"), { repeating = true })
+hl.bind("KP_Subtract", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%-"), { repeating = true })
+
 --- Programs ---------------------------------------------------
 
 local terminal = "alacritty"
+local browser = "zen-beta"
 local file_manager = "thunar"
-local menu = "fuzzel"
+
 local calculator = "gnome-calculator"
 local notes = "nvl -c 'cd ~/Notes' -c 'startinsert'"
-local browser = "zen-beta"
+
 local password_manager = "bitwarden"
 local telegram_client = "AyuGram"
 local mpd_client = "chromium-browser --app=http://localhost:5173/"
 
--- hl.bind("SUPER + ", hl.dsp.exec_cmd())
-hl.bind("SUPER + return", hl.dsp.exec_cmd(terminal))
+local menu = "fuzzel"
+local bookmarks = "fuzzel-bookmarks.sh"
+
+local steam = "steam-isp"
+local photopea = "chromium-browser --app=https://photopea.com"
+
+local lab_ssh = "ssh lab"
+
+--- Programs Keys ----------------------------------------------
+
+hl.bind("SUPER + Return", hl.dsp.exec_cmd(terminal))
+
 hl.bind("SUPER + R", hl.dsp.exec_cmd(menu))
+
 hl.bind("SUPER + SHIFT + E", hl.dsp.exec_cmd(file_manager))
+
 hl.bind("SUPER + SHIFT + B", hl.dsp.exec_cmd(browser))
+
 hl.bind("SUPER + KP_Multiply", hl.dsp.exec_cmd(calculator))
+
 hl.bind("SUPER + SHIFT + P", hl.dsp.exec_cmd(password_manager))
 
--- bookmarks
-hl.bind("SUPER + grave", hl.dsp.exec_cmd("fuzzel-bookmarks.sh"))
+hl.bind("SUPER + Grave", hl.dsp.exec_cmd(bookmarks))
+
+hl.bind("SUPER + SHIFT + Return", hl.dsp.exec_cmd(terminal .. " -e " .. lab_ssh))
 
 -- mpd client
--- hl.workspace_rule({ workspace = "special:mpd", on_created_empty = mpd_client })
--- hl.bind("SUPER + M", hl.dsp.workspace.toggle_special("mpd"))
+hl.bind("CONTROL + Space", hl.dsp.exec_cmd("rmpc togglepause"))
+hl.bind("CONTROL + Pause", hl.dsp.exec_cmd("rmpc single oneshot"))
+hl.bind("CONTROL + SHIFT + Pause", hl.dsp.exec_cmd("rmpc single off"))
 
--- notes
-hl.workspace_rule({ workspace = "special:notes", on_created_empty = notes })
-hl.bind("SUPER + N", hl.dsp.workspace.toggle_special("notes"))
+-- llm paste and exec commands
+hl.bind("SUPER + V", hl.dsp.exec_cmd("wrap-paste.sh"))
+hl.bind("SUPER + bracketleft", hl.dsp.exec_cmd("fuzzel-llm-system-prompts.sh"))
+hl.bind("SUPER + bracketright", hl.dsp.exec_cmd("fuzzel-llm-instructions.sh"))
 
--- hl.workspace_rule({ workspace = "special:", on_created_empty =  })
--- hl.bind("SUPER + ", hl.dsp.workspace.toggle_special())
-
--- hl.bind("SUPER + ", hl.dsp.exec_cmd())
--- hl.bind("SUPER + ", hl.dsp.exec_cmd())
--- hl.bind("SUPER + ", hl.dsp.exec_cmd())
--- hl.bind("SUPER + ", hl.dsp.exec_cmd())
 -- hl.bind("SUPER + ", hl.dsp.exec_cmd())
 
 --- Meta Workspaces --------------------------------------------
@@ -91,26 +115,58 @@ hl.bind("SUPER + N", hl.dsp.workspace.toggle_special("notes"))
 local current_meta = "Desktop"
 
 local meta_workspaces = {
+
+  -- Name = {
+  --   key = "",
+  --   offset = ,
+  --   last_active = ,
+  --   on_created_empty = ,
+  -- },
+
   Desktop = {
     key = "D",
     offset = 0,
     last_active = 1,
   },
+
   Telecom = {
     key = "T",
     offset = 4,
     last_active = 5,
     on_created_empty = telegram_client,
   },
+
   Music = {
     key = "M",
     offset = 8,
     last_active = 9,
     on_created_empty = mpd_client,
-  }
+  },
+
+  Games = {
+    key = "G",
+    offset = 12,
+    last_active = 13,
+    on_created_empty = steam,
+  },
+
+  Image = {
+    key = "I",
+    offset = 16,
+    last_active = 17,
+    on_created_empty = photopea,
+  },
+
+  Notes = {
+    key = "N",
+    offset = 20,
+    last_active = 21,
+    on_created_empty = notes,
+  },
+
 }
 
--- Switching meta-workspaces retrieves and focuses the last active sub-workspace
+-- switching meta-workspaces retrieves and focuses the last active sub-workspace
 local function switch_meta_workspace(meta_name)
   if current_meta == meta_name then return end
   
@@ -119,14 +175,14 @@ local function switch_meta_workspace(meta_name)
   hl.dispatch(hl.dsp.focus({ workspace = tostring(target_ws) }))
 end
 
--- Switch sub-workspace (1-10) using the current meta-workspace offset
+-- switch sub-workspace (1-4) using the current meta-workspace offset
 local function switch_sub_workspace(sub_idx)
   local target_ws = meta_workspaces[current_meta].offset + sub_idx
   meta_workspaces[current_meta].last_active = target_ws
   hl.dispatch(hl.dsp.focus({ workspace = tostring(target_ws) }))
 end
 
--- Create workspace rules for default applications on sub-workspace 1
+-- create workspace rules for default applications on sub-workspace 1
 for _, meta in pairs(meta_workspaces) do
   if meta.on_created_empty then
     local target_ws = meta.offset + 1
@@ -137,7 +193,7 @@ for _, meta in pairs(meta_workspaces) do
   end
 end
 
--- Bind switching meta-workspaces (SUPER + D / T / M)
+-- bind switching meta-workspaces
 for name, meta in pairs(meta_workspaces) do
   hl.bind("SUPER + " .. meta.key, function()
     switch_meta_workspace(name)
@@ -153,14 +209,3 @@ for i = 1, 4 do
 end
 
 --- Workspace Navigation ---------------------------------------
-
--- -- switch and move workspaces with SUPER + i
--- for i = 1, 10 do
---     local key = i % 10
---     hl.bind("SUPER + " .. key,             hl.dsp.focus({ workspace = i}))
---     hl.bind("SUPER + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
--- end
-
--- scroll through existing workspaces with SUPER + scroll
--- hl.bind("SUPER + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
--- hl.bind("SUPER + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
