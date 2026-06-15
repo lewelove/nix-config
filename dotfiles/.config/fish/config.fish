@@ -28,6 +28,7 @@ if status is-interactive
   alias ipcheck="curl ip-api.com"
 
   alias st="systemctl --user status"
+  alias stp="systemctl --user stop"
   alias rs="systemctl --user restart"
   alias jl="journalctl --user -fu"
 

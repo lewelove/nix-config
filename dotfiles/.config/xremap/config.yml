@@ -21,25 +21,9 @@ modmap:
     device:
       only: "Xbox Wireless Controller"
     application:
-      not:
-        - steam
-        - steam_app_.*
-        - lutris
-        - retroarch
+      only:
+        - mpv
     remap:
       BTN_SOUTH: KEY_PLAYPAUSE
       BTN_WEST: KEY_KPMINUS
       BTN_Z: KEY_KPPLUS
-
-keymap:
-  - name: Xbox Gamepad Remote
-    device:
-      only: "Xbox Wireless Controller"
-    application:
-      not:
-        - steam
-        - steam_app_.*
-        - lutris
-        - retroarch
-    remap:
-      BTN_SOUTH: KEY_PLAYPAUSE

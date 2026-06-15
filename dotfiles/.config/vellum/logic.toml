@@ -85,38 +85,38 @@ filter = "COALESCE(${album.genre}, '') LIKE %{Signalwave}"
 
 [libraries.apple_music]
 label = "Apple Music"
-filter = "${album.tags.unix_added_applemusic} IS NOT NULL"
+filter = "${album.tags.date_added_applemusic} IS NOT NULL"
 strict = true
 groupers = ["year_added_applemusic", "genre", "decade"]
-sorters = ["unix_added_applemusic", "default", "az", "year"]
+sorters = ["date_added_applemusic", "default", "az", "year"]
 
 [groupers.year_added_applemusic]
 label = "Year Added"
-select = "substr(${album.tags.unix_added_applemusic}, 1, 4)"
+select = "substr(${album.tags.date_added_applemusic}, 1, 4)"
 strict = true
 
-[sorters.unix_added_applemusic]
+[sorters.date_added_applemusic]
 label = "Date Added"
-order_by = "${album.tags.unix_added_applemusic} DESC"
+order_by = "${album.tags.date_added_applemusic} DESC"
 strict = true
 
 # Foobar2000 Collection
 
 [libraries.foobar]
 label = "Foobar2000"
-filter = "${album.tags.unix_added_foobar} IS NOT NULL"
+filter = "${album.tags.date_added_foobar} IS NOT NULL"
 strict = true
 groupers = ["year_added_foobar"]
-sorters = ["unix_added_foobar"]
+sorters = ["date_added_foobar"]
 
 [groupers.year_added_foobar]
 label = "Year Added"
 select = "substr(${album.tags.date_added_foobar}, 1, 4)"
 strict = true
 
-[sorters.unix_added_foobar]
+[sorters.date_added_foobar]
 label = "Date Added"
-order_by = "${album.tags.unix_added_foobar} DESC"
+order_by = "${album.tags.date_added_foobar} DESC"
 strict = true
 
 # My Year
