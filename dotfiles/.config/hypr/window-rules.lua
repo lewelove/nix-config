@@ -37,6 +37,19 @@ hl.window_rule ({
 })
 
 hl.window_rule ({
+  name = "steam",
+  match = { class = "steam" },
+  workspace = 13,
+})
+
+hl.window_rule ({
+  name = "steam_games",
+  match = { initial_class = "^steam_app_.*$" },
+  workspace = 14,
+  fullscreen = true
+})
+
+hl.window_rule ({
   name = "btop",
   match = { class = "btop" },
   float = true,

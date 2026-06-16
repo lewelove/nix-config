@@ -29,17 +29,26 @@ hl.bind (
 -- cycle focus through windows
 hl.bind (
   "SUPER + left",
-  hl.dsp.focus({ direction = "left" }) )
+  hl.dsp.focus({ direction = "l" }) )
 
 hl.bind (
   "SUPER + right",
-  hl.dsp.focus({ direction = "right" }) )
+  hl.dsp.focus({ direction = "r" }) )
+
+hl.bind (
+  "SUPER + up",
+  hl.dsp.focus({ direction = "u" }) )
+
+hl.bind (
+  "SUPER + down",
+  hl.dsp.focus({ direction = "d" }) )
 
 -- move/resize windows with lmb/rmb and dragging
 hl.bind (
   "SUPER + mouse:272",
   hl.dsp.window.drag(),
   { mouse = true } )
+
 hl.bind (
   "SUPER + mouse:273",
   hl.dsp.window.resize(),
@@ -150,7 +159,7 @@ hl.bind (
 
 hl.bind (
   "SUPER + P",
-  hl.dsp.exec_cmd("fuzzel-paste.sh") )
+  hl.dsp.exec_cmd("fuzzel-file-paste") )
 
 -- llm exec commands
 hl.bind (

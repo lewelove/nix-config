@@ -20,6 +20,9 @@ grain = 0.1
 # blur = 0.00
 
 
+[scripts]
+get-lyrics = "./scripts/get_lyrics/result/bin/get_lyrics"
+
 [manifest]
 supported_extensions = [ ".flac" ]
 

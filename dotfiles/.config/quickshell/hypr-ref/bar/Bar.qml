@@ -35,6 +35,7 @@ Scope {
         Rectangle {
           anchors.fill: parent
           color: Theme.get.barBgColor
+          radius: 6
         }
 
         RowLayout {

@@ -24,17 +24,17 @@
     ./modules/games.nix
 
     # Programs
-    (lib.pipe inputs.import-tree[
+    (lib.pipe inputs.import-tree [
       (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
       (i: i ../../programs)
     ])
-    (lib.pipe inputs.import-tree[
+    (lib.pipe inputs.import-tree [
       (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
       (i: i ./programs)
     ])
 
     # Services
-    (lib.pipe inputs.import-tree[
+    (lib.pipe inputs.import-tree [
       (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
       (i: i ../../services)
     ])
@@ -44,7 +44,7 @@
     ])
 
     # Scripts
-    (lib.pipe inputs.import-tree[
+    (lib.pipe inputs.import-tree [
       (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
       (i: i ../../scripts)
     ])

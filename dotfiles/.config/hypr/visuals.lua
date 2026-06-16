@@ -2,8 +2,8 @@
 
 hl.config ({
   general = {
-    gaps_in = 6,
-    gaps_out = 12,
+    gaps_in = 3,
+    gaps_out = { top = 12, bottom = 6, left = 12, right = 12 },
     border_size = 0,
     resize_on_border = false,
     allow_tearing = false,
@@ -63,24 +63,23 @@ hl.animation ({
 hl.animation ({
   leaf = "windows",
   enabled = true,
-  speed = 4.8,
+  speed = 4,
   bezier = "ease_out_quint",
-  style = "popin 90%",
+  style = "slide",
 })
 
 hl.animation ({
   leaf = "windowsIn",
   enabled = true,
-  speed = 3,
+  speed = 4,
   bezier = "ease_out_quint",
 })
 
 hl.animation ({
   leaf = "windowsOut",
   enabled = true,
-  speed = 1.5,
+  speed = 4,
   bezier = "ease_out_quint",
-  style = "popin 90%",
 })
 
 hl.animation ({
@@ -123,13 +122,13 @@ hl.animation ({
 hl.animation ({
   leaf = "fadeLayersIn",
   enabled = true,
-  speed = 1,
+  speed = 2,
   bezier = "steep",
 })
 
 hl.animation ({
   leaf = "fadeLayersOut",
   enabled = true,
-  speed = 1,
+  speed = 2,
   bezier = "steep",
 })

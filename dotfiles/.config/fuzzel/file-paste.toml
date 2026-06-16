@@ -1,0 +1,14 @@
+[files]
+
+nix-config = [ "~/Folders/XML Packed/~-nix-config.xml" ]
+
+vellum = [
+  "~/Folders/XML Packed/~-dev-vellum.xml",
+  "~/Folders/XML Packed/~-.config-vellum.xml",
+]
+
+mute = [
+  "~/Folders/XML Packed/~-dev-mute.xml",
+  "~/Folders/XML Packed/~-.config-mute.xml",
+]
+

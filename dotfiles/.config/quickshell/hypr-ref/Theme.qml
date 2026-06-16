@@ -19,14 +19,14 @@ Singleton {
   property int sectionSpacingLeft: 12
   property int sectionSpacingRight: 32
   property int barMarginTop: 0        
-  property int barMarginLeft: 0       
-  property int barMarginRight: 0      
-  property int barMarginBottom: 0
+  property int barMarginLeft: 12       
+  property int barMarginRight: 12    
+  property int barMarginBottom: 6
   property int barPaddingX: 12
 
   // --- BAR STYLING ---
   property string barBgColor: "#FF242424"
-  property bool onTop: true
+  property bool onTop: false
 
   // --- COLORS ---
   property string activeColor: "#40FFFFFF"
