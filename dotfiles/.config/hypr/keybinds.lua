@@ -1,31 +1,4 @@
--- ### System #####################################################
--- 
--- $mainMod = SUPER
--- 
--- bind = $mainMod, Q, exec, ~/.config/hypr/scripts/safe-kill.sh
--- bind = $mainMod SHIFT, Q, killactive
--- bind = $mainMod, Tab, fullscreen, 0
--- 
--- # toggle floating
--- bind = $mainMod, E, togglefloating
--- 
--- # cycle focus through windows
--- bind = $mainMod, Right, cyclenext
--- bind = $mainMod, Left, cyclenext, prev
--- 
--- move/resize windows with lmb/rmb and dragging
--- bindm = $mainMod, mouse:272, movewindow
--- bindm = $mainMod, mouse:273, resizewindow
--- 
--- bind = , Scroll_Lock, exec, qs -p ~/.config/quickshell/hypr-ref/shell.qml ipc call screensaver activate
--- bind = CONTROL ALT, Delete, exec, powermenu.sh
-
-
 --- System -----------------------------------------------------
-
--- hl.bind("SUPER + ", hl.dsp.exec_cmd(""))
--- hl.bind("SUPER + ", hl.dsp.exec_cmd())
--- hl.bind("SUPER + ", hl.dsp.window())
 
 -- kill hyprland and escape to tty
 hl.bind("CONTROL + ALT + Escape", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
@@ -47,8 +20,6 @@ hl.bind("CONTROL + ALT + Delete", hl.dsp.exec_cmd("powermenu.sh"))
 
 
 --- Control ----------------------------------------------------
-
--- hl.bind("SUPER + ", hl.dsp.exec_cmd(""))
 
 -- audio devices
 hl.bind("SUPER + F1", hl.dsp.exec_cmd("pactl set-default-sink EDIFIER-R1380DB-EQ-SPL90-20260609"))
@@ -83,19 +54,12 @@ local lab_ssh = "ssh lab"
 --- Programs Keys ----------------------------------------------
 
 hl.bind("SUPER + Return", hl.dsp.exec_cmd(terminal))
-
 hl.bind("SUPER + R", hl.dsp.exec_cmd(menu))
-
 hl.bind("SUPER + SHIFT + E", hl.dsp.exec_cmd(file_manager))
-
 hl.bind("SUPER + SHIFT + B", hl.dsp.exec_cmd(browser))
-
 hl.bind("SUPER + KP_Multiply", hl.dsp.exec_cmd(calculator))
-
 hl.bind("SUPER + SHIFT + P", hl.dsp.exec_cmd(password_manager))
-
 hl.bind("SUPER + Grave", hl.dsp.exec_cmd(bookmarks))
-
 hl.bind("SUPER + SHIFT + Return", hl.dsp.exec_cmd(terminal .. " -e " .. lab_ssh))
 
 -- mpd client
@@ -103,12 +67,19 @@ hl.bind("CONTROL + Space", hl.dsp.exec_cmd("rmpc togglepause"))
 hl.bind("CONTROL + Pause", hl.dsp.exec_cmd("rmpc single oneshot"))
 hl.bind("CONTROL + SHIFT + Pause", hl.dsp.exec_cmd("rmpc single off"))
 
+-- screenshots
+local screenshot = "~/.config/hypr/scripts/screenshot.sh"
+hl.bind("PRINT", hl.dsp.exec_cmd(screenshot .. " output"))
+hl.bind("CONTROL + PRINT", hl.dsp.exec_cmd(screenshot .. " window"))
+hl.bind("CONTROL + SHIFT + PRINT", hl.dsp.exec_cmd(screenshot .. " region"))
+
+-- pick color
+hl.bind("CONTROL + Menu", hl.dsp.exec_cmd("hyprpicker -a | wl-copy"))
+
 -- llm paste and exec commands
 hl.bind("SUPER + V", hl.dsp.exec_cmd("wrap-paste.sh"))
 hl.bind("SUPER + bracketleft", hl.dsp.exec_cmd("fuzzel-llm-system-prompts.sh"))
 hl.bind("SUPER + bracketright", hl.dsp.exec_cmd("fuzzel-llm-instructions.sh"))
-
--- hl.bind("SUPER + ", hl.dsp.exec_cmd())
 
 --- Meta Workspaces --------------------------------------------
 
@@ -207,5 +178,3 @@ for i = 1, 4 do
     switch_sub_workspace(i)
   end, { description = "Switch to sub-workspace " .. i })
 end
-
---- Workspace Navigation ---------------------------------------
