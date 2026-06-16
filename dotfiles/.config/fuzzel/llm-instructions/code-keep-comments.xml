@@ -4,7 +4,7 @@
 </instruction>
 
 <important_constraints>
-  - Never change or add any commented lines within code blocks. Keep all original ones as is.
+  - Never change or add any commented lines within code blocks, unless the logic is changed.
   - Do not write out files that didn't require change since last message.
   - For files that require no change but require filesystem move or rename provide bash commands.
 </important_constraints>

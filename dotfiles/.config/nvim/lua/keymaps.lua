@@ -61,13 +61,13 @@ vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
 -- Smart Diff Merge (Leader m)
 -- If in DIFF_REVIEW -> Push to original (diffput)
 -- If in Original    -> Pull from review (diffget)
--- vim.keymap.set({ "n", "v" }, "<leader>m", function()
---   if vim.fn.bufname("%") == "DIFF_REVIEW" then
---     vim.cmd("diffput")
---   else
---     vim.cmd("diffget")
---   end
--- end, { desc = "Smart Diff Put/Get" })
+vim.keymap.set({ "n", "v" }, "<leader>b", function()
+  if vim.fn.bufname("%") == "DIFF_REVIEW" then
+    vim.cmd("diffput")
+  else
+    vim.cmd("diffget")
+  end
+end, { desc = "Smart Diff Put/Get" })
 -- =============================================================
 
 -- DIFF MERGE TOOL (Internal V-Split)

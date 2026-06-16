@@ -56,11 +56,20 @@ local meta_workspaces = {
 
 -- switching meta-workspaces retrieves and focuses the last active sub-workspace
 local function switch_meta_workspace(meta_name)
-  if current_meta == meta_name then return end
-  
+  local active_ws = hl.get_active_workspace()
+  local meta = meta_workspaces[meta_name]
+  local start_ws = meta.offset + 1
+  local end_ws = meta.offset + 4
+
   current_meta = meta_name
-  local target_ws = meta_workspaces[current_meta].last_active
-  hl.dispatch(hl.dsp.focus({ workspace = tostring(target_ws) }))
+
+  if active_ws and active_ws.id >= start_ws and active_ws.id <= end_ws then
+    meta.last_active = start_ws
+    hl.dispatch(hl.dsp.focus({ workspace = tostring(start_ws) }))
+  else
+    local target_ws = meta.last_active
+    hl.dispatch(hl.dsp.focus({ workspace = tostring(target_ws) }))
+  end
 end
 
 -- switch sub-workspace (1-4) using the current meta-workspace offset

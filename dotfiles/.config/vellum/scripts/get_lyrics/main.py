@@ -17,15 +17,16 @@ def clean_genius_lyrics(lyrics, title):
     filtered_lines = []
     for line in lines:
         trimmed = line.strip()
-        if trimmed.startswith("[") and trimmed.endswith("]"):
-            continue
-        filtered_lines.append(trimmed)
+        if trimmed.startswith("["):
+            filtered_lines.append("")
+        else:
+            filtered_lines.append(trimmed)
     
     cleaned = "\n".join(filtered_lines)
     
     cleaned = re.sub(r"\(\s*\n\s*", "(", cleaned)
     cleaned = re.sub(r"\s*\n\s*\)", ")", cleaned)
-    cleaned = re.sub(r"\n{3,}", "\n\n", cleaned)
+    cleaned = re.sub(r"\n{2,}", "\n", cleaned)
     
     cleaned = re.sub(r"[0-9]*Embed$", "", cleaned)
     cleaned = cleaned.strip()
