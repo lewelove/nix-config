@@ -28,22 +28,14 @@ hl.bind (
 
 -- cycle focus through windows
 hl.bind (
-  "SUPER + left",
+  "SUPER + Left",
   hl.dsp.focus({ direction = "l" }) )
 
 hl.bind (
-  "SUPER + right",
+  "SUPER + Right",
   hl.dsp.focus({ direction = "r" }) )
 
-hl.bind (
-  "SUPER + up",
-  hl.dsp.focus({ direction = "u" }) )
-
-hl.bind (
-  "SUPER + down",
-  hl.dsp.focus({ direction = "d" }) )
-
--- move/resize windows with lmb/rmb and dragging
+-- drag/resize windows with lmb/rmb and dragging
 hl.bind (
   "SUPER + mouse:272",
   hl.dsp.window.drag(),
@@ -53,6 +45,24 @@ hl.bind (
   "SUPER + mouse:273",
   hl.dsp.window.resize(),
   { mouse = true } )
+
+-- swap windows within workspace
+hl.bind (
+  "SUPER + SHIFT + Left",
+  hl.dsp.window.swap({ direction = "l" }) )
+
+hl.bind (
+  "SUPER + SHIFT + Right",
+  hl.dsp.window.swap({ direction = "r", group_aware = true }) )
+
+-- rezise scrolling column
+hl.bind (
+  "SUPER + Down",
+  hl.dsp.layout("colresize 0.7"))
+
+hl.bind (
+  "SUPER + Up",
+  hl.dsp.layout("colresize 0.9"))
 
 -- powermenu
 hl.bind (
