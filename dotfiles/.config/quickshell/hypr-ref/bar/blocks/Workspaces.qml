@@ -12,8 +12,10 @@ RowLayout {
     Repeater {
         model: ScriptModel {
             values: [...Hyprland.workspaces.values]
-                .filter(ws => ws.monitor === monitor && ws.id > 0)
-                .sort((a, b) => a.id - b.id)
+                // FIX: Named workspaces have negative IDs in Hyprland! 
+                // We filter by name string instead of ws.id > 0
+                .filter(ws => ws.monitor === monitor && !ws.name.startsWith("special:"))
+                .sort((a, b) => a.name.localeCompare(b.name))
         }
 
         BarBlock {
@@ -25,10 +27,9 @@ RowLayout {
             
             Layout.preferredWidth: Math.max(Theme.get.barHeight, content.implicitWidth)
 
-            onClicked: Hyprland.dispatch(`workspace ${thisWorkspace.id}`)
+            onClicked: Hyprland.dispatch(`workspace name:${thisWorkspace.name}`)
 
             content: Row {
-                // Now uses the theme setting
                 spacing: Theme.get.workspaceInnerSpacing
                 leftPadding: 0
                 
@@ -39,7 +40,7 @@ RowLayout {
                     
                     BarText { 
                         id: numText
-                        text: thisWorkspace.id
+                        text: thisWorkspace.name
                         
                         // Font
                         fontFamily: Theme.get.fontFaceWorkspaces

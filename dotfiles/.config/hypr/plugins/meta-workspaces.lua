@@ -1,90 +1,86 @@
 --- Meta Workspaces --------------------------------------------
 
+local range = 4
 local current_meta = "Desktop"
 
 local meta_workspaces = {
 
-  -- Name = {
-  --   key = "",
-  --   offset = ,
-  --   last_active = ,
-  --   on_created_empty = ,
-  -- },
-
   Desktop = {
     key = "D",
-    offset = 0,
-    last_active = 1,
   },
 
   Telecom = {
     key = "T",
-    offset = 4,
-    last_active = 5,
     on_created_empty = programs.telegram_client,
   },
 
   Music = {
     key = "M",
-    offset = 8,
-    last_active = 9,
     on_created_empty = programs.mpd_client,
   },
 
   Games = {
     key = "G",
-    offset = 12,
-    last_active = 13,
     on_created_empty = programs.steam,
   },
 
   Image = {
     key = "I",
-    offset = 16,
-    last_active = 17,
     on_created_empty = programs.photopea,
   },
 
   Notes = {
     key = "N",
-    offset = 20,
-    last_active = 21,
     on_created_empty = programs.notes,
   },
 
 }
 
+-- Initialize dynamic state for tracking last active sub-workspace
+for _, meta in pairs(meta_workspaces) do
+  meta.last_active = 1
+end
+
 -- switching meta-workspaces retrieves and focuses the last active sub-workspace
 local function switch_meta_workspace(meta_name)
   local active_ws = hl.get_active_workspace()
   local meta = meta_workspaces[meta_name]
-  local start_ws = meta.offset + 1
-  local end_ws = meta.offset + 4
 
   current_meta = meta_name
 
-  if active_ws and active_ws.id >= start_ws and active_ws.id <= end_ws then
-    meta.last_active = start_ws
-    hl.dispatch(hl.dsp.focus({ workspace = tostring(start_ws) }))
+  -- Check if current workspace starts with this meta's key
+  local is_in_meta = false
+  if active_ws and active_ws.name then
+    local prefix = meta.key .. ":"
+    if string.sub(active_ws.name, 1, string.len(prefix)) == prefix then
+      is_in_meta = true
+    end
+  end
+
+  if is_in_meta then
+    -- Reset back to index 1 if we're already on this meta
+    meta.last_active = 1
+    hl.dispatch(hl.dsp.focus({ workspace = "name:" .. meta.key .. ":1" }))
   else
-    local target_ws = meta.last_active
-    hl.dispatch(hl.dsp.focus({ workspace = tostring(target_ws) }))
+    local target_ws = meta.key .. ":" .. tostring(meta.last_active)
+    hl.dispatch(hl.dsp.focus({ workspace = "name:" .. target_ws }))
   end
 end
 
--- switch sub-workspace (1-4) using the current meta-workspace offset
+-- switch sub-workspace (1 to range) using the current meta-workspace key
 local function switch_sub_workspace(sub_idx)
-  local target_ws = meta_workspaces[current_meta].offset + sub_idx
-  meta_workspaces[current_meta].last_active = target_ws
-  hl.dispatch(hl.dsp.focus({ workspace = tostring(target_ws) }))
+  local meta = meta_workspaces[current_meta]
+  meta.last_active = sub_idx
+  local target_ws = meta.key .. ":" .. tostring(sub_idx)
+  hl.dispatch(hl.dsp.focus({ workspace = "name:" .. target_ws }))
 end
 
 -- create workspace rules for default applications on sub-workspace 1
 for _, meta in pairs(meta_workspaces) do
   if meta.on_created_empty then
-    local target_ws = meta.offset + 1
+    local target_ws = meta.key .. ":1"
     hl.workspace_rule({
-      workspace = tostring(target_ws),
+      workspace = "name:" .. target_ws,
       on_created_empty = meta.on_created_empty
     })
   end
@@ -97,9 +93,8 @@ for name, meta in pairs(meta_workspaces) do
   end)
 end
 
-for i = 1, 4 do
-  local key = i
-  
+for i = 1, range do
+  local key = tostring(i)
   hl.bind ("SUPER + " .. key, function()
     switch_sub_workspace(i)
   end)

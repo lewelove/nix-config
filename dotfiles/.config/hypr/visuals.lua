@@ -16,7 +16,7 @@ hl.config ({
       enabled = true,
       range = 20,
       render_power = 8,
-      color = "rgba(00000050)",
+      color = "rgba(00000080)",
       color_inactive = "rgba(00000010)",
     },
   },

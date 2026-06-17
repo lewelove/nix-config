@@ -8,6 +8,7 @@ hl.on("hyprland.start", function ()
 end)
 
 require("visuals")
+require("layouts")
 require("window-rules")
 
 require("keybinds")

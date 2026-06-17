@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Hyprland
 import "root:/"
-import "../" // Imports WindowTracker and WindowIcon from bar/
+import "../" 
 
 RowLayout {
     id: root
@@ -16,8 +16,9 @@ RowLayout {
         id: repeater
         model: ScriptModel {
             values: [...Hyprland.workspaces.values]
-                .filter(ws => ws.monitor === monitor && ws.id < 0)
-                .sort((a, b) => a.id - b.id)
+                // FIX: Catch special workspaces using the name prefix instead of ws.id < 0
+                .filter(ws => ws.monitor === monitor && ws.name.startsWith("special:"))
+                .sort((a, b) => a.name.localeCompare(b.name))
         }
 
         BarBlock {
