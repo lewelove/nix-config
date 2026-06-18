@@ -25,7 +25,7 @@ Singleton {
   property int barPaddingX: 12
 
   // --- BAR STYLING ---
-  property string barBgColor: "#FF242424"
+  property string barBgColor: "#FF191919"
   property bool onTop: false
 
   // --- COLORS ---
