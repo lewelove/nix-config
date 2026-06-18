@@ -5,6 +5,11 @@ hl.bind (
   "CONTROL + ALT + Escape",
   hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'") )
 
+-- powermenu
+hl.bind (
+  "CONTROL + ALT + Delete",
+  hl.dsp.exec_cmd("powermenu.sh") )
+
 -- close window safely
 local safe_kill = require("scripts.safe-kill")
 hl.bind (
@@ -57,17 +62,20 @@ hl.bind (
 
 -- rezise scrolling column
 hl.bind (
-  "SUPER + Down",
-  hl.dsp.layout("colresize 0.7"))
+  "SUPER + SHIFT + Up",
+  hl.dsp.layout("colresize 1.0") )
 
 hl.bind (
   "SUPER + Up",
-  hl.dsp.layout("colresize 0.9"))
+  hl.dsp.layout("colresize 0.9") )
 
--- powermenu
 hl.bind (
-  "CONTROL + ALT + Delete",
-  hl.dsp.exec_cmd("powermenu.sh") )
+  "SUPER + Down",
+  hl.dsp.layout("colresize 0.7") )
+
+hl.bind (
+  "SUPER + SHIFT + Down",
+  hl.dsp.layout("colresize 0.5") )
 
 --- Control ----------------------------------------------------
 
