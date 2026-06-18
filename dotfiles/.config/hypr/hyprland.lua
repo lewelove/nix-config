@@ -13,6 +13,7 @@ require("window-rules")
 require("keybinds")
 
 require("plugins.meta-workspaces")
+require("plugins.dynamic-layout")
 
 -- IO
 

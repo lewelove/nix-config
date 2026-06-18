@@ -15,7 +15,7 @@ hl.config ({
 
 hl.config ({
   general = {
-    gaps_in = { top = 6, bottom = 6, left = 0, right = 0 }, 
+    gaps_in = 0,
     gaps_out = { top = 12, bottom = 6, left = 12, right = 12 },
     border_size = 0,
     resize_on_border = false,
