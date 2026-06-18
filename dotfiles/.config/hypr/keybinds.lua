@@ -51,23 +51,29 @@ hl.bind (
   hl.dsp.window.resize(),
   { mouse = true } )
 
--- swap windows within workspace
+-- -- swap windows within workspace
+-- hl.bind (
+--   "SUPER + SHIFT + Left",
+--   hl.dsp.window.swap({ direction = "l" }) )
+--
+-- hl.bind (
+--   "SUPER + SHIFT + Right",
+--   hl.dsp.window.swap({ direction = "r", group_aware = true }) )
+
+-- swap columns within scrolling workspace
 hl.bind (
   "SUPER + SHIFT + Left",
-  hl.dsp.window.swap({ direction = "l" }) )
+  hl.dsp.layout("swapcol l") )
 
 hl.bind (
   "SUPER + SHIFT + Right",
-  hl.dsp.window.swap({ direction = "r", group_aware = true }) )
+  hl.dsp.layout("swapcol r") )
 
 -- rezise scrolling column
-hl.bind (
-  "SUPER + SHIFT + Up",
-  hl.dsp.layout("colresize 1.0") )
 
 hl.bind (
   "SUPER + Up",
-  hl.dsp.layout("colresize 0.9") )
+  hl.dsp.layout("fit active") )
 
 hl.bind (
   "SUPER + Down",

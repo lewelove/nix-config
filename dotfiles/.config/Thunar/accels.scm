@@ -138,6 +138,7 @@
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/c288f7e9737e09dba12f1ef2c2c75450" "")
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/1322302e9bab360b4dbfb2ef3cd3f29a" "")
 ; (gtk_accel_path "<Actions>/ThunarStandardView/create-folder" "<Primary><Shift>n")
+; (gtk_accel_path "<Actions>/ThunarBookmarks/4236333340f6c1c742d113a742eebade" "")
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/966a36c34875819fb2e5b160d819b3da" "")
 ; (gtk_accel_path "<Actions>/ThunarWindow/open-home" "<Alt>Home")
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/231101a395e86757a2bf786e6b0f1e5c" "")

@@ -39,13 +39,13 @@ hl.window_rule ({
 hl.window_rule ({
   name = "steam",
   match = { class = "steam" },
-  workspace = 13,
+  workspace = "name:G:1",
 })
 
 hl.window_rule ({
   name = "steam_games",
   match = { initial_class = "^steam_app_.*$" },
-  workspace = 14,
+  workspace = "name:G:2",
   fullscreen = true
 })
 
