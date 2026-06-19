@@ -19,14 +19,6 @@ let
   '';
 in
 {
-  networking.hosts."127.0.0.1" = [ domain ];
-
-  services.nginx.virtualHosts."${domain}" = {
-    locations."/" = {
-      proxyPass = "http://127.0.0.1:${toString port}";
-      proxyWebsockets = true;
-    };
-  };
 
   environment.systemPackages = [
     pkgs.bun

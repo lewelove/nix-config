@@ -37,6 +37,8 @@
     mako
     libnotify
     awww
+    nemo
+    cliphist
     xremap
     hyprshot
     hyprpicker

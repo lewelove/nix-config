@@ -67,16 +67,16 @@ Scope {
           }
         }
 
-        Blocks.ActiveWorkspace {
-          id: activeWorkspace
-          anchors.centerIn: parent
-          chopLength: {
-              var occupied = rightBlocks.implicitWidth + leftBlocks.implicitWidth
-              var available = bar.width - occupied - (Theme.get.barPaddingX * 2) - 20
-              var chars = Math.floor(available / 10)
-              return Math.max(10, chars)
-          }
-        }
+        // Blocks.ActiveWorkspace {
+        //   id: activeWorkspace
+        //   anchors.centerIn: parent
+        //   chopLength: {
+        //       var occupied = rightBlocks.implicitWidth + leftBlocks.implicitWidth
+        //       var available = bar.width - occupied - (Theme.get.barPaddingX * 2) - 20
+        //       var chars = Math.floor(available / 10)
+        //       return Math.max(10, chars)
+        //   }
+        // }
       }
 
       IpcHandler {

@@ -5,7 +5,7 @@ OPTIONS=(
   "YYYYMMDD"
 )
 
-selection=$(printf "%s\n" "${OPTIONS[@]}" | fuzzel --dmenu --prompt="Paste: " --width 20)
+selection=$(printf "%s\n" "${OPTIONS[@]}" | fuzzel --dmenu --prompt="Copy: " --width 20)
 
 [[ -z "$selection" ]] && exit 0
 
@@ -17,5 +17,3 @@ case "$selection" in
         echo -n "$(date +%s)" | wl-copy
         ;;
 esac
-
-wtype -M ctrl v -m ctrl
