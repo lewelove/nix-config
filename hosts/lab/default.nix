@@ -27,7 +27,6 @@
     ./modules/disko.nix
 
     ./modules/packages.nix
-    ./modules/programs.nix
 
     ./modules/virtualization.nix
 
@@ -36,6 +35,10 @@
     ../../programs/nvim.nix
     ../../programs/git.nix
     ../../programs/btop.nix
+    (lib.pipe inputs.import-tree [
+      (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
+      (i: i ./programs)
+    ])
 
     # Services
     (lib.pipe inputs.import-tree [
