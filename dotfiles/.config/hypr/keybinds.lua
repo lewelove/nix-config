@@ -180,7 +180,10 @@ hl.bind (
 hl.bind (
   "SUPER + V",
   hl.dsp.exec_cmd("cliphist list | fuzzel --dmenu -w 130 | cliphist decode | wl-copy") )
-  -- hl.dsp.exec_cmd("wrap-paste.sh") )
+
+hl.bind (
+  "SUPER + SHIFT + V",
+  hl.dsp.exec_cmd("wrap-paste.sh") )
 
 hl.bind (
   "SUPER + P",
