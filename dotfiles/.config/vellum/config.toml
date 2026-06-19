@@ -22,6 +22,7 @@ grain = 0.1
 
 [scripts]
 get-lyrics = "./scripts/get_lyrics/result/bin/get_lyrics"
+search-cover = "./scripts/search_cover/result/bin/search_cover"
 
 [manifest]
 supported_extensions = [ ".flac" ]

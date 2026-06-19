@@ -42,17 +42,24 @@
           doCheck = false;
         } (builtins.readFile ./get_lyrics/main.py);
 
+        search_cover = pkgs.writers.writePython3Bin "search_cover" {
+          libraries = [];
+          doCheck = false;
+        } (builtins.readFile ./search_cover/main.py);
+
         build-cli = pkgs.writeShellApplication {
           name = "build";
           runtimeInputs = [ pkgs.nix ];
           text = ''
             nix build .#get_lyrics --out-link get_lyrics/result
+            nix build .#search_cover --out-link search_cover/result
           '';
         };
       in
       {
         packages.default = get_lyrics;
         packages.get_lyrics = get_lyrics;
+        packages.search_cover = search_cover;
         packages.build = build-cli;
 
         apps.build = {
