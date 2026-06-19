@@ -23,6 +23,7 @@ grain = 0.1
 [scripts]
 get-lyrics = "./scripts/get_lyrics/result/bin/get_lyrics"
 search-cover = "./scripts/search_cover/result/bin/search_cover"
+cover-palette = "./scripts/cover_palette/target/release/cover_palette"
 
 [manifest]
 supported_extensions = [ ".flac" ]
@@ -43,15 +44,6 @@ file_subset_match = [
 [compiler.covers]
 thumbnail = { interpolation = "lanczos", size = 200 }
 modal = { interpolation = "mitchell", size = 627 }
-
-[compiler.cover_palette]
-# type = "kmeansnh"
-# sort = "gradient"
-# args = "k=18,n=6,h=5"
-type = "kmeansnv"
-# sort = "original"
-# threshold = 0.02
-args = "k=12,n=12,d=0.0"
 
 
 [manifest.keys]
@@ -102,6 +94,7 @@ replaygain_album_peak = { type = "string" }
 musicbrainz_albumid = { type = "string" }
 musicbrainz_albumartistid = { type = "string" }
 musicbrainz_releasegroupid = { type = "string" }
+cover_palette = { type = "array" }
 
 cover_chroma = { type = "function" }
 cover_entropy = { type = "function" }

@@ -49,10 +49,11 @@
 
         build-cli = pkgs.writeShellApplication {
           name = "build";
-          runtimeInputs = [ pkgs.nix ];
+          runtimeInputs = [ pkgs.cargo pkgs.rustc pkgs.nix ];
           text = ''
             nix build .#get_lyrics --out-link get_lyrics/result
             nix build .#search_cover --out-link search_cover/result
+            cargo build --manifest-path cover_palette/Cargo.toml --release
           '';
         };
       in

@@ -12,7 +12,7 @@ use palette::{FromColor, Oklab, Oklch, Srgb};
 use serde::Deserialize;
 use serde_json::Value;
 use std::io::Read;
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 
 #[derive(Deserialize, Default)]
 struct ScriptConfig {
@@ -50,12 +50,12 @@ fn main() -> Result<()> {
         .context("Missing library_root in payload")?;
 
     let album_path_str = payload
-        .pointer("/album/info/album_path")
+        .pointer("/album/album/info/album_path")
         .and_then(Value::as_str)
         .context("Missing album_path in payload")?;
 
     let cover_path_str = payload
-        .pointer("/album/info/cover_path")
+        .pointer("/album/album/info/cover_path")
         .and_then(Value::as_str)
         .unwrap_or("cover.jpg");
 
@@ -89,10 +89,10 @@ fn main() -> Result<()> {
             .collect();
 
         let toml_content = format!(
-            "[album]\ncover_palette = [\n{}\n]\n",
+            "[album]\n\ncover_palette = [\n{}\n]\n",
             hex_colors
                 .iter()
-                .map(|c| format!("    \"{c}\","))
+                .map(|c| format!("  \"{c}\","))
                 .collect::<Vec<_>>()
                 .join("\n")
         );
