@@ -26,6 +26,8 @@
     ./modules/hardware-configuration.nix
     ./modules/disko.nix
 
+    ./modules/packages.nix
+
     ./modules/virtualization.nix
 
     # Programs
