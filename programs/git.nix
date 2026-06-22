@@ -1,6 +1,10 @@
-{ identity, ... }:
+{ pkgs, identity, ... }:
 
 {
+  environment.systemPackages = with pkgs; [
+    lazygit
+  ];
+
   programs.git = {
     enable = true;
     config = {

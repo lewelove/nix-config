@@ -5,7 +5,6 @@
   environment.systemPackages = with pkgs; [
 
     # System
-    git
     wget
     stow
     unzip
@@ -20,7 +19,6 @@
     wakeonlan
 
     # Terminal Programs
-    neovim
     starship
 
     # Virtualization

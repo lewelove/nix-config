@@ -10,8 +10,12 @@ let
   '';
 in
 {
+  environment.systemPackages = with pkgs; [
+    neovim
+    tree-sitter
+  ];
+
   environment.systemPackages = [
-    pkgs.neovim
     nv
     nvl
   ];
