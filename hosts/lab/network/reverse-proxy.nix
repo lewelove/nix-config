@@ -46,36 +46,6 @@
           reverse_proxy localhost:8096
         '';
       };
-
-      "jitsi.{$DUCKDNS_DOMAIN}" = {
-        extraConfig = ''
-          import logging
-          import drop_scanners
-          reverse_proxy localhost:8082 {
-              header_up Host {host}
-              header_up X-Real-IP {remote_host}
-              header_up X-Forwarded-For {remote_host}
-              header_up X-Forwarded-Proto {scheme}
-          }
-        '';
-      };
-
-      "call.{$DUCKDNS_DOMAIN}" = {
-        extraConfig = ''
-          import logging
-          import drop_scanners
-          reverse_proxy 127.0.0.1:3000
-        '';
-      };
-
-      "vellum.{$DUCKDNS_DOMAIN}" = {
-        extraConfig = ''
-          import logging
-          import drop_scanners
-          import auth
-          reverse_proxy 127.0.0.1:5173
-        '';
-      };
     };
   };
 

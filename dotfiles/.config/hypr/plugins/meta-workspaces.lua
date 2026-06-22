@@ -19,7 +19,7 @@ local meta_workspaces = {
   },
   Image = {
     key = "I",
-    on_created_empty = programs.photopea,
+    on_created_empty = programs.pea,
   },
   Notes = {
     key = "N",
@@ -44,7 +44,21 @@ local function switch_meta_workspace(meta_name)
   end
   if is_in_meta then
     meta.last_active = 1
-    hl.dispatch(hl.dsp.focus({ workspace = "name:" .. meta.key .. ":1" }))
+    local target_ws = meta.key .. ":1"
+    if active_ws.name == target_ws then
+      local windows = hl.get_workspace_windows("name:" .. target_ws)
+      if windows and #windows > 0 then
+        local leftmost = windows[1]
+        for _, w in ipairs(windows) do
+          if w.at.x < leftmost.at.x then
+            leftmost = w
+          end
+        end
+        hl.dispatch(hl.dsp.focus({ window = "address:" .. leftmost.address }))
+      end
+    else
+      hl.dispatch(hl.dsp.focus({ workspace = "name:" .. target_ws }))
+    end
   else
     local target_ws = meta.key .. ":" .. tostring(meta.last_active)
     hl.dispatch(hl.dsp.focus({ workspace = "name:" .. target_ws }))

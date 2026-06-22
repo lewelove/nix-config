@@ -5,6 +5,7 @@ _G.programs = require("tables.programs")
 hl.on("hyprland.start", function () 
   hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
   hl.exec_cmd("systemctl --user start hyprland-session.target")
+  hl.dispatch(hl.dsp.focus({ workspace = "name:D:1" }))
 end)
 
 require("visuals")
