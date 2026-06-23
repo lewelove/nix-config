@@ -31,6 +31,8 @@
     apitrace
     openssl
     cryptsetup
+    brightnessctl
+    ddcutil
 
     # Desktop
     fuzzel

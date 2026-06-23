@@ -7,7 +7,7 @@
 
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" "input" "uinput" "novpn" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "uinput" "novpn" "i2c" ];
     shell = pkgs.fish; 
     autoSubUidGidRange = true;
   };

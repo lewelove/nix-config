@@ -27,6 +27,7 @@ return {
       "markdown_inline",
       "nix",
       "toml",
+      "bash",
     }
 
     ts.install(parsers)
@@ -55,6 +56,7 @@ return {
         "markdown_inline",
         "nix",
         "toml",
+        "bash",
       },
       callback = function()
         vim.treesitter.start()

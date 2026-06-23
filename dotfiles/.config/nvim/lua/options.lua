@@ -95,6 +95,9 @@ vim.opt.wildignore:append({ "*.o", "*.obj", "*.pyc", "*.class", "*.jar" })
 vim.opt.breakindent = true
 vim.opt.linebreak = true
 
+-- Disable Neovim's default filetype override for Markdown
+vim.g.markdown_recommended_style = 0
+
 -- GITHUB-STYLE DIFF LOGIC
 vim.opt.diffopt = {
   "internal",
