@@ -50,12 +50,12 @@ fn main() -> Result<()> {
         .context("Missing library_root in payload")?;
 
     let album_path_str = payload
-        .pointer("/album/album/info/album_path")
+        .pointer("/album/album/id")
         .and_then(Value::as_str)
-        .context("Missing album_path in payload")?;
+        .context("Missing id in payload")?;
 
     let cover_path_str = payload
-        .pointer("/album/album/info/cover_path")
+        .pointer("/album/album/covers/main/file/path")
         .and_then(Value::as_str)
         .unwrap_or("cover.jpg");
 

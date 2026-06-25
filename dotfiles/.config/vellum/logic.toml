@@ -9,7 +9,7 @@ sql.where = '''
 [filters.main_library]
 label = "Main Library"
 sql.where = '''
-COALESCE(${album.tags.collection}, '') NOT LIKE %{Vapor Memory}
+COALESCE(${album.keys.collection}, '') NOT LIKE %{Vapor Memory}
 AND ${album.genre} NOT LIKE %{Signalwave}
 AND ${album.genre} NOT LIKE %{Vaporwave}
 '''
@@ -17,7 +17,7 @@ AND ${album.genre} NOT LIKE %{Vaporwave}
 [filters.vapor_memory]
 label = "Vapor Memory"
 sql.where = '''
-COALESCE(${album.tags.collection}, '') LIKE %{Vapor Memory}
+COALESCE(${album.keys.collection}, '') LIKE %{Vapor Memory}
 OR ${album.genre} LIKE %{Vaporwave}
 '''
 
@@ -40,7 +40,7 @@ label = "Artists"
 index = true
 sql.select = '''
 COALESCE(
-  NULLIF(${album.tags.albumartists}, {[]}),
+  NULLIF(${album.keys.albumartists}, {[]}),
   ${album.albumartist}
 )
 '''
@@ -54,13 +54,13 @@ substr(${album.date}, 1, 3) || {0s}
 [groupers.total_tracks]
 label = "Total Tracks"
 sql.select = '''
-CAST(${album.info.total_tracks} AS TEXT)
+CAST(${album.total_tracks} AS TEXT)
 '''
 
 [groupers.total_discs]
 label = "Total Discs"
 sql.select = '''
-CAST(COALESCE(${album.info.total_discs}, 1) AS TEXT)
+CAST(COALESCE(${album.total_discs}, 1) AS TEXT)
 '''
 
 [groupers.year_added]
@@ -73,10 +73,10 @@ substr(${album.info.date_added}, 1, 4)
 label = "Chroma"
 sql.select = '''
 CASE
-  WHEN CAST(${album.tags.cover_chroma} AS FLOAT) = 0 THEN {Monochrome}
-  WHEN CAST(${album.tags.cover_chroma} AS FLOAT) < 15 THEN {Bleak}
-  WHEN CAST(${album.tags.cover_chroma} AS FLOAT) < 33 THEN {Muted}
-  WHEN CAST(${album.tags.cover_chroma} AS FLOAT) < 60 THEN {Standard}
+  WHEN CAST(${album.keys.cover_chroma} AS FLOAT) = 0 THEN {Monochrome}
+  WHEN CAST(${album.keys.cover_chroma} AS FLOAT) < 15 THEN {Bleak}
+  WHEN CAST(${album.keys.cover_chroma} AS FLOAT) < 33 THEN {Muted}
+  WHEN CAST(${album.keys.cover_chroma} AS FLOAT) < 60 THEN {Standard}
   ELSE {Vibrant}
 END
 '''
@@ -88,13 +88,13 @@ label = "Default"
 sql.order_by = '''
 CASE
   WHEN LOWER(
-    COALESCE(${album.tags.custom_albumartist}, ${album.albumartist})
+    COALESCE(${album.keys.custom_albumartist}, ${album.albumartist})
   ) LIKE {the %}
   THEN SUBSTR(
-    COALESCE(${album.tags.custom_albumartist}, ${album.albumartist}),
+    COALESCE(${album.keys.custom_albumartist}, ${album.albumartist}),
     5
   )
-  ELSE COALESCE(${album.tags.custom_albumartist}, ${album.albumartist})
+  ELSE COALESCE(${album.keys.custom_albumartist}, ${album.albumartist})
 END ASC,
 ${album.date} ASC,
 ${album.album} ASC
@@ -115,19 +115,19 @@ ${album.date} DESC
 [orders.duration]
 label = "Duration"
 sql.order_by = '''
-CAST(${album.info.album_duration} AS INT) DESC
+CAST(${album.info.duration_milliseconds} AS INT) DESC
 '''
 
 [orders.chroma]
 label = "Chroma"
 sql.order_by = '''
-CAST(${album.tags.cover_chroma} AS FLOAT) DESC
+CAST(${album.keys.cover_chroma} AS FLOAT) DESC
 '''
 
 [orders.entropy]
 label = "Entropy"
 sql.order_by = '''
-CAST(${album.tags.cover_entropy} AS INT) DESC
+CAST(${album.keys.cover_entropy} AS INT) DESC
 '''
 
 [orders.date_added]
@@ -139,7 +139,7 @@ ${album.info.date_added} DESC
 [orders.last_edited]
 label = "Last Edited"
 sql.order_by = '''
-COALESCE(${album.info.metadata_toml_mtime}, 0) DESC
+COALESCE(${album.manifests[0].file.mtime}, 0) DESC
 '''
 
 # LIBRARIES
@@ -159,21 +159,21 @@ strict = true
 groupers = ["year_added_applemusic", "genre", "decade"]
 orders = ["date_added_applemusic", "default", "az", "year"]
 sql.where = '''
-${album.tags.date_added_applemusic} IS NOT NULL
+${album.keys.date_added_applemusic} IS NOT NULL
 '''
 
 [groupers.year_added_applemusic]
 label = "Year Added"
 strict = true
 sql.select = '''
-substr(${album.tags.date_added_applemusic}, 1, 4)
+substr(${album.keys.date_added_applemusic}, 1, 4)
 '''
 
 [orders.date_added_applemusic]
 label = "Date Added"
 strict = true
 sql.order_by = '''
-${album.tags.date_added_applemusic} DESC
+${album.keys.date_added_applemusic} DESC
 '''
 
 ## Foobar2000
@@ -184,21 +184,21 @@ strict = true
 groupers = ["year_added_foobar"]
 orders = ["date_added_foobar"]
 sql.where = '''
-${album.tags.date_added_foobar} IS NOT NULL
+${album.keys.date_added_foobar} IS NOT NULL
 '''
 
 [groupers.year_added_foobar]
 label = "Year Added"
 strict = true
 sql.select = '''
-substr(${album.tags.date_added_foobar}, 1, 4)
+substr(${album.keys.date_added_foobar}, 1, 4)
 '''
 
 [orders.date_added_foobar]
 label = "Date Added"
 strict = true
 sql.order_by = '''
-${album.tags.date_added_foobar} DESC
+${album.keys.date_added_foobar} DESC
 '''
 
 ## My Year
@@ -209,14 +209,14 @@ strict = true
 groupers = ["my_year_grouper"]
 orders = ["default", "date_added"]
 sql.where = '''
-${album.tags.my_year} IS NOT NULL
+${album.keys.my_year} IS NOT NULL
 '''
 
 [groupers.my_year_grouper]
 label = "Year"
 strict = true
 sql.select = '''
-${album.tags.my_year}
+${album.keys.my_year}
 '''
 
 # SHELVES

@@ -36,7 +36,7 @@ function M.quick_save()
   local routed = false
 
   local routes = {
-    vellum = "~/dev/vellum/docs/handwrittenideas/",
+    vellumIdeas = "~/dev/vellum/docs/handwritten/ideas/",
     vellumActions = "~/dev/vellum/docs/handwritten/ideas/actions",
     vellumNotes = "~/dev/vellum/docs/handwritten/notes",
     vellumTodo = "~/dev/vellum/docs/handwritten/todo",

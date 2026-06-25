@@ -45,9 +45,9 @@ def get_album_lyrics(config, album_lock, access_token):
     library_root = Path(library_root_str).expanduser().resolve()
     
     album_meta = album_lock.get("album", {})
-    album_path = album_meta.get("info", {}).get("album_path", "")
+    album_path = album_meta.get("id", "")
     if not album_path:
-        print("Error: album_path not found in metadata lock")
+        print("Error: album_path (id) not found in metadata lock")
         return
 
     root = (library_root / album_path).resolve()

@@ -66,6 +66,7 @@
     lazygit
     git-filter-repo
     taplo
+    yazi
 
     # Virtualization
     distrobox

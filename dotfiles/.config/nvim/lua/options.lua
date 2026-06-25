@@ -6,9 +6,6 @@ vim.opt.shortmess:append("I")
 -- Visual separation for diff windows and splits
 vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#444444", bg = "none" })
 
--- CLEAN DIFF LOOK: No dashes, just empty space for missing lines
-vim.opt.fillchars = { vert = "│", diff = " " }
-
 -- Basic Settings
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -108,6 +105,9 @@ vim.opt.diffopt = {
   "algorithm:histogram",
   "context:99999",
 }
+
+-- CLEAN DIFF LOOK: No dashes, just empty space for missing lines
+vim.opt.fillchars = { vert = "│", diff = " " }
 
 -- Performance improvements
 vim.opt.redrawtime = 10000
