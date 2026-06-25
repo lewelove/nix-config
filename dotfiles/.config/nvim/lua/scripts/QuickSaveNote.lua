@@ -36,10 +36,11 @@ function M.quick_save()
   local routed = false
 
   local routes = {
+    n = "~/Notes/",
     vellumIdeas = "~/dev/vellum/docs/handwritten/ideas/",
-    vellumActions = "~/dev/vellum/docs/handwritten/ideas/actions",
-    vellumNotes = "~/dev/vellum/docs/handwritten/notes",
-    vellumTodo = "~/dev/vellum/docs/handwritten/todo",
+    vellumActions = "~/dev/vellum/docs/handwritten/ideas/actions/",
+    vellumNotes = "~/dev/vellum/docs/handwritten/notes/",
+    vellumTodo = "~/dev/vellum/docs/handwritten/todo/",
     mute = "~/dev/mute/docs/ideas/",
     nv = "~/Notes/config/nv/",
     hypr = "~/Notes/config/hypr/",

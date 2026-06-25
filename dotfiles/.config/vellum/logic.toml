@@ -118,6 +118,12 @@ sql.order_by = '''
 CAST(${album.info.duration_milliseconds} AS INT) DESC
 '''
 
+[orders.cover_hash]
+label = "Random"
+sql.order_by = '''
+${album.covers.main.file.hash.address} ASC
+'''
+
 [orders.chroma]
 label = "Chroma"
 sql.order_by = '''

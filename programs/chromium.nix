@@ -57,7 +57,7 @@ let
     "--force-dark-mode"
     "--hide-scrollbars"
     "--hide-fullscreen-exit-ui"
-    "--user-agent=\"${windowUserAgent}\""
+    # "--user-agent=\"${windowUserAgent}\""
     # "--enable-unsafe-webgpu"
     # "--enable-features=Vulkan" 
     # "--ignore-gpu-blocklist"
