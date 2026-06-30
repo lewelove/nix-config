@@ -27,10 +27,10 @@ if status is-interactive
   alias clients="hyprctl clients | rg -A 3 'class'"
   alias ipcheck="curl ip-api.com"
 
-  alias st="systemctl --user status"
-  alias stp="systemctl --user stop"
-  alias rs="systemctl --user restart"
-  alias jl="journalctl --user -fu"
+  abbr -a status "systemctl --user status"
+  abbr -a stop "systemctl --user stop"
+  abbr -a restart "systemctl --user restart"
+  abbr -a journal "journalctl --user -fu"
 
   alias sts="systemctl status"
   alias rss="systemctl restart"
@@ -43,7 +43,7 @@ if status is-interactive
     find . -type f -printf '%T@ %Tb %Td %TY %p\n' | sort -n | head -1 | string replace -r '^(\d+)\.\d+' \'\$1\'
   end
 
-  alias vellcro="/home/lewelove/dev/vellcro/rust/target/release/vellcro"
+  # alias vellcro="/home/lewelove/dev/vellcro/rust/target/release/vellcro"
   alias mute="/home/lewelove/dev/mute/rust/target/release/mute"
   alias discid="/home/lewelove/dev/album_curation/rsdiscid/target/release/rsdiscid"
   alias albumset="/home/lewelove/dev/album_curation/album_setup/.build/bin/album_setup"

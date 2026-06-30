@@ -21,9 +21,9 @@ grain = 0.1
 
 
 [actions]
-get-lyrics = "./scripts/get_lyrics/result/bin/get_lyrics"
-search-cover = "./scripts/search_cover/result/bin/search_cover"
-cover-palette = "./scripts/cover_palette/target/release/cover_palette"
+get-lyrics = "~/dev/vellum/actions/get_lyrics/result/bin/get_lyrics"
+search-cover = "~/dev/vellum/actions/search_cover/result/bin/search_cover"
+cover-palette = "~/dev/vellum/actions/cover_palette/target/release/cover_palette"
 
 [manifest]
 supported_extensions = [ ".flac" ]
@@ -110,10 +110,3 @@ replaygain_track_peak = { type = "string" }
 musicbrainz_trackid = { type = "string" }
 musicbrainz_releasetrackid = { type = "string" }
 musicbrainz_artistid = { type = "array" }
-# cover_palette = { level = "album", class = "function", args = "k=12,noise=0.0,conv=0.05,filter=0.002,bias=0.0" }
-# cover_palette = { level = "album", class = "function", args = "type=kmeans,sort=C,k=8" }
-# cover_palette = { level = "album", class = "function", args = "type=kmeans,sort=gradient,k=8,Hb=35,Ht=108,Cb=12,Ct=60,Tb=0,Tt=50" }
-# cover_palette = { level = "album", class = "function", args = "type=msc,k=16,bw=0.08,mt=0.05,cg=3.0,t=0.002" }
-# cover_palette = { level = "album", class = "function", args = "type=mmcq,k=8,sort=C" }
-# cover_palette = { level = "album", class = "function", args = "type=auto,theme=basic,t=0.0,k=12" }
-# cover_palette = { level = "album", class = "function", args = "type=msc,bw=6" }

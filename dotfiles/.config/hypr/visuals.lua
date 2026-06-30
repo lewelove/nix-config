@@ -96,22 +96,17 @@ hl.animation ({
 })
 
 hl.animation ({
-  leaf = "fadeIn",
+  leaf = "fade",
   enabled = true,
-  speed = 1.5,
-  bezier = "almost_linear",
-})
-
-hl.animation ({
-  leaf = "fadeOut",
-  enabled = true,
-  speed = 1.5,
+  -- enabled = false,
+  speed = 0.5,
   bezier = "almost_linear",
 })
 
 hl.animation ({
   leaf = "layers",
-  enabled = true,
+  -- enabled = true,
+  enabled = false,
   speed = 1,
   bezier = "ease_out_quint",
 })
@@ -119,7 +114,7 @@ hl.animation ({
 hl.animation ({
   leaf = "layersIn",
   enabled = true,
-  speed = 1,
+  speed = 0.2,
   bezier = "steep",
   style = "fade",
 })
@@ -127,21 +122,23 @@ hl.animation ({
 hl.animation ({
   leaf = "layersOut",
   enabled = true,
-  speed = 1,
+  speed = 0.2,
   bezier = "steep",
   style = "fade",
 })
 
-hl.animation ({
-  leaf = "fadeLayersIn",
-  enabled = true,
-  speed = 2,
-  bezier = "steep",
-})
-
-hl.animation ({
-  leaf = "fadeLayersOut",
-  enabled = true,
-  speed = 2,
-  bezier = "steep",
-})
+-- hl.animation ({
+--   leaf = "fadeLayersIn",
+--   -- enabled = true,
+--   enabled = false,
+--   speed = 0.2,
+--   bezier = "steep",
+-- })
+--
+-- hl.animation ({
+--   leaf = "fadeLayersOut",
+--   -- enabled = true,
+--   enabled = false,
+--   speed = 0.2,
+--   bezier = "steep",
+-- })
