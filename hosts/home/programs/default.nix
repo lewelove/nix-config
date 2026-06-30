@@ -75,7 +75,6 @@
     pi-coding-agent
 
     # Media
-    stable.mpv
     imv
     mpc
     rmpc

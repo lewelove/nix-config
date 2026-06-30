@@ -12,7 +12,6 @@
       ".config/fuzzel".source = link "${dot}/.config/fuzzel";
       ".config/kitty".source = link "${dot}/.config/kitty";
       ".config/mako".source = link "${dot}/.config/mako";
-      ".config/mpv".source = link "${dot}/.config/mpv";
       ".config/pipewire".source = link "${dot}/.config/pipewire";
       ".config/wireplumber".source = link "${dot}/.config/wireplumber";
       ".config/imv".source = link "${dot}/.config/imv";
