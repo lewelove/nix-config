@@ -1,8 +1,5 @@
 { pkgs, username, dot, config, ... }:
 
-let
-  web-app-wrapper = config.my.chromium.wrapper;
-in
 {
   programs.hyprland = {
     enable = true;
@@ -24,12 +21,16 @@ in
     };
   };
 
-  home-manager.users.${username} = { config, ... }: {
+  home-manager.users.${username} = { config, osConfig, ... }: {
     home.file.".config/hypr".source = config.lib.file.mkOutOfStoreSymlink "${dot}/.config/hypr";
 
-    xdg.desktopEntries.hyprland-wiki = {
+    xdg.desktopEntries.hyprland-wiki = let
+      web-app-wrapper = osConfig.my.chromium.wrapper;
       name = "Hyprland Wiki";
-      exec = "${web-app-wrapper}/bin/chromium-browser --app=https://wiki.hypr.land";
+      url = "https://wiki.hypr.land";
+    in {
+      inherit name;
+      exec = "${web-app-wrapper}/bin/chromium-browser --app=${url}";
       terminal = false;
     };
 

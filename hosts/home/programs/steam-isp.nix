@@ -10,7 +10,7 @@ in
 
   home-manager.users.${username} = {
     xdg.desktopEntries.steam-isp = {
-      name = "Steam (VPN Bypass)";
+      name = "Steam (ISP Connection)";
       genericName = "Games Client";
       exec = "steam-isp %U";
       icon = "steam";
