@@ -7,7 +7,7 @@
     extraSpecialArgs = { inherit inputs username; };
     backupFileExtension = "backup"; 
     users.${username} = { config, ... }: {
-      home.stateVersion = "25.05";
+      home.stateVersion = "26.05";
 
       xdg.userDirs = {
         enable = true;
