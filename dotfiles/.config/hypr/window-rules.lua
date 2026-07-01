@@ -75,10 +75,22 @@ hl.window_rule ({
 })
 
 hl.window_rule ({
+  name = "Chromium Windows",
+  match = { class = "Chromium-browser" },
+  tile = true,
+})
+
+hl.window_rule ({
+  name = "popups_noblur",
+  match = { class = "^$", title = "^$" },
+  no_blur = true,
+})
+
+hl.window_rule ({
   name = "chromium_dev_app",
-  match = { class = "chromium-browser", initial_title = "DevToolsApp" },
+  match = { class = "Chromium-browser", initial_title = "DevToolsApp" },
   float = true,
   center = true,
-  size = { "monitor_w * 0.5",  "monitor_h * 0.75" },
+  size = { "monitor_w * 0.5",  "monitor_h * 0.6" },
 })
 
