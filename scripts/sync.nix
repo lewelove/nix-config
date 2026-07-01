@@ -21,11 +21,14 @@ let
       cd "$GIT_ROOT"
 
       SKIP_XML=false
+      NO_MSG_PROMPT=false
       MSG_ARG=""
 
       for arg in "$@"; do
         if [ "$arg" = "--no-xml" ]; then
           SKIP_XML=true
+        elif [ "$arg" = "--nm" ]; then
+          NO_MSG_PROMPT=true
         else
           if [ -z "$MSG_ARG" ]; then
             MSG_ARG="$arg"
@@ -51,8 +54,6 @@ let
           BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
       fi
 
-      MSG="''${MSG_ARG:-$(date -u +'%Y-%m-%d at %H:%M UTC')}"
-
       echo
       gum join --horizontal "$(m "[>] ")" "Syncing " "$(y "$GIT_ROOT") to " "$(b "origin/$BRANCH")"
       echo
@@ -61,9 +62,27 @@ let
       git add .
 
       if ! git diff-index --quiet HEAD --; then
+          GEN_MSG=$(date -u +'%Y-%m-%d at %H:%M UTC')
+          if [ "$NO_MSG_PROMPT" = "true" ]; then
+              MSG="''${MSG_ARG:-$GEN_MSG}"
+          else
+              DEFAULT_VAL="$MSG_ARG"
+              if [ -z "$DEFAULT_VAL" ]; then
+                  DEFAULT_VAL="$GEN_MSG"
+              fi
+              PROMPT_MSG=$(gum input --width 60 --placeholder "Enter commit message (Press Enter for default: $DEFAULT_VAL)" --value "")
+              if [ -z "$PROMPT_MSG" ]; then
+                  MSG="$DEFAULT_VAL"
+              else
+                  MSG="$PROMPT_MSG"
+              fi
+          fi
+
+          echo
           gum join --horizontal "$(g "[+] ")" "Committing: " "$(w "$MSG")"
           git commit -m "$MSG"
       else
+          echo
           gum join --horizontal "$(y "[~] ")" "No changes to commit."
       fi
 

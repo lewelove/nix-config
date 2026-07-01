@@ -18,6 +18,7 @@
     ./network/fail2ban.nix
     ./network/auth.nix
     ./network/routing-isp.nix
+    ./network/adguardhome.nix
 
     # Home Manager
     ./modules/home-manager.nix
