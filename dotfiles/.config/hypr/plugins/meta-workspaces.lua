@@ -25,6 +25,10 @@ local meta_workspaces = {
     key = "N",
     on_created_empty = programs.notes,
   },
+  Alarms = {
+    key = "Pause",
+    on_created_empty = "gnome-clocks"
+  }
 }
 
 for _, meta in pairs(meta_workspaces) do

@@ -19,6 +19,12 @@ grain = 0.1
 # zoom = 0.8
 # blur = 0.00
 
+[interfaces]
+
+default = {
+  directory = "~/dev/vellum/interfaces/web-app"
+}
+
 
 [actions]
 get-lyrics = "~/dev/vellum/actions/get_lyrics/result/bin/get_lyrics"

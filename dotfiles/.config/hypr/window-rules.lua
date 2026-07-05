@@ -81,7 +81,7 @@ hl.window_rule ({
 })
 
 hl.window_rule ({
-  name = "popups_noblur",
+  name = "No Blur for Popup Windows",
   match = { class = "^$", title = "^$" },
   no_blur = true,
 })
