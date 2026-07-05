@@ -7,7 +7,7 @@ hl.config ({
   scrolling = {
     fullscreen_on_one_column = false,
     column_width = 0.7,
-    focus_fit_method = 0,
+    focus_fit_method = 1,
   }
 })
 

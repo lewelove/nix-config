@@ -50,7 +50,8 @@ let
   commonArgs = [
     "--test-type"
     "--unsafely-treat-insecure-origin-as-secure=${trustedOrigins}"
-    "--load-extension=${extensions.ublock-origin.drv},${extensions.sponsorblock.drv}"
+    "--load-extension=${extensions.ublock-origin.drv}"
+    # "--load-extension=${extensions.sponsorblock.drv}"
     "--extension-mime-request-handling=always-prompt-for-install"
     "--no-default-browser-check"
     "--restore-last-session"

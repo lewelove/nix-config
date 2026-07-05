@@ -2,29 +2,11 @@
 library_root = "/run/media/lewelove/1000xhome/backup-everything/FB2K/Library Historyfied!/"
 environment = "~/.secrets/vellum.env"
 
-
-[theme]
-thumbnail_size = 190
-
-[theme.shader]
-order = "original"
-path = "shaders/mountain_eq.frag"
-speed = 0.7
-zoom = 0.9
-blur = 0.8
-grain = 0.1
-
-# path = "shaders/simplex.frag"
-# speed = 0.005
-# zoom = 0.8
-# blur = 0.00
-
 [interfaces]
-
 default = {
-  directory = "~/dev/vellum/interfaces/web-app"
+  directory = "~/dev/vellum/interfaces/web-app",
+  config = "interface.toml"
 }
-
 
 [actions]
 get-lyrics = "~/dev/vellum/actions/get_lyrics/result/bin/get_lyrics"
@@ -33,7 +15,6 @@ cover-palette = "~/dev/vellum/actions/cover_palette/target/release/cover_palette
 
 [manifest]
 supported_extensions = [ ".flac" ]
-
 
 [compiler]
 date_added = [ "date_added_youtube", "date_added_applemusic", "date_added_foobar" ]
@@ -46,11 +27,9 @@ file_subset_match = [
   "musicbrainz_releasetrackid", "musicbrainz_trackid"
 ]
 
-
 [compiler.covers]
 thumbnail = { interpolation = "lanczos", size = 200 }
 modal = { interpolation = "mitchell", size = 627 }
-
 
 [manifest.keys]
 albumartist = { level = "album", newline = true }
@@ -73,7 +52,6 @@ ctdbid_url = { level = "album", manifests = "url" }
 
 tracknumber = { level = "track" }
 title = { level = "track" }
-
 
 [compiler.keys.album]
 albumartists = { type = "array" }

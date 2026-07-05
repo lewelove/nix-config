@@ -15,11 +15,6 @@
     import-tree.url = "github:vic/import-tree";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
 
-    mangowm = {
-      url = "github:mangowm/mango";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
   };
 
   outputs = { self, nixpkgs, nixpkgs-stable, ... }@inputs:
@@ -36,9 +31,6 @@
           system = "x86_64-linux"; 
           config = {
             allowUnfree = true;
-            permittedInsecurePackages = [
-              "electron-39.8.10"
-            ];
           };
         };
       };

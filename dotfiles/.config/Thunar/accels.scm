@@ -137,7 +137,6 @@
 ; (gtk_accel_path "<Actions>/ThunarStandardView/back-alt1" "BackSpace")
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/312831adf14a846f4157527d795679f9" "")
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/c288f7e9737e09dba12f1ef2c2c75450" "")
-; (gtk_accel_path "<Actions>/ThunarBookmarks/1322302e9bab360b4dbfb2ef3cd3f29a" "")
 ; (gtk_accel_path "<Actions>/ThunarStandardView/create-folder" "<Primary><Shift>n")
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/4236333340f6c1c742d113a742eebade" "")
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/966a36c34875819fb2e5b160d819b3da" "")
