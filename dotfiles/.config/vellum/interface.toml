@@ -3,8 +3,8 @@
 [theme.shader]
 order = "original"
 path = "shaders/mountain_eq.frag"
-speed = 0.7
-zoom = 0.1
+speed = 3.7
+zoom = 1.1
 blur = 0.8
 grain = 0.1
 

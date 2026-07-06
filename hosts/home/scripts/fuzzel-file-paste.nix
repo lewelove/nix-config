@@ -2,14 +2,13 @@
 
 let
   fuzzel-file-paste = pkgs.writers.writeFishBin "fuzzel-file-paste" ''
-
     set TOML_FILE "/home/${identity.username}/.config/fuzzel/file-paste.toml"
 
     if not test -f "$TOML_FILE"
         exit 1
     end
 
-    set KEYS (${pkgs.yq-go}/bin/yq -p=toml '.files | keys | .[]' "$TOML_FILE")
+    set KEYS (${pkgs.toml2json}/bin/toml2json < "$TOML_FILE" | ${pkgs.jq}/bin/jq -r '.files | keys | .[]')
 
     set SELECTION (printf "%s\n" $KEYS | ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt="File Paste: ")
 
@@ -17,7 +16,16 @@ let
         exit 0
     end
 
-    set PATHS (env sel="$SELECTION" ${pkgs.yq-go}/bin/yq -p=toml '.files[strenv(sel)] | .[]' "$TOML_FILE")
+    set RUN_CMD (${pkgs.toml2json}/bin/toml2json < "$TOML_FILE" | ${pkgs.jq}/bin/jq -r --arg sel "$SELECTION" '.files[$sel].run')
+
+    if test -n "$RUN_CMD" -a "$RUN_CMD" != "null"
+        sh -c "$RUN_CMD"
+        if test $status -ne 0
+            exit 1
+        end
+    end
+
+    set PATHS (${pkgs.toml2json}/bin/toml2json < "$TOML_FILE" | ${pkgs.jq}/bin/jq -r --arg sel "$SELECTION" '.files[$sel].paste | .[]')
 
     for path in $PATHS
         if test -z "$path"

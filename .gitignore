@@ -1,4 +1,5 @@
-dotfiles/.config/ublock_origin.txt
+.repomixignore
 **/target/
 **/.direnv/
+dotfiles/.config/ublock_origin.txt
 dotfiles/.config/nvim/lazy-lock.json

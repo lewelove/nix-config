@@ -1,14 +1,22 @@
 [files]
 
-nix-config = [ "~/Folders/XML Packed/~-nix-config.xml" ]
+nix-config = {
+  run = "cd ~/nix-config && repomix --quiet",
+  paste = [ "~/Folders/XML Packed/~-nix-config.xml" ]
+}
 
-vellum = [
+vellum = {
+  run = "cd ~/dev/vellum && repomix --quiet && cd ~/.config/vellum && repomix --quiet",
+  paste = [
   "~/Folders/XML Packed/~-dev-vellum.xml",
-  "~/Folders/XML Packed/~-.config-vellum.xml",
-]
+  "~/Folders/XML Packed/~-.config-vellum.xml"
+  ]
+}
 
-mute = [
+mute = {
+  run = "cd ~/dev/mute && repomix --quiet",
+  paste = [
   "~/Folders/XML Packed/~-dev-mute.xml",
-  "~/Folders/XML Packed/~-.config-mute.xml",
-]
-
+  "~/Folders/XML Packed/~-.config-mute.xml"
+  ]
+}

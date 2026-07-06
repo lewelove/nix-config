@@ -5,7 +5,7 @@ environment = "~/.secrets/vellum.env"
 [interfaces]
 default = {
   directory = "~/dev/vellum/interfaces/web-app",
-  config = "interface.toml"
+  config = "~/.config/vellum/interface.toml"
 }
 
 [actions]
