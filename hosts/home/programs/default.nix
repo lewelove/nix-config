@@ -49,6 +49,7 @@
     gnome-clocks
     nicotine-plus
     plugdata
+    marktext
 
     # Terminal Programs
     foot
