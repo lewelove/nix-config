@@ -32,6 +32,8 @@ if status is-interactive
   abbr -a restart "systemctl --user restart"
   abbr -a journal "journalctl --user -fu"
 
+  abbr -a b "clr && build --release && notify-send 'Built!'"
+
   alias sts="systemctl status"
   alias rss="systemctl restart"
   alias jls="journalctl -fu"

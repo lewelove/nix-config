@@ -10,7 +10,7 @@
         After = [ "default.target" ];
       };
       Service = {
-        ExecStart = "${pkgs.xremap}/bin/xremap --watch=device --device \"SEM USB Keyboard\" --device \"Xbox Wireless Controller\" ${config.home.homeDirectory}/.config/xremap/config.yml";
+        ExecStart = "${pkgs.xremap}/bin/xremap --watch=device --device \"SEM USB Keyboard\" ${config.home.homeDirectory}/.config/xremap/config.yml";
         Restart = "always";
         RestartSec = "3s";
       };

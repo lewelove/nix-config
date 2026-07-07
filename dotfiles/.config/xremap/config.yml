@@ -16,14 +16,3 @@ modmap:
       KEY_KP8: KEY_8
       KEY_KP9: KEY_9
       KEY_KPDOT: KEY_DOT
-
-  - name: Xbox Gamepad Remote
-    device:
-      only: "Xbox Wireless Controller"
-    application:
-      only:
-        - mpv
-    remap:
-      BTN_SOUTH: KEY_PLAYPAUSE
-      BTN_WEST: KEY_KPMINUS
-      BTN_Z: KEY_KPPLUS
