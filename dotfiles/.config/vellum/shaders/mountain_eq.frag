@@ -155,6 +155,7 @@ void main() {
     }
     
     finalOklab.x = 0.05 + (finalOklab.x * 0.9);
+    finalOklab.x = finalOklab.x * 0.7;
     // finalOklab.x = 0.2 + (finalOklab.x * 0.6);
     
     vec3 finalColor = oklab_to_srgb(finalOklab);

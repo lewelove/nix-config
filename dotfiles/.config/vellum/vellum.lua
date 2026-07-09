@@ -41,7 +41,7 @@ vl.config({
   actions = {
     ["get-lyrics"] = "~/dev/vellum/actions/get_lyrics/result/bin/get_lyrics",
     ["search-cover"] = "~/dev/vellum/actions/search_cover/result/bin/search_cover",
-    ["cover-palette"] = "~/dev/vellum/actions/cover_palette/target/release/cover_palette",
+    ["cover-palette"] = "~/dev/vellum/actions/target/release/cover_palette",
   },
   interfaces = {
     default = {
