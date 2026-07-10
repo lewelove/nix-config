@@ -27,16 +27,16 @@ if status is-interactive
   alias clients="hyprctl clients | rg -A 3 'class'"
   alias ipcheck="curl ip-api.com"
 
-  abbr -a status "systemctl --user status"
-  abbr -a stop "systemctl --user stop"
-  abbr -a restart "systemctl --user restart"
-  abbr -a journal "journalctl --user -fu"
+  abbr -a st "systemctl --user status"
+  abbr -a sp "systemctl --user stop"
+  abbr -a rs "systemctl --user restart"
+  abbr -a jl "journalctl --user -fu"
 
   abbr -a b "clr && build --release && notify-send 'Built!'"
 
-  alias sts="systemctl status"
-  alias rss="systemctl restart"
-  alias jls="journalctl -fu"
+  abbr -a sts "systemctl status"
+  abbr -a rss "systemctl restart"
+  abbr -a jls "journalctl -fu"
 
   alias sync="git-sync-bin"
   alias c="wl-copy"
