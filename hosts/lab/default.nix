@@ -48,7 +48,7 @@
       (i: i ./services)
     ])
 
-    Scripts
+    # Scripts
     (lib.pipe inputs.import-tree [
       (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
       (i: i ../../scripts)
