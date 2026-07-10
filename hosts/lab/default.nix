@@ -11,7 +11,10 @@
     # Network
     ./network/core.nix
     ./network/inbound.nix
-    ./network/amneziawg.nix
+
+    # ./network/amneziawg.nix
+    ./network/v2raya.nix
+
     ./network/openssh.nix
     ./network/duckdns.nix
     ./network/reverse-proxy.nix
@@ -45,7 +48,7 @@
       (i: i ./services)
     ])
 
-    # Scripts
+    Scripts
     (lib.pipe inputs.import-tree [
       (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
       (i: i ../../scripts)
