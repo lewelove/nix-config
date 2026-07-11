@@ -54,7 +54,7 @@ Item {
     Rectangle {
         anchors.fill: parent
         visible: (icon.status === Image.Error || icon.status === Image.Null) && root.cleanName !== ""
-        color: "#AA0000"
+        color: "#333333"
         radius: 3
         Text {
             anchors.centerIn: parent

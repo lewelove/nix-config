@@ -3,8 +3,11 @@ return {
    terminal = "alacritty",
    browser = "zen-beta",
    file_manager = "thunar",
+
+   vpn = "v2rayN",
   
    calculator = "gnome-calculator",
+   clock = "gnome-clocks",
    notes = "nvl -c 'cd ~/Notes' -c 'startinsert'",
   
    password_manager = "flatpak run com.bitwarden.desktop",
