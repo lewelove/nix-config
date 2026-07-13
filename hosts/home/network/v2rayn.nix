@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, username, ... }:
 
 let
 
@@ -36,6 +36,18 @@ in
     home.file = {
       ".local/share/v2rayN/bin/xray".source = "${pkgs.xray}/bin/xray";
       ".local/share/v2rayN/bin/sing-box".source = "${pkgs.sing-box}/bin/sing-box";
+    };
+  };
+
+  systemd.services.ssh-bypass-v2rayn = {
+    description = "Force SSH (Port 22) to bypass v2rayN TUN interface";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = "${pkgs.iproute2}/bin/ip rule add ipproto tcp dport 22 lookup main priority 8999";
+      ExecStop = "${pkgs.iproute2}/bin/ip rule del ipproto tcp dport 22 lookup main priority 8999";
     };
   };
 }

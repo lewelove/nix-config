@@ -1,6 +1,8 @@
 -- Lewelove Vellum Config --
 
 require("keys")
+require("covers")
+require("interfaces.default")
 
 vl.config({
   storage = {
@@ -43,20 +45,5 @@ vl.config({
     ["search-cover"] = "~/dev/vellum/actions/search_cover/result/bin/search_cover",
     ["cover-palette"] = "~/dev/vellum/actions/target/release/cover_palette",
   },
-  interfaces = {
-    default = {
-      directory = "~/dev/vellum/interfaces/web-app",
-      config = "./interface.toml",
-    }
-  }
 })
 
-vl.compiler.covers("thumbnail", {
-  interpolation = "lanczos",
-  size = 200,
-})
-
-vl.compiler.covers("modal", {
-  interpolation = "mitchell",
-  size = 627,
-})

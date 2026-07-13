@@ -47,6 +47,8 @@ vl.compiler.keys.album({
   }
 })
 
+-- track level keys
+
 vl.compiler.keys.tracks({
   lyrics = { type = "string" },
   accuripid = { type = "string" },

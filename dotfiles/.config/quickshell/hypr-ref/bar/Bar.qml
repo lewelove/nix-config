@@ -3,6 +3,7 @@ import Quickshell.Io
 import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Effects
 import "blocks" as Blocks
 import "root:/"
 
@@ -16,12 +17,26 @@ Scope {
       screen: modelData
 
       color: "transparent"
-      implicitHeight: Theme.get.barHeight
+      
+      property int shadowSize: 6
+      implicitHeight: Theme.get.barHeight + (Theme.get.onTop ? Theme.get.barMarginTop : Theme.get.barMarginBottom) + shadowSize
+      
+      exclusiveZone: Theme.get.barHeight + (Theme.get.onTop ? Theme.get.barMarginTop : Theme.get.barMarginBottom)
+      
       visible: true 
 
       Item {
         id: barContainer
-        anchors.fill: parent
+        
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: Theme.get.onTop ? parent.top : undefined
+        anchors.bottom: !Theme.get.onTop ? parent.bottom : undefined
+        anchors.leftMargin: Theme.get.barMarginLeft
+        anchors.rightMargin: Theme.get.barMarginRight
+        anchors.topMargin: Theme.get.onTop ? Theme.get.barMarginTop : 0
+        anchors.bottomMargin: !Theme.get.onTop ? Theme.get.barMarginBottom : 0
+        height: Theme.get.barHeight
         
         opacity: Theme.get.screensaverActive ? 0 : 1
 
@@ -32,10 +47,19 @@ Scope {
           }
         }
 
+        RectangularShadow {
+          anchors.fill: bgRect
+          radius: bgRect.radius
+          blur: bar.shadowSize
+          spread: 0
+          color: "#99000000"
+        }
+
         Rectangle {
+          id: bgRect
           anchors.fill: parent
           color: Theme.get.barBgColor
-          radius: 8
+          radius: Theme.get.barRadius
         }
 
         RowLayout {
@@ -66,17 +90,6 @@ Scope {
             Blocks.Time {}
           }
         }
-
-        // Blocks.ActiveWorkspace {
-        //   id: activeWorkspace
-        //   anchors.centerIn: parent
-        //   chopLength: {
-        //       var occupied = rightBlocks.implicitWidth + leftBlocks.implicitWidth
-        //       var available = bar.width - occupied - (Theme.get.barPaddingX * 2) - 20
-        //       var chars = Math.floor(available / 10)
-        //       return Math.max(10, chars)
-        //   }
-        // }
       }
 
       IpcHandler {
@@ -89,13 +102,6 @@ Scope {
         bottom: !Theme.get.onTop
         left: true
         right: true
-      }
-
-      margins {
-        left: Theme.get.barMarginLeft
-        right: Theme.get.barMarginRight
-        top: Theme.get.onTop ? Theme.get.barMarginTop : 0
-        bottom: !Theme.get.onTop ? Theme.get.barMarginBottom : 0
       }
     }
   }

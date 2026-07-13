@@ -45,6 +45,8 @@ if status is-interactive
     find . -type f -printf '%T@ %Tb %Td %TY %p\n' | sort -n | head -1 | string replace -r '^(\d+)\.\d+' \'\$1\'
   end
 
+  abbr -a vl "vellum"
+
   # alias vellcro="/home/lewelove/dev/vellcro/rust/target/release/vellcro"
   alias mute="/home/lewelove/dev/mute/rust/target/release/mute"
   alias discid="/home/lewelove/dev/album_curation/rsdiscid/target/release/rsdiscid"

@@ -11,6 +11,10 @@
       Service = {
         ExecStart = "${pkgs.quickshell}/bin/quickshell -p %h/.config/quickshell/hypr-ref/shell.qml";
         Restart = "on-failure";
+        Environment = [
+          "QSG_DISTANCEFIELD_ANTIALIASING=subpixel"
+          # "QML_DISABLE_DISTANCEFIELD=1"
+        ];
       };
       Install.WantedBy = [ "graphical-session.target" ];
     };

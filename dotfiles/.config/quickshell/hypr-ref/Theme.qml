@@ -13,19 +13,28 @@ Singleton {
 
   // --- DIMENSIONS & SPACING ---
   property int barHeight: 32
+  property int barRadius: 32
   property int iconSize: 20
   property int workspaceSpacing: 12
   property int workspaceInnerSpacing: 4
   property int sectionSpacingLeft: 12
   property int sectionSpacingRight: 32
+
   property int barMarginTop: 0        
-  property int barMarginLeft: 12       
-  property int barMarginRight: 12    
-  property int barMarginBottom: 6
-  property int barPaddingX: 12
+  property int barMarginLeft: 12
+  property int barMarginRight: 12
+  property int barMarginBottom: 8
+
+  // property int barMarginTop: 0        
+  // property int barMarginLeft: 0       
+  // property int barMarginRight: 0    
+  // property int barMarginBottom: 0
+  
+  property int barPaddingX: 16
 
   // --- BAR STYLING ---
-  property string barBgColor: "#FF191919"
+  property string barBgColor: "#c0191919"
+  // property string barBgColor: "#ff191919"
   property bool onTop: false
 
   // --- COLORS ---

@@ -16,7 +16,8 @@ hl.config ({
 hl.config ({
   general = {
     gaps_in = 0,
-    gaps_out = { top = 12, bottom = 6, left = 12, right = 12 },
+    gaps_out = { top = 12, bottom = 8, left = 12, right = 12 },
+    -- gaps_out = 8,
     border_size = 0,
     resize_on_border = false,
     allow_tearing = false,
@@ -27,10 +28,10 @@ hl.config ({
     rounding_power = 0,
     shadow = {
       enabled = true,
-      range = 16,
-      render_power = 12,
+      range = 8,
+      render_power = 4,
       color = "rgba(00000060)",
-      color_inactive = "rgba(00000010)",
+      color_inactive = "rgba(00000000)",
     },
   },
 
