@@ -2,6 +2,7 @@
 
 require("keys")
 require("covers")
+require("actions")
 require("interfaces.default")
 
 vl.config({
@@ -40,10 +41,4 @@ vl.config({
       "musicbrainz_releasetrackid", "musicbrainz_trackid"
     },
   },
-  actions = {
-    ["get-lyrics"] = "~/dev/vellum/actions/get_lyrics/result/bin/get_lyrics",
-    ["search-cover"] = "~/dev/vellum/actions/search_cover/result/bin/search_cover",
-    ["cover-palette"] = "~/dev/vellum/actions/target/release/cover_palette",
-  },
 })
-
