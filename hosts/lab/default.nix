@@ -17,7 +17,7 @@
 
     ./network/openssh.nix
     ./network/duckdns.nix
-    ./network/reverse-proxy.nix
+    # ./network/reverse-proxy.nix
     ./network/fail2ban.nix
     ./network/auth.nix
     ./network/routing-isp.nix
