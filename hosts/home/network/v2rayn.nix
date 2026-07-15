@@ -34,7 +34,7 @@ in
 
   home-manager.users.${username} = { config, ... }: {
     home.file = {
-      ".local/share/v2rayN/bin/xray".source = "${pkgs.xray}/bin/xray";
+      ".local/share/v2rayN/bin/xray/xray".source = "${pkgs.xray}/bin/xray";
       ".local/share/v2rayN/bin/sing-box".source = "${pkgs.sing-box}/bin/sing-box";
     };
   };

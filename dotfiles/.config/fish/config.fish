@@ -19,27 +19,27 @@ if status is-interactive
   alias clr="set -e _starship_rendered; clear"
   alias clear="set -e _starship_rendered; command clear"
 
-  alias ls="ls -la"
-  alias x+="chmod +x"
-  alias lg="lazygit"
-  alias gs="git status"
+  alias ls "ls -la"
+  alias x+ "chmod +x"
+  alias lg "lazygit"
 
-  alias clients="hyprctl clients | rg -A 3 'class'"
-  alias ipcheck="curl ip-api.com"
+  alias clients "hyprctl clients | rg -A 3 'class'"
+  alias ipcheck "curl ip-api.com"
 
-  abbr -a st "systemctl --user status"
-  abbr -a sp "systemctl --user stop"
   abbr -a rs "systemctl --user restart"
+  abbr -a sp "systemctl --user stop"
+  abbr -a st "systemctl --user status"
   abbr -a jl "journalctl --user -fu"
 
-  abbr -a b "clr && build --release && notify-send 'Built!'"
-
-  abbr -a sts "systemctl status"
   abbr -a rss "systemctl restart"
+  abbr -a sps "systemctl stop"
+  abbr -a sts "systemctl status"
   abbr -a jls "journalctl -fu"
 
-  alias sync="git-sync-bin"
-  alias c="wl-copy"
+  abbr -a b "clr && build && notify-send 'Built!'"
+
+  alias sync "git-sync-bin"
+  alias c "wl-copy"
 
   function lowmtime
     find . -type f -printf '%T@ %Tb %Td %TY %p\n' | sort -n | head -1 | string replace -r '^(\d+)\.\d+' \'\$1\'
@@ -48,14 +48,14 @@ if status is-interactive
   abbr -a vl "vellum"
 
   # alias vellcro="/home/lewelove/dev/vellcro/rust/target/release/vellcro"
-  alias mute="/home/lewelove/dev/mute/rust/target/release/mute"
-  alias discid="/home/lewelove/dev/album_curation/rsdiscid/target/release/rsdiscid"
-  alias albumset="/home/lewelove/dev/album_curation/album_setup/.build/bin/album_setup"
-  alias albumw="/home/lewelove/dev/album_curation/album_write/.build/bin/album_write"
-  alias albumspl="/home/lewelove/dev/album_curation/album_split/.build/bin/album_split"
-  alias albumresample="/home/lewelove/dev/album_curation/album_to_44100hz/.build/bin/album_to_44100hz"
-  alias mbid="/home/lewelove/dev/album_curation/mbid/.build/bin/mbid"
-  alias cover-resize="/home/lewelove/dev/album_curation/cover_resize/.build/bin/cover_resize"
+  alias mute "/home/lewelove/dev/mute/rust/target/release/mute"
+  alias discid "/home/lewelove/dev/album_curation/rsdiscid/target/release/rsdiscid"
+  alias albumset "/home/lewelove/dev/album_curation/album_setup/.build/bin/album_setup"
+  alias albumw "/home/lewelove/dev/album_curation/album_write/.build/bin/album_write"
+  alias albumspl "/home/lewelove/dev/album_curation/album_split/.build/bin/album_split"
+  alias albumresample "/home/lewelove/dev/album_curation/album_to_44100hz/.build/bin/album_to_44100hz"
+  alias mbid "/home/lewelove/dev/album_curation/mbid/.build/bin/mbid"
+  alias cover-resize "/home/lewelove/dev/album_curation/cover_resize/.build/bin/cover_resize"
 
   function distrobox
       if contains $argv[1] create rm stop assemble

@@ -15,7 +15,7 @@ vl.interfaces({ default = {
 
     shader = {
       order = "original",
-      speed = 1.7,
+      speed = 0.4,
       zoom = 0.3,
       blur = 0.8,
       grain = 1,
@@ -30,8 +30,10 @@ vl.interfaces({ default = {
     },
 
     album_grid = {
+
       spacing = { x = 20, y = 16, top = 20 },
       -- spacing = { x = 0, y = 0, top = 20 },
+
       album_card = {
         cover = {
           size = 200,

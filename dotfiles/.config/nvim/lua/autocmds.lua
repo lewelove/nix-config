@@ -22,14 +22,15 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 -- Enable spellcheck for specific filetypes
--- vim.api.nvim_create_autocmd("FileType", {
---   group = vim.api.nvim_create_augroup("SpellCheck", { clear = true }),
---   pattern = { "markdown", "text", "xml", "gitcommit" },
---   callback = function()
---     vim.opt_local.spell = true
---     vim.opt_local.spelllang = "en_us"
---   end,
--- })
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("SpellCheck", { clear = true }),
+  pattern = { "markdown", "text", "xml", "gitcommit" },
+  callback = function()
+    vim.opt_local.spell = true
+    vim.opt_local.spelllang = "en_us"
+  end,
+})
+
 vim.api.nvim_set_hl(0, "SpellBad", { undercurl = true, sp = "#EA4335" })
 vim.api.nvim_set_hl(0, "SpellRare", { underline = false, undercurl = false })
 vim.api.nvim_set_hl(0, "SpellLocal", { underline = false, undercurl = false })

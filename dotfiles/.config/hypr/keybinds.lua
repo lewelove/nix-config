@@ -96,7 +96,7 @@ hl.bind (
 
 hl.bind (
   "SUPER + F3",
-  hl.dsp.exec_cmd("pactl set-default-sink REDMI-BUDS-6-ACTIVE-EQ") )
+  hl.dsp.exec_cmd("pactl set-default-sink REDMI-BUDS-6-ACTIVE-EQ && bluetoothctl connect 90:EF:4A:FC:27:9F") )
 
 -- audio volume
 hl.bind (
