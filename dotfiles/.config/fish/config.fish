@@ -46,8 +46,9 @@ if status is-interactive
   end
 
   abbr -a vl "vellum"
+  abbr -a cl "vellum x collect"
 
-  # alias vellcro="/home/lewelove/dev/vellcro/rust/target/release/vellcro"
+  alias vellcro="/home/lewelove/dev/.archived/vellcro/rust/target/release/vellcro"
   alias mute "/home/lewelove/dev/mute/rust/target/release/mute"
   alias discid "/home/lewelove/dev/album_curation/rsdiscid/target/release/rsdiscid"
   alias albumset "/home/lewelove/dev/album_curation/album_setup/.build/bin/album_setup"

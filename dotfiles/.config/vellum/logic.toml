@@ -12,13 +12,14 @@ sql.where = '''
 COALESCE(${album.keys.collection}, '') NOT LIKE %{Vapor Memory}
 AND ${album.genre} NOT LIKE %{Signalwave}
 AND ${album.genre} NOT LIKE %{Vaporwave}
+AND COALESCE(${album.info.virtual}, 0) != 1
 '''
 
 [filters.vapor_memory]
 label = "Vapor Memory"
 sql.where = '''
-COALESCE(${album.keys.collection}, '') LIKE %{Vapor Memory}
-OR ${album.genre} LIKE %{Vaporwave}
+(COALESCE(${album.keys.collection}, '') LIKE %{Vapor Memory}
+OR ${album.genre} LIKE %{Vaporwave})
 '''
 
 [filters.signal_memory]
@@ -155,6 +156,12 @@ label = "All Albums"
 filters = [ "default", "main_library", "vapor_memory", "signal_memory" ]
 sql.where = '''
 1 = 1
+'''
+
+[libraries.virtual]
+label = "Virtual Albums"
+sql.where = '''
+COALESCE(${album.info.virtual}, 0) = 1
 '''
 
 ## Apple Music

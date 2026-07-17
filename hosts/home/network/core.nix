@@ -5,8 +5,8 @@
     hostName = hostname;
     networkmanager.enable = true;
     firewall.checkReversePath = "loose";
-    firewall.allowedTCPPorts = [ 80 8080 6600 666 ];
-    firewall.allowedUDPPorts = [ 9 ]; 
+    firewall.allowedTCPPorts = [ 80 8080 6600 666 2234 2235 ];
+    firewall.allowedUDPPorts = [ 9 2234 2235 ];
 
     interfaces.enp3s0.wakeOnLan.enable = true;
 

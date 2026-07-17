@@ -50,4 +50,28 @@ in
       ExecStop = "${pkgs.iproute2}/bin/ip rule del ipproto tcp dport 22 lookup main priority 8999";
     };
   };
+
+  systemd.services.nicotine-bypass-v2rayn = {
+    description = "Force Nicotine+ (Port 2234) to bypass v2rayN TUN interface";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = [
+        # Bypass for outbound responses sent FROM your local listening port 2234
+        "${pkgs.iproute2}/bin/ip rule add ipproto tcp sport 2234 lookup main priority 8998"
+        "${pkgs.iproute2}/bin/ip rule add ipproto udp sport 2234 lookup main priority 8998"
+        # Bypass for outbound connections initiated TO other peers listening on port 2234
+        "${pkgs.iproute2}/bin/ip rule add ipproto tcp dport 2234 lookup main priority 8998"
+        "${pkgs.iproute2}/bin/ip rule add ipproto udp dport 2234 lookup main priority 8998"
+      ];
+      ExecStop = [
+        "${pkgs.iproute2}/bin/ip rule del ipproto tcp sport 2234 lookup main priority 8998"
+        "${pkgs.iproute2}/bin/ip rule del ipproto udp sport 2234 lookup main priority 8998"
+        "${pkgs.iproute2}/bin/ip rule del ipproto tcp dport 2234 lookup main priority 8998"
+        "${pkgs.iproute2}/bin/ip rule del ipproto udp dport 2234 lookup main priority 8998"
+      ];
+    };
+  };
 }

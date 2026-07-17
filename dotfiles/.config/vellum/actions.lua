@@ -11,6 +11,17 @@ vl.actions({ cover_palette = {
   }
 }})
 
+vl.actions({ collect = {
+  run = actions_dir .. "collect",
+  config = {
+    root = "/run/media/lewelove/1000xhome/backup-everything/FB2K/Library Historyfied!/Virtual Albums/",
+    formatting = {
+      album = "{albumartist} - {album}",
+      info = "Info"
+    }
+  }
+}})
+
 vl.actions({ search_cover = {
   run = actions_dir .. "search_cover"
 }})

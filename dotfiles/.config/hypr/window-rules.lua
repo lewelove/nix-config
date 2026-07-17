@@ -17,14 +17,13 @@ hl.window_rule ({
 hl.window_rule ({
   name = "portal",
   match = { class = "xdg-desktop-portal-gtk" },
-  float = true,
-  center = true,
+  tile = true,
   size = { "monitor_w * 0.5",  "monitor_h * 0.75" },
 })
 
 hl.window_rule ({
-  name = "fullscreen",
-  match = { class = "^(imv|mpv|rmpc)$" },
+  name = "MPV",
+  match = { class = "mpv" },
   fullscreen = true,
 })
 
