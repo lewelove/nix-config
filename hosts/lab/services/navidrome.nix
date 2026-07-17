@@ -6,7 +6,7 @@
     settings = {
       Address = "127.0.0.1";
       Port = 4533;
-      MusicFolder = "/mnt/1000xlab/backup-everything/FB2K/Library Historyfied!";
+      MusicFolder = "'/mnt/1000xlab/backup-everything/FB2K/Library Historyfied!'";
       
       LogLevel = "info";
       DefaultTheme = "Dark";
