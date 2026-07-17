@@ -13,7 +13,7 @@
       EnableDownloads = true;
       SessionTimeout = "720h";
       
-      BaseUrl = "https://navidrome.{$DUCKDNS_DOMAIN}";
+      BaseUrl = "https://navidrome.lewelaboratory.duckdns.org";
     };
   };
 
