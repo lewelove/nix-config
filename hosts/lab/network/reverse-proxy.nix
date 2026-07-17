@@ -46,6 +46,14 @@
           reverse_proxy localhost:8096
         '';
       };
+
+      "navidrome.{$DUCKDNS_DOMAIN}" = {
+        extraConfig = ''
+          import logging
+          import drop_scanners
+          reverse_proxy localhost:4533
+        '';
+      };
     };
   };
 
