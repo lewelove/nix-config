@@ -1,12 +1,18 @@
 { config, pkgs, ... }:
 
 {
+  fileSystems."/var/lib/navidrome/music" = {
+    device = "/mnt/1000xlab/backup-everything/FB2K/Library Historyfied!";
+    fsType = "none";
+    options = [ "bind" "ro" ];
+  };
+
   services.navidrome = {
     enable = true;
     settings = {
       Address = "127.0.0.1";
       Port = 4533;
-      MusicFolder = "'/mnt/1000xlab/backup-everything/FB2K/Library Historyfied!'";
+      MusicFolder = "/var/lib/navidrome/music";
       
       LogLevel = "info";
       DefaultTheme = "Dark";
