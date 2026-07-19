@@ -13,10 +13,10 @@ vellum = {
   ]
 }
 
-mute = {
-  run = "repomix ~/dev/mute --quiet && repomix ~/.config/mute --quiet",
-  paste = [
-  "~/Folders/XML Packed/~-dev-mute.xml",
-  "~/Folders/XML Packed/~-.config-mute.xml"
-  ]
-}
+# mute = {
+#   run = "repomix ~/dev/mute --quiet && repomix ~/.config/mute --quiet",
+#   paste = [
+#   "~/Folders/XML Packed/~-dev-mute.xml",
+#   "~/Folders/XML Packed/~-.config-mute.xml"
+#   ]
+# }

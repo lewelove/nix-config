@@ -10,8 +10,8 @@ sql.where = '''
 label = "Main Library"
 sql.where = '''
 COALESCE(${album.keys.collection}, '') NOT LIKE %{Vapor Memory}
-AND ${album.genre} NOT LIKE %{Signalwave}
-AND ${album.genre} NOT LIKE %{Vaporwave}
+AND ${album.keys.genre} NOT LIKE %{Signalwave}
+AND ${album.keys.genre} NOT LIKE %{Vaporwave}
 AND COALESCE(${album.info.virtual}, 0) != 1
 '''
 
@@ -19,13 +19,13 @@ AND COALESCE(${album.info.virtual}, 0) != 1
 label = "Vapor Memory"
 sql.where = '''
 (COALESCE(${album.keys.collection}, '') LIKE %{Vapor Memory}
-OR ${album.genre} LIKE %{Vaporwave})
+OR ${album.keys.genre} LIKE %{Vaporwave})
 '''
 
 [filters.signal_memory]
 label = "Signal Memory"
 sql.where = '''
-COALESCE(${album.genre}, '') LIKE %{Signalwave}
+COALESCE(${album.keys.genre}, '') LIKE %{Signalwave}
 '''
 
 # GROUPERS
@@ -33,7 +33,7 @@ COALESCE(${album.genre}, '') LIKE %{Signalwave}
 [groupers.genre]
 label = "Genre"
 sql.select = '''
-${album.genre}
+${album.keys.genre}
 '''
 
 [groupers.artists]
@@ -55,13 +55,13 @@ substr(${album.date}, 1, 3) || {0s}
 [groupers.total_tracks]
 label = "Total Tracks"
 sql.select = '''
-CAST(${album.total_tracks} AS TEXT)
+CAST(${album.info.total_tracks} AS TEXT)
 '''
 
 [groupers.total_discs]
 label = "Total Discs"
 sql.select = '''
-CAST(COALESCE(${album.total_discs}, 1) AS TEXT)
+CAST(COALESCE(${album.info.total_discs}, 1) AS TEXT)
 '''
 
 [groupers.year_added]
@@ -122,7 +122,7 @@ CAST(${album.info.duration_milliseconds} AS INT) DESC
 [orders.cover_hash]
 label = "Random"
 sql.order_by = '''
-${album.covers.main.file.hash.address} ASC
+${album.covers.main.file.address} ASC
 '''
 
 [orders.chroma]
@@ -146,7 +146,7 @@ ${album.info.date_added} DESC
 [orders.last_edited]
 label = "Last Edited"
 sql.order_by = '''
-COALESCE(${album.manifests[0].file.mtime}, 0) DESC
+COALESCE(${album.manifests.metadata.file.mtime}, 0) DESC
 '''
 
 # LIBRARIES

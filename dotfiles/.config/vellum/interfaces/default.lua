@@ -15,7 +15,7 @@ vl.interfaces({ default = {
 
     shader = {
       order = "original",
-      speed = 0.4,
+      speed = 0.8,
       zoom = 0.2,
       blur = 0.8,
       grain = 1,
