@@ -16,7 +16,7 @@
       peer-port = 54322;
       port-forwarding-enabled = false;
       rpc-bind-address = "0.0.0.0";
-      rpc-port = 9091;
+      rpc-port = 9095;
       rpc-whitelist-enabled = true;
       rpc-whitelist = "127.0.0.1,192.168.*.*,10.*.*.*";
       rpc-host-whitelist-enabled = false;
