@@ -26,38 +26,49 @@ function M.process_metadata()
     end
   end
 
-  -- 1. General Deletions (Black hole)
-  vim.cmd([[silent! %g/^\(replaygain_track_peak\|replaygain_album_peak\|original_date\|original_yyyy_mm\|date_added\) = /d _]])
+  -- General Deletions (Black hole) - original_date removed from here
+  vim.cmd([[silent! %g/^\(replaygain_track_peak\|replaygain_album_peak\|original_yyyy_mm\|date_added\) = /d _]])
 
-  -- 2. Conditional Artist Deletion
+  -- Conditional original_date Deletion
+  local orig_year, date_year
+  for _, line in ipairs(lines) do
+    local oy = line:match('^original_date%s*=%s*["\']?(%d%d%d%d)%-00["\']?%s*$')
+    if oy then
+      orig_year = oy
+    end
+    local dy = line:match('^date%s*=%s*["\']?(%d%d%d%d)["\']?%s*$')
+    if dy then
+      date_year = dy
+    end
+  end
+
+  if orig_year and date_year and orig_year == date_year then
+    vim.cmd([[silent! %g/^original_date = /d _]])
+  end
+
+  -- Conditional Artist Deletion
   if all_artists_same then
     vim.cmd([[silent! %g/^artist = /d _]])
   end
 
-  -- 3. Conditional Gain Removal
+  -- Conditional Gain Removal
   if has_album_gain then
     vim.cmd([[silent! %g/^replaygain_track_gain = /d _]])
   end
   vim.cmd([[silent! %g/^replaygain_album_gain = /d _]])
 
-  -- 4. Tag Duplication/Renaming
-  if not has_albumartists then
-    vim.cmd([[silent! %s/^\(custom_albumartist\) = \(.*\)/albumartists = \2\r\1 = \2/ge]])
-  end
-
-  -- 5. Swap Album/Artist Order
+  -- Swap Album/Artist Order
   vim.cmd([[silent! %s/^\(album = .*\)\n\(albumartists\? = .*\)/\2\r\1/ge]])
 
-  -- 6. Formatting (Numbers & Quotes)
+  -- Formatting (Numbers & Quotes)
   vim.cmd([[silent! %s/tracknumber = "0*\(\d\+\)"/tracknumber = \1/ge]])
   vim.cmd([[silent! %s/discnumber = "0*\(\d\+\)"/discnumber = \1/ge]])
-  vim.cmd([[silent! %g/^unix_added_\(foobar\|applemusic\|youtube\)/s/"//ge]])
 
-  -- 7. Whitespace Management
+  -- Whitespace Management
   vim.cmd([[silent! %s/^\[album\]$/[album]\r/ge]])
   vim.cmd([[silent! %s/\n\{3,}/\r\r/ge]])
 
-  -- 8. Save
+  -- Save
   vim.cmd("silent! write")
 
   -- Restore Registers

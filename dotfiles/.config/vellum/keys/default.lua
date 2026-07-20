@@ -39,20 +39,26 @@ vl.compile.album.key({ genre = function(ctx, m)
 end })
 
 vl.compile.album.key({ comment = function(ctx, m)
-  local c = m.metadata.album.comment
-  if c ~= nil and c ~= "" then
-      return vl.fn.type_check(c, "string")
-  end
   local country = m.metadata.album.country or ""
   local label = m.metadata.album.label or ""
   local cat = m.metadata.album.catalognumber or ""
-  local year = m.metadata.album.date and string.sub(m.metadata.album.date, 1, 4) or ""
-  local parts = {}
-  if year ~= "" then table.insert(parts, year) end
-  if country ~= "" then table.insert(parts, country) end
-  if label ~= "" then table.insert(parts, label) end
-  if cat ~= "" then table.insert(parts, cat) end
-  return table.concat(parts, " ")
+
+  if country ~= "" or label ~= "" or cat ~= "" then
+      -- Compile the synthetic comment if at least one field is present
+      local year = m.metadata.album.date and string.sub(m.metadata.album.date, 1, 4) or ""
+      local parts = {}
+      if year ~= "" then table.insert(parts, year) end
+      if country ~= "" then table.insert(parts, country) end
+      if label ~= "" then table.insert(parts, label) end
+      if cat ~= "" then table.insert(parts, cat) end
+      return table.concat(parts, " ")
+  else
+      -- Fall back to passing the metadata comment
+      local c = m.metadata.album.comment
+      if c ~= nil and c ~= "" then
+          return vl.fn.type_check(c, "string")
+      end
+  end
 end })
 
 vl.compile.album.key({ custom_albumartist = function(ctx, m)

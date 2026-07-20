@@ -7,6 +7,12 @@
     options = [ "bind" "ro" ];
   };
 
+  fileSystems."/var/lib/navidrome/collections/bohemesss" = {
+    device = "/mnt/1000xlab/backup-everything/FB2K/People Collection/bohemesss";
+    fsType = "none";
+    options = [ "bind" "ro" ];
+  };
+
   services.navidrome = {
     enable = true;
     settings = {
@@ -25,5 +31,8 @@
 
   systemd.services.navidrome.serviceConfig = {
     SupplementaryGroups = [ "users" "wheel" "jellyfin" ]; 
+    BindReadOnlyPaths = [
+      "/var/lib/navidrome/collections/bohemesss"
+    ];
   };
 }

@@ -33,6 +33,7 @@
     cryptsetup
     brightnessctl
     ddcutil
+    toml2json
 
     # Desktop
     fuzzel
