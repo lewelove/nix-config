@@ -21,16 +21,31 @@ b() { gum style --foreground 4 "$*"; }
 m() { gum style --foreground 5 "$*"; }
 w() { gum style --foreground 7 "$*"; }
 
-MSG="''${1:-$(date -u +'%Y-%m-%d %H:%M UTC')}"
+SKIP_GIT=false
+MSG_ARG=""
+
+for arg in "$@"; do
+  if [ "$arg" = "--ng" ]; then
+    SKIP_GIT=true
+  else
+    if [ -z "$MSG_ARG" ]; then
+      MSG_ARG="$arg"
+    fi
+  fi
+done
+
+MSG="''${MSG_ARG:-$(date -u +'%Y-%m-%d %H:%M UTC')}"
 cd "${repoPath}"
 
-echo
-gum join --horizontal "$(m "[>] ")" "Committing local changes..."
-git add .
-if ! git diff-index --quiet HEAD --; then
-    git commit -m "$MSG"
-else
-    gum join --horizontal "$(y "[~] ")" "No changes to commit locally."
+if [ "$SKIP_GIT" = "false" ]; then
+    echo
+    gum join --horizontal "$(m "[>] ")" "Committing local changes..."
+    git add .
+    if ! git diff-index --quiet HEAD --; then
+        git commit -m "$MSG"
+    else
+        gum join --horizontal "$(y "[~] ")" "No changes to commit locally."
+    fi
 fi
 
 if git remote | grep -q "^lab$"; then
@@ -53,25 +68,22 @@ if git remote | grep -q "^lab$"; then
     fi
 fi
 
-echo
+if [ "$SKIP_GIT" = "false" ]; then
+    if git remote | grep -q "^origin$"; then
+        RAW_ADDR=$(git remote get-url origin)
+        TARGET_ADDR=''${RAW_ADDR%.git}
+        TARGET_ADDR=''${TARGET_ADDR%/}
 
-gum join --horizontal "$(m "[>] ")" "Packaging Repository..."
-repomix --quiet || true
+        echo
+        gum join --horizontal "$(m "[>] ")" "Pushing to Origin: " "$(y "$TARGET_ADDR")" "..."
 
-if git remote | grep -q "^origin$"; then
-    RAW_ADDR=$(git remote get-url origin)
-    TARGET_ADDR=''${RAW_ADDR%.git}
-    TARGET_ADDR=''${TARGET_ADDR%/}
-
-    echo
-    gum join --horizontal "$(m "[>] ")" "Pushing to Origin: " "$(y "$TARGET_ADDR")" "..."
-
-    if
-        git push -u origin main
-    then
-        gum join --horizontal "$(g "[+] ")" "Pushed to Origin."
-    else
-        gum join --horizontal "$(r "[!] ")" "Push failed."
+        if
+            git push -u origin main
+        then
+            gum join --horizontal "$(g "[+] ")" "Pushed to Origin."
+        else
+            gum join --horizontal "$(r "[!] ")" "Push failed."
+        fi
     fi
 fi
 
