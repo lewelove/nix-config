@@ -34,7 +34,6 @@ vl.config({
     }
   },
   compiler = {
-    date_added = { "date_added_youtube", "date_added_applemusic", "date_added_foobar" },
     manifests = { "id.toml", "cover_palette.toml", "history.toml" },
   },
 })
