@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 {
-
   services.qbittorrent = {
     enable = true;
     webuiPort = 8081;
@@ -21,5 +20,4 @@
   users.groups.torrents.gid = 990;
 
   users.users.lewelove.extraGroups = [ "torrents" ];
-
 }

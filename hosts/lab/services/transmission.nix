@@ -1,9 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  networking.firewall.allowedTCPPorts = [ 9091 54322 ];
-  networking.firewall.allowedUDPPorts = [ 54322 ];
-
   services.transmission = {
     enable = true;
     group = "torrents"; 
@@ -21,5 +18,10 @@
       rpc-whitelist = "127.0.0.1,192.168.*.*,10.*.*.*";
       rpc-host-whitelist-enabled = false;
     };
+  };
+
+  networking.firewall = {
+    allowedTCPPorts = [ 9091 54322 ];
+    allowedUDPPorts = [ 54322 ];
   };
 }
