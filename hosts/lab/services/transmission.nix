@@ -6,7 +6,7 @@
     group = "torrents"; 
     settings = {
       umask = 2;
-      download-dir = "/mnt/1000xlab/downloads";
+      download-dir = "/mnt/1000xlab/downloads/transmission";
       incomplete-dir-enabled = false;
       cache-size-mb = 1024;
       encryption = 1;

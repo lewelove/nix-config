@@ -25,37 +25,37 @@
 
     # Programs
     (lib.pipe inputs.import-tree [
-      (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
+      (i: i.filterNot (path: lib.hasInfix "/d/" path))
       (i: i ../../programs)
     ])
     (lib.pipe inputs.import-tree [
-      (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
+      (i: i.filterNot (path: lib.hasInfix "/d/" path))
       (i: i ./programs)
     ])
 
     # Services
     (lib.pipe inputs.import-tree [
-      (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
+      (i: i.filterNot (path: lib.hasInfix "/d/" path))
       (i: i ../../services)
     ])
     (lib.pipe inputs.import-tree [
-      (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
+      (i: i.filterNot (path: lib.hasInfix "/d/" path))
       (i: i ./services)
     ])
 
     # Scripts
     (lib.pipe inputs.import-tree [
-      (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
+      (i: i.filterNot (path: lib.hasInfix "/d/" path))
       (i: i ../../scripts)
     ])
     (lib.pipe inputs.import-tree [
-      (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
+      (i: i.filterNot (path: lib.hasInfix "/d/" path))
       (i: i ./scripts)
     ])
 
     # Network
     (lib.pipe inputs.import-tree [
-      (i: i.filterNot (path: lib.hasInfix "/disabled/" path))
+      (i: i.filterNot (path: lib.hasInfix "/d/" path))
       (i: i ./network)
     ])
 
