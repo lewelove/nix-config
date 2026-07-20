@@ -35,12 +35,5 @@ vl.config({
   compiler = {
     date_added = { "date_added_youtube", "date_added_applemusic", "date_added_foobar" },
     manifests = { "id.toml", "cover_palette.toml" },
-    file_subset_match = {
-      "album", "albumartist", "date", "genre",
-      "comment", "title", "artist", "tracknumber",
-      "musicbrainz_albumartistid", "musicbrainz_albumid",
-      "musicbrainz_releasegroupid", "musicbrainz_artistid",
-      "musicbrainz_releasetrackid", "musicbrainz_trackid"
-    },
   },
 })

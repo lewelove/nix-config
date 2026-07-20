@@ -1,6 +1,7 @@
 ; thunar GtkAccelMap rc-file         -*- scheme -*-
 ; this file is an automated accelerator map dump
 ;
+; (gtk_accel_path "<Actions>/ThunarBookmarks/0ec15b82c3c3c1864842b8fb3640dccc" "")
 ; (gtk_accel_path "<Actions>/ThunarDetailsView/expandable-folders" "")
 ; (gtk_accel_path "<Actions>/ThunarStandardView/sort-by-type" "")
 ; (gtk_accel_path "<Actions>/ThunarStatusBar/toggle-last-modified" "")
@@ -19,6 +20,7 @@
 ; (gtk_accel_path "<Actions>/ThunarWindow/view-side-pane-menu" "")
 ; (gtk_accel_path "<Actions>/ThunarWindow/switch-previous-tab" "<Primary>Page_Up")
 ; (gtk_accel_path "<Actions>/ThunarStatusBar/toggle-size-in-bytes" "")
+; (gtk_accel_path "<Actions>/ThunarBookmarks/5b50c16174670d4943704fd144bc6cb1" "")
 ; (gtk_accel_path "<Actions>/ThunarActionManager/open" "<Primary>o")
 ; (gtk_accel_path "<Actions>/ThunarStandardView/sort-ascending" "")
 ; (gtk_accel_path "<Actions>/ThunarWindow/toggle-split-view" "F3")
@@ -61,6 +63,7 @@
 ; (gtk_accel_path "<Actions>/ThunarStandardView/create-document" "")
 ; (gtk_accel_path "<Actions>/ThunarWindow/detach-tab" "")
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/dfae28973c60516e056e1469cd7fd123" "")
+; (gtk_accel_path "<Actions>/ThunarBookmarks/25b914d41120480060fb5fd7166fbd60" "")
 ; (gtk_accel_path "<Actions>/ThunarWindow/zoom-in-alt2" "<Primary>equal")
 ; (gtk_accel_path "<Actions>/ThunarWindow/cancel-search" "Escape")
 ; (gtk_accel_path "<Actions>/ThunarStatusBar/toggle-hidden-count" "")
@@ -86,6 +89,7 @@
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/d5960dc76c8e1cb9dc8fffb777c128fe" "")
 ; (gtk_accel_path "<Actions>/ThunarWindow/remove-from-recent" "")
 ; (gtk_accel_path "<Actions>/ThunarActionManager/open-with-other" "")
+; (gtk_accel_path "<Actions>/ThunarBookmarks/f07641dda52b2981a478d69f6b0d2635" "")
 ; (gtk_accel_path "<Actions>/ThunarStandardView/invert-selection" "<Primary><Shift>i")
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/80ed1c840ba5765288c155b27ddc65ed" "")
 ; (gtk_accel_path "<Actions>/ThunarStandardView/arrange-items-menu" "")
@@ -118,6 +122,7 @@
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/2bf0d2388831a61567c21f9b9e9744bc" "")
 ; (gtk_accel_path "<Actions>/ThunarStandardView/rename" "F2")
 ; (gtk_accel_path "<Actions>/ThunarWindow/open-location" "<Primary>l")
+; (gtk_accel_path "<Actions>/ThunarBookmarks/5148f3ef642d1d0013730e221461a299" "")
 (gtk_accel_path "<Actions>/ThunarWindow/view-as-compact-list" "")
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/735e55c64ef3f7c9ca18ed15c64ace6d" "")
 ; (gtk_accel_path "<Actions>/ThunarWindow/view-menu" "")

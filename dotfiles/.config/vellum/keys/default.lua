@@ -5,8 +5,7 @@ vl.compile.album.key({ albumartists = function(ctx, m)
 end })
 
 vl.compile.album.key({ media = function(ctx, m)
-  local key = m.metadata.album.media
-  return key
+  return m.metadata.album.media
 end })
 
 vl.compile.album.key({ collection = function(ctx, m)
