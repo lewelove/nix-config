@@ -19,12 +19,12 @@ if status is-interactive
   alias clr="set -e _starship_rendered; clear"
   alias clear="set -e _starship_rendered; command clear"
 
-  alias ls "ls -la"
+  alias ls "eza"
   alias x+ "chmod +x"
   alias lg "lazygit"
 
   alias clients "hyprctl clients | rg -A 3 'class'"
-  alias ipcheck "curl ip-api.com"
+  alias mip "curl ip-api.com"
 
   abbr -a rs "systemctl --user restart"
   abbr -a sp "systemctl --user stop"

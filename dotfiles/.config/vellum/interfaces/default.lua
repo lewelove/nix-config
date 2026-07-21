@@ -29,6 +29,10 @@ vl.interfaces({ default = {
       ["500"] = "#FFFFFF",
     },
 
+    queue = {
+      cover
+    },
+
     album_grid = {
 
       spacing = { x = 20, y = 16, top = 20 },

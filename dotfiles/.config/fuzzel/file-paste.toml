@@ -13,6 +13,13 @@ vellum = {
   ]
 }
 
+album_curation = {
+  run = "repomix ~/dev/album_curation --quiet",
+  paste = [
+  "~//Folders/XML Packed/~-dev-album_curation.xml",
+  ]
+}
+
 # mute = {
 #   run = "repomix ~/dev/mute --quiet && repomix ~/.config/mute --quiet",
 #   paste = [

@@ -8,7 +8,10 @@ let
         exit 1
     end
 
-    set KEYS (${pkgs.toml2json}/bin/toml2json < "$TOML_FILE" | ${pkgs.jq}/bin/jq -r '.files | keys | .[]')
+    set -x TOML_FILE "$TOML_FILE"
+    set JSON_DATA (${pkgs.nushell}/bin/nu -c 'open $env.TOML_FILE | get files | to json')
+
+    set KEYS (echo "$JSON_DATA" | ${pkgs.jq}/bin/jq -r 'keys_unsorted | .[]')
 
     set SELECTION (printf "%s\n" $KEYS | ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt="File Paste: ")
 
@@ -16,7 +19,7 @@ let
         exit 0
     end
 
-    set RUN_CMD (${pkgs.toml2json}/bin/toml2json < "$TOML_FILE" | ${pkgs.jq}/bin/jq -r --arg sel "$SELECTION" '.files[$sel].run')
+    set RUN_CMD (echo "$JSON_DATA" | ${pkgs.jq}/bin/jq -r --arg sel "$SELECTION" '.[$sel].run')
 
     if test -n "$RUN_CMD" -a "$RUN_CMD" != "null"
         sh -c "$RUN_CMD"
@@ -25,7 +28,7 @@ let
         end
     end
 
-    set PATHS (${pkgs.toml2json}/bin/toml2json < "$TOML_FILE" | ${pkgs.jq}/bin/jq -r --arg sel "$SELECTION" '.files[$sel].paste | .[]')
+    set PATHS (echo "$JSON_DATA" | ${pkgs.jq}/bin/jq -r --arg sel "$SELECTION" '.[$sel].paste | .[]')
 
     for path in $PATHS
         if test -z "$path"

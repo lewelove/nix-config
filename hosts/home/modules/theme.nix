@@ -28,7 +28,9 @@
       defaultFonts = {
         monospace = [
           "CommitMono Nerd Font"
+          "Noto Sans Mono"
           "Noto Sans Mono CJK JP"
+          "Noto Color Emoji"
         ];
         sansSerif = [
           "Inter"

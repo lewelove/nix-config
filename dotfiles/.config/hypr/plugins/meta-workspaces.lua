@@ -21,13 +21,9 @@ local meta_workspaces = {
     key = "I",
     on_created_empty = programs.photopea,
   },
-  Notes = {
-    key = "N",
-    on_created_empty = programs.notes,
-  },
   Alarms = {
     key = "Pause",
-    name = "⏰",
+    name = "Alarm",
     on_created_empty = programs.clock
   },
   System = {

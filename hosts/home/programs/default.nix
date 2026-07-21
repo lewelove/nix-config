@@ -69,6 +69,7 @@
     git-filter-repo
     taplo
     yazi
+    eza
 
     # Virtualization
     distrobox
@@ -105,9 +106,6 @@
     nh
     nvd
     nix-output-monitor
-
-    # Flake Inputs
-    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   programs.ssh.startAgent = true;
