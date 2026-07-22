@@ -45,7 +45,7 @@ vl.compile.album.key({ comment = function(ctx, m)
 
   if country ~= "" or label ~= "" or cat ~= "" then
       -- Compile the synthetic comment if at least one field is present
-      local year = m.metadata.album.date and string.sub(m.metadata.album.date, 1, 4) or ""
+      local year = m.metadata.album.release_date and string.sub(m.metadata.album.release_date, 1, 4) or ""
       local parts = {}
       if year ~= "" then table.insert(parts, year) end
       if country ~= "" then table.insert(parts, country) end

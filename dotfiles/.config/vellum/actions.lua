@@ -22,10 +22,33 @@ vl.actions({ collect = {
   }
 }})
 
+vl.actions({ embed = {
+  run = actions_dir .. "embed",
+  config = {
+    sync_tags = {
+      "ALBUM",
+      "ALBUMARTIST",
+      "DATE",
+      "GENRE",
+      "COMMENT",
+      "TITLE",
+      "ARTIST",
+      "DISCOGS_URL",
+      "MUSICBRAINZ_URL",
+      "REPLAYGAIN_TRACK_GAIN",
+      "REPLAYGAIN_ALBUM_GAIN",
+    }
+  }
+}})
+
 vl.actions({ search_cover = {
   run = actions_dir .. "search_cover"
 }})
 
 vl.actions({ get_lyrics = {
   run = actions_dir .. "get_lyrics"
+}})
+
+vl.actions({ rename = {
+  run = actions_dir .. "rename",
 }})

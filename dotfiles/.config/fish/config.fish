@@ -46,6 +46,7 @@ if status is-interactive
   end
 
   abbr -a vl "vellum"
+  abbr -a vx "vellum x"
   abbr -a cl "vellum x collect"
 
   alias vellcro="/home/lewelove/dev/.archived/vellcro/rust/target/release/vellcro"

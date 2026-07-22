@@ -1,9 +1,9 @@
 --- System -----------------------------------------------------
 
 -- kill hyprland and escape to tty
-hl.bind (
-  "CONTROL + ALT + Escape",
-  hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'") )
+-- hl.bind (
+--   "CONTROL + ALT + Escape",
+--   hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'") )
 
 -- powermenu
 hl.bind (
