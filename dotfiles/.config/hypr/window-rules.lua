@@ -57,20 +57,22 @@ hl.window_rule ({
 })
 
 hl.window_rule ({
-  name = "bitwarden",
-  match = { class = "Bitwarden" },
-  float = true,
-  center = true,
-  size = { "monitor_w * 0.5",  "monitor_h * 0.75" },
-})
-
-hl.window_rule ({
   name = "calculator",
   match = { class = "org.gnome.Calculator" },
   float = true,
   pin = true,
   size = { 360, 540 },
   move = { 1500, 110 },
+})
+
+hl.window_rule ({
+  name = "WEV",
+  match = { class = "wev" },
+  float = true,
+  pin = true,
+  stay_focused = true,
+  size = { 320, 320 },
+  move = { 1500, 100 },
 })
 
 hl.window_rule ({

@@ -22,7 +22,7 @@ hl.config ({
 
   input = {
     kb_layout = "us",
-    -- sensitivity = -0.3,
+    sensitivity = -0.5,
     repeat_rate = 35,
     repeat_delay = 200,
   },

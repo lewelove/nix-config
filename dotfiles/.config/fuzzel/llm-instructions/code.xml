@@ -1,12 +1,14 @@
 <instruction>
   - Write out the code.
   - For each file changed provide detailed description of logic changed.
+  - If new files should be created in codebase provide `touch` fish commands first.
+  - If files require no change but require renaming or moving provide fish commands first.
 </instruction>
 
 <important_constraints>
   - Never write any commented lines within code blocks.
   - When implementing new logic never keep the backwards compatability logic.
-  - If something useful to reach our goal can be done with `fish` cli commands, provide them first. Do not overuse them for direct file text editing, if a lot of changes required, print entire file instead.
+  - Focus on simple implementation with minimal diff.
 </important_constraints>
 
   <output_formatting>

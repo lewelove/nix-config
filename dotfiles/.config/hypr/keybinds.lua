@@ -100,14 +100,31 @@ hl.bind (
 
 -- audio volume
 hl.bind (
-  "KP_Add",
-  hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 3%+"),
+  "Prior",
+  hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%-"),
   { repeating = true } )
 
 hl.bind (
-  "KP_Subtract",
-  hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%-"),
+  "Next",
+  hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 3%+"),
   { repeating = true } )
+
+-- mpd client
+hl.bind (
+  "SUPER + L", -- rebind and use of Lock on Keychron keyboarg
+  hl.dsp.exec_cmd("rmpc togglepause") )
+
+hl.bind (
+  "CONTROL + Space",
+  hl.dsp.exec_cmd("rmpc togglepause") )
+
+hl.bind (
+  "CONTROL + End",
+  hl.dsp.exec_cmd("rmpc single oneshot") )
+
+hl.bind (
+  "CONTROL + SHIFT + End",
+  hl.dsp.exec_cmd("rmpc single off") )
 
 --- Programs ---------------------------------------------------
 
@@ -143,37 +160,24 @@ hl.bind (
   "SUPER + SHIFT + Return",
   hl.dsp.exec_cmd(programs.terminal .. " -e " .. programs.lab_ssh) )
 
--- mpd client
-hl.bind (
-  "CONTROL + Space",
-  hl.dsp.exec_cmd("rmpc togglepause") )
-
-hl.bind (
-  "CONTROL + Pause",
-  hl.dsp.exec_cmd("rmpc single oneshot") )
-
-hl.bind (
-  "CONTROL + SHIFT + Pause",
-  hl.dsp.exec_cmd("rmpc single off") )
-
 -- screenshots
 local screenshot = require("scripts.screenshot")
 
 hl.bind (
-  "PRINT",
+  "Print",
   function() screenshot("output") end )
 
 hl.bind (
-  "CONTROL + PRINT",
+  "CONTROL + Print",
   function() screenshot("window") end )
 
 hl.bind (
-  "CONTROL + SHIFT + PRINT",
+  "CONTROL + SHIFT + Print",
   function() screenshot("region") end )
 
 -- pick color
 hl.bind (
-  "CONTROL + Menu",
+  "ALT + Print",
   hl.dsp.exec_cmd("hyprpicker -a | wl-copy") )
 
 -- paste utils

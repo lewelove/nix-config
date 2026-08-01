@@ -1,16 +1,16 @@
 [files]
 
-nix-config = {
-  run = "repomix ~/nix-config --quiet",
-  paste = [ "~/Folders/XML Packed/~-nix-config.xml" ]
-}
-
 vellum = {
   run = "repomix ~/dev/vellum --quiet && repomix ~/.config/vellum --quiet",
   paste = [
   "~/Folders/XML Packed/~-dev-vellum.xml",
   "~/Folders/XML Packed/~-.config-vellum.xml"
   ]
+}
+
+nix-config = {
+  run = "repomix ~/nix-config --quiet",
+  paste = [ "~/Folders/XML Packed/~-nix-config.xml" ]
 }
 
 album_curation = {

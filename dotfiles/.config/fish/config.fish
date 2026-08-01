@@ -20,6 +20,7 @@ if status is-interactive
   alias clear="set -e _starship_rendered; command clear"
 
   alias ls "eza"
+  alias cat "bat"
   alias x+ "chmod +x"
   alias lg "lazygit"
 
@@ -51,12 +52,14 @@ if status is-interactive
 
   alias vellcro="/home/lewelove/dev/.archived/vellcro/rust/target/release/vellcro"
   alias mute "/home/lewelove/dev/mute/rust/target/release/mute"
+
   alias discid "/home/lewelove/dev/album_curation/rsdiscid/target/release/rsdiscid"
   alias albumset "/home/lewelove/dev/album_curation/album_setup/.build/bin/album_setup"
   alias albumw "/home/lewelove/dev/album_curation/album_write/.build/bin/album_write"
   alias albumspl "/home/lewelove/dev/album_curation/album_split/.build/bin/album_split"
   alias albumresample "/home/lewelove/dev/album_curation/album_to_44100hz/.build/bin/album_to_44100hz"
   alias mbid "/home/lewelove/dev/album_curation/mbid/.build/bin/mbid"
+  alias mb-manifest "/home/lewelove/dev/album_curation/mb_manifest/.build/bin/mb_manifest"
   alias cover-resize "/home/lewelove/dev/album_curation/cover_resize/.build/bin/cover_resize"
   alias cover-save "/home/lewelove/dev/album_curation/cover_save.fish"
 
@@ -67,5 +70,8 @@ if status is-interactive
           command distrobox $argv
       end
   end
+
+  zoxide init fish --cmd z | source
+  source ~/.config/fish/completions/z.fish
 
 end

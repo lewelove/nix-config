@@ -22,7 +22,7 @@ local meta_workspaces = {
     on_created_empty = programs.photopea,
   },
   Alarms = {
-    key = "Pause",
+    key = "F12",
     name = "Alarm",
     on_created_empty = programs.clock
   },

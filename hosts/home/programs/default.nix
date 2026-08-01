@@ -49,8 +49,9 @@
     gnome-calculator
     gnome-clocks
     nicotine-plus
-    plugdata
+    # plugdata
     marktext
+    zoxide
 
     # Terminal Programs
     foot

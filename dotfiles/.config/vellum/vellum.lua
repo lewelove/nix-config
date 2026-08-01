@@ -2,7 +2,7 @@
 
 require("keys.default")
 require("keys.date_added")
-require("keys.musicbrainz")
+require("keys.id")
 require("keys.verified")
 require("covers")
 require("actions")
@@ -34,6 +34,6 @@ vl.config({
     }
   },
   compiler = {
-    manifests = { "id.toml", "cover_palette.toml", "history.toml" },
+    manifests = { "id.toml", "history.toml" },
   },
 })

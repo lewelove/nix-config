@@ -5,7 +5,7 @@
   environment.systemPackages = with pkgs; [
     # lutris
     # luanti
-    rimsort
+    # rimsort
   ];
 
   programs.gamemode.enable = true;

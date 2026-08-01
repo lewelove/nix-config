@@ -1,7 +1,15 @@
 local actions_dir = "~/dev/vellum/actions/"
 
-vl.actions({ cover_palette = {
-  run = actions_dir .. "cover_palette",
+vl.actions({ open_terminal = {
+  config = { terminal = "alacritty" }
+}})
+
+vl.actions({ open_config_in_terminal = {
+  config = { terminal = "alacritty", cmd = 'nvim -s <(printf " e")' }
+}})
+
+vl.actions({ get_theme = {
+  run = actions_dir .. "get_theme",
   config = {
     type = "kmeansnv",
     sort = "gradient",
@@ -33,8 +41,7 @@ vl.actions({ embed = {
       "COMMENT",
       "TITLE",
       "ARTIST",
-      "DISCOGS_URL",
-      "MUSICBRAINZ_URL",
+      "musicbrainz_releasetrackid",
       "REPLAYGAIN_TRACK_GAIN",
       "REPLAYGAIN_ALBUM_GAIN",
     }

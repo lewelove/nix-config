@@ -24,12 +24,6 @@ vl.compile.album.key({ replaygain_album_gain = function(ctx, m)
   return m.metadata.album.replaygain_album_gain
 end })
 
-vl.compile.album.key({ cover_palette = function(ctx, m)
-  if m.cover_palette then
-    return vl.fn.type_check(m.cover_palette.album.cover_palette, "array")
-  end
-end })
-
 vl.compile.album.key({ genre = function(ctx, m)
   local g = m.metadata.album.genre
   if g == nil or g == "" then
