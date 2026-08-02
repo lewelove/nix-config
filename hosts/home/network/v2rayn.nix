@@ -1,4 +1,4 @@
-{ pkgs, inputs, username, ... }:
+{ pkgs, inputs, username, stable, ... }:
 
 let
 
@@ -25,7 +25,7 @@ let
 in
 
 {
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with stable; [
     xray
     sing-box
     v2rayn

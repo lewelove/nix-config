@@ -9,7 +9,8 @@ hl.on("hyprland.start", function ()
 end)
 
 require("visuals")
-require("window-rules")
+require("window_rules")
+require("workspace_rules")
 
 require("keybinds")
 
@@ -30,6 +31,10 @@ hl.config ({
   cursor = {
     no_hardware_cursors = false,
     inactive_timeout = 3,
+  },
+
+  binds = {
+    movefocus_cycles_fullscreen = true,
   },
 
 })

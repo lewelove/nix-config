@@ -2,6 +2,7 @@
   description = "Entry Point for NixOS Configuration";
 
   inputs = {
+
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
 
@@ -19,6 +20,12 @@
         nixpkgs.follows = "nixpkgs";
         home-manager.follows = "home-manager";
       };
+    };
+
+    hyprland-git = {
+      # url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+      url = "git+https://github.com/hyprwm/Hyprland?submodules=1&ref=refs/pull/15716/head";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 

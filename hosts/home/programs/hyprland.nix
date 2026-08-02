@@ -1,8 +1,9 @@
-{ pkgs, username, dot, config, ... }:
+{ pkgs, username, dot, config, inputs, ... }:
 
 {
   programs.hyprland = {
     enable = true;
+    package = inputs.hyprland-git.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     withUWSM = false;
     xwayland.enable = true;
   };
@@ -12,7 +13,7 @@
   xdg.portal = {
     enable = true;
     extraPortals = [ 
-      pkgs.xdg-desktop-portal-hyprland
+      # stable.xdg-desktop-portal-hyprland
       pkgs.xdg-desktop-portal-gtk
     ];
     config = {

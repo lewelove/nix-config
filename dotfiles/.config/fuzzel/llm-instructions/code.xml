@@ -3,6 +3,7 @@
   - For each file changed provide detailed description of logic changed.
   - If new files should be created in codebase provide `touch` fish commands first.
   - If files require no change but require renaming or moving provide fish commands first.
+  - If any AGENTIC actions can be done (except editing a LOT of text), provide all fish commands as well.
 </instruction>
 
 <important_constraints>

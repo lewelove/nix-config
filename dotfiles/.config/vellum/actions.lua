@@ -33,18 +33,21 @@ vl.actions({ collect = {
 vl.actions({ embed = {
   run = actions_dir .. "embed",
   config = {
-    sync_tags = {
-      "ALBUM",
-      "ALBUMARTIST",
-      "DATE",
-      "GENRE",
-      "COMMENT",
-      "TITLE",
-      "ARTIST",
+    keys_to_embed = {
+      "album",
+      "albumartist",
+      "date",
+      "genre",
+      "comment",
+      "title",
+      "artist",
       "musicbrainz_releasetrackid",
-      "REPLAYGAIN_TRACK_GAIN",
-      "REPLAYGAIN_ALBUM_GAIN",
-    }
+      "replaygain_track_gain",
+      "replaygain_album_gain",
+    },
+    auto_delete = true,
+    auto_convert_tracknumber = true,
+    auto_cover_embed = true,
   }
 }})
 

@@ -31,6 +31,10 @@ hl.bind (
   "SUPER + Tab",
   hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }) )
 
+hl.bind (
+  "CONTROL + Tab",
+  hl.dsp.layout("inhibit_scroll") )
+
 -- cycle focus through windows
 hl.bind (
   "SUPER + Left",
@@ -109,21 +113,24 @@ hl.bind (
   hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 3%+"),
   { repeating = true } )
 
--- mpd client
-hl.bind (
-  "SUPER + L", -- rebind and use of Lock on Keychron keyboarg
-  hl.dsp.exec_cmd("rmpc togglepause") )
+-- rebind of Lock key on KEYCHRON keyboard
+local keychron_lock_key = "SUPER + L"
 
+-- mpd client
 hl.bind (
   "CONTROL + Space",
   hl.dsp.exec_cmd("rmpc togglepause") )
 
 hl.bind (
-  "CONTROL + End",
+  keychron_lock_key,
+  hl.dsp.exec_cmd("rmpc togglepause") )
+
+hl.bind (
+  "CONTROL + " .. keychron_lock_key,
   hl.dsp.exec_cmd("rmpc single oneshot") )
 
 hl.bind (
-  "CONTROL + SHIFT + End",
+  "CONTROL + SHIFT + " .. keychron_lock_key,
   hl.dsp.exec_cmd("rmpc single off") )
 
 --- Programs ---------------------------------------------------
