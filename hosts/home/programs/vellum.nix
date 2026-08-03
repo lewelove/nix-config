@@ -4,7 +4,7 @@ let
   wrapper = config.my.chromium.wrapper;
   name = "Vellum";
   icon = "vellum";
-  domain = "localhost:5173";
+  domain = "localhost";
 
   vellum-cmd = pkgs.writeShellScriptBin "vellum" ''
     case "$1" in
@@ -30,8 +30,17 @@ in
     xdg.desktopEntries.${name} = {
       inherit name icon;
       genericName = "Vellum";
-      exec = "${wrapper}/bin/chromium-browser --app=http://${domain}";
+      exec = "${wrapper}/bin/chromium-browser --app=http://${domain}:4173";
       terminal = false;
     };
+
+    xdg.desktopEntries."${name}-dev" = {
+      inherit icon;
+      name = "${name}-dev";
+      genericName = "Vellum Dev";
+      exec = "${wrapper}/bin/chromium-browser --app=http://${domain}:5173";
+      terminal = false;
+    };
+
   };
 }

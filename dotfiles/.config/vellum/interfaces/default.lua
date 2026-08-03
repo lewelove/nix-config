@@ -25,7 +25,7 @@ local palette = {
   }
 }
 
-vl.interfaces({ default = {
+local base_interface = {
 
   directory = interface_dir,
 
@@ -67,5 +67,25 @@ vl.interfaces({ default = {
       }
     }
   }
+}
 
-}})
+vl.interfaces({
+  default = {
+    directory = base_interface.directory,
+    run = interface_dir .. "/run_prod.sh",
+    assets = base_interface.assets,
+    config = base_interface.config,
+  },
+  dev = {
+    directory = base_interface.directory,
+    run = interface_dir .. "/run_dev.sh",
+    assets = base_interface.assets,
+    config = base_interface.config,
+  },
+  prod = {
+    directory = base_interface.directory,
+    run = interface_dir .. "/run_prod.sh",
+    assets = base_interface.assets,
+    config = base_interface.config,
+  }
+})

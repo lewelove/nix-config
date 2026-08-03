@@ -12,7 +12,7 @@ return {
   
    password_manager = "flatpak run com.bitwarden.desktop",
    telegram_client = "AyuGram",
-   mpd_client = "chromium-browser --app=http://localhost:5173/",
+   mpd_client = "chromium-browser --app=http://localhost:4173/",
   
    menu = "fuzzel",
    bookmarks = "fuzzel-bookmarks.sh",

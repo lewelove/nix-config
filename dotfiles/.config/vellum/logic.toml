@@ -1,10 +1,10 @@
 # FILTERS
 
-[filters.default]
-label = "Default"
-sql.where = '''
-1 = 1
-'''
+# [filters.default]
+# label = "Default"
+# sql.where = '''
+# 1 = 1
+# '''
 
 [filters.main_library]
 label = "Main Library"
@@ -156,12 +156,6 @@ label = "All Albums"
 filters = [ "default", "main_library", "vapor_memory", "signal_memory" ]
 sql.where = '''
 1 = 1
-'''
-
-[libraries.virtual]
-label = "Virtual Albums"
-sql.where = '''
-COALESCE(${album.info.virtual}, 0) = 1
 '''
 
 ## Apple Music

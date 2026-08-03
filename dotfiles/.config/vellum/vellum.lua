@@ -1,4 +1,4 @@
--- Lewelove Vellum Config --
+-- LeweLove's Vellum Config --
 
 require("keys.default")
 require("keys.date_added")
