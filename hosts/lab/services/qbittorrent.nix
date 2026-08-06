@@ -10,6 +10,10 @@
     group = "torrents";
   };
 
+  systemd.services.qbittorrent.serviceConfig = {
+    UMask = "0002";
+  };
+
   systemd.tmpfiles.rules = [
     "d /mnt/1000xlab 0775 lewelove torrents -"
     "d /mnt/1000xlab/downloads 2775 qbittorrent torrents -"

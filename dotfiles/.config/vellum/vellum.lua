@@ -1,12 +1,28 @@
 -- LeweLove's Vellum Config --
 
+require("helpers")
+
 require("keys.default")
 require("keys.date_added")
 require("keys.id")
 require("keys.verified")
-require("covers")
-require("actions")
+require("keys.lyrics")
+
+require("logic.filters")
+require("logic.orders")
+require("logic.groupers")
+require("logic.shelves")
+
+require("libraries.apple_music")
+require("libraries.foobar")
+require("libraries.my_year")
+require("libraries.default")
+
+require("libraries.experimental")
+
 require("interfaces.default")
+
+require("actions")
 
 vl.config({
   storage = {
@@ -37,3 +53,8 @@ vl.config({
     manifests = { "id.toml", "history.toml" },
   },
 })
+
+vl.cache.cover({ filter = "catmullrom", size = 200 })
+vl.cache.cover({ filter = "catmullrom", size = 627 })
+vl.cache.cover({ filter = "catmullrom", size = 1040 })
+

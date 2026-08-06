@@ -43,6 +43,7 @@ local base_interface = {
       order = "original",
       speed = 0.8,
       zoom = 0.2,
+      zoom = 0.5,
       blur = 0.8,
       grain = 1.7,
     },

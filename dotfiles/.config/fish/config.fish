@@ -20,7 +20,6 @@ if status is-interactive
   alias clear="set -e _starship_rendered; command clear"
 
   alias ls "eza"
-  alias cat "bat"
   alias x+ "chmod +x"
   alias lg "lazygit"
 

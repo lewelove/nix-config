@@ -31,6 +31,7 @@
     bat
     fd
     fzf
+    zoxide
 
     # Media
     mpc

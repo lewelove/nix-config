@@ -42,7 +42,6 @@
         extraConfig = ''
           import logging
           import drop_scanners
-          import auth
           reverse_proxy localhost:8096
         '';
       };
