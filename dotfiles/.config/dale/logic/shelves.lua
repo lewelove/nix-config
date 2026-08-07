@@ -1,4 +1,4 @@
-vl.shelf( "virtual", { label = "Virtual Albums",
+dl.shelf( "virtual", { label = "Virtual Albums",
   sort = function(a)
     local keys = a.keys or {}
     return keys.date_added or ""
@@ -10,9 +10,9 @@ vl.shelf( "virtual", { label = "Virtual Albums",
   end
 })
 
-local ambient50_list = vl.fs.read_lines("~/.config/vellum/shelves/Ambient50.txt")
+local ambient50_list = dl.fs.read_lines("~/.config/dale/shelves/Ambient50.txt")
 
-vl.shelf( "ambient50", { label = "Ambient 50",
+dl.shelf( "ambient50", { label = "Ambient 50",
   match = function(a)
     return ambient50_list[a.id]
   end,
@@ -21,7 +21,7 @@ vl.shelf( "ambient50", { label = "Ambient 50",
   end
 })
 
-vl.shelf( "ambient_50", { label = "Ambient 50 by Date",
+dl.shelf( "ambient_50", { label = "Ambient 50 by Date",
   match = function(a)
     local keys = a.keys or {}
     return contains_in_table(keys.shelves, "Ambient 50")

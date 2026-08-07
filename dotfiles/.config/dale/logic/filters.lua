@@ -1,10 +1,10 @@
-vl.filter( "default", { label = "Default",
+dl.filter( "default", { label = "Default",
   match = function(a)
     return true
   end
 })
 
-vl.filter( "main_library", { label = "Main Library",
+dl.filter( "main_library", { label = "Main Library",
   match = function(a)
     local keys = a.keys or {}
     local info = a.info or {}
@@ -15,22 +15,21 @@ vl.filter( "main_library", { label = "Main Library",
   end
 })
 
-vl.filter( "vapor_memory", { label = "Vapor Memory",
+dl.filter( "vapor_memory", { label = "Vapor Memory",
   match = function(a)
     local keys = a.keys or {}
     return contains(keys.collection, "Vapor Memory") or contains(keys.genre, "Vaporwave")
   end
 })
 
-vl.filter( "signal_memory", { label = "Signal Memory",
+dl.filter( "signal_memory", { label = "Signal Memory",
   match = function(a)
     local keys = a.keys or {}
     return contains(keys.genre, "Signalwave")
   end
 })
 
-vl.filter( "ambient_50", { label = "Ambient 50",
-  -- strict = true,
+dl.filter( "ambient_50", { label = "Ambient 50",
   match = function(a)
     local keys = a.keys or {}
     return contains_in_table(keys.shelves, "Ambient 50")

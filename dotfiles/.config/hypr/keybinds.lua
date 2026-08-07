@@ -35,6 +35,11 @@ hl.bind (
   "CONTROL + Tab",
   hl.dsp.layout("inhibit_scroll") )
 
+-- pin windows
+hl.bind (
+  "SUPER + P",
+  hl.dsp.window.pin() )
+
 -- cycle focus through windows
 hl.bind (
   "SUPER + Left",
@@ -197,19 +202,19 @@ hl.bind (
   hl.dsp.exec_cmd("wrap-paste.sh") )
 
 hl.bind (
-  "SUPER + P",
+  "SUPER + Apostrophe",
   hl.dsp.exec_cmd("fuzzel-file-paste") )
 
 hl.bind (
-  "SUPER + O",
+  "SUPER + Semicolon",
   hl.dsp.exec_cmd("fuzzel-copy.sh") )
 
 -- llm exec commands
 hl.bind (
-  "SUPER + bracketleft",
+  "SUPER + BracketLeft",
   hl.dsp.exec_cmd("fuzzel-llm-system-prompts.sh") )
 
 hl.bind (
-  "SUPER + bracketright",
+  "SUPER + BracketRight",
   hl.dsp.exec_cmd("fuzzel-llm-instructions.sh") )
 

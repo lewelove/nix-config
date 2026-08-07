@@ -1,7 +1,7 @@
--- Config for default Vellum Web-App interface
+-- Config for default DALE Web-App interface
 
-local shader_dir = "~/.config/vellum/shaders/"
-local interface_dir = "~/dev/vellum/interfaces/web-app"
+local shader_dir = "~/.config/dale/shaders/"
+local interface_dir = "~/dev/dale/interfaces/web-app"
 
 local ok = {
   white = "oklch(1.00 0 0)",
@@ -42,8 +42,8 @@ local base_interface = {
     shader = {
       order = "original",
       speed = 0.8,
-      zoom = 0.2,
       zoom = 0.5,
+      zoom = 0.3,
       blur = 0.8,
       grain = 1.7,
     },
@@ -70,23 +70,23 @@ local base_interface = {
   }
 }
 
-vl.interfaces({
-  default = {
-    directory = base_interface.directory,
-    run = interface_dir .. "/run_prod.sh",
-    assets = base_interface.assets,
-    config = base_interface.config,
-  },
-  dev = {
-    directory = base_interface.directory,
-    run = interface_dir .. "/run_dev.sh",
-    assets = base_interface.assets,
-    config = base_interface.config,
-  },
-  prod = {
-    directory = base_interface.directory,
-    run = interface_dir .. "/run_prod.sh",
-    assets = base_interface.assets,
-    config = base_interface.config,
-  }
+dl.interface( "default", {
+  directory = base_interface.directory,
+  run = interface_dir .. "/run_prod.sh",
+  assets = base_interface.assets,
+  config = base_interface.config,
+})
+
+dl.interface( "dev", {
+  directory = base_interface.directory,
+  run = interface_dir .. "/run_dev.sh",
+  assets = base_interface.assets,
+  config = base_interface.config,
+})
+
+dl.interface( "prod", {
+  directory = base_interface.directory,
+  run = interface_dir .. "/run_prod.sh",
+  assets = base_interface.assets,
+  config = base_interface.config,
 })

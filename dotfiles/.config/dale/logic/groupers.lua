@@ -1,11 +1,11 @@
-vl.grouper( "genre", { label = "Genre",
+dl.grouper( "genre", { label = "Genre",
   select = function(a)
     local keys = a.keys or {}
     return keys.genre or "Unknown"
-  end
+  end,
 })
 
-vl.grouper( "artists", { label = "Artists",
+dl.grouper( "artists", { label = "Artists",
   index = true,
   select = function(a)
     local keys = a.keys or {}
@@ -13,10 +13,13 @@ vl.grouper( "artists", { label = "Artists",
       return keys.albumartists
     end
     return a.albumartist or "Unknown"
+  end,
+  sort = function(val, a)
+    return clean_artist(val):lower()
   end
 })
 
-vl.grouper( "decade", { label = "Decade",
+dl.grouper( "decade", { label = "Decade",
   select = function(a)
     if a.date and #a.date >= 3 then
       return a.date:sub(1, 3) .. "0s"
@@ -25,21 +28,21 @@ vl.grouper( "decade", { label = "Decade",
   end
 })
 
-vl.grouper( "total_tracks", { label = "Total Tracks",
+dl.grouper( "total_tracks", { label = "Total Tracks",
   select = function(a)
     local info = a.info or {}
     return tostring(info.total_tracks or 0)
   end
 })
 
-vl.grouper( "total_discs", { label = "Total Discs",
+dl.grouper( "total_discs", { label = "Total Discs",
   select = function(a)
     local info = a.info or {}
     return tostring(info.total_discs or 1)
   end
 })
 
-vl.grouper( "year_added", { label = "Year Added",
+dl.grouper( "year_added", { label = "Year Added",
   select = function(a)
     local keys = a.keys or {}
     local d = keys.date_added
@@ -50,16 +53,19 @@ vl.grouper( "year_added", { label = "Year Added",
   end
 })
 
-vl.grouper( "chroma", { label = "Chroma",
+dl.grouper( "chroma", { label = "Chroma",
   select = function(a)
     local keys = a.keys or {}
     local val = tonumber(keys.cover_chroma) or 0
-    if val < 0.17 then return "0"
-    elseif val < 15 then return "15"
-    elseif val < 30 then return "30"
-    elseif val < 45 then return "45"
-    elseif val < 60 then return "60"
-    elseif val < 80 then return "80"
-    else return "80+" end
-  end
+    if val < 0.17 then return "Monochrome"
+    elseif val < 21 then return "Bleak"
+    elseif val < 45 then return "Standard"
+    elseif val < 60 then return "Vivid"
+    else return "Saturated" end
+  end,
+  sort = function(val, a)
+    local keys = a.keys or {}
+    return tonumber(keys.cover_chroma) or 0
+  end,
+  reverse = true
 })

@@ -2,17 +2,17 @@
 
 let
   wrapper = config.my.chromium.wrapper;
-  name = "Vellum";
-  icon = "vellum";
+  name = "Dale";
+  icon = "dale";
   domain = "localhost";
 
-  vellum-cmd = pkgs.writeShellScriptBin "vellum" ''
+  dale-cmd = pkgs.writeShellScriptBin "dale" ''
     case "$1" in
       ui)
-        cd "/home/${username}/dev/vellum/web-app" && exec ${pkgs.bun}/bin/bun run dev
+        cd "/home/${username}/dev/dale/web-app" && exec ${pkgs.bun}/bin/bun run dev
         ;;
       *)
-        exec "/home/${username}/dev/vellum/rust/target/release/vellum" "$@"
+        exec "/home/${username}/dev/dale/rust/target/release/dale" "$@"
         ;;
     esac
   '';
@@ -21,23 +21,21 @@ in
 
   environment.systemPackages = [
     pkgs.bun
-    vellum-cmd
+    dale-cmd
   ];
 
   home-manager.users.${username} = { config, ... }: {
-    home.file.".config/vellum".source = config.lib.file.mkOutOfStoreSymlink "${identity.repoPath}/dotfiles/.config/vellum";
+    home.file.".config/dale".source = config.lib.file.mkOutOfStoreSymlink "${identity.repoPath}/dotfiles/.config/dale";
 
     xdg.desktopEntries.${name} = {
       inherit name icon;
-      genericName = "Vellum";
       exec = "${wrapper}/bin/chromium-browser --app=http://${domain}:4173";
       terminal = false;
     };
 
     xdg.desktopEntries."${name}-dev" = {
       inherit icon;
-      name = "${name}-dev";
-      genericName = "Vellum Dev";
+      name = "${name} Dev";
       exec = "${wrapper}/bin/chromium-browser --app=http://${domain}:5173";
       terminal = false;
     };

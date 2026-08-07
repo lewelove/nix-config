@@ -45,9 +45,9 @@ if status is-interactive
     find . -type f -printf '%T@ %Tb %Td %TY %p\n' | sort -n | head -1 | string replace -r '^(\d+)\.\d+' \'\$1\'
   end
 
-  abbr -a vl "vellum"
-  abbr -a vx "vellum x"
-  abbr -a cl "vellum x collect"
+  abbr -a dl "dale"
+  abbr -a dx "dale x"
+  abbr -a cl "dale x collect"
 
   alias vellcro="/home/lewelove/dev/.archived/vellcro/rust/target/release/vellcro"
   alias mute "/home/lewelove/dev/mute/rust/target/release/mute"

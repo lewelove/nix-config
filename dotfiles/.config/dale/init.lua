@@ -1,4 +1,4 @@
--- LeweLove's Vellum Config --
+-- LeweLove's DALE Config --
 
 require("helpers")
 
@@ -13,10 +13,10 @@ require("logic.orders")
 require("logic.groupers")
 require("logic.shelves")
 
+require("libraries.default")
 require("libraries.apple_music")
 require("libraries.foobar")
 require("libraries.my_year")
-require("libraries.default")
 
 require("libraries.experimental")
 
@@ -24,10 +24,10 @@ require("interfaces.default")
 
 require("actions")
 
-vl.config({
+dl.config({
   storage = {
     library = "/run/media/lewelove/1000xhome/backup-everything/FB2K/Library Historyfied!/",
-    environment = "~/.secrets/vellum.env",
+    environment = "~/.secrets/dale.env",
   },
   manifest = {
     audio_files = { ".flac" },
@@ -54,7 +54,7 @@ vl.config({
   },
 })
 
-vl.cache.cover({ filter = "catmullrom", size = 200 })
-vl.cache.cover({ filter = "catmullrom", size = 627 })
-vl.cache.cover({ filter = "catmullrom", size = 1040 })
+dl.cache.cover({ filter = "catmullrom", size = 200 })
+dl.cache.cover({ filter = "catmullrom", size = 627 })
+dl.cache.cover({ filter = "catmullrom", size = 1040 })
 

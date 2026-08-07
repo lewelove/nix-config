@@ -1,10 +1,10 @@
 [files]
 
-vellum = {
-  run = "repomix ~/dev/vellum --quiet && repomix ~/.config/vellum --quiet",
+dale = {
+  run = "repomix ~/dev/dale --quiet && repomix ~/.config/dale --quiet",
   paste = [
-  "~/Folders/XML Packed/~-dev-vellum.xml",
-  "~/Folders/XML Packed/~-.config-vellum.xml"
+  "~/Folders/XML Packed/~-dev-dale.xml",
+  "~/Folders/XML Packed/~-.config-dale.xml"
   ]
 }
 

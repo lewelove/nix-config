@@ -1,4 +1,4 @@
-vl.compile.album.key({ verified = function(ctx, m)
+dl.compile.album.key( "verified", function(ctx, m)
 
   if not m.history then return nil end
 
@@ -22,4 +22,4 @@ vl.compile.album.key({ verified = function(ctx, m)
 
   return nil
 
-end })
+end)
