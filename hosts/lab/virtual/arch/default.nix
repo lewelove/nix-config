@@ -22,9 +22,14 @@ in
     options = [
       "noauto"
       "x-systemd.automount"
+      "x-systemd.requires=arch-vm.service"
+      "x-systemd.after=arch-vm.service"
+      "x-systemd.idle-timeout=60"
+      "_netdev"
       "port=2222"
       "IdentityFile=/home/${username}/.ssh/id_ed25519"
       "StrictHostKeyChecking=no"
+      "UserKnownHostsFile=/dev/null"
       "allow_other"
       "reconnect"
       "ServerAliveInterval=15"
@@ -50,7 +55,9 @@ in
         echo "Error: ${diskImage} not found. Run fetch-image.fish first."
         exit 1
       fi
-      chown -R ${username}:users ${vmDir}
+      mkdir -p "${vmDir}"
+      chown ${username}:users "${vmDir}"
+      chown ${username}:users "${diskImage}"
     '';
 
     script = ''
