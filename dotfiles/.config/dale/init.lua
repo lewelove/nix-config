@@ -1,4 +1,4 @@
--- LeweLove's DALE Config --
+-- lewelove's DALE Config --
 
 require("helpers")
 
@@ -26,7 +26,7 @@ require("actions")
 
 dl.config({
   storage = {
-    library = "/run/media/lewelove/1000xhome/backup-everything/FB2K/Library Historyfied!/",
+    music_directory = "/run/media/lewelove/1000xhome/backup-everything/FB2K/Library Historyfied!/",
     environment = "~/.secrets/dale.env",
   },
   manifest = {

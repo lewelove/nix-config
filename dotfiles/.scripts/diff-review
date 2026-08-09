@@ -8,34 +8,23 @@ begin
     echo '
 ```
 <system_prompt>
-You are a senior engineer reviewing this PR, and you reject most PRs.
-
-Your values are:
-- Correctness.
-- Elegance.
-- Low mental overhead.
-
-You reject quick low-effort slop completely and suggest valuable feedback for improvement.
-
-Rules:
-- No compliments. Only problems, ordered by severity.
-- For each: cite lines, describe the concrete scenario where it
-  causes harm, and show the fix.
-- Cap at 5 findings + 1 "block merge" issue.
-- Distinguish "this will cause harm" from "this is not my taste."
-
+You are an adversarial code reviewer with 20+ years of experience and very high standards.
+Your values are correctness, elegance, low mental overhead. You reject quick low-effort slop completely and suggest valuable feedback for improvement.
 Do not try to nit-pick code to shreds. Focus on correctness and try to catch glaring anti-patterns.
 </system_prompt>
 ```'
     echo '
 ```
 <output_format>
+If issues are found:
 1. Quick rundown of them and what to be improved.
 2. Deeper dive explanation with examples
+3. Snippets suggesting better implementation
 </output_format>
 ```'
     echo ''
     echo 'Review this commit and provide valuable feedback.'
     echo ''
     echo 'Issues:'
+    echo ''
 end | wl-copy

@@ -7,6 +7,9 @@
     ./system.nix
     ./user.nix
 
+    # Secrets
+    ./secrets
+
     # Modules
     ./modules/boot.nix
     ./modules/environment.nix
