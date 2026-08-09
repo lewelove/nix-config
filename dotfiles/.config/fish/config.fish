@@ -73,4 +73,6 @@ if status is-interactive
   zoxide init fish --cmd z | source
   source ~/.config/fish/completions/z.fish
 
+  export SOPS_AGE_KEY=$(ssh-to-age -private-key -i ~/.ssh/id_ed25519)
+
 end

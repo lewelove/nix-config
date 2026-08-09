@@ -11,6 +11,7 @@
     # Network
     ./network/core.nix
     ./network/inbound.nix
+    ./network/xray-inbound.nix
 
     # ./network/amneziawg.nix
     ./network/v2raya.nix
