@@ -9,9 +9,28 @@ in
 {
   boot.kernelModules = [ "kvm-intel" ];
 
-  environment.systemPackages = [ pkgs.qemu_kvm ];
+  environment.systemPackages = [
+    pkgs.qemu_kvm
+    pkgs.sshfs
+  ];
 
   networking.firewall.allowedTCPPorts = [ sshPort vncPort ];
+
+  fileSystems."/home/${username}/virtual/arch/vm-home" = {
+    device = "arch@127.0.0.1:/home/arch";
+    fsType = "fuse.sshfs";
+    options = [
+      "noauto"
+      "x-systemd.automount"
+      "port=2222"
+      "IdentityFile=/home/${username}/.ssh/id_ed25519"
+      "StrictHostKeyChecking=no"
+      "allow_other"
+      "reconnect"
+      "ServerAliveInterval=15"
+      "ServerAliveCountMax=3"
+    ];
+  };
 
   systemd.services.arch-vm = {
     description = "Minimal Isolated Arch Linux QEMU VM";
@@ -27,7 +46,6 @@ in
     };
 
     preStart = ''
-      mkdir -p ${vmDir}/home
       if [ ! -f "${diskImage}" ]; then
         echo "Error: ${diskImage} not found. Run fetch-image.fish first."
         exit 1
@@ -45,9 +63,7 @@ in
         -netdev user,id=net0,hostfwd=tcp:0.0.0.0:${toString sshPort}-:22 \
         -device virtio-net-pci,netdev=net0 \
         -vnc 127.0.0.1:0 \
-        -serial mon:stdio \
-        -virtfs local,path=${vmDir}/home,mount_tag=host_home,security_model=mapped-xattr,id=host_home
+        -serial mon:stdio
     '';
   };
 }
-

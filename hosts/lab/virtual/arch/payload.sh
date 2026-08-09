@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Sudoers Configuration
+sudo chown -R arch: /home/arch
+
 echo "arch ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/arch
 
-# Authorize Home SSH Key ONLY
 mkdir -p ~/.ssh
 chmod 700 ~/.ssh
 cat <<EOF > ~/.ssh/authorized_keys
@@ -12,9 +12,8 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINngwDtUZAiEALEZ1XhPXX221hYqjGSaqWRnvaUnpMXT
 EOF
 chmod 600 ~/.ssh/authorized_keys
 
-# Disable Password Authentication & Lock Passwords
-sudo passwd -l root
-sudo passwd -l arch
+sudo passwd -l root || true
+sudo passwd -l arch || true
 
 sudo mkdir -p /etc/ssh/sshd_config.d
 sudo bash -c 'cat <<EOF > /etc/ssh/sshd_config.d/10-security.conf
@@ -27,7 +26,6 @@ EOF'
 
 sudo systemctl restart sshd
 
-# Environment & Proxies
 sudo bash -c 'cat <<EOF >> /etc/environment
 http_proxy=http://10.0.2.2:20171
 https_proxy=http://10.0.2.2:20171
@@ -40,7 +38,6 @@ EOF'
 export http_proxy="http://10.0.2.2:20171"
 export https_proxy="http://10.0.2.2:20171"
 
-# System Packages & Default Shell
 sudo pacman-key --init
 sudo pacman-key --populate archlinux
 sudo pacman -Sy --noconfirm \
@@ -49,11 +46,7 @@ sudo pacman -Sy --noconfirm \
 
 sudo chsh -s /usr/bin/fish arch
 
-# Mount Shared Directory & Link Dotfiles
-if ! grep -q "host_home" /etc/fstab; then
-  echo "host_home /home/arch 9p trans=virtio,version=9p2000.L,rw,access=any,_netdev 0 0" | sudo tee -a /etc/fstab
-fi
-sudo mount -a || true
+sudo npm install -g pi-coding-agent @mitsuhiko/pi-agent || true
 
 mkdir -p ~/.config
 if test ! -d ~/.dotfiles; then
