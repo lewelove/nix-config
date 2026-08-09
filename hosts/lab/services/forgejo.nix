@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   services.forgejo = {
@@ -9,8 +9,6 @@
       server = {
         HTTP_ADDR = "127.0.0.1";
         HTTP_PORT = 3001;
-        DOMAIN = "10.0.2.2";
-        ROOT_URL = "http://10.0.2.2:3001/";
       };
 
       service = {
@@ -25,6 +23,21 @@
     };
   };
 
-  environment.systemPackages = [ pkgs.tea ];
+  sops.secrets."duckdns/domain" = { };
+
+  sops.templates."forgejo.env" = {
+    content = ''
+      FORGEJO__server__DOMAIN=git.${config.sops.placeholder."duckdns/domain"}
+      FORGEJO__server__ROOT_URL=https://git.${config.sops.placeholder."duckdns/domain"}
+    '';
+  };
+
+  systemd.services.forgejo = {
+    after = [ "sops-install-secrets.service" ];
+    wants = [ "sops-install-secrets.service" ];
+    serviceConfig.EnvironmentFile = [ config.sops.templates."forgejo.env".path ];
+  };
+
+  environment.systemPackages = [ pkgs.forgejo pkgs.tea ];
 }
 

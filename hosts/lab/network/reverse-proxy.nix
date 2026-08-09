@@ -1,11 +1,15 @@
 { config, pkgs, ... }:
 
+let
+  domain = config.sops.placeholder."duckdns/domain";
+in
 {
-  services.caddy = {
-    enable = true;
-    environmentFile = "/etc/duckdns.env";
+  sops.secrets."duckdns/domain" = { };
 
-    extraConfig = ''
+  sops.templates."Caddyfile" = {
+    mode = "0644";
+    reloadUnits = [ "caddy.service" ];
+    content = ''
       (logging) {
         log {
           output file /var/log/caddy/access.log
@@ -15,7 +19,7 @@
 
       (auth) {
         forward_auth localhost:9091 {
-          uri /api/verify?rd=https://auth.{$DUCKDNS_DOMAIN}/
+          uri /api/verify?rd=https://auth.${domain}/
           copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
         }
       }
@@ -27,33 +31,41 @@
         }
         respond @scanners "Forbidden" 403
       }
+
+      git.${domain} {
+        import logging
+        import drop_scanners
+        reverse_proxy localhost:3001
+      }
+
+      auth.${domain} {
+        import logging
+        import drop_scanners
+        reverse_proxy localhost:9091
+      }
+
+      jellyfin.${domain} {
+        import logging
+        import drop_scanners
+        reverse_proxy localhost:8096
+      }
+
+      navidrome.${domain} {
+        import logging
+        import drop_scanners
+        reverse_proxy localhost:4533
+      }
     '';
+  };
 
-    virtualHosts = {
-      "auth.{$DUCKDNS_DOMAIN}" = {
-        extraConfig = ''
-          import logging
-          import drop_scanners
-          reverse_proxy localhost:9091
-        '';
-      };
+  services.caddy = {
+    enable = true;
+    configFile = config.sops.templates."Caddyfile".path;
+  };
 
-      "jellyfin.{$DUCKDNS_DOMAIN}" = {
-        extraConfig = ''
-          import logging
-          import drop_scanners
-          reverse_proxy localhost:8096
-        '';
-      };
-
-      "navidrome.{$DUCKDNS_DOMAIN}" = {
-        extraConfig = ''
-          import logging
-          import drop_scanners
-          reverse_proxy localhost:4533
-        '';
-      };
-    };
+  systemd.services.caddy = {
+    after = [ "sops-install-secrets.service" ];
+    wants = [ "sops-install-secrets.service" ];
   };
 
   systemd.tmpfiles.rules = [
@@ -63,3 +75,4 @@
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];
 }
+
