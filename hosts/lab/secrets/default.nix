@@ -10,7 +10,6 @@
     ssh-to-age
   ];
 
-
   sops = {
     defaultSopsFile = ./secrets.yaml;
     defaultSopsFormat = "yaml";

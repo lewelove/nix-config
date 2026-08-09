@@ -8,9 +8,11 @@
     ./system.nix
     ./user.nix
 
+    # Secrets
+    ./secrets
+
     # Network
     ./network/core.nix
-    ./network/inbound.nix
     ./network/xray-inbound.nix
 
     # ./network/amneziawg.nix
@@ -23,6 +25,9 @@
     ./network/auth.nix
     ./network/routing-isp.nix
     ./network/adguardhome.nix
+
+    # Virtual Machines
+    ./virtual/arch
 
     # Home Manager
     ./modules/home-manager.nix
@@ -60,7 +65,7 @@
     ])
 
     # Commercial
-    ./commercial/family-office-bot.nix
+    # ./commercial/family-office-bot.nix
 
   ];
 

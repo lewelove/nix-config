@@ -31,8 +31,8 @@ if status is-interactive
   abbr -a st "systemctl --user status"
   abbr -a jl "journalctl --user -fu"
 
-  abbr -a rss "systemctl restart"
-  abbr -a sps "systemctl stop"
+  abbr -a rss "sudo systemctl restart"
+  abbr -a sps "sudo systemctl stop"
   abbr -a sts "systemctl status"
   abbr -a jls "journalctl -fu"
 
@@ -73,6 +73,8 @@ if status is-interactive
   zoxide init fish --cmd z | source
   source ~/.config/fish/completions/z.fish
 
-  export SOPS_AGE_KEY=$(ssh-to-age -private-key -i ~/.ssh/id_ed25519)
+  if test (hostname) = "home"
+    set -gx SOPS_AGE_KEY (ssh-to-age -private-key -i ~/.ssh/id_ed25519 2>/dev/null)
+  end
 
 end

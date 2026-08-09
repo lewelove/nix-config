@@ -129,6 +129,12 @@
           User = "lewelove";
           ForwardAgent = "yes";
         };
+        "arch-vm" = {
+           hostname = "127.0.0.1";
+           port = 2222;
+           user = "arch";
+           proxyJump = "lab";
+        };
       };
     };
 

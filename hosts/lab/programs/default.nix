@@ -32,6 +32,7 @@
     fd
     fzf
     zoxide
+    eza
 
     # Media
     mpc
