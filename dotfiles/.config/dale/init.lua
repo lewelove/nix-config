@@ -20,6 +20,8 @@ require("libraries.my_year")
 
 require("libraries.experimental")
 
+require("cabinets.collections")
+
 require("interfaces.default")
 
 require("actions")

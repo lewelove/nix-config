@@ -1,3 +1,15 @@
+dl.cabinet( "collections", { label = "Collections",
+  shelves = {
+    "virtual",
+    "ambient50",
+  },
+  orders = {
+    "az",
+    "year",
+    "date_added",
+  }
+})
+
 dl.shelf( "virtual", { label = "Virtual Albums",
   sort = function(a)
     local keys = a.keys or {}
@@ -20,16 +32,3 @@ dl.shelf( "ambient50", { label = "Ambient 50",
     return ambient50_list[a.id]
   end
 })
-
-dl.shelf( "ambient_50", { label = "Ambient 50 by Date",
-  match = function(a)
-    local keys = a.keys or {}
-    return contains_in_table(keys.shelves, "Ambient 50")
-  end,
-  sort = function(a)
-    local date = a.date or ""
-    local id = a.id or ""
-    return { date, id }
-  end
-})
-
