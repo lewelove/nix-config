@@ -11,7 +11,6 @@ require("keys.lyrics")
 require("logic.filters")
 require("logic.orders")
 require("logic.groupers")
-require("logic.shelves")
 
 require("libraries.default")
 require("libraries.apple_music")
