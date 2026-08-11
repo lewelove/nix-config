@@ -72,11 +72,11 @@
     yazi
     eza
 
-    # Virtualization
-    distrobox
+    # Programming Languages
+    python3
 
-    # AI
-    pi-coding-agent
+    # Virtualisation
+    distrobox
 
     # Media
     imv

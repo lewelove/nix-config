@@ -1,4 +1,4 @@
-dl.cabinet( "collections", { label = "Collections",
+dale.cabinet( "collections", { label = "Collections",
   shelves = {
     "ambient50",
     "virtual",
@@ -11,7 +11,7 @@ dl.cabinet( "collections", { label = "Collections",
   }
 })
 
-dl.shelf( "virtual", { label = "Virtual Albums",
+dale.shelf( "virtual", { label = "Virtual Albums",
   match = function(a)
     local info = a.info or {}
     return info["virtual"] == true
@@ -23,9 +23,9 @@ dl.shelf( "virtual", { label = "Virtual Albums",
   reverse = true,
 })
 
-local ambient50_list = dl.fs.read_lines("~/.config/dale/shelves/Ambient50.txt")
+local ambient50_list = d.fs.read_lines("~/.config/dale/shelves/Ambient50.txt")
 
-dl.shelf( "ambient50", { label = "Ambient 50",
+dale.shelf( "ambient50", { label = "Ambient 50",
   match = function(a)
     return ambient50_list[a.id]
   end,
@@ -34,7 +34,7 @@ dl.shelf( "ambient50", { label = "Ambient 50",
   end,
 })
 
-dl.shelf( "signalwave", { label = "Signalwave",
+dale.shelf( "signalwave", { label = "Signalwave",
   match = function(a)
     local keys = a.keys or {}
     return contains(keys.genre, "Signalwave")

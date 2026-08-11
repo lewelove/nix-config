@@ -1,4 +1,4 @@
-dl.library( "foobar", { label = "Foobar2000",
+dale.library( "foobar", { label = "Foobar2000",
   groupers = { "year_added_foobar" },
   orders = { "date_added_foobar" },
   match = function(a)
@@ -7,7 +7,7 @@ dl.library( "foobar", { label = "Foobar2000",
   end
 })
 
-dl.grouper( "year_added_foobar", { label = "Year Added",
+dale.grouper( "year_added_foobar", { label = "Year Added",
   select = function(a)
     local keys = a.keys or {}
     local d = keys.date_added_foobar
@@ -18,7 +18,7 @@ dl.grouper( "year_added_foobar", { label = "Year Added",
   end
 })
 
-dl.order( "date_added_foobar", { label = "Date Added",
+dale.order( "date_added_foobar", { label = "Date Added",
   reverse = true,
   sort = function(a)
     local keys = a.keys or {}

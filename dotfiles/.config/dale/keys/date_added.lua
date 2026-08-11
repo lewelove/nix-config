@@ -1,40 +1,40 @@
-dl.compile.album.key( "date_added_foobar", function(ctx, m)
+dale.compile.album.key( "date_added_foobar", function(ctx, m)
   if m.history then
     local key = m.history.album.date_added_foobar
     if key then
-      return dl.fn.type_check(key, "datetime")
+      return d.fn.type_check(key, "datetime")
     end
   end
 end)
 
-dl.compile.album.key( "date_added_applemusic", function(ctx, m)
+dale.compile.album.key( "date_added_applemusic", function(ctx, m)
   if m.history then
     local key = m.history.album.date_added_applemusic
     if key then
-      return dl.fn.type_check(key, "datetime")
+      return d.fn.type_check(key, "datetime")
     end
   end
 end)
 
-dl.compile.album.key( "date_added_youtube", function(ctx, m)
+dale.compile.album.key( "date_added_youtube", function(ctx, m)
   if m.history then
     local key = m.history.album.date_added_youtube
     if key then
-      return dl.fn.type_check(key, "datetime")
+      return d.fn.type_check(key, "datetime")
     end
   end
 end)
 
-dl.compile.album.key( "date_added_vellum", function(ctx, m)
+dale.compile.album.key( "date_added_vellum", function(ctx, m)
   if m.history then
     local key = m.history.album.date_added_vellum
     if key then
-      return dl.fn.type_check(key, "datetime")
+      return d.fn.type_check(key, "datetime")
     end
   end
 end)
 
-dl.compile.album.key( "date_added", function(ctx, m)
+dale.compile.album.key( "date_added", function(ctx, m)
   local earliest = nil
 
   if m.history and m.history.album then
@@ -58,5 +58,5 @@ dl.compile.album.key( "date_added", function(ctx, m)
     end
   end
 
-  return dl.fn.require(earliest)
+  return d.fn.present(earliest)
 end)

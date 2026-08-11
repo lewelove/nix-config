@@ -1,4 +1,4 @@
-dl.library( "all_albums", { label = "All Albums",
+dale.library( "all_albums", { label = "All Albums",
   filters = {
     "main_library",
     "vapor_memory",

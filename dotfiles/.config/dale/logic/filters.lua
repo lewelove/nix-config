@@ -1,10 +1,10 @@
-dl.filter( "default", { label = "Default",
+dale.filter( "default", { label = "Default",
   match = function(a)
     return true
   end
 })
 
-dl.filter( "main_library", { label = "Main Library",
+dale.filter( "main_library", { label = "Main Library",
   match = function(a)
     local keys = a.keys or {}
     local info = a.info or {}
@@ -15,7 +15,7 @@ dl.filter( "main_library", { label = "Main Library",
   end
 })
 
-dl.filter( "vapor_memory", { label = "Vapor Memory",
+dale.filter( "vapor_memory", { label = "Vapor Memory",
   match = function(a)
     local keys = a.keys or {}
     return contains(keys.collection, "Vapor Memory") or contains(keys.genre, "Vaporwave")

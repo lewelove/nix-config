@@ -1,25 +1,22 @@
-dl.grouper( "genre", { label = "Genre",
+dale.grouper( "genre", { label = "Genre",
   select = function(a)
     local keys = a.keys or {}
     return keys.genre or "Unknown"
   end,
 })
 
-dl.grouper( "artists", { label = "Artists",
+dale.grouper( "artists", { label = "Artists",
   index = true,
   select = function(a)
     local keys = a.keys or {}
-    if keys.albumartists and #keys.albumartists > 0 then
-      return keys.albumartists
-    end
-    return a.albumartist or "Unknown"
+    return d.fn.coalesce(keys.albumartists, a.albumartist, "Unknown")
   end,
   sort = function(val, a)
     return clean_artist(val):lower()
   end
 })
 
-dl.grouper( "decade", { label = "Decade",
+dale.grouper( "decade", { label = "Decade",
   select = function(a)
     if a.date and #a.date >= 3 then
       return a.date:sub(1, 3) .. "0s"
@@ -28,21 +25,21 @@ dl.grouper( "decade", { label = "Decade",
   end
 })
 
-dl.grouper( "total_tracks", { label = "Total Tracks",
+dale.grouper( "total_tracks", { label = "Total Tracks",
   select = function(a)
     local info = a.info or {}
     return tostring(info.total_tracks or 0)
   end
 })
 
-dl.grouper( "total_discs", { label = "Total Discs",
+dale.grouper( "total_discs", { label = "Total Discs",
   select = function(a)
     local info = a.info or {}
     return tostring(info.total_discs or 1)
   end
 })
 
-dl.grouper( "year_added", { label = "Year Added",
+dale.grouper( "year_added", { label = "Year Added",
   select = function(a)
     local keys = a.keys or {}
     local d = keys.date_added
@@ -53,7 +50,7 @@ dl.grouper( "year_added", { label = "Year Added",
   end
 })
 
-dl.grouper( "chroma", { label = "Chroma",
+dale.grouper( "chroma", { label = "Chroma",
   select = function(a)
     local keys = a.keys or {}
     local val = tonumber(keys.cover_chroma) or 0

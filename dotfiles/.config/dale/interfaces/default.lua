@@ -70,21 +70,21 @@ local base_interface = {
   }
 }
 
-dl.interface( "default", {
+dale.interface( "default", {
   directory = base_interface.directory,
   run = interface_dir .. "/run_prod.sh",
   assets = base_interface.assets,
   config = base_interface.config,
 })
 
-dl.interface( "dev", {
+dale.interface( "dev", {
   directory = base_interface.directory,
   run = interface_dir .. "/run_dev.sh",
   assets = base_interface.assets,
   config = base_interface.config,
 })
 
-dl.interface( "prod", {
+dale.interface( "prod", {
   directory = base_interface.directory,
   run = interface_dir .. "/run_prod.sh",
   assets = base_interface.assets,

@@ -1,4 +1,4 @@
-dl.library( "my_year", { label = "My Year",
+dale.library( "my_year", { label = "My Year",
   groupers = {
     "my_year_grouper",
   },
@@ -12,7 +12,7 @@ dl.library( "my_year", { label = "My Year",
   end
 })
 
-dl.grouper( "my_year_grouper", { label = "Year",
+dale.grouper( "my_year_grouper", { label = "Year",
   select = function(a)
     local keys = a.keys or {}
     return keys.my_year

@@ -22,7 +22,7 @@ local function find_lyrics_file(ctx, m, i)
   table.insert(patterns, string.format("^0*%d[%%s%%._%%-]", track_no))
 
   for _, folder in ipairs(folders) do
-    if dl.fs.exists(folder) then
+    if d.fs.exists(folder) then
       local p = io.popen('ls -1 "' .. folder .. '" 2>/dev/null')
       if p then
         for filename in p:lines() do
@@ -44,7 +44,7 @@ local function find_lyrics_file(ctx, m, i)
   return nil, "txt"
 end
 
-dl.compile.track.lyrics({
+dale.compile.track.lyrics({
   type = function(ctx, m, i)
     local _, fmt = find_lyrics_file(ctx, m, i)
     return fmt
@@ -52,7 +52,7 @@ dl.compile.track.lyrics({
   text = function(ctx, m, i)
     local file_path, _ = find_lyrics_file(ctx, m, i)
     if file_path then
-      return dl.fs.read(file_path)
+      return d.fs.read(file_path)
     end
     return nil
   end

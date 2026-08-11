@@ -1,4 +1,4 @@
-dl.library( "apple_music", { label = "Apple Music",
+dale.library( "apple_music", { label = "Apple Music",
   groupers = {
     "year_added_applemusic",
     "genre",
@@ -16,7 +16,7 @@ dl.library( "apple_music", { label = "Apple Music",
   end
 })
 
-dl.grouper( "year_added_applemusic", { label = "Year Added",
+dale.grouper( "year_added_applemusic", { label = "Year Added",
   select = function(a)
     local keys = a.keys or {}
     local d = keys.date_added_applemusic
@@ -27,7 +27,7 @@ dl.grouper( "year_added_applemusic", { label = "Year Added",
   end
 })
 
-dl.order( "date_added_applemusic", { label = "Date Added",
+dale.order( "date_added_applemusic", { label = "Date Added",
   reverse = true,
   sort = function(a)
     local keys = a.keys or {}

@@ -1,14 +1,14 @@
 local actions_dir = "~/dev/dale/actions/"
 
-dl.action( "open_terminal", {
+dale.action( "open_terminal", {
   config = { terminal = "alacritty" }
 })
 
-dl.action( "open_config_in_terminal", {
+dale.action( "open_config_in_terminal", {
   config = { terminal = "alacritty", cmd = 'nvim -s <(printf " e")' }
 })
 
-dl.action( "theme", {
+dale.action( "theme", {
   run = actions_dir .. "get_theme",
   config = {
     type = "kmeansnv",
@@ -19,7 +19,7 @@ dl.action( "theme", {
   }
 })
 
-dl.action( "collect", {
+dale.action( "collect", {
   run = actions_dir .. "collect",
   config = {
     root = "/run/media/lewelove/1000xhome/backup-everything/FB2K/Virtual Albums Stage/",
@@ -30,7 +30,7 @@ dl.action( "collect", {
   }
 })
 
-dl.action( "embed", {
+dale.action( "embed", {
   run = actions_dir .. "embed",
   config = {
     keys_to_embed = {
@@ -51,14 +51,18 @@ dl.action( "embed", {
   }
 })
 
-dl.action( "search_cover", {
+dale.action( "mb_search", {
+  run = "mb_search.py"
+})
+
+dale.action( "search_cover", {
   run = actions_dir .. "search_cover"
 })
 
-dl.action( "lyrics", {
+dale.action( "lyrics", {
   run = actions_dir .. "get_lyrics"
 })
 
-dl.action( "rename", {
+dale.action( "rename", {
   run = actions_dir .. "rename"
 })

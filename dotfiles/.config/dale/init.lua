@@ -23,9 +23,9 @@ require("cabinets.collections")
 
 require("interfaces.default")
 
-require("actions")
+require("actions.default")
 
-dl.config({
+dale.config({
   storage = {
     music_directory = "/run/media/lewelove/1000xhome/backup-everything/FB2K/Library Historyfied!/",
     environment = "~/.secrets/dale.env",
@@ -51,11 +51,10 @@ dl.config({
     }
   },
   compiler = {
-    manifests = { "id.toml", "history.toml" },
+    manifests = { "id", "history" },
   },
 })
 
-dl.cache.cover({ filter = "catmullrom", size = 200 })
-dl.cache.cover({ filter = "catmullrom", size = 627 })
-dl.cache.cover({ filter = "catmullrom", size = 1040 })
-
+dale.cache.cover({ filter = "catmullrom", size = 200 })
+dale.cache.cover({ filter = "catmullrom", size = 627 })
+dale.cache.cover({ filter = "catmullrom", size = 1040 })

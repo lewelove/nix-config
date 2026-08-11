@@ -1,4 +1,4 @@
-dl.compile.album.key( "verified", function(ctx, m)
+dale.compile.album.key( "verified", function(ctx, m)
 
   if not m.history then return nil end
 
