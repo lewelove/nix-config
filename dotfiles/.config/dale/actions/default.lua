@@ -66,3 +66,7 @@ dale.action( "lyrics", {
 dale.action( "rename", {
   run = actions_dir .. "rename"
 })
+
+dale.action( "discogs_fetch_master", {
+  run = actions_dir .. "discogs_fetch_master"
+})

@@ -26,6 +26,12 @@ dale.compile.album.key( "genre", function(ctx, m)
   return d.fn.coalesce(m.metadata.album.genre, { "Unknown" })
 end)
 
+dale.compile.album.key( "styles", function(ctx, m)
+  local path = ctx.paths.album_root .. "/Info/discogs_master.json"
+  local discogs = d.fs.read_json(path)
+  return discogs and discogs.styles
+end)
+
 dale.compile.album.key( "comment", function(ctx, m)
   local country = m.metadata.album.country or ""
   local label = m.metadata.album.label or ""

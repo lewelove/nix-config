@@ -30,6 +30,9 @@ dale.config({
     music_directory = "/run/media/lewelove/1000xhome/backup-everything/FB2K/Library Historyfied!/",
     environment = "~/.secrets/dale.env",
   },
+  server = {
+    port = 8000,
+  },
   manifest = {
     audio_files = { ".flac" },
     keys = {
@@ -57,4 +60,3 @@ dale.config({
 
 dale.cache.cover({ filter = "catmullrom", size = 200 })
 dale.cache.cover({ filter = "catmullrom", size = 627 })
-dale.cache.cover({ filter = "catmullrom", size = 1040 })

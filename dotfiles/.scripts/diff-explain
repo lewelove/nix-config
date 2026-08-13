@@ -5,5 +5,5 @@ begin
     git --no-pager diff --no-color $argv
     echo '```'
     echo ''
-    echo 'Explain this commit concisely and give it a message.'
+    echo 'Explain this PR, what it does, and how it improves/degrades things.'
 end | wl-copy

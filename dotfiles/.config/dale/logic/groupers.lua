@@ -5,6 +5,17 @@ dale.grouper( "genre", { label = "Genre",
   end,
 })
 
+dale.grouper( "styles", { label = "Styles",
+  select = function(a)
+    local keys = a.keys or {}
+    local s = keys.styles
+    if not s or (type(s) == "table" and #s == 0) then
+      return "Unknown"
+    end
+    return s
+  end,
+})
+
 dale.grouper( "artists", { label = "Artists",
   index = true,
   select = function(a)

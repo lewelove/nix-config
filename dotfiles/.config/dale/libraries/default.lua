@@ -6,6 +6,7 @@ dale.library( "all_albums", { label = "All Albums",
   },
   groupers = {
     "genre",
+    "styles",
     "decade",
     "artists",
     "total_discs",

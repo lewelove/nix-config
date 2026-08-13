@@ -8,7 +8,7 @@
 <important_constraints>
   - Never write any additional commented lines within code blocks.
   - When implementing new logic never keep the legacy backwards compatibility logic.
-  - Focus on correctness and low-mental-overhead implementation with minimal diff.
+  - Focus on correctness.
   - Do not change styling or do a drive-by refactor (if requested logic does not require it) willy-nilly.
 </important_constraints>
 

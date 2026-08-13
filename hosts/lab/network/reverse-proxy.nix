@@ -55,6 +55,13 @@ in
         import drop_scanners
         reverse_proxy localhost:4533
       }
+
+      slskd.${domain} {
+        import logging
+        import drop_scanners
+        import auth
+        reverse_proxy localhost:5030
+      }
     '';
   };
 

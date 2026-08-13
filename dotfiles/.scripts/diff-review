@@ -2,7 +2,7 @@
 
 begin
     echo '```diff'
-    git --no-pager diff --no-color
+    git --no-pager diff --no-color $argv
     echo '```'
     echo ''
     echo '
