@@ -154,7 +154,7 @@ void main() {
         finalOklab += iColorsOklab[i] * max(0.0, weightMask);
     }
     
-    finalOklab.x = 0.07 + (finalOklab.x * 0.92);
+    finalOklab.x = 0.04 + (finalOklab.x * 0.94);
     // finalOklab.x = 0.2 + (finalOklab.x * 0.6);
     
     vec3 finalColor = oklab_to_srgb(finalOklab);

@@ -51,8 +51,8 @@ dale.action( "embed", {
   }
 })
 
-dale.action( "mb_search", {
-  run = "mb_search.py"
+dale.action( "mbs", {
+  run = actions_dir .. "musicbrainz_search"
 })
 
 dale.action( "search_cover", {
@@ -69,4 +69,8 @@ dale.action( "rename", {
 
 dale.action( "discogs_fetch_master", {
   run = actions_dir .. "discogs_fetch_master"
+})
+
+dale.action( "cover_metrics", {
+  run = actions_dir .. "calculate_cover_metrics"
 })

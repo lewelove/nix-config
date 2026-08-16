@@ -34,6 +34,7 @@
     brightnessctl
     ddcutil
     toml2json
+    qrencode
 
     # Desktop
     fuzzel
@@ -95,9 +96,6 @@
 
     # Web
     ayugram-desktop
-
-    # Network
-    amneziawg-tools
 
     # Themes and Icons
     nwg-look

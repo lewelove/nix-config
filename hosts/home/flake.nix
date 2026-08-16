@@ -27,11 +27,10 @@
       };
     };
 
-    hyprland-git = {
-      # url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-      url = "git+https://github.com/hyprwm/Hyprland?submodules=1&ref=refs/pull/15716/head";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # hyprland-git = {
+    #   url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs = { self, nixpkgs, nixpkgs-stable, ... }@inputs:

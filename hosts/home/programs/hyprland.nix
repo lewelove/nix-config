@@ -3,7 +3,7 @@
 {
   programs.hyprland = {
     enable = true;
-    package = inputs.hyprland-git.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    # package = inputs.hyprland-git.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     withUWSM = false;
     xwayland.enable = true;
   };

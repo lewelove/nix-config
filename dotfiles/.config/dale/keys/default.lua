@@ -58,11 +58,15 @@ dale.compile.album.key( "custom_albumartist", function(ctx, m)
 end)
 
 dale.compile.album.key( "cover_chroma", function(ctx, m)
-  return ctx.cover_metrics and ctx.cover_metrics.chroma
+  local path = ctx.paths.album_root .. "/Info/cover_metrics.json"
+  local metrics = d.fs.read_json(path)
+  return metrics and metrics.chroma
 end)
 
 dale.compile.album.key( "cover_entropy", function(ctx, m)
-  return ctx.cover_metrics and ctx.cover_metrics.entropy
+  local path = ctx.paths.album_root .. "/Info/cover_metrics.json"
+  local metrics = d.fs.read_json(path)
+  return metrics and metrics.entropy
 end)
 
 dale.compile.tracks.key( "ctdbid", function(ctx, m, i)

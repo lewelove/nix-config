@@ -1,5 +1,6 @@
 dale.cabinet( "collections", { label = "Collections",
   shelves = {
+    "hauntology",
     "ambient50",
     "virtual",
     "signalwave",
@@ -39,4 +40,16 @@ dale.shelf( "signalwave", { label = "Signalwave",
     local keys = a.keys or {}
     return contains(keys.genre, "Signalwave")
   end,
+})
+
+dale.shelf( "hauntology", { label = "Hauntology & Lost Futures",
+  match = function(a)
+    local artist = a.albumartist
+    return artist == "The Caretaker"
+        or artist == "Leyland Kirby"
+        -- or artist == "V/Vm"
+  end,
+  sort = function(a)
+    return a.album
+  end
 })

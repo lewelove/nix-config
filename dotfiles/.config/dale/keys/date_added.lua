@@ -25,9 +25,9 @@ dale.compile.album.key( "date_added_youtube", function(ctx, m)
   end
 end)
 
-dale.compile.album.key( "date_added_vellum", function(ctx, m)
+dale.compile.album.key( "date_added_dale", function(ctx, m)
   if m.history then
-    local key = m.history.album.date_added_vellum
+    local key = m.history.album.date_added_dale
     if key then
       return d.fn.type_check(key, "datetime")
     end
@@ -43,9 +43,9 @@ dale.compile.album.key( "date_added", function(ctx, m)
       "date_added_youtube",
       "date_added_applemusic",
       "date_added_foobar",
-      "date_added_vellum",
+      "date_added_dale",
       "date_added_applemusic_unknown",
-      "date_added_vellum_unknown",
+      "date_added_dale_unknown",
     }
     
     for _, key in ipairs(candidate_keys) do

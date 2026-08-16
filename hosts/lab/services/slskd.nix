@@ -1,6 +1,12 @@
 { config, pkgs, ... }:
 
 {
+  fileSystems."/var/lib/slskd/music" = {
+    device = "/mnt/1000xlab/backup-everything/FB2K/Library Historyfied!";
+    fsType = "none";
+    options = [ "bind" "ro" ];
+  };
+
   sops.secrets."slskd/password" = { };
   sops.secrets."slskd/web-app-password" = { };
 
@@ -27,19 +33,24 @@
         description = "350GB music library, open ports, online 24/7, look inside";
       };
 
-      shares.directories = [
-        "/mnt/1000xlab/backup-everything/FB2K/Library Historyfied!"
-      ];
+      shares = {
+        directories = [
+          "/var/lib/slskd/music"
+        ];
+        filters = [
+          "\\.(?!(flac|png|jpe?g|log|cue)$)[a-zA-Z0-9]+$"
+          "(^|[\\\\/])\\.[^\\\\/]+$"
+          "(^|[\\\\/])Blind Faith - Blind Faith([\\\\/]|$)"
+        ];
+      };
 
       directories = {
-        downloads = "/mnt/1000xlab/downloads/slskd/complete";
-        incomplete = "/mnt/1000xlab/downloads/slskd/incomplete";
+        downloads = "/mnt/1000xlab/downloads/slskd/";
       };
 
       transfers = {
         upload = {
-          slots = 20;
-          speed_limit = 2048;
+          slots = 16;
         };
         download.slots = 3;
       };
