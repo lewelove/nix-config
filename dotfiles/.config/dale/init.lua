@@ -34,7 +34,7 @@ dale.config({
     port = 8000,
   },
   manifest = {
-    audio_files = { ".flac" },
+    audio_extensions = { "flac" },
     keys = {
       albumartist = { level = "album", newline = true },
       album = { level = "album" },

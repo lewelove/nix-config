@@ -2,14 +2,13 @@
   - Write out the code.
   - If new files should be created in codebase provide `touch` fish commands first.
   - If files require no change but require renaming or moving provide fish commands first.
-  - If any **agentic** CLI actions can be done for ease of implementation of code you provide (except editing a LOT of text), provide all fish commands as well.
+  - Focus on correctness.
 </instruction>
 
 <important_constraints>
   - Never write any additional commented lines within code blocks.
   - When implementing new logic never keep the legacy backwards compatibility logic.
-  - Focus on correctness.
-  - Do not change styling or do a drive-by refactor (if requested logic does not require it) willy-nilly.
+  - Do not change styling of logic you didn't change willy-nilly.
 </important_constraints>
 
   <output_formatting>
