@@ -1,4 +1,4 @@
-dale.library( "my_year", { label = "My Year",
+dale.library("my_year", { label = "My Year",
   groupers = {
     "my_year_grouper",
   },
@@ -7,14 +7,12 @@ dale.library( "my_year", { label = "My Year",
     "date_added",
   },
   match = function(a)
-    local keys = a.keys or {}
-    return keys.my_year ~= nil
-  end
+    return d.get(a, "keys.my_year") ~= nil
+  end,
 })
 
-dale.grouper( "my_year_grouper", { label = "Year",
+dale.grouper("my_year_grouper", { label = "Year",
   select = function(a)
-    local keys = a.keys or {}
-    return keys.my_year
-  end
+    return d.get(a, "keys.my_year")
+  end,
 })

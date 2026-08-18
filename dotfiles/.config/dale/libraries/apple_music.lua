@@ -1,4 +1,4 @@
-dale.library( "apple_music", { label = "Apple Music",
+dale.library("apple_music", { label = "Apple Music",
   groupers = {
     "year_added_applemusic",
     "genre",
@@ -11,26 +11,20 @@ dale.library( "apple_music", { label = "Apple Music",
     "year",
   },
   match = function(a)
-    local keys = a.keys or {}
-    return keys.date_added_applemusic ~= nil
-  end
+    return d.get(a, "keys.date_added_applemusic") ~= nil
+  end,
 })
 
-dale.grouper( "year_added_applemusic", { label = "Year Added",
+dale.grouper("year_added_applemusic", { label = "Year Added",
   select = function(a)
-    local keys = a.keys or {}
-    local d = keys.date_added_applemusic
-    if d and #d >= 4 then
-      return d:sub(1, 4)
-    end
-    return nil
-  end
+    local date = d.get(a, "keys.date_added_applemusic")
+    if date and #date >= 4 then return date:sub(1, 4) end
+  end,
 })
 
-dale.order( "date_added_applemusic", { label = "Date Added",
+dale.order("date_added_applemusic", { label = "Date Added",
   reverse = true,
   sort = function(a)
-    local keys = a.keys or {}
-    return keys.date_added_applemusic or ""
-  end
+    return d.get(a, "keys.date_added_applemusic") or ""
+  end,
 })

@@ -1,46 +1,42 @@
--- MusicBrainz URL generation from database keys
+local function url_key(name, path, prefix)
+  dale.compile.album.key(name, function(ctx, m)
+    local raw = d.get(m, path)
+    local id = d.fn.type_check(raw, "string")
+    if id then return prefix .. id end
+  end)
+end
 
-dale.compile.album.key("musicbrainz_releasegroup_url", function(ctx, m)
-    if not m.id then return nil end
-    local url = "https://musicbrainz.org/release-group/"
-    local key = d.fn.type_check(m.id.album.musicbrainz_releasegroupid, "string")
-    return key and (url .. key)
-end)
+url_key(
+  "musicbrainz_releasegroup_url",
+  "id.album.musicbrainz_releasegroupid",
+  "https://musicbrainz.org/release-group/"
+)
 
-dale.compile.album.key("musicbrainz_release_url", function(ctx, m)
-    if not m.id then return nil end
-    local url = "https://musicbrainz.org/release/"
-    local key = d.fn.type_check(m.id.album.musicbrainz_albumid, "string")
-    return key and (url .. key)
-end)
+url_key(
+  "musicbrainz_release_url",
+  "id.album.musicbrainz_albumid",
+  "https://musicbrainz.org/release/"
+)
 
-dale.compile.album.key("musicbrainz_albumartist_url", function(ctx, m)
-    if not m.id then return nil end
-    local url = "https://musicbrainz.org/artist/"
-    local key = d.fn.type_check(m.id.album.musicbrainz_albumartistid, "string")
-    return key and (url .. key)
-end)
+url_key(
+  "musicbrainz_albumartist_url",
+  "id.album.musicbrainz_albumartistid",
+  "https://musicbrainz.org/artist/"
+)
 
--- Discogs URL generation from database keys
+url_key(
+  "discogs_release_url",
+  "id.album.discogs_releaseid",
+  "https://discogs.com/release/"
+)
 
-dale.compile.album.key( "discogs_release_url", function(ctx, m)
-    if not m.id then return nil end
-    local url = "https://discogs.com/release/"
-    local key = d.fn.type_check(m.id.album.discogs_releaseid, "string")
-    return key and (url .. key)
-end)
+url_key(
+  "discogs_master_url",
+  "id.album.discogs_masterid",
+  "https://discogs.com/master/"
+)
 
-dale.compile.album.key( "discogs_master_url", function(ctx, m)
-    if not m.id then return nil end
-    local url = "https://discogs.com/master/"
-    local key = d.fn.type_check(m.id.album.discogs_masterid, "string")
-    return key and (url .. key)
-end)
-
--- MusicBrainz database track key for future embed
-
-dale.compile.track.key( "musicbrainz_releasetrackid", function(ctx, m, i)
-    if not m.id or not m.id.tracks or not m.id.tracks[i] then return nil end
-    local key = d.fn.type_check(m.id.tracks[i].musicbrainz_releasetrackid, "string")
-    return key
+dale.compile.track.key("musicbrainz_releasetrackid", function(ctx, m, i)
+  local raw = d.get(m, "id.tracks", i, "musicbrainz_releasetrackid")
+  return d.fn.type_check(raw, "string")
 end)

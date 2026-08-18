@@ -1,60 +1,33 @@
-dale.compile.album.key( "date_added_foobar", function(ctx, m)
-  if m.history then
-    local key = m.history.album.date_added_foobar
-    if key then
-      return d.fn.type_check(key, "datetime")
-    end
-  end
-end)
+local function add_date_key(name)
+  dale.compile.album.key(name, function(ctx, m)
+    local val = d.get(m, "history.album." .. name)
+    return d.fn.type_check(val, "datetime")
+  end)
+end
 
-dale.compile.album.key( "date_added_applemusic", function(ctx, m)
-  if m.history then
-    local key = m.history.album.date_added_applemusic
-    if key then
-      return d.fn.type_check(key, "datetime")
-    end
-  end
-end)
+add_date_key("date_added_foobar")
+add_date_key("date_added_applemusic")
+add_date_key("date_added_youtube")
+add_date_key("date_added_dale")
 
-dale.compile.album.key( "date_added_youtube", function(ctx, m)
-  if m.history then
-    local key = m.history.album.date_added_youtube
-    if key then
-      return d.fn.type_check(key, "datetime")
-    end
-  end
-end)
+dale.compile.album.key("date_added", function(ctx, m)
+  local hist = d.get(m, "history.album")
+  if not hist then return nil end
 
-dale.compile.album.key( "date_added_dale", function(ctx, m)
-  if m.history then
-    local key = m.history.album.date_added_dale
-    if key then
-      return d.fn.type_check(key, "datetime")
-    end
-  end
-end)
+  local keys = {
+    "date_added_youtube",
+    "date_added_applemusic",
+    "date_added_foobar",
+    "date_added_dale",
+    "date_added_applemusic_unknown",
+    "date_added_dale_unknown",
+  }
 
-dale.compile.album.key( "date_added", function(ctx, m)
   local earliest = nil
-
-  if m.history and m.history.album then
-    local h = m.history.album
-    local candidate_keys = {
-      "date_added_youtube",
-      "date_added_applemusic",
-      "date_added_foobar",
-      "date_added_dale",
-      "date_added_applemusic_unknown",
-      "date_added_dale_unknown",
-    }
-    
-    for _, key in ipairs(candidate_keys) do
-      local date_str = h[key]
-      if date_str and date_str ~= "" then
-        if earliest == nil or date_str < earliest then
-          earliest = date_str
-        end
-      end
+  for _, key in ipairs(keys) do
+    local dt = d.get(hist, key)
+    if dt and dt ~= "" and (not earliest or dt < earliest) then
+      earliest = dt
     end
   end
 

@@ -1,27 +1,22 @@
-dale.library( "Experimental", {
+dale.library("Experimental", {
   filters = { "default" },
   groupers = { "root_folder" },
   orders = { "default", "cover_mtime" },
-  match = function(a)
-    return true
-  end
+  match = function(a) return true end,
 })
 
-dale.filter( "exp_f", {
-  match = function(a)
-    return true
-  end
+dale.filter("exp_f", {
+  match = function(a) return true end,
 })
 
-dale.order( "cover_mtime", { label = "Cover Mtime",
-  sort = function(a)
-    local time = a.covers.main.file.mtime
-    return time
-  end
+dale.order("cover_mtime", { label = "Cover Mtime",
+  sort = function(a) return d.get(a, "covers.main.file.mtime") end,
 })
 
-dale.grouper( "root_folder", { label = "First Order Folder",
+dale.grouper("root_folder", { label = "First Order Folder",
   select = function(a)
-    return d.fn.coalesce(a.id and a.id:match("^([^/]+)"), "Unknown")
-  end
+    local id = d.get(a, "id")
+    local folder = id and id:match("^([^/]+)")
+    return d.fn.coalesce(folder, "Unknown")
+  end,
 })

@@ -1,23 +1,24 @@
-dale.filter( "default", { label = "Default",
-  match = function(a)
-    return true
-  end
+dale.filter("default", { label = "Default",
+  match = function(a) return true end,
 })
 
-dale.filter( "main_library", { label = "Main Library",
+dale.filter("main_library", { label = "Main Library",
   match = function(a)
-    local keys = a.keys or {}
-    local info = a.info or {}
-    if contains(keys.collection, "Vapor Memory") then return false end
-    if contains(keys.genre, "Signalwave") or contains(keys.genre, "Vaporwave") then return false end
-    if info["virtual"] == true then return false end
-    return true
-  end
+    local coll = d.get(a, "keys.collection")
+    if contains(coll, "Vapor Memory") then return false end
+
+    local genre = d.get(a, "keys.genre")
+    if contains(genre, "Signalwave") or contains(genre, "Vaporwave") then return false end
+
+    local is_virtual = d.get(a, "info.virtual")
+    return is_virtual ~= true
+  end,
 })
 
-dale.filter( "vapor_memory", { label = "Vapor Memory",
+dale.filter("vapor_memory", { label = "Vapor Memory",
   match = function(a)
-    local keys = a.keys or {}
-    return contains(keys.collection, "Vapor Memory") or contains(keys.genre, "Vaporwave")
-  end
+    local coll = d.get(a, "keys.collection")
+    local genre = d.get(a, "keys.genre")
+    return contains(coll, "Vapor Memory") or contains(genre, "Vaporwave")
+  end,
 })
