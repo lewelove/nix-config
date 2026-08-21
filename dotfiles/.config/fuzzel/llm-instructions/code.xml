@@ -8,7 +8,7 @@
 <important_constraints>
   - Never write any additional commented lines within code blocks.
   - When implementing new logic never keep the legacy backwards compatibility logic.
-  - Do not change styling of logic you didn't change willy-nilly.
+  - Do not change styling (indentation, LoC split, etc) of already existent code that require no logical changes change willy-nilly.
 </important_constraints>
 
   <output_formatting>

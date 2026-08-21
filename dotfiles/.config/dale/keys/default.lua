@@ -72,6 +72,10 @@ dale.compile.album.key("cover_entropy", function(ctx, m)
   return d.get(metrics, "entropy")
 end)
 
+dale.compile.album.key("path", function(ctx, m)
+  return ctx.paths.rel_path
+end)
+
 dale.compile.tracks.key("ctdbid", function(ctx, m, i)
   local val = d.get(m, "metadata.tracks", i, "ctdbid")
   return d.fn.type_check(val, "string")

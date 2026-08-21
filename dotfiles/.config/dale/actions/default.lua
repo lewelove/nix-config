@@ -1,4 +1,5 @@
 local actions_dir = "~/dev/dale/actions/"
+local config_dir = "~/.config/dale/actions/"
 
 dale.action( "open_terminal", {
   config = { terminal = "alacritty" }
@@ -53,6 +54,10 @@ dale.action( "embed", {
 
 dale.action( "mbs", {
   run = actions_dir .. "musicbrainz_search"
+})
+
+dale.action( "css", {
+  run = config_dir .. "copy_search_string.py"
 })
 
 dale.action( "search_cover", {

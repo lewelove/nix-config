@@ -18,11 +18,6 @@ function clean_artist(artist)
   return artist
 end
 
---- Checks if a value exists within a Lua table (array, key-value map, or nested tables).
---- @param tbl table|any The table to search through
---- @param target any The value or substring to look for
---- @param exact boolean|nil If true, uses exact equality (==); if false, performs substring search on strings (default: true)
---- @return boolean
 function contains_in_table(tbl, target, exact)
   if type(tbl) ~= "table" or target == nil then
     return false
@@ -45,7 +40,6 @@ function contains_in_table(tbl, target, exact)
       end
     end
 
-    -- Recurse if the table contains nested sub-tables
     if type(val) == "table" and contains_in_table(val, target, exact) then
       return true
     end
@@ -53,3 +47,41 @@ function contains_in_table(tbl, target, exact)
 
   return false
 end
+
+function format_duration(ms)
+  if not ms or ms <= 0 then return "0m" end
+  local total_secs = math.floor(ms / 1000)
+  local hours = math.floor(total_secs / 3600)
+  local mins = math.floor((total_secs % 3600) / 60)
+  if hours > 0 then
+    return string.format("%dh %dm", hours, mins)
+  end
+  return string.format("%dm", mins)
+end
+
+function format_duration_clock(ms)
+  if not ms or ms <= 0 then return "00:00" end
+
+  local total_secs = math.floor(ms / 1000)
+  local hours = math.floor(total_secs / 3600)
+  local mins = math.floor((total_secs % 3600) / 60)
+  local secs = total_secs - (hours * 3600) - (mins * 60)
+
+  local hours_str = string.format("%d", hours)
+  local mins_str, secs_str = "", ""
+
+  if mins < 10 then
+    mins_str = string.format("0%d", mins)
+  else
+    mins_str = string.format("%d", mins)
+  end
+
+  if secs < 10 then
+    secs_str = string.format("0%d", secs)
+  else
+    secs_str = string.format("%d", secs)
+  end
+
+  return hours_str .. ":" .. mins_str .. ":" .. secs_str
+end
+

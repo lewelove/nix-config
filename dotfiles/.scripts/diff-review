@@ -25,7 +25,7 @@ If code is valid and none from the above are present just state that it is.
     echo '
 ```
 <output_format>
-If issues are found, group your suggesetions in Critical, Warning, and Stylistic categories. For each category:
+If issues are found, group your suggestions in Critical, Warning, and Stylistic categories. For each category:
 1. Quick rundown of the issue and what to be improved.
 2. Deeper dive explanation with examples and snippets suggesting better implementation
 </output_format>

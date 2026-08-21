@@ -26,11 +26,11 @@ local ambient50 = d.fs.read_lines("~/.config/dale/shelves/Ambient50.txt")
 
 dale.shelf("ambient50", { label = "Ambient 50",
   match = function(a)
-    local id = d.get(a, "id")
+    local id = d.get(a, "keys.path")
     return ambient50[id]
   end,
   sort = function(a)
-    local id = d.get(a, "id")
+    local id = d.get(a, "keys.path")
     return ambient50[id]
   end,
 })
