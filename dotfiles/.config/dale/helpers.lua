@@ -68,7 +68,8 @@ function format_duration_clock(ms)
   local secs = total_secs - (hours * 3600) - (mins * 60)
 
   local hours_str = string.format("%d", hours)
-  local mins_str, secs_str = "", ""
+  local mins_str = ""
+  local secs_str = ""
 
   if mins < 10 then
     mins_str = string.format("0%d", mins)
@@ -84,4 +85,3 @@ function format_duration_clock(ms)
 
   return hours_str .. ":" .. mins_str .. ":" .. secs_str
 end
-

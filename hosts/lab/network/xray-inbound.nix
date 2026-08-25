@@ -13,7 +13,7 @@ let
       {
         tag = "vless-in";
         listen = "0.0.0.0";
-        port = 55555;
+        port = 4443;
         protocol = "vless";
         settings = {
           clients = [
@@ -121,8 +121,8 @@ let
   };
 in
 {
-  networking.firewall.allowedTCPPorts = [ 55555 ];
-  networking.firewall.allowedUDPPorts = [ 55555 ];
+  networking.firewall.allowedTCPPorts = [ 4443 ];
+  networking.firewall.allowedUDPPorts = [ 4443 ];
 
   sops.templates."xray-inbound.json" = {
     owner = "root";

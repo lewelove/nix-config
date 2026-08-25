@@ -41,6 +41,12 @@ if status is-interactive
   alias sync "git-sync-bin"
   alias c "wl-copy"
 
+  abbr -a dv "devenv shell"
+
+  if type -q devenv
+    devenv hook fish | sed 's/devenv shell/devenv shell --quiet/g' | source
+  end
+
   function lowmtime
     find . -type f -printf '%T@ %Tb %Td %TY %p\n' | sort -n | head -1 | string replace -r '^(\d+)\.\d+' \'\$1\'
   end

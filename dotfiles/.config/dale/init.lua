@@ -1,5 +1,3 @@
--- lewelove's DALE Config --
-
 require("helpers")
 
 require("keys.default")
@@ -28,30 +26,12 @@ require("actions.default")
 dale.config({
   storage = {
     music_directory = "/run/media/lewelove/1000xhome/backup-everything/FB2K/Library Historyfied!/",
-    environment = "~/.secrets/dale.env",
   },
   server = {
     port = 8000,
   },
   manifest = {
     audio_extensions = { "flac" },
-    keys = {
-      albumartist = { level = "album", newline = true },
-      album = { level = "album" },
-      date = { level = "album" },
-      genre = { level = "album", type = "list", newline = true },
-      styles = { level = "album", type = "list" },
-      original_date = { level = "album", newline = true },
-      country = { level = "album", newline = true },
-      label = { level = "album" },
-      catalognumber = { level = "album" },
-      release_date = { level = "album" },
-      discogs_url = { level = "album", newline = true, manifests = "url" },
-      musicbrainz_url = { level = "album", manifests = "url" },
-      ctdbid_url = { level = "album", manifests = "url" },
-      tracknumber = { level = "track" },
-      title = { level = "track" },
-    }
   },
   compiler = {
     manifests = { "id", "history" },

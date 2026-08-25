@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
 
+let
+  homeIp = "192.168.1.109";
+  nfsPorts = "111,2049,4000,4001,4002";
+in
 {
   services.nfs.server = {
     enable = true;
@@ -8,10 +12,12 @@
     mountdPort = 4002;
 
     exports = ''
-      /mnt/1000xlab 192.168.1.0/24(rw,nohide,insecure,no_subtree_check,all_squash,anonuid=1000,anongid=990)
+      /mnt/1000xlab ${homeIp}(rw,nohide,insecure,no_subtree_check,all_squash,anonuid=1000,anongid=990)
     '';
   };
 
-  networking.firewall.allowedTCPPorts = [ 111 2049 4000 4001 4002 ];
-  networking.firewall.allowedUDPPorts = [ 111 2049 4000 4001 4002 ];
+  networking.firewall.extraCommands = ''
+    iptables -A INPUT -p tcp -s ${homeIp} -m multiport --dports ${nfsPorts} -j ACCEPT
+    iptables -A INPUT -p udp -s ${homeIp} -m multiport --dports ${nfsPorts} -j ACCEPT
+  '';
 }

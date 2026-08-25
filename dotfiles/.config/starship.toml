@@ -1,7 +1,7 @@
 add_newline = false
 
 format = """
-[\\[](bright-black)[$time](bright-black)[\\]](bright-black) ${custom.icon} [$username](yellow)[@](green)[$hostname](blue) [$directory](purple) $git_branch
+[$username](yellow)[@](green)[$hostname](blue) [$directory](purple) $git_branch
 $character
 """
 
@@ -24,8 +24,8 @@ format = "$path"
 style = "cyan"
 
 [character]
-success_symbol = "[\\[](bright-black)[>](bright-black)[\\]](bright-black)"
-error_symbol = "[\\[](bright-black)[>](bright-black)[\\]](bright-black)"
+success_symbol = "[❯](bright-black)"
+# error_symbol = "[\\[](bright-black)[>](bright-black)[\\]](bright-black)"
 
 [custom.icon]
 when = "true"

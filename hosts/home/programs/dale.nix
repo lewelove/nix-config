@@ -12,7 +12,7 @@ let
         cd "/home/${username}/dev/dale/web-app" && exec ${pkgs.bun}/bin/bun run dev
         ;;
       *)
-        exec "/home/${username}/dev/dale/rust/target/release/dale" "$@"
+        exec "/home/${username}/dev/dale/target/release/dale" "$@"
         ;;
     esac
   '';

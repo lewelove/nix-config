@@ -36,7 +36,31 @@ url_key(
   "https://discogs.com/master/"
 )
 
-dale.compile.track.key("musicbrainz_releasetrackid", function(ctx, m, i)
-  local raw = d.get(m, "id.tracks", i, "musicbrainz_releasetrackid")
-  return d.fn.type_check(raw, "string")
+dale.compile.album.key("musicbrainz_release_url", function(ctx, m, i)
+  local root = d.get(ctx, "paths.album_root")
+  local json = d.fs.read_json(root .. "/Info/musicbrainz_release.json")
+  local base = "https://musicbrainz.org/release/"
+  local id = d.get(json, "id")
+  return id and base .. id
 end)
+
+dale.compile.track.key("musicbrainz_releasetrackid", function(ctx, m, i)
+  local root = d.get(ctx, "paths.album_root")
+  local json = d.fs.read_json(root .. "/Info/musicbrainz_release.json")
+
+  -- local title = d.get(m, "metadata", "tracks", i, "title")
+  -- local mb_title = d.get(json, "media", 1, "tracks", i, "title")
+  -- if mb_title and title ~= mb_title then
+  --   error(string.format(
+  --     "\nTrack %d title mismatch: \nmetadata = '%s' \nmusicbrainz = '%s'",
+  --     i, title, mb_title
+  --   ))
+  -- end
+
+  return d.get(json, "media", 1, "tracks", i, "id")
+end)
+
+-- dale.compile.track.key("musicbrainz_releasetrackid", function(ctx, m, i)
+--   local raw = d.get(m, "id.tracks", i, "musicbrainz_releasetrackid")
+--   return d.fn.type_check(raw, "string")
+-- end)

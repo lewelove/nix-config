@@ -1,5 +1,6 @@
 dale.cabinet("collections", { label = "Collections",
   shelves = {
+    "added_this_year",
     "hauntology",
     "ambient50",
     "virtual",
@@ -10,6 +11,17 @@ dale.cabinet("collections", { label = "Collections",
     "year",
     "date_added",
   },
+})
+
+dale.shelf("added_this_year", { label = "Added This Year",
+  reverse = true,
+  match = function(a)
+    local date = d.get(a, "keys.date_added")
+    return date and date:sub(1, 4) == os.date("%Y")
+  end,
+  sort = function(a)
+    return d.get(a, "keys.date_added") or ""
+  end,
 })
 
 dale.shelf("virtual", { label = "Virtual Albums",

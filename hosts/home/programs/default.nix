@@ -72,6 +72,7 @@
     taplo
     yazi
     eza
+    devenv
 
     # Programming Languages
     python3

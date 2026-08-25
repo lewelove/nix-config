@@ -15,7 +15,6 @@
     ./network/core.nix
     ./network/xray-inbound.nix
 
-    # ./network/amneziawg.nix
     ./network/v2raya.nix
 
     ./network/openssh.nix
