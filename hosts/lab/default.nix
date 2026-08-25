@@ -11,22 +11,8 @@
     # Secrets
     ./secrets
 
-    # Network
-    ./network/core.nix
-    ./network/xray-inbound.nix
-
-    ./network/v2raya.nix
-
-    ./network/openssh.nix
-    ./network/duckdns.nix
-    ./network/reverse-proxy.nix
-    ./network/fail2ban.nix
-    ./network/auth.nix
-    ./network/routing-isp.nix
-    ./network/adguardhome.nix
-
     # Virtual Machines
-    ./virtual/arch
+    # ./virtual/arch
 
     # Home Manager
     ./modules/home-manager.nix
@@ -34,8 +20,13 @@
     # Modules
     ./modules/hardware-configuration.nix
     ./modules/disko.nix
-
     ./modules/virtualization.nix
+
+    # Network
+    (lib.pipe inputs.import-tree [
+      (i: i.filterNot (path: lib.hasInfix "/d/" path))
+      (i: i ./network)
+    ])
 
     # Programs
     ../../programs/fish.nix

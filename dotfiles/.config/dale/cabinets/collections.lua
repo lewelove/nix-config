@@ -52,6 +52,9 @@ dale.shelf("signalwave", { label = "Signalwave",
     local genre = d.get(a, "keys.genre")
     return contains(genre, "Signalwave")
   end,
+  sort = function(a)
+    return d.get(a, "albumartist")
+  end,
 })
 
 dale.shelf("hauntology", { label = "Hauntology & Lost Futures",

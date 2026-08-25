@@ -9,6 +9,30 @@
       log = {
         level = "info";
       };
+
+      dns = {
+        servers = [
+          {
+            type = "udp";
+            tag = "local-adguard";
+            server = "192.168.1.100";
+          }
+          {
+            type = "udp";
+            tag = "fallback-dns";
+            server = "1.1.1.1";
+          }
+        ];
+        rules = [
+          {
+            action = "route";
+            server = "local-adguard";
+          }
+        ];
+        final = "local-adguard";
+        strategy = "prefer_ipv4";
+      };
+
       inbounds = [
         {
           type = "tun";
@@ -20,6 +44,7 @@
           stack = "mixed";
         }
       ];
+
       outbounds = [
         {
           type = "socks";
@@ -32,12 +57,22 @@
           tag = "direct";
         }
       ];
+
       route = {
         auto_detect_interface = true;
+        default_domain_resolver = "local-adguard";
         final = "lab-proxy";
         rules = [
           {
             action = "sniff";
+          }
+          {
+            protocol = "dns";
+            action = "hijack-dns";
+          }
+          {
+            port = [ 53 ];
+            action = "hijack-dns";
           }
           {
             ip_cidr = [

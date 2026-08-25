@@ -172,6 +172,10 @@ hl.bind (
   "SUPER + SHIFT + Return",
   hl.dsp.exec_cmd(programs.terminal .. " -e " .. programs.lab_ssh) )
 
+hl.bind (
+  "SUPER + SHIFT + S",
+  hl.dsp.exec_cmd("ns --ng && notify-send '~/nix-config is mirrored'") )
+
 -- screenshots
 local screenshot = require("scripts.screenshot")
 

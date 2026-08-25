@@ -5,15 +5,10 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   documentation = {
-    enable = true;
-    man.enable = true;
+    enable = false;
+    man.enable = false;
     man.cache.enable = false;
     nixos.enable = false;
-  };
-
-  services.nginx = {
-    enable = true;
-    recommendedProxySettings = true;
   };
 
   services.logrotate.enable = false;
@@ -22,9 +17,6 @@
 
   nixpkgs.config = {
     allowUnfree = true;
-    # permittedInsecurePackages = [
-    #   "electron-39.8.10"
-    # ];
   };
 
   services.udev.extraRules = ''

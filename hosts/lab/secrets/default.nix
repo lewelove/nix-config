@@ -20,6 +20,8 @@
       "xray/uuid" = {};
       "xray/private_key" = {};
       "xray/short_id" = {};
+      "duckdns/domain" = {};
+      "dns/auth_key" = {};
     };
   };
 }
