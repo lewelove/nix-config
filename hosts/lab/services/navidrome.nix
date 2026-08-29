@@ -13,6 +13,12 @@
     options = [ "bind" "ro" ];
   };
 
+  fileSystems."/var/lib/navidrome/collections/chuvachonok" = {
+    device = "/mnt/1000xlab/backup-everything/FB2K/People Collection/chuvachonok";
+    fsType = "none";
+    options = [ "bind" "ro" ];
+  };
+
   services.navidrome = {
     enable = true;
     settings = {
@@ -33,6 +39,7 @@
     SupplementaryGroups = [ "users" "wheel" "jellyfin" ]; 
     BindReadOnlyPaths = [
       "/var/lib/navidrome/collections/bohemesss"
+      "/var/lib/navidrome/collections/chuvachonok"
     ];
   };
 }

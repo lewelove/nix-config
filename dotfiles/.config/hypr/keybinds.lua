@@ -123,10 +123,6 @@ local keychron_lock_key = "SUPER + L"
 
 -- mpd client
 hl.bind (
-  "CONTROL + Space",
-  hl.dsp.exec_cmd("rmpc togglepause") )
-
-hl.bind (
   keychron_lock_key,
   hl.dsp.exec_cmd("rmpc togglepause") )
 

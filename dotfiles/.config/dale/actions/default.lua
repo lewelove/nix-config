@@ -226,7 +226,7 @@ dale.action("css", {
     if artist ~= "" and title ~= "" then
       local query = string.format("%s - %s", artist, title)
       local clip_cmd = { "wl-copy" }
-      d.system(clip_cmd, { stdin = query })
+      d.system(clip_cmd, { stdin = query, detach = true })
     end
   end
 })

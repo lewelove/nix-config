@@ -10,28 +10,28 @@
         level = "info";
       };
 
-      dns = {
-        servers = [
-          {
-            type = "udp";
-            tag = "local-adguard";
-            server = "192.168.1.100";
-          }
-          {
-            type = "udp";
-            tag = "fallback-dns";
-            server = "1.1.1.1";
-          }
-        ];
-        rules = [
-          {
-            action = "route";
-            server = "local-adguard";
-          }
-        ];
-        final = "local-adguard";
-        strategy = "prefer_ipv4";
-      };
+      # dns = {
+      #   servers = [
+      #     {
+      #       type = "udp";
+      #       tag = "local-adguard";
+      #       server = "192.168.1.100";
+      #     }
+      #     {
+      #       type = "udp";
+      #       tag = "fallback-dns";
+      #       server = "1.1.1.1";
+      #     }
+      #   ];
+      #   rules = [
+      #     {
+      #       action = "route";
+      #       server = "local-adguard";
+      #     }
+      #   ];
+      #   final = "local-adguard";
+      #   strategy = "prefer_ipv4";
+      # };
 
       inbounds = [
         {
@@ -60,7 +60,8 @@
 
       route = {
         auto_detect_interface = true;
-        default_domain_resolver = "local-adguard";
+        # default_domain_resolver = "local-adguard";
+        # default_domain_resolver = "fallback-dns";
         final = "lab-proxy";
         rules = [
           {

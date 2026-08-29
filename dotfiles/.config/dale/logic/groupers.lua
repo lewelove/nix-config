@@ -17,6 +17,17 @@ dale.grouper("genre", { label = "Genre",
   end
 })
 
+dale.grouper("styles", { label = "Styles",
+  select = function(a) return d.get(a, "keys.styles") or "Unknown" end,
+  format = function(g)
+    return {
+      label = g.value,
+      sublabel = format_duration_clock(g.duration_millis),
+      -- sort = -g.duration_millis or 0,
+    }
+  end
+})
+
 dale.grouper("year", { label = "Decades & Years",
   select = function(a)
     local date = d.get(a, "date")

@@ -31,3 +31,9 @@ vim.api.nvim_create_user_command('QuickSaveNote', function()
   quicksave_script.quick_save()
   vim.notify("QuickSaveNote: Processed and saved.", vim.log.levels.INFO)
 end, { desc = "Run quicksave note process" })
+
+local teletime_script = require("scripts.telegram_time_to_iso")
+
+vim.api.nvim_create_user_command('TeleTime', function(opts)
+  teletime_script.process_range(opts)
+end, { range = true, desc = "Convert Telegram timestamps (M/D/YY at HH:MM:SS) to UTC Zulu ISO (-3h)" })
