@@ -76,6 +76,11 @@
 
     # Programming Languages
     python3
+    rustc
+    cargo
+    clippy
+    rustup
+    rustfmt
 
     # Virtualisation
     distrobox

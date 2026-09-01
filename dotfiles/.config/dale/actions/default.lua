@@ -71,25 +71,173 @@ dale.action("collect", {
   end
 })
 
+dale.action("mbf", {
+  label = "MusicBrainz Fetch",
+  description = "Fetch raw JSON metadata from MusicBrainz",
+  run = function(ctx)
+    local raw_opts = d.str.trim(ctx.options)
+    if raw_opts == "" then
+      error("mbf: URL argument is required in options")
+    end
+
+    local entry = ctx.albums and ctx.albums[1]
+    local info_dir = entry and d.fs.joinpath(entry.path, "Info") or "."
+
+    local args = {
+      rust_bin("musicbrainz_fetch"),
+      "-d", info_dir,
+      "--release",
+      "--release-group",
+      "--all-releases"
+    }
+
+    for _, part in ipairs(d.str.split(raw_opts, " ")) do
+      if part ~= "" then
+        table.insert(args, part)
+      end
+    end
+
+    d.system(args, { stdio = "inherit" })
+  end
+})
+
 dale.action("embed", {
   label = "Embed Tags",
   description = "Embed metadata from album.lock.json into audio files",
   run = function(ctx)
-    local is_auto = ctx.options:find("%-y") or ctx.options:find("%-%-auto")
-    local keys = "album,albumartist,date,genre,comment,title,artist,musicbrainz_releasetrackid,replaygain_track_gain,replaygain_album_gain"
-
     for _, entry in ipairs(ctx.albums) do
+      local album = entry.lock.album
+      local tracks = entry.lock.tracks
+
       local args = {
-        py_bin("embed"),
-        "--path", entry.path,
-        "--auto-cover",
-        "--auto-convert-tracknumber",
-        "--keys", keys
+        rust_bin("embed"),
+        "--delete-other-tags",
+        "--delete-other-covers",
       }
-      if is_auto then
-        table.insert(args, "-y")
+
+      local cover_path = d.get(album, "covers.main.file.path")
+      if cover_path then
+        table.insert(args, "--cover")
+        table.insert(args, d.fs.joinpath(entry.path, cover_path))
       end
-      d.system(args, { stdio = ctx.isatty and "inherit" or "pipe" })
+
+      local multi_disc = album.info.total_discs > 1
+
+      for _, track in ipairs(tracks) do
+        table.insert(args, "--track")
+        table.insert(args, d.fs.joinpath(entry.path, track.file.path))
+
+        table.insert(args, "--album")
+        table.insert(args, album.album)
+
+        table.insert(args, "--albumartist")
+        table.insert(args, album.albumartist)
+
+        table.insert(args, "--date")
+        table.insert(args, album.date)
+
+        if album.keys and album.keys.genre then
+          local genre_val = type(album.keys.genre) == "table" and table.concat(album.keys.genre, "; ") or tostring(album.keys.genre)
+          if genre_val ~= "" and genre_val ~= "Unknown" then
+            table.insert(args, "--genre")
+            table.insert(args, genre_val)
+          end
+        end
+
+        local alb_mbid = d.get(album, "keys.musicbrainz_albumid")
+        if alb_mbid and alb_mbid ~= "" then
+          table.insert(args, "--musicbrainz-albumid")
+          table.insert(args, tostring(alb_mbid))
+        end
+
+        local rgid = d.get(album, "keys.musicbrainz_releasegroupid")
+        if rgid and rgid ~= "" then
+          table.insert(args, "--musicbrainz-releasegroupid")
+          table.insert(args, tostring(rgid))
+        end
+
+        local alb_artist_mbid = d.get(album, "keys.musicbrainz_albumartistid")
+        if alb_artist_mbid and alb_artist_mbid ~= "" then
+          table.insert(args, "--musicbrainz-albumartistid")
+          table.insert(args, tostring(alb_artist_mbid))
+        end
+
+        local rel_type = d.get(album, "keys.musicbrainz_releasetype")
+        if rel_type and rel_type ~= "" then
+          table.insert(args, "--releasetype")
+          table.insert(args, tostring(rel_type))
+        end
+
+        local country = d.get(album, "keys.releasecountry") or d.get(album, "keys.country")
+        if country and country ~= "" then
+          table.insert(args, "--releasecountry")
+          table.insert(args, tostring(country))
+        end
+
+        local barcode = d.get(album, "keys.barcode")
+        if barcode and barcode ~= "" then
+          table.insert(args, "--barcode")
+          table.insert(args, tostring(barcode))
+        end
+
+        local publisher = d.get(album, "keys.label")
+        if publisher and publisher ~= "" then
+          table.insert(args, "--publisher")
+          table.insert(args, tostring(publisher))
+        end
+
+        local cat_no = d.get(album, "keys.catalognumber")
+        if cat_no and cat_no ~= "" then
+          table.insert(args, "--catalognumber")
+          table.insert(args, tostring(cat_no))
+        end
+
+        table.insert(args, "--title")
+        table.insert(args, track.title)
+
+        table.insert(args, "--artist")
+        table.insert(args, track.artist)
+
+        table.insert(args, "--tracknumber")
+        table.insert(args, tostring(track.tracknumber))
+
+        if multi_disc then
+          table.insert(args, "--discnumber")
+          table.insert(args, tostring(track.discnumber))
+        end
+
+        local track_mbid = d.get(track, "keys.musicbrainz_releasetrackid")
+        if track_mbid and track_mbid ~= "" then
+          table.insert(args, "--musicbrainz-releasetrackid")
+          table.insert(args, tostring(track_mbid))
+        end
+
+        local rec_mbid = d.get(track, "keys.musicbrainz_trackid") or d.get(track, "keys.musicbrainz_recordingid")
+        if rec_mbid and rec_mbid ~= "" then
+          table.insert(args, "--musicbrainz-trackid")
+          table.insert(args, tostring(rec_mbid))
+        end
+
+        local track_artist_mbid = d.get(track, "keys.musicbrainz_artistid")
+        if track_artist_mbid and track_artist_mbid ~= "" then
+          table.insert(args, "--musicbrainz-artistid")
+          table.insert(args, tostring(track_artist_mbid))
+        end
+
+        local rg_gain = d.get(track, "keys.replaygain_track_gain")
+        if rg_gain and rg_gain ~= "" then
+          table.insert(args, "--replaygain-track-gain")
+          table.insert(args, tostring(rg_gain))
+        end
+
+        local lyrics = d.get(track, "lyrics.text") or d.get(track, "keys.lyrics")
+        if lyrics and lyrics ~= "" then
+          table.insert(args, "--lyrics")
+          table.insert(args, lyrics)
+        end
+      end
+
+      d.system(args, { stdio = "inherit" })
     end
   end
 })

@@ -12,7 +12,7 @@
     ./secrets
 
     # Virtual Machines
-    # ./virtual/arch
+    ./virtual/arch
 
     # Home Manager
     ./modules/home-manager.nix
