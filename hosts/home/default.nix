@@ -8,7 +8,7 @@
     ./user.nix
 
     # Secrets
-    ./secrets
+    ../../secrets
 
     # Modules
     ./modules/boot.nix

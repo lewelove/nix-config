@@ -1,4 +1,4 @@
-{ pkgs, lib, username, dot, ... }:
+{ pkgs, lib, username, dot, config, ... }:
 
 let
   listenbrainz-mpd-90-no4m = pkgs.listenbrainz-mpd.overrideAttrs (old: rec {
@@ -19,7 +19,17 @@ let
   });
 in
 {
-  home-manager.users.${username} = { config, ... }: {
+  sops.secrets."listenbrainz-token" = { };
+
+  sops.templates."listenbrainz-mpd.env" = {
+    owner = username;
+    mode = "0440";
+    content = ''
+      LISTENBRAINZ_TOKEN=${config.sops.placeholder."listenbrainz-token"}
+    '';
+  };
+
+  home-manager.users.${username} = { config, osConfig, ... }: {
     services.mpd = {
       enable = true;
       musicDirectory = "/run/media/${config.home.username}/1000xhome/backup-everything/FB2K/Library Historyfied!";
@@ -50,8 +60,8 @@ in
         ExecStart = "${listenbrainz-mpd-90-no4m}/bin/listenbrainz-mpd";
         Restart = "on-failure";
         RestartSec = "5s";
+        EnvironmentFile = [ osConfig.sops.templates."listenbrainz-mpd.env".path ];
         Environment = [
-          "XDG_CONFIG_HOME=${config.home.homeDirectory}/.config"
           "LISTENBRAINZ_MPD_LOG=debug"
         ];
       };
@@ -60,7 +70,6 @@ in
 
     home.file = {
       ".config/rmpc".source = config.lib.file.mkOutOfStoreSymlink "${dot}/.config/rmpc";
-      ".config/listenbrainz-mpd".source = config.lib.file.mkOutOfStoreSymlink "${dot}/.config/listenbrainz-mpd";
     };
   };
 }

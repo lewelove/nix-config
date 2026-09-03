@@ -22,6 +22,11 @@
     '';
   };
 
+  # systemd.services.slskd.environment = {
+  #   SLSKD_DEBUG = "true";
+  #   SLSKD_SLSK_DIAG_LEVEL = "Debug";
+  # };
+
   services.slskd = {
     enable = true;
     environmentFile = config.sops.templates."slskd.env".path;

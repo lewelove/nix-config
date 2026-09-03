@@ -8,6 +8,20 @@ local function py_bin(name)
   return d.fs.normalize(d.fs.joinpath(root_dir, "actions", name))
 end
 
+local function add_arg(args, flag, val)
+  if val == nil or val == "" or val == "Unknown" then
+    return
+  end
+  if type(val) == "table" then
+    val = table.concat(val, "; ")
+    if val == "" or val == "Unknown" then
+      return
+    end
+  end
+  table.insert(args, flag)
+  table.insert(args, tostring(val))
+end
+
 dale.action("open_terminal", {
   label = "Open Terminal",
   description = "Open terminal inside album directory",
@@ -117,124 +131,39 @@ dale.action("embed", {
 
       local cover_path = d.get(album, "covers.main.file.path")
       if cover_path then
-        table.insert(args, "--cover")
-        table.insert(args, d.fs.joinpath(entry.path, cover_path))
+        add_arg(args, "--cover", d.fs.joinpath(entry.path, cover_path))
       end
 
       local multi_disc = album.info.total_discs > 1
 
       for _, track in ipairs(tracks) do
-        table.insert(args, "--track")
-        table.insert(args, d.fs.joinpath(entry.path, track.file.path))
-
-        table.insert(args, "--album")
-        table.insert(args, album.album)
-
-        table.insert(args, "--albumartist")
-        table.insert(args, album.albumartist)
-
-        table.insert(args, "--date")
-        table.insert(args, album.date)
-
-        if album.keys and album.keys.genre then
-          local genre_val = type(album.keys.genre) == "table" and table.concat(album.keys.genre, "; ") or tostring(album.keys.genre)
-          if genre_val ~= "" and genre_val ~= "Unknown" then
-            table.insert(args, "--genre")
-            table.insert(args, genre_val)
-          end
-        end
-
-        local alb_mbid = d.get(album, "keys.musicbrainz_albumid")
-        if alb_mbid and alb_mbid ~= "" then
-          table.insert(args, "--musicbrainz-albumid")
-          table.insert(args, tostring(alb_mbid))
-        end
-
-        local rgid = d.get(album, "keys.musicbrainz_releasegroupid")
-        if rgid and rgid ~= "" then
-          table.insert(args, "--musicbrainz-releasegroupid")
-          table.insert(args, tostring(rgid))
-        end
-
-        local alb_artist_mbid = d.get(album, "keys.musicbrainz_albumartistid")
-        if alb_artist_mbid and alb_artist_mbid ~= "" then
-          table.insert(args, "--musicbrainz-albumartistid")
-          table.insert(args, tostring(alb_artist_mbid))
-        end
-
-        local rel_type = d.get(album, "keys.musicbrainz_releasetype")
-        if rel_type and rel_type ~= "" then
-          table.insert(args, "--releasetype")
-          table.insert(args, tostring(rel_type))
-        end
-
-        local country = d.get(album, "keys.releasecountry") or d.get(album, "keys.country")
-        if country and country ~= "" then
-          table.insert(args, "--releasecountry")
-          table.insert(args, tostring(country))
-        end
-
-        local barcode = d.get(album, "keys.barcode")
-        if barcode and barcode ~= "" then
-          table.insert(args, "--barcode")
-          table.insert(args, tostring(barcode))
-        end
-
-        local publisher = d.get(album, "keys.label")
-        if publisher and publisher ~= "" then
-          table.insert(args, "--publisher")
-          table.insert(args, tostring(publisher))
-        end
-
-        local cat_no = d.get(album, "keys.catalognumber")
-        if cat_no and cat_no ~= "" then
-          table.insert(args, "--catalognumber")
-          table.insert(args, tostring(cat_no))
-        end
-
-        table.insert(args, "--title")
-        table.insert(args, track.title)
-
-        table.insert(args, "--artist")
-        table.insert(args, track.artist)
-
-        table.insert(args, "--tracknumber")
-        table.insert(args, tostring(track.tracknumber))
+        add_arg(args, "--track", d.fs.joinpath(entry.path, track.file.path))
+        add_arg(args, "--album", album.album)
+        add_arg(args, "--albumartist", album.albumartist)
+        add_arg(args, "--date", album.date)
+        add_arg(args, "--genre", d.get(album, "keys.genre"))
+        add_arg(args, "--comment", d.get(album, "keys.comment"))
+        add_arg(args, "--musicbrainz-albumid", d.get(album, "keys.musicbrainz_albumid"))
+        add_arg(args, "--musicbrainz-releasegroupid", d.get(album, "keys.musicbrainz_releasegroupid"))
+        add_arg(args, "--musicbrainz-albumartistid", d.get(album, "keys.musicbrainz_albumartistid"))
+        add_arg(args, "--releasetype", d.get(album, "keys.musicbrainz_releasetype"))
+        add_arg(args, "--releasecountry", d.get(album, "keys.releasecountry") or d.get(album, "keys.country"))
+        add_arg(args, "--barcode", d.get(album, "keys.barcode"))
+        add_arg(args, "--publisher", d.get(album, "keys.label"))
+        add_arg(args, "--catalognumber", d.get(album, "keys.catalognumber"))
+        add_arg(args, "--title", track.title)
+        add_arg(args, "--artist", track.artist)
+        add_arg(args, "--tracknumber", track.tracknumber)
 
         if multi_disc then
-          table.insert(args, "--discnumber")
-          table.insert(args, tostring(track.discnumber))
+          add_arg(args, "--discnumber", track.discnumber)
         end
 
-        local track_mbid = d.get(track, "keys.musicbrainz_releasetrackid")
-        if track_mbid and track_mbid ~= "" then
-          table.insert(args, "--musicbrainz-releasetrackid")
-          table.insert(args, tostring(track_mbid))
-        end
-
-        local rec_mbid = d.get(track, "keys.musicbrainz_trackid") or d.get(track, "keys.musicbrainz_recordingid")
-        if rec_mbid and rec_mbid ~= "" then
-          table.insert(args, "--musicbrainz-trackid")
-          table.insert(args, tostring(rec_mbid))
-        end
-
-        local track_artist_mbid = d.get(track, "keys.musicbrainz_artistid")
-        if track_artist_mbid and track_artist_mbid ~= "" then
-          table.insert(args, "--musicbrainz-artistid")
-          table.insert(args, tostring(track_artist_mbid))
-        end
-
-        local rg_gain = d.get(track, "keys.replaygain_track_gain")
-        if rg_gain and rg_gain ~= "" then
-          table.insert(args, "--replaygain-track-gain")
-          table.insert(args, tostring(rg_gain))
-        end
-
-        local lyrics = d.get(track, "lyrics.text") or d.get(track, "keys.lyrics")
-        if lyrics and lyrics ~= "" then
-          table.insert(args, "--lyrics")
-          table.insert(args, lyrics)
-        end
+        add_arg(args, "--musicbrainz-releasetrackid", d.get(track, "keys.musicbrainz_releasetrackid"))
+        add_arg(args, "--musicbrainz-trackid", d.get(track, "keys.musicbrainz_trackid") or d.get(track, "keys.musicbrainz_recordingid"))
+        add_arg(args, "--musicbrainz-artistid", d.get(track, "keys.musicbrainz_artistid"))
+        add_arg(args, "--replaygain-track-gain", d.get(track, "keys.replaygain_track_gain"))
+        add_arg(args, "--lyrics", d.get(track, "lyrics.text") or d.get(track, "keys.lyrics"))
       end
 
       d.system(args, { stdio = "inherit" })
@@ -261,13 +190,12 @@ dale.action("lyrics", {
   label = "Fetch Lyrics",
   description = "Fetch track lyrics from Genius",
   run = function(ctx)
-    local token = os.getenv("GENIUS_ACCESS_TOKEN")
+    local secrets = d.fs.read_dotenv("~/.secrets/dale.env")
+    local token = secrets and secrets.GENIUS_ACCESS_TOKEN
     for _, entry in ipairs(ctx.albums) do
-      local args = { py_bin("lyrics"), "--path", entry.path }
-      if token then
-        table.insert(args, "--token")
-        table.insert(args, token)
-      end
+      local args = { py_bin("lyrics") }
+      add_arg(args, "--path", entry.path)
+      add_arg(args, "--token", token)
       d.system(args, { stdio = "inherit" })
     end
   end
@@ -282,13 +210,10 @@ dale.action("search_cover", {
       local album = d.get(entry, "lock.album.album")
       local args = { py_bin("search_cover") }
       if artist and album then
-        table.insert(args, "--artist")
-        table.insert(args, artist)
-        table.insert(args, "--album")
-        table.insert(args, album)
+        add_arg(args, "--artist", artist)
+        add_arg(args, "--album", album)
       else
-        table.insert(args, "--path")
-        table.insert(args, entry.path)
+        add_arg(args, "--path", entry.path)
       end
       d.system(args, { detach = true })
     end
@@ -377,4 +302,48 @@ dale.action("css", {
       d.system(clip_cmd, { stdin = query, detach = true })
     end
   end
+})
+
+dale.action("cs", {
+  label = "Cover Source",
+  description = "Download cover image from URL",
+  run = function(ctx)
+    local url = ctx.options:match("%S+")
+    local ext = url:gsub("%?.*$", ""):match("(%.[^./\\]+)$") or ""
+    local file = string.format("Digital Covers/source%d%s", os.time(), ext)
+    d.system({ "mkdir", "-p", "Digital Covers" })
+    d.system({ "wget", "-O", file, url }, { stdio = "inherit" })
+  end
+})
+
+dale.action("rts", {
+  label = "RuTracker Search",
+  description = "Search album releases on RuTracker",
+  run = function(ctx)
+    local function open_tracker(query)
+      if query == "" then return end
+
+      local enc = d.system({
+        "python3",
+        "-c",
+        "import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1]), end='')",
+        query,
+      })
+      if not enc.ok then return end
+
+      local url = "https://rutracker.org/forum/tracker.php?nm=" .. enc.stdout
+      d.system({ "xdg-open", url }, { detach = true })
+    end
+
+    if #ctx.albums > 0 then
+      for _, entry in ipairs(ctx.albums) do
+        local artist = d.get(entry, "lock.album.albumartist") or d.get(entry, "lock.album.artist") or ""
+        local title = d.get(entry, "lock.album.album") or ""
+        local query = (artist ~= "" and title ~= "") and (artist .. " " .. title) or (artist .. title)
+        open_tracker(d.str.trim(query))
+      end
+    elseif ctx.options and ctx.options ~= "" then
+      open_tracker(d.str.trim(ctx.options))
+    end
+  end,
 })

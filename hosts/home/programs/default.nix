@@ -131,7 +131,6 @@
         "lab" = {
           HostName = "192.168.1.100";
           User = "lewelove";
-          ForwardAgent = "yes";
         };
         "arch-vm" = {
            hostname = "127.0.0.1";
