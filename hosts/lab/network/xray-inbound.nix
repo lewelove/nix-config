@@ -124,6 +124,10 @@ in
   networking.firewall.allowedTCPPorts = [ 4443 ];
   networking.firewall.allowedUDPPorts = [ 4443 ];
 
+  sops.secrets."xray/uuid" = { };
+  sops.secrets."xray/private_key" = { };
+  sops.secrets."xray/short_id" = { };
+
   sops.templates."xray-inbound.json" = {
     owner = "root";
     mode = "0444";

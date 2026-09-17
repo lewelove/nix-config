@@ -1,9 +1,11 @@
 ; thunar GtkAccelMap rc-file         -*- scheme -*-
 ; this file is an automated accelerator map dump
 ;
+; (gtk_accel_path "<Actions>/ThunarBookmarks/601e72af565f5073eb076ba6994de203" "")
 ; (gtk_accel_path "<Actions>/ThunarDetailsView/expandable-folders" "")
 ; (gtk_accel_path "<Actions>/ThunarStandardView/sort-by-type" "")
 ; (gtk_accel_path "<Actions>/ThunarStatusBar/toggle-last-modified" "")
+; (gtk_accel_path "<Actions>/ThunarBookmarks/b4d4916a24e1125a723581ac11d5ac73" "")
 ; (gtk_accel_path "<Actions>/Thunarwindow/menu" "")
 (gtk_accel_path "<Actions>/ThunarActions/uca-action-1759649936900221-1" "<Primary>t")
 ; (gtk_accel_path "<Actions>/ThunarActionManager/cut" "<Primary>x")
@@ -141,8 +143,10 @@
 ; (gtk_accel_path "<Actions>/ThunarStandardView/duplicate" "")
 ; (gtk_accel_path "<Actions>/ThunarActionManager/trash-delete-2" "KP_Delete")
 ; (gtk_accel_path "<Actions>/ThunarStandardView/back-alt1" "BackSpace")
+; (gtk_accel_path "<Actions>/ThunarBookmarks/22c336b504a663bd7f752e81e93895ff" "")
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/312831adf14a846f4157527d795679f9" "")
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/c288f7e9737e09dba12f1ef2c2c75450" "")
+; (gtk_accel_path "<Actions>/ThunarBookmarks/022e57ecf4e8f3128499e2aeff0c73ad" "")
 ; (gtk_accel_path "<Actions>/ThunarStandardView/create-folder" "<Primary><Shift>n")
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/4236333340f6c1c742d113a742eebade" "")
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/966a36c34875819fb2e5b160d819b3da" "")
@@ -153,6 +157,7 @@
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/c84b14e69005e52b19381a061b64894f" "")
 ; (gtk_accel_path "<Actions>/ThunarStandardView/set-default-app" "")
 ; (gtk_accel_path "<Actions>/ThunarWindow/empty-trash" "")
+; (gtk_accel_path "<Actions>/ThunarBookmarks/293d37d2684c91a1eaf93d158cdbaab2" "")
 ; (gtk_accel_path "<Actions>/ThunarWindow/preferences" "")
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/84405219e4528655b90f83ee727930fc" "")
 ; (gtk_accel_path "<Actions>/ThunarActionManager/delete" "")
@@ -165,4 +170,5 @@
 ; (gtk_accel_path "<Actions>/ThunarActionManager/sendto-desktop" "")
 ; (gtk_accel_path "<Actions>/ThunarStandardView/make-link" "")
 ; (gtk_accel_path "<Actions>/ThunarWindow/zoom-reset-alt" "<Primary>KP_0")
+; (gtk_accel_path "<Actions>/ThunarBookmarks/e0a11a11a933c4302dbba523fa4a6886" "")
 ; (gtk_accel_path "<Actions>/ThunarWindow/about" "")

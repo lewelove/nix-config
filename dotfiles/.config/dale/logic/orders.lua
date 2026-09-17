@@ -24,7 +24,7 @@ dale.order("year", { label = "Year",
 })
 
 dale.order("duration", { label = "Duration",
-  reverse = true,
+  -- reverse = true,
   sort = function(a)
     local val = d.get(a, "info.duration_milliseconds")
     return tonumber(val) or 0

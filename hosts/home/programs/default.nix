@@ -51,13 +51,13 @@
     gnome-clocks
     nicotine-plus
     # plugdata
+    peazip
     marktext
     zoxide
 
     # Terminal Programs
     foot
     kitty
-    alacritty
     btop
     repomix
     ripgrep
@@ -93,7 +93,6 @@
     flac2all
     mediainfo
     imagemagick
-    puddletag
     roomeqwizard
     transmission_4
     ffmpeg

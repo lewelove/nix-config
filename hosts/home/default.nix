@@ -3,6 +3,9 @@
 {
   imports = [
 
+    # Core Infrastructure
+    (inputs.import-tree ../../modules/core)
+
     # System
     ./system.nix
     ./user.nix
@@ -61,6 +64,5 @@
       (i: i.filterNot (path: lib.hasInfix "/d/" path))
       (i: i ./network)
     ])
-
   ];
 }

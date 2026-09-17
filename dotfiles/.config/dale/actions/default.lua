@@ -77,8 +77,7 @@ dale.action("collect", {
       rust_bin("collect"),
       "--url", url,
       "--root", d.fs.normalize("/run/media/lewelove/1000xhome/backup-everything/FB2K/Virtual Albums Stage/"),
-      "--format-album", "{albumartist} - {album}",
-      "--format-info", "Info"
+      "--format-album", "{albumartist} - {album}"
     }
 
     d.system(args, { stdio = "inherit" })
@@ -101,8 +100,7 @@ dale.action("mbf", {
       rust_bin("musicbrainz_fetch"),
       "-d", info_dir,
       "--release",
-      "--release-group",
-      "--all-releases"
+      "--release-group"
     }
 
     for _, part in ipairs(d.str.split(raw_opts, " ")) do
