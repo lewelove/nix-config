@@ -15,6 +15,7 @@
     device = "nodev";
     efiSupport = true;
     useOSProber = true;
+    configurationLimit = 5;
   };
 
   # --- ACME / SSL Setup ---

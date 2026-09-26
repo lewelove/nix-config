@@ -25,6 +25,7 @@ dale.library( "all_albums", { label = "All Albums",
     "chroma",
     "entropy",
     "last_edited",
+    "random",
   },
   match = function(a)
     return true

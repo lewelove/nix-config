@@ -12,6 +12,7 @@ return {
 
     local parsers = {
       "c",
+      "rust",
       "lua",
       "vim",
       "vimdoc",
@@ -40,6 +41,7 @@ return {
     vim.api.nvim_create_autocmd("FileType", {
       pattern = {
         "c",
+        "rust",
         "lua",
         "vim",
         "vimdoc",

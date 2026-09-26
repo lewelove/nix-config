@@ -20,7 +20,11 @@ dale.order("az", { label = "Alphabetical",
 
 dale.order("year", { label = "Year",
   reverse = true,
-  sort = function(a) return d.get(a, "date") or "" end,
+  sort = function(a)
+    local date = d.get(a, "date")
+    local id = d.get(a, "id")
+    return { date, id }
+  end,
 })
 
 dale.order("duration", { label = "Duration",
@@ -31,8 +35,12 @@ dale.order("duration", { label = "Duration",
   end,
 })
 
-dale.order("cover_hash", { label = "Random",
+dale.order("cover_hash", { label = "Cover Hash",
   sort = function(a) return d.get(a, "covers.main.file.address") or "" end,
+})
+
+dale.order("random", { label = "Random",
+  sort = function(a) return "0" end,
 })
 
 dale.order("chroma", { label = "Chroma",

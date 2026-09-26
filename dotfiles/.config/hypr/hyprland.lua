@@ -6,7 +6,7 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
   hl.exec_cmd("systemctl --user start hyprland-session.target")
   hl.exec_cmd("systemctl --user restart xdg-desktop-portal-hyprland xdg-desktop-portal")
-  hl.dispatch(hl.dsp.focus({ workspace = "name:D:1" }))
+  hl.dispatch(hl.dsp.focus({ workspace = "name:D" }))
 end)
 
 require("visuals")
@@ -27,6 +27,7 @@ hl.config ({
     sensitivity = -0.5,
     repeat_rate = 35,
     repeat_delay = 200,
+    focus_on_close = 2,
   },
 
   cursor = {

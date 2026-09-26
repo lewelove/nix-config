@@ -16,9 +16,9 @@
       enable = true;
       antialias = true;
       hinting = {
-        enable = true;
+        enable = false;
         autohint = false;
-        style = "full";
+        # style = "full";
       };
       subpixel = {
         rgba = "rgb";

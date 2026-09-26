@@ -35,6 +35,7 @@
     ddcutil
     toml2json
     qrencode
+    gparted
 
     # Desktop
     fuzzel
@@ -76,11 +77,11 @@
 
     # Programming Languages
     python3
-    rustc
-    cargo
-    clippy
     rustup
-    rustfmt
+    # rustc
+    # cargo
+    # clippy
+    # rustfmt
 
     # Virtualisation
     distrobox

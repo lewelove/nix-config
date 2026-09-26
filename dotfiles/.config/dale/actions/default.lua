@@ -88,28 +88,65 @@ dale.action("mbf", {
   label = "MusicBrainz Fetch",
   description = "Fetch raw JSON metadata from MusicBrainz",
   run = function(ctx)
-    local raw_opts = d.str.trim(ctx.options)
-    if raw_opts == "" then
-      error("mbf: URL argument is required in options")
-    end
+    local url = d.str.trim(ctx.options)
+    local entry = ctx.albums[1]
+    local info_dir = d.fs.joinpath(entry.path, "Info")
+    local rel_file = d.fs.joinpath(info_dir, "musicbrainz_release.json")
+    local rg_file = d.fs.joinpath(info_dir, "musicbrainz_releasegroup.json")
 
-    local entry = ctx.albums and ctx.albums[1]
-    local info_dir = entry and d.fs.joinpath(entry.path, "Info") or "."
-
-    local args = {
+    d.system({
       rust_bin("musicbrainz_fetch"),
-      "-d", info_dir,
-      "--release",
-      "--release-group"
-    }
+      "--url", url,
+      "-o", rel_file,
+      "--retry", "3"
+    }, { stdio = "inherit" })
 
-    for _, part in ipairs(d.str.split(raw_opts, " ")) do
-      if part ~= "" then
-        table.insert(args, part)
-      end
+    local rel_data = d.fs.read_json(rel_file)
+    local rg_id = d.get(rel_data, "release-group.id")
+
+    d.system({ "sleep", "1" })
+
+    d.system({
+      rust_bin("musicbrainz_fetch"),
+      "--release-group-id", rg_id,
+      "-o", rg_file,
+      "--retry", "3"
+    }, { stdio = "inherit" })
+  end
+})
+
+dale.action("mbffid", {
+  label = "MusicBrainz Fetch From ID",
+  description = "Fetch raw JSON metadata from MusicBrainz using id.toml",
+  run = function(ctx)
+    for _, entry in ipairs(ctx.albums) do
+      local id_path = d.fs.joinpath(entry.path, "id.toml")
+      local id_data = d.fs.read_toml(id_path)
+      local rel_id = d.get(id_data, "album.musicbrainz_albumid")
+
+      local info_dir = d.fs.joinpath(entry.path, "Info")
+      local rel_file = d.fs.joinpath(info_dir, "musicbrainz_release.json")
+      local rg_file = d.fs.joinpath(info_dir, "musicbrainz_releasegroup.json")
+
+      d.system({
+        rust_bin("musicbrainz_fetch"),
+        "--release-id", rel_id,
+        "-o", rel_file,
+        "--retry", "3"
+      }, { stdio = "inherit" })
+
+      local rel_data = d.fs.read_json(rel_file)
+      local rg_id = d.get(rel_data, "release-group.id")
+
+      d.system({ "sleep", "1" })
+
+      d.system({
+        rust_bin("musicbrainz_fetch"),
+        "--release-group-id", rg_id,
+        "-o", rg_file,
+        "--retry", "3"
+      }, { stdio = "inherit" })
     end
-
-    d.system(args, { stdio = "inherit" })
   end
 })
 

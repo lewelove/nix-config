@@ -1,4 +1,3 @@
-.repomixignore
 **/target/
 **/.direnv/
 dotfiles/.config/nvim/lazy-lock.json

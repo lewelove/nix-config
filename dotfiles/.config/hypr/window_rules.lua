@@ -38,23 +38,23 @@ hl.window_rule ({
 hl.window_rule ({
   name = "steam",
   match = { class = "steam" },
-  workspace = "name:G:1",
+  workspace = "name:G",
 })
 
 hl.window_rule ({
   name = "steam_games",
   match = { initial_class = "^steam_app_.*$" },
-  workspace = "name:G:1",
+  workspace = "name:G",
   fullscreen = true
 })
 
-hl.window_rule ({
-  name = "btop",
-  match = { class = "btop" },
-  float = true,
-  center = true,
-  size = { "monitor_w * 0.75",  "monitor_h * 0.9" },
-})
+-- hl.window_rule ({
+--   name = "btop",
+--   match = { class = "btop" },
+--   float = true,
+--   center = true,
+--   size = { "monitor_w * 0.75",  "monitor_h * 0.9" },
+-- })
 
 hl.window_rule ({
   name = "calculator",

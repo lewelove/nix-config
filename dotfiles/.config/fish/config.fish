@@ -67,6 +67,7 @@ if status is-interactive
   alias mb-manifest "/home/lewelove/dev/album_curation/mb_manifest/.build/bin/mb_manifest"
   alias cover-resize "/home/lewelove/dev/album_curation/cover_resize/.build/bin/cover_resize"
   alias cover-save "/home/lewelove/dev/album_curation/cover_save.fish"
+  alias flac2webm "/home/lewelove/dev/album_curation/flac2webm.fish"
 
   function distrobox
       if contains $argv[1] create rm stop assemble

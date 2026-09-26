@@ -1,4 +1,4 @@
-dale.cabinet("collections", { label = "Collections",
+dale.cabinet("main", { label = "Main Cabinet",
   shelves = {
     "added_this_year",
     "added_this_year_real",

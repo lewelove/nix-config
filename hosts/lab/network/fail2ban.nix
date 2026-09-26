@@ -6,7 +6,7 @@
     bantime = "24h";
     maxretry = 5;
 
-    ignoreIP =[
+    ignoreIP = [
       "127.0.0.1/8"
       "192.168.1.0/24"
       "10.10.10.0/24"
@@ -21,22 +21,24 @@
         findtime = "24h";
       };
 
-      caddy-auth = {
+      caddy-scanners = {
         settings = {
           enabled = true;
-          filter = "caddy-auth";
+          filter = "caddy-scanners";
           logpath = "/var/log/caddy/access.log";
           port = "http,https";
-          backend = "auto"; 
-          findtime = "48h";
+          backend = "auto";
+          maxretry = 3;
+          findtime = "10m";
+          bantime = "24h";
         };
       };
     };
   };
 
-  environment.etc."fail2ban/filter.d/caddy-auth.conf".text = ''
+  environment.etc."fail2ban/filter.d/caddy-scanners.conf".text = ''
     [Definition]
-    failregex = ^.*"remote_ip":"<HOST>(:\d+)?".*"status":(401|403|404|444|502).*$
+    failregex = ^.*"remote_ip":"<HOST>(:\d+)?".*"status":(403|444).*$
     ignoreregex =
   '';
 }

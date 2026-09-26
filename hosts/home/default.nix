@@ -19,6 +19,7 @@
 
     ./modules/hardware-configuration.nix
     ./modules/nvidia.nix
+    ./modules/nix-ld.nix
 
     ./modules/tilde.nix
     ./modules/bluetooth.nix
