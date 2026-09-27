@@ -13,6 +13,7 @@ in
 
     exports = ''
       /mnt/1000xlab ${homeIp}(rw,nohide,insecure,no_subtree_check,all_squash,anonuid=1000,anongid=990)
+      /home/lewelove/virtual/box ${homeIp}(rw,nohide,insecure,no_subtree_check,all_squash,anonuid=1000,anongid=100)
     '';
   };
 

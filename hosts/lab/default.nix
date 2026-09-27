@@ -12,6 +12,7 @@
     ../../secrets
 
     # Virtual Machines
+    ./virtual/box
     # ./virtual/arch
 
     # Home Manager

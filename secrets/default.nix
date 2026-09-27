@@ -17,5 +17,18 @@
     age.sshKeyPaths = lib.mkDefault [
       "/etc/ssh/ssh_host_ed25519_key"
     ];
+
+    secrets."github-token" = { };
+
+    templates."nix-access-tokens.conf" = {
+      mode = "0444";
+      content = ''
+        access-tokens = github.com=${config.sops.placeholder."github-token"}
+      '';
+    };
   };
+
+  nix.extraOptions = ''
+    !include ${config.sops.templates."nix-access-tokens.conf".path}
+  '';
 }

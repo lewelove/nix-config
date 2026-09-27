@@ -74,6 +74,7 @@
     yazi
     eza
     devenv
+    yt-dlp
 
     # Programming Languages
     python3
@@ -137,6 +138,13 @@
            port = 2222;
            user = "arch";
            proxyJump = "lab";
+        };
+        "box" = {
+          hostname = "192.168.1.100";
+          port = 2223;
+          user = "box";
+          StrictHostKeyChecking = "no";
+          UserKnownHostsFile = "/dev/null";
         };
       };
     };

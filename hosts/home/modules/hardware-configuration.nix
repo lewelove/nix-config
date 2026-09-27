@@ -82,4 +82,14 @@
     ];
   };
 
+  fileSystems."/home/${username}/virtual/box" = {
+    device = "192.168.1.100:/home/lewelove/virtual/box";
+    fsType = "nfs";
+    options = [
+      "x-systemd.automount"
+      "noauto"
+      "x-systemd.idle-timeout=600"
+    ];
+  };
+
 }
