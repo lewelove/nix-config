@@ -124,6 +124,11 @@
     keybindings = true;
   };
 
+  my.programs.neovim = {
+    enable = true;
+    gui = true;
+  };
+
   home-manager.users.${username} = { config, ... }: {
     programs.ssh = {
       enable = true;

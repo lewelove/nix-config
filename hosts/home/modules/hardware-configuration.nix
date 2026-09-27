@@ -89,6 +89,7 @@
       "x-systemd.automount"
       "noauto"
       "x-systemd.idle-timeout=600"
+      "actimeo=1"
     ];
   };
 

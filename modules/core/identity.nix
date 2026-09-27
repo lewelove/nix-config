@@ -2,7 +2,6 @@
 
 {
   options.my.identity = {
-
     username = lib.mkOption {
       type = lib.types.str;
       default = "lewelove";
@@ -19,6 +18,12 @@
       type = lib.types.str;
       default = "/home/lewelove/nix-config";
       description = "Absolute path to local nix-config git checkout";
+    };
+
+    dotfilesPath = lib.mkOption {
+      type = lib.types.str;
+      default = "/home/lewelove/nix-config/dotfiles";
+      description = "Path to dotfiles directory";
     };
   };
 }

@@ -1,5 +1,8 @@
 { inputs, pkgs, config, ... }:
 
+let
+  user = config.my.identity.username;
+in
 {
   imports = [
     inputs.microvm.nixosModules.host
@@ -10,14 +13,14 @@
   networking.firewall.allowedTCPPorts = [ 2223 ];
 
   systemd.tmpfiles.rules = [
-    "d /home/lewelove/virtual/box 0755 lewelove users -"
-    "d /home/lewelove/virtual/box/.config/nix 0755 lewelove users -"
-    "L+ /mnt/dotfiles - - - - /home/lewelove/nix-config/dotfiles"
+    "d /home/${user}/virtual/box 0755 ${user} users -"
+    "d /home/${user}/virtual/box/.config/nix 0755 ${user} users -"
+    "L+ /mnt/dotfiles - - - - ${config.my.identity.repoPath}/dotfiles"
   ];
 
   sops.templates."box-nix-access-tokens" = {
-    path = "/home/lewelove/virtual/box/.config/nix/nix.conf";
-    owner = "lewelove";
+    path = "/home/${user}/virtual/box/.config/nix/nix.conf";
+    owner = user;
     group = "users";
     mode = "0644";
     content = ''
@@ -28,29 +31,9 @@
   microvm.vms.box = {
     autostart = true;
     config = {
-      system.stateVersion = "26.05";
-      networking.hostName = "box";
-
-      programs.fish.enable = true;
-
-      nix.extraOptions = ''
-        !include /home/box/.config/nix/nix.conf
-      '';
-
-      environment.systemPackages = with pkgs; [
-        pi-coding-agent
-        git
-        starship
-        zoxide
-        eza
-        yazi
-      ];
-
-      systemd.tmpfiles.rules = [
-        "d /home/box/.config 0755 box users -"
-        "d /home/box/.ssh 0700 box users -"
-        "L+ /home/box/.config/fish - box users - /mnt/dotfiles/.config/fish"
-        "L+ /home/box/.config/starship.toml - box users - /mnt/dotfiles/.config/starship.toml"
+      imports = [
+        inputs.home-manager.nixosModules.default
+        ./guest
       ];
 
       microvm = {
@@ -69,15 +52,15 @@
           {
             proto = "virtiofs";
             tag = "dotfiles";
-            source = "/home/lewelove/nix-config/dotfiles";
+            source = "${config.my.identity.repoPath}/dotfiles";
             mountPoint = "/mnt/dotfiles";
             readOnly = true;
           }
           {
             proto = "virtiofs";
             tag = "home-box";
-            source = "/home/lewelove/virtual/box";
-            mountPoint = "/home/box";
+            source = "/home/${user}/virtual/box";
+            mountPoint = "/home/${user}";
           }
         ];
 
@@ -109,28 +92,6 @@
           }
         ];
       };
-
-      services.openssh = {
-        enable = true;
-        settings = {
-          PasswordAuthentication = false;
-          KbdInteractiveAuthentication = false;
-          PermitRootLogin = "no";
-        };
-      };
-
-      users.users.box = {
-        isNormalUser = true;
-        uid = 1000;
-        group = "users";
-        shell = pkgs.fish;
-        extraGroups = [ "wheel" ];
-        openssh.authorizedKeys.keys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINngwDtUZAiEALEZ1XhPXX221hYqjGSaqWRnvaUnpMXT lewelove@proton.me"
-        ];
-      };
-
-      security.sudo.wheelNeedsPassword = false;
     };
   };
 }
