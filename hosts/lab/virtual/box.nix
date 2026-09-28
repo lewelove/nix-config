@@ -2,6 +2,7 @@
 
 let
   user = config.my.identity.username;
+  dot = config.my.identity.dotfilesPath;
 in
 {
   imports = [
@@ -15,7 +16,6 @@ in
   systemd.tmpfiles.rules = [
     "d /home/${user}/virtual/box 0755 ${user} users -"
     "d /home/${user}/virtual/box/.config/nix 0755 ${user} users -"
-    "L+ /mnt/dotfiles - - - - ${config.my.identity.repoPath}/dotfiles"
   ];
 
   sops.templates."box-nix-access-tokens" = {
@@ -33,7 +33,7 @@ in
     config = {
       imports = [
         inputs.home-manager.nixosModules.default
-        ../../../box
+        ../../box
       ];
 
       microvm = {

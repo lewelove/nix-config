@@ -18,8 +18,10 @@ in
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
+    backupFileExtension = "backup";
     users.${user} = {
       home.stateVersion = "26.05";
+      home.activationGenerateGcRoot = false;
     };
   };
 

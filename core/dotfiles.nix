@@ -9,12 +9,16 @@
 
   config.home-manager.users.${config.my.identity.username}.home.file =
     lib.mapAttrs' (target: src:
-      lib.nameValuePair target {
-        source = config.home-manager.users.${config.my.identity.username}.lib.file.mkOutOfStoreSymlink (
+      let
+        pathStr =
           if builtins.isPath src
           then "${config.my.identity.repoPath}${lib.removePrefix (toString ../.) (toString src)}"
-          else "${config.my.identity.repoPath}/${src}"
-        );
+          else if lib.hasPrefix "/" src
+          then src
+          else "${config.my.identity.repoPath}/${src}";
+      in
+      lib.nameValuePair target {
+        source = config.home-manager.users.${config.my.identity.username}.lib.file.mkOutOfStoreSymlink pathStr;
       }
     ) config.my.dotfiles;
 }
