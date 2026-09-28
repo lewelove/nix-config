@@ -38,14 +38,13 @@ in
     environment.systemPackages = [
       pkgs.neovim
       pkgs.tree-sitter
+      pkgs.gcc
       nv
     ] ++ lib.optionals cfg.gui [
       nvl
       desktopItem
     ];
 
-    home-manager.users.${user} = { config, ... }: {
-      home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/.config/nvim";
-    };
+    my.dotfiles.".config/nvim" = ./config;
   };
 }

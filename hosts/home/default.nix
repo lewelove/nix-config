@@ -4,7 +4,7 @@
   imports = [
 
     # Core Infrastructure
-    (inputs.import-tree ../../modules/core)
+    (inputs.import-tree ../../core)
 
     # System
     ./system.nix

@@ -5,13 +5,14 @@ let
 in
 {
   imports = [
-    ../../../../../modules/core/identity.nix
+    ../../../../../core/identity.nix
     ./network.nix
     ./programs.nix
     ./user.nix
   ];
 
-  my.identity.dotfilesPath = "/mnt/dotfiles";
+  my.identity.repoPath = "/mnt/nix-config";
+  my.identity.dotfilesPath = "/mnt/nix-config/dotfiles";
 
   home-manager = {
     useGlobalPkgs = true;

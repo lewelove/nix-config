@@ -51,9 +51,9 @@ in
           }
           {
             proto = "virtiofs";
-            tag = "dotfiles";
-            source = "${config.my.identity.repoPath}/dotfiles";
-            mountPoint = "/mnt/dotfiles";
+            tag = "nix-config";
+            source = config.my.identity.repoPath;
+            mountPoint = "/mnt/nix-config";
             readOnly = true;
           }
           {
@@ -69,6 +69,13 @@ in
             image = "/var/lib/microvms/box/box-store-overlay.img";
             mountPoint = "/nix/.rw-store";
             size = 40960;
+            fsType = "ext4";
+            autoCreate = true;
+          }
+          {
+            image = "/var/lib/microvms/box/box-nix-var.img";
+            mountPoint = "/nix/var";
+            size = 4096;
             fsType = "ext4";
             autoCreate = true;
           }

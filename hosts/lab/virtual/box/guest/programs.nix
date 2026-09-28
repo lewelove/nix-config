@@ -5,13 +5,10 @@ let
 in
 {
   imports = [
-    ../../../../../programs/nvim.nix
+    ../../../../../programs/nvim
   ];
 
-  my.programs.neovim = {
-    enable = true;
-    gui = false;
-  };
+  my.programs.neovim.enable = true;
 
   programs.fish.enable = true;
 
@@ -29,7 +26,6 @@ in
     eza
     yazi
     lazygit
-    tree-sitter
   ];
 
   systemd.tmpfiles.rules = [

@@ -12,7 +12,7 @@
       lib.nameValuePair target {
         source = config.home-manager.users.${config.my.identity.username}.lib.file.mkOutOfStoreSymlink (
           if builtins.isPath src
-          then "${config.my.identity.repoPath}${lib.removePrefix (toString ../../.) (toString src)}"
+          then "${config.my.identity.repoPath}${lib.removePrefix (toString ../.) (toString src)}"
           else "${config.my.identity.repoPath}/${src}"
         );
       }

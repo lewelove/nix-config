@@ -40,4 +40,6 @@
     
   ];
 
+  my.programs.neovim = { enable = true; };
+
 }

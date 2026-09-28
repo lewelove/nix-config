@@ -4,6 +4,9 @@
 
   imports = [
 
+    # Core Infrastructure
+    (inputs.import-tree ../../core)
+
     # System
     ./system.nix
     ./user.nix

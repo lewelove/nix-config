@@ -1,7 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
+let
+  user = config.my.identity.username;
+in
 {
-  users.users.box = {
+  users.users.${user} = {
     isNormalUser = true;
     uid = 1000;
     group = "users";
@@ -24,6 +27,6 @@
   };
 
   systemd.tmpfiles.rules = [
-    "d /home/box/.ssh 0700 box users -"
+    "d /home/${user}/.ssh 0700 ${user} users -"
   ];
 }
