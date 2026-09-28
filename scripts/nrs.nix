@@ -1,12 +1,11 @@
-{ pkgs, identity, repoPath, hostPath, ... }:
+{ pkgs, config, ... }:
 
 let
+  repoPath = config.my.identity.repoPath;
   nrs = pkgs.writeShellApplication {
     name = "nrs";
     runtimeInputs = with pkgs; [ nh nix-output-monitor nvd coreutils gum ];
     text = ''
-
-################################################################
 
 rb() { gum style --foreground 1 --bold "$*"; }
 gb() { gum style --foreground 2 --bold "$*"; }
@@ -23,8 +22,8 @@ w() { gum style --foreground 7 "$*"; }
 
 TARGET_HOST="''${1:-$(hostname)}"
 
-if [ ! -d "${hostPath}" ]; then
-  echo "$(r "[!] ")" "Error: Host directory ${hostPath} does not exist in ${repoPath}"
+if [ ! -d "${repoPath}/hosts/$TARGET_HOST" ]; then
+  echo "$(r "[!] ")" "Error: Host directory ${repoPath}/hosts/$TARGET_HOST does not exist in ${repoPath}"
   exit 1
 fi
 
@@ -32,11 +31,9 @@ cd "${repoPath}" || exit 1
 
 git add .
 
-export NH_FLAKE="${hostPath}"
+export NH_FLAKE="${repoPath}"
 
-if
-    NH_NOM=1 nh os switch "${hostPath}" --hostname "$TARGET_HOST"
-then
+if NH_NOM=1 nh os switch "${repoPath}" --hostname "$TARGET_HOST"; then
     echo
     gum join --horizontal "$(g "[+] ")" "Configuration for " "$(b "$TARGET_HOST")" " applied."
 else
@@ -44,8 +41,6 @@ else
     gum join --horizontal "$(r "[!] ")" "Build failed."
     exit 1
 fi
-
-################################################################
 
     '';
   };

@@ -1,11 +1,15 @@
-{ pkgs, username, dot, ... }:
+{ pkgs, config, ... }:
 
+let
+  user = config.my.identity.username;
+  dot = config.my.identity.dotfilesPath;
+in
 {
   environment.systemPackages = with pkgs; [
     cliphist
   ];
 
-  home-manager.users.${username} = { config, ... }: {
+  home-manager.users.${user} = { config, ... }: {
     systemd.user.services.cliphist = {
       Unit = {
         Description = "Cliphist Daemon";
@@ -22,4 +26,3 @@
     home.file.".config/cliphist".source = config.lib.file.mkOutOfStoreSymlink "${dot}/.config/cliphist";
   };
 }
-

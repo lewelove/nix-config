@@ -5,7 +5,7 @@ let
 in
 {
   imports = [
-    ../../../../../programs/nvim
+    ../../programs/nvim
   ];
 
   my.programs.neovim.enable = true;

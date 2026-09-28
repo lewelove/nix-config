@@ -40,19 +40,20 @@
   outputs = { self, nixpkgs, nixpkgs-stable, ... }@inputs:
   let
     system = "x86_64-linux";
-    mkHost = { hostname, modules ? [] }: nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = {
-        inherit inputs;
-        stable = import nixpkgs-stable {
-          inherit system;
-          config.allowUnfree = true;
+    mkHost = { hostname, modules ? [] }:
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit inputs;
+          stable = import nixpkgs-stable {
+            inherit system;
+            config.allowUnfree = true;
+          };
         };
+        modules = [
+          ./hosts/${hostname}
+        ] ++ modules;
       };
-      modules = [
-        ./hosts/${hostname}
-      ] ++ modules;
-    };
   in {
     nixosConfigurations = {
       home = mkHost {
@@ -70,6 +71,7 @@
         hostname = "box";
         modules = [
           inputs.microvm.nixosModules.microvm
+          inputs.home-manager.nixosModules.default
         ];
       };
     };

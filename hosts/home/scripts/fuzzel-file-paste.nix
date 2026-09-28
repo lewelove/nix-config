@@ -1,8 +1,9 @@
-{ pkgs, identity, ... }:
+{ pkgs, config, ... }:
 
 let
+  user = config.my.identity.username;
   fuzzel-file-paste = pkgs.writers.writeFishBin "fuzzel-file-paste" ''
-    set TOML_FILE "/home/${identity.username}/.config/fuzzel/file-paste.toml"
+    set TOML_FILE "/home/${user}/.config/fuzzel/file-paste.toml"
 
     if not test -f "$TOML_FILE"
         exit 1
@@ -35,7 +36,7 @@ let
             continue
         end
 
-        set expanded_path (string replace -r '^~' "/home/${identity.username}" "$path")
+        set expanded_path (string replace -r '^~' "/home/${user}" "$path")
 
         if not string match -r '^/' "$expanded_path" >/dev/null
             set expanded_path (${pkgs.coreutils}/bin/realpath "$expanded_path")

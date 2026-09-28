@@ -1,7 +1,11 @@
-{ pkgs, username, dot, ... }:
+{ pkgs, config, ... }:
 
+let
+  user = config.my.identity.username;
+  dot = config.my.identity.dotfilesPath;
+in
 {
-  home-manager.users.${username} = { config, ... }: {
+  home-manager.users.${user} = { config, ... }: {
     systemd.user.services.quickshell = {
       Unit = {
         Description = "Quickshell Desktop Shell";
@@ -13,7 +17,6 @@
         Restart = "on-failure";
         Environment = [
           "QSG_DISTANCEFIELD_ANTIALIASING=subpixel"
-          # "QML_DISABLE_DISTANCEFIELD=1"
         ];
       };
       Install.WantedBy = [ "graphical-session.target" ];

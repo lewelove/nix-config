@@ -1,5 +1,9 @@
-{ pkgs, username, dot, ... }:
+{ pkgs, config, ... }:
 
+let
+  user = config.my.identity.username;
+  dot = config.my.identity.dotfilesPath;
+in
 {
   programs.thunar.enable = true;
 
@@ -18,7 +22,7 @@
     };
   };
 
-  home-manager.users.${username} = { config, ... }: {
+  home-manager.users.${user} = { config, ... }: {
     home.file.".config/Thunar".source = config.lib.file.mkOutOfStoreSymlink "${dot}/.config/Thunar";
   };
 }

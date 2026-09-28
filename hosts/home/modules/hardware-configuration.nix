@@ -1,7 +1,9 @@
-{ config, lib, pkgs, modulesPath, username, ... }:
+{ config, lib, pkgs, modulesPath, ... }:
 
+let
+  user = config.my.identity.username;
+in
 {
-
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
@@ -46,29 +48,29 @@
 
   # --- Data Drives ---
 
-  fileSystems."/run/media/${username}/1000xhome" = {
+  fileSystems."/run/media/${user}/1000xhome" = {
     device = "/dev/disk/by-uuid/27b9a1ab-0bb3-4e2f-bc9b-7c4a227dbb2f";
     fsType = "btrfs";
     options = [ "nofail" "compress=zstd" "noatime" "space_cache=v2" "x-gvfs-show" ];
   };
 
-  fileSystems."/run/media/${username}/500" = {
+  fileSystems."/run/media/${user}/500" = {
     device = "/dev/disk/by-uuid/8ad89f3d-6953-4ee7-b6bd-8e1a61e07e87";
     fsType = "btrfs";
     options = [ "nofail" "compress=zstd" "noatime" "space_cache=v2" "x-gvfs-show" ];
   };
 
-  fileSystems."/run/media/${username}/250x1" = {
+  fileSystems."/run/media/${user}/250x1" = {
     device = "/dev/disk/by-uuid/e7b47531-8e65-4096-be54-ca0648b0fe62";
     fsType = "btrfs";
     options = [ "nofail" "compress=zstd" "noatime" "space_cache=v2" "x-gvfs-show" ];
   };
  
-  fileSystems."/run/media/${username}/2000" = {
+  fileSystems."/run/media/${user}/2000" = {
     device = "/dev/disk/by-uuid/e2873f44-a0b2-4c05-9e8a-d14e9cade796";
     fsType = "btrfs";
     options = [ "nofail" "compress=zstd" "noatime" "space_cache=v2" "x-gvfs-show" ];
- };
+  };
 
   # --- NFS Mounting ---
 
@@ -82,8 +84,8 @@
     ];
   };
 
-  fileSystems."/home/${username}/virtual/box" = {
-    device = "192.168.1.100:/home/lewelove/virtual/box";
+  fileSystems."/home/${user}/virtual/box" = {
+    device = "192.168.1.100:/home/${user}/virtual/box";
     fsType = "nfs";
     options = [
       "x-systemd.automount"
@@ -92,5 +94,4 @@
       "actimeo=1"
     ];
   };
-
 }

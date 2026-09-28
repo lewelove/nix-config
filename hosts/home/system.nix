@@ -1,4 +1,4 @@
-{ config, pkgs, username, hostname, ... }:
+{ config, pkgs, ... }:
 
 {
   time.timeZone = "Europe/Moscow";
@@ -12,7 +12,6 @@
   };
 
   services.logrotate.enable = false;
-
   hardware.uinput.enable = true;
 
   nixpkgs.config = {

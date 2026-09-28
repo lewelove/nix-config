@@ -1,6 +1,8 @@
-{ pkgs, lib, username, config, ... }:
+{ pkgs, lib, config, ... }:
 
 let
+  user = config.my.identity.username;
+
   fetchExtension = { id, version, hash }: let
     crx = pkgs.fetchurl {
       url = "https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&prodversion=${lib.versions.major pkgs.ungoogled-chromium.version}&x=id%3D${id}%26installsource%3Dondemand%26uc";
@@ -29,18 +31,12 @@ let
         installPhase = "mkdir -p $out; cp -r uBlock0.chromium/* $out/";
       };
     };
-  
+
     sponsorblock = fetchExtension {
       id = "mnjggcdmjocbbbhaepdhchncahnbgone";
       version = "6.1.2";
       hash = "sha256-nE5FE3Eo1jG8sT1KYjVl8JRbmAiyhN8IZObHsAIb0wY=";
     };
-
-    # untrap = fetchExtension {
-    #   id = "enboaomnljigfhfjfoalacienlhjlfil";
-    #   version = "9.3.7";
-    #   hash = "sha256-Z+ZJ9wh/9PFhWTfWf1jgT4A0pnQAlnPFEFSsMnERU48=";
-    # };
   };
 
   windowUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
@@ -71,7 +67,6 @@ let
       ${lib.strings.escapeShellArgs commonArgs} \
       "$@" >/dev/null 2>&1
   '';
-
 in
 {
   options.my.chromium.wrapper = lib.mkOption {
@@ -81,7 +76,7 @@ in
   };
 
   config = {
-    home-manager.users.${username} = {
+    home-manager.users.${user} = {
       programs.chromium = {
         enable = true;
         package = pkgs.ungoogled-chromium;

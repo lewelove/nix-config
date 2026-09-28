@@ -1,5 +1,9 @@
-{ pkgs, inputs, stable, username, dot, ... }:
+{ pkgs, inputs, config, ... }:
 
+let
+  user = config.my.identity.username;
+  dot = config.my.identity.dotfilesPath;
+in
 {
   imports = [
     inputs.nix-flatpak.nixosModules.nix-flatpak
@@ -116,7 +120,6 @@
 
   programs.ssh.startAgent = true;
   programs.dconf.enable = true;
-
   programs.fuse.userAllowOther = true;
 
   programs.fzf = {
@@ -129,7 +132,7 @@
     gui = true;
   };
 
-  home-manager.users.${username} = { config, ... }: {
+  home-manager.users.${user} = { config, ... }: {
     programs.ssh = {
       enable = true;
       enableDefaultConfig = false;

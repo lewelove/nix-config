@@ -1,12 +1,15 @@
-{ inputs, username, ... }:
+{ inputs, config, ... }:
 
+let
+  user = config.my.identity.username;
+in
 {
   imports = [ inputs.home-manager.nixosModules.default ];
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs username; };
+    extraSpecialArgs = { inherit inputs; };
     backupFileExtension = "backup"; 
-    users.${username} = { config, ... }: {
+    users.${user} = { config, ... }: {
       home.stateVersion = "26.05";
 
       xdg.configFile."user-dirs.conf".text = "enabled=False";
@@ -23,7 +26,7 @@
         templates   = "${config.home.homeDirectory}/Documents";
         videos      = "${config.home.homeDirectory}/Documents";
 
-        download    = "/run/media/${username}/1000xhome/downloads";
+        download    = "/run/media/${user}/1000xhome/downloads";
       };
     };
   };

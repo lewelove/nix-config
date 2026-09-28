@@ -1,13 +1,13 @@
-{ pkgs, lib, username, config, ... }:
+{ config, ... }:
 
 let
+  user = config.my.identity.username;
   wrapper = config.my.chromium.wrapper;
   name = "Soulseek";
-  # domain = "slskd.lewelaboratory.duckdns.org";
   domain = "192.168.1.100:5030";
 in
 {
-  home-manager.users.${username} = {
+  home-manager.users.${user} = {
     xdg.desktopEntries.${name} = {
       inherit name;
       genericName = "Soulseek Client";
@@ -16,4 +16,3 @@ in
     };
   };
 }
-

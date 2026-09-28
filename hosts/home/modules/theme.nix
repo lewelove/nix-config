@@ -1,5 +1,8 @@
-{ pkgs, username, ... }:
+{ pkgs, config, ... }:
 
+let
+  user = config.my.identity.username;
+in
 {
   fonts = {
     packages = with pkgs; [
@@ -18,7 +21,6 @@
       hinting = {
         enable = false;
         autohint = false;
-        # style = "full";
       };
       subpixel = {
         rgba = "rgb";
@@ -52,7 +54,7 @@
     };
   };
 
-  home-manager.users.${username} = { config, ... }: {
+  home-manager.users.${user} = { config, ... }: {
     dconf.settings = {
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";

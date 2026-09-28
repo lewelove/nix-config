@@ -1,7 +1,10 @@
-{ username, ... }:
+{ config, ... }:
 
+let
+  user = config.my.identity.username;
+in
 {
-  home-manager.users.${username} = {
+  home-manager.users.${user} = {
     programs.direnv = {
       enable = true;
       nix-direnv.enable = true;

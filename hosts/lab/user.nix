@@ -1,10 +1,10 @@
-{ config, pkgs, inputs, username, ... }:
+{ config, pkgs, ... }:
 
+let
+  user = config.my.identity.username;
+in
 {
-  
-  # services.getty.autologinUser = "${username}";
-
-  users.users.${username} = {
+  users.users.${user} = {
     isNormalUser = true;
     uid = 1000;
     extraGroups = [ "networkmanager" "wheel" ];
@@ -14,5 +14,4 @@
   };
 
   security.sudo.wheelNeedsPassword = true;
-
 }

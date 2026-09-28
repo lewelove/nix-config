@@ -1,4 +1,4 @@
-{ pkgs, identity, ... }:
+{ pkgs, config, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -9,8 +9,8 @@
     enable = true;
     config = {
       user = {
-        name = identity.username;
-        email = identity.email;
+        name = config.my.identity.username;
+        email = config.my.identity.email;
       };
       init.defaultBranch = "main";
       safe.directory = "*";

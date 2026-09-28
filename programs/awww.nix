@@ -1,11 +1,14 @@
-{ pkgs, username, ... }:
+{ pkgs, config, ... }:
 
+let
+  user = config.my.identity.username;
+in
 {
   environment.systemPackages = [
     pkgs.awww
   ];
 
-  home-manager.users.${username} = {
+  home-manager.users.${user} = {
     systemd.user.services.awww = {
       Unit = {
         Description = "Wayland Wallpaper Daemon";
@@ -22,5 +25,4 @@
       Install.WantedBy = [ "graphical-session.target" ];
     };
   };
-
 }

@@ -1,6 +1,7 @@
-{ pkgs, lib, username, config, ... }:
+{ config, ... }:
 
 let
+  user = config.my.identity.username;
   wrapper = config.my.chromium.wrapper;
   
   homeName = "Syncthing (Home)";
@@ -31,7 +32,7 @@ in
     };
   };
 
-  home-manager.users.${username} = {
+  home-manager.users.${user} = {
     services.syncthing = {
       enable = true;
       extraOptions = [

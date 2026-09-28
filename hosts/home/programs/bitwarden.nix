@@ -1,4 +1,4 @@
-{ pkgs, lib, username, ... }:
+{ ... }:
 
 {
   services.flatpak.packages = [

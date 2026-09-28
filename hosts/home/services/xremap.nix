@@ -1,7 +1,11 @@
-{ username, dot, ... }:
+{ config, pkgs, ... }:
 
+let
+  user = config.my.identity.username;
+  dot = config.my.identity.dotfilesPath;
+in
 {
-  home-manager.users.${username} = { config, pkgs, ... }: {
+  home-manager.users.${user} = { config, pkgs, ... }: {
     home.file.".config/xremap/".source = config.lib.file.mkOutOfStoreSymlink "${dot}/.config/xremap/";
 
     systemd.user.services.xremap = {

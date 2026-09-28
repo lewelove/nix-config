@@ -1,6 +1,9 @@
-{ pkgs, lib, username, dot, config, ... }:
+{ pkgs, config, ... }:
 
 let
+  user = config.my.identity.username;
+  dot = config.my.identity.dotfilesPath;
+
   listenbrainz-mpd-90-no4m = pkgs.listenbrainz-mpd.overrideAttrs (old: rec {
     pname = "listenbrainz-mpd-90-no4m";
     version = "git";
@@ -22,14 +25,14 @@ in
   sops.secrets."listenbrainz-token" = { };
 
   sops.templates."listenbrainz-mpd.env" = {
-    owner = username;
+    owner = user;
     mode = "0440";
     content = ''
       LISTENBRAINZ_TOKEN=${config.sops.placeholder."listenbrainz-token"}
     '';
   };
 
-  home-manager.users.${username} = { config, osConfig, ... }: {
+  home-manager.users.${user} = { config, osConfig, ... }: {
     services.mpd = {
       enable = true;
       musicDirectory = "/run/media/${config.home.username}/1000xhome/backup-everything/FB2K/Library Historyfied!";

@@ -1,4 +1,4 @@
-{ config, pkgs, username, hostname, ... }:
+{ pkgs, ... }:
 
 {
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -13,6 +13,5 @@
   boot.kernelParams = [ 
     "btusb.enable_autosuspend=0" 
     "bluetooth.disable_ertm=1"
-    # "bluetooth.disable_esco=1"
   ];
 }

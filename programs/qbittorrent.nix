@@ -1,4 +1,4 @@
-{ pkgs, lib, username, config, ... }:
+{ config, ... }:
 
 let
   wrapper = config.my.chromium.wrapper;
@@ -7,11 +7,12 @@ let
   domain = "qbittorrent.lab";
   ip = "192.168.1.100";
   port = 8081;
+  user = config.my.identity.username;
 in
 {
   networking.hosts."${ip}" = [ domain ];
 
-  home-manager.users.${username} = {
+  home-manager.users.${user} = {
     xdg.desktopEntries.${name} = {
       inherit name icon;
       genericName = "Torrent Client";

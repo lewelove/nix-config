@@ -1,8 +1,7 @@
-{ config, pkgs, username, hostname, ... }:
+{ ... }:
 
 {
-
-  networking.hostName = hostname;
+  networking.hostName = "lab";
   networking.networkmanager.enable = true;
   networking.resolvconf.enable = true;
 
@@ -43,5 +42,4 @@
     "net.ipv4.conf.all.send_redirects" = 0;
     "net.ipv4.conf.default.send_redirects" = 0;
   };
-
 }

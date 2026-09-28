@@ -1,12 +1,13 @@
-{ pkgs, username, config, ... }:
+{ config, ... }:
 
 let
+  user = config.my.identity.username;
   wrapper = config.my.chromium.wrapper;
   name = "v2RayA";
   url = "192.168.1.100:2017";
 in
 {
-  home-manager.users.${username} = {
+  home-manager.users.${user} = {
     xdg.desktopEntries.${name} = {
       inherit name;
       genericName = "BitTorrent Client";

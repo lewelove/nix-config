@@ -1,11 +1,14 @@
-{ config, pkgs, username, ... }:
+{ config, ... }:
 
+let
+  user = config.my.identity.username;
+in
 {
   services.syncthing = {
     enable = true;
-    user = username;
+    user = user;
     group = "users";
-    configDir = "/home/${username}/.config/syncthing";
+    configDir = "/home/${user}/.config/syncthing";
     
     guiAddress = "0.0.0.0:8384";
 

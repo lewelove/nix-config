@@ -1,7 +1,10 @@
-{ username, ... }:
+{ config, ... }:
 
+let
+  user = config.my.identity.username;
+in
 {
-  home-manager.users.${username} = { inputs, ... }: {
+  home-manager.users.${user} = { inputs, ... }: {
     imports = [ inputs.zen-browser.homeModules.beta ];
 
     programs.zen-browser = {

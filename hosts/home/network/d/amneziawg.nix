@@ -1,6 +1,7 @@
-{ pkgs, identity, ... }:
+{ pkgs, config, ... }:
 
 let
+  user = config.my.identity.username;
   awgg = pkgs.writeShellApplication {
     name = "awgg";
     runtimeInputs = with pkgs; [ 
@@ -42,7 +43,7 @@ let
       awg-quick down /etc/amneziawg/active.conf >/dev/null 2>&1 || true
       killall amneziawg-go >/dev/null 2>&1 || true
 
-      SOURCE_DIR="/home/${identity.username}/vpn/amneziawg"
+      SOURCE_DIR="/home/${user}/vpn/amneziawg"
       TARGET_DIR="/etc/amneziawg"
       TARGET_CONF="$TARGET_DIR/active.conf"
 
@@ -68,7 +69,6 @@ let
 
       awg-quick up "$TARGET_CONF" 2>/dev/null || true
 
-      # FIX PRIORITY INVERSION: Force wg-quick rules to evaluate AFTER the Steam bypass.
       while ip rule show | grep -q "lookup 51820"; do
           ip rule del lookup 51820 || true
       done

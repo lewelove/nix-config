@@ -1,12 +1,11 @@
-{ pkgs, identity, repoPath, hostPath, ... }:
+{ pkgs, config, ... }:
 
 let
+  repoPath = config.my.identity.repoPath;
   ns = pkgs.writeShellApplication {
     name = "ns";
     runtimeInputs = with pkgs; [ git stow repomix coreutils gum rsync openssh ];
     text = ''
-
-################################################################
 
 rb() { gum style --foreground 1 --bold "$*"; }
 gb() { gum style --foreground 2 --bold "$*"; }
@@ -87,7 +86,6 @@ if [ "$SKIP_GIT" = "false" ]; then
     fi
 fi
 
-################################################################
     '';
   };
 in

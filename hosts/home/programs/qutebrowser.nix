@@ -1,4 +1,4 @@
-{ pkgs, username, dot, ... }:
+{ pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [ qutebrowser ];

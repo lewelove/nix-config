@@ -1,4 +1,4 @@
-{ inputs, pkgs, config, ... }:
+{ inputs, config, ... }:
 
 let
   user = config.my.identity.username;
@@ -33,7 +33,7 @@ in
     config = {
       imports = [
         inputs.home-manager.nixosModules.default
-        ./guest
+        ../../../box
       ];
 
       microvm = {

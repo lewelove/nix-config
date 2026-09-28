@@ -1,8 +1,10 @@
-{ pkgs, username, ... }:
+{ pkgs, config, ... }:
 
+let
+  user = config.my.identity.username;
+in
 {
-
-  home-manager.users.${username} = {
+  home-manager.users.${user} = {
     systemd.user.services.wlsunset = {
       Unit = {
         Description = "Day/Night Gamma Adjuster";
@@ -16,5 +18,4 @@
       Install.WantedBy = [ "graphical-session.target" ];
     };
   };
-
 }

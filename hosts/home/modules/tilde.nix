@@ -1,9 +1,12 @@
-{ identity, username, ... }:
+{ config, ... }:
 
+let
+  user = config.my.identity.username;
+  dot = config.my.identity.dotfilesPath;
+in
 {
-  home-manager.users.${username} = { config, ... }: let
+  home-manager.users.${user} = { config, ... }: let
     link = config.lib.file.mkOutOfStoreSymlink;
-    dot = "${identity.repoPath}/dotfiles";
   in {
     home.file = {
       # --- .config Directories (Not yet modularized) ---

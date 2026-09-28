@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, config, ... }:
 
 {
   options.my.identity = {
@@ -22,7 +22,7 @@
 
     dotfilesPath = lib.mkOption {
       type = lib.types.str;
-      default = "/home/lewelove/nix-config/dotfiles";
+      default = "${config.my.identity.repoPath}/dotfiles";
       description = "Path to dotfiles directory";
     };
   };

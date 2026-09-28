@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 let
+  user = config.my.identity.username;
   homeIp = "192.168.1.101";
   nfsPorts = "111,2049,4000,4001,4002";
 in
@@ -13,7 +14,7 @@ in
 
     exports = ''
       /mnt/1000xlab ${homeIp}(rw,nohide,insecure,no_subtree_check,all_squash,anonuid=1000,anongid=990)
-      /home/lewelove/virtual/box ${homeIp}(rw,nohide,insecure,no_subtree_check,all_squash,anonuid=1000,anongid=100)
+      /home/${user}/virtual/box ${homeIp}(rw,nohide,insecure,no_subtree_check,all_squash,anonuid=1000,anongid=100)
     '';
   };
 

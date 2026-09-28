@@ -1,5 +1,8 @@
-{ pkgs, username, ... }:
+{ config, ... }:
 
+let
+  user = config.my.identity.username;
+in
 {
   services.openssh = {
     enable = true;
@@ -11,7 +14,7 @@
     };
   };
 
-  users.users.${username}.openssh.authorizedKeys.keys = [
+  users.users.${user}.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINngwDtUZAiEALEZ1XhPXX221hYqjGSaqWRnvaUnpMXT lewelove@proton.me"
   ];
 }

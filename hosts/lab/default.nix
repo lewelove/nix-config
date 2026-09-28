@@ -34,7 +34,7 @@
 
     # Programs
     ../../programs/fish.nix
-    ../../programs/nvim.nix
+    ../../programs/nvim
     ../../programs/git.nix
     ../../programs/btop.nix
     (lib.pipe inputs.import-tree [

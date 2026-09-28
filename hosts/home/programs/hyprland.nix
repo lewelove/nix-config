@@ -1,9 +1,12 @@
-{ pkgs, username, dot, config, inputs, ... }:
+{ pkgs, config, ... }:
 
+let
+  user = config.my.identity.username;
+  dot = config.my.identity.dotfilesPath;
+in
 {
   programs.hyprland = {
     enable = true;
-    # package = inputs.hyprland-git.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     withUWSM = false;
     xwayland.enable = true;
   };
@@ -13,7 +16,6 @@
   xdg.portal = {
     enable = true;
     extraPortals = [ 
-      # stable.xdg-desktop-portal-hyprland
       pkgs.xdg-desktop-portal-gtk
     ];
     config = {
@@ -22,7 +24,7 @@
     };
   };
 
-  home-manager.users.${username} = { config, osConfig, ... }: {
+  home-manager.users.${user} = { config, osConfig, ... }: {
     home.file.".config/hypr".source = config.lib.file.mkOutOfStoreSymlink "${dot}/.config/hypr";
 
     xdg.desktopEntries.hyprland-wiki = let

@@ -1,5 +1,9 @@
-{ stable, username, dot, config, ... }:
+{ stable, config, ... }:
 
+let
+  user = config.my.identity.username;
+  dot = config.my.identity.dotfilesPath;
+in
 {
   environment.systemPackages = [
     (stable.mpv.override {
@@ -9,7 +13,7 @@
     })
   ];
 
-  home-manager.users.${username} = { config, osConfig, ... }: {
+  home-manager.users.${user} = { config, osConfig, ... }: {
     home.file.".config/mpv".source = config.lib.file.mkOutOfStoreSymlink "${dot}/.config/mpv";
 
     xdg.desktopEntries.mpv-wiki = let

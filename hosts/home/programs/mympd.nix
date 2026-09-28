@@ -1,6 +1,7 @@
-{ pkgs, lib, username, config, ... }:
+{ config, ... }:
 
 let
+  user = config.my.identity.username;
   wrapper = config.my.chromium.wrapper;
   name = "myMPD";
   icon = "mympd";
@@ -22,7 +23,7 @@ in
     };
   };
 
-  home-manager.users.${username} = {
+  home-manager.users.${user} = {
     xdg.desktopEntries.${name} = {
       inherit name icon;
       genericName = "MPD Web Client";

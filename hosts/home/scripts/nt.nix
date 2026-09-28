@@ -1,12 +1,11 @@
-{ pkgs, identity, ... }:
+{ pkgs, config, ... }:
 
 let
+  repoPath = config.my.identity.repoPath;
   nt = pkgs.writeShellApplication {
     name = "nt";
     runtimeInputs = with pkgs; [ nh nix-output-monitor coreutils gum ];
     text = ''
-
-################################################################
 
 rb() { gum style --foreground 1 --bold "$*"; }
 gb() { gum style --foreground 2 --bold "$*"; }
@@ -21,7 +20,7 @@ b() { gum style --foreground 4 "$*"; }
 m() { gum style --foreground 5 "$*"; }
 w() { gum style --foreground 7 "$*"; }
 
-REPO_DIR="${identity.repoPath}"
+REPO_DIR="${repoPath}"
 TARGET_HOST="''${1:-}"
 
 if [ -z "$TARGET_HOST" ]; then
@@ -30,10 +29,10 @@ if [ -z "$TARGET_HOST" ]; then
 fi
 
 cd "$REPO_DIR" || exit 1
-TARGET_PATH="$REPO_DIR/$TARGET_HOST"
+TARGET_PATH="$REPO_DIR/hosts/$TARGET_HOST"
 
 if [ ! -d "$TARGET_PATH" ]; then
-  echo "$(r "[!] ")" "Error: Host directory $(b "$TARGET_HOST") does not exist in $REPO_DIR"
+  echo "$(r "[!] ")" "Error: Host directory $(b "$TARGET_HOST") does not exist in $REPO_DIR/hosts"
   exit 1
 fi
 
@@ -41,7 +40,7 @@ echo
 gum join --horizontal "$(m "[>] ")" "Verifying Flake for " "$(b "[$TARGET_HOST]")" "..."
 echo
 
-if NH_NOM=1 nh os build "$TARGET_PATH" --hostname "$TARGET_HOST"; then
+if NH_NOM=1 nh os build "$REPO_DIR" --hostname "$TARGET_HOST"; then
     echo
     gum join --horizontal "$(g "[+] ")" "$(b "$TARGET_HOST")" " is valid and buildable."
 else
@@ -49,8 +48,6 @@ else
     gum join --horizontal "$(r "[!] ")" "$(b "$TARGET_HOST")" " build failed."
     exit 1
 fi
-
-################################################################
 
     '';
   };

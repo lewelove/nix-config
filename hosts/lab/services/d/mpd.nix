@@ -1,7 +1,10 @@
-{ pkgs, lib, username, dot, ... }:
+{ config, ... }:
 
+let
+  user = config.my.identity.username;
+in
 {
-  home-manager.users.${username} = { config, ... }: {
+  home-manager.users.${user} = { config, ... }: {
     services.mpd = {
       enable = true;
       musicDirectory = "/mnt/1000xlab/backup-everything/FB2K/Library Historyfied!";
@@ -22,4 +25,3 @@
     };
   };
 }
-

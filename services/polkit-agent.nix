@@ -1,8 +1,10 @@
-{ pkgs, username, ... }:
+{ pkgs, config, ... }:
 
+let
+  user = config.my.identity.username;
+in
 {
-
-  home-manager.users.${username} = {
+  home-manager.users.${user} = {
     systemd.user.services.polkit-agent = {
       Unit = {
         Description = "GNOME Polkit Authentication Agent";
@@ -18,5 +20,4 @@
       Install.WantedBy = [ "graphical-session.target" ];
     };
   };
-
 }

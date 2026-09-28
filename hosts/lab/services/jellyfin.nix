@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 
+let
+  user = config.my.identity.username;
+in
 {
   services.jellyfin = {
     enable = true;
@@ -7,5 +10,5 @@
   };
 
   users.users.jellyfin.extraGroups = [ "torrents" ];
-  users.users.lewelove.extraGroups = [ "jellyfin" ];
+  users.users.${user}.extraGroups = [ "jellyfin" ];
 }

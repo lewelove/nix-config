@@ -1,12 +1,9 @@
-{ config, pkgs, username, hostname, identity, ... }:
+{ config, pkgs, ... }:
 
 {
-
-  # --- Localization ---
   time.timeZone = "Europe/Moscow";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # --- Boot ---
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [ "tun" ];
   boot.loader.efi.canTouchEfiVariables = true;
@@ -18,18 +15,15 @@
     configurationLimit = 5;
   };
 
-  # --- ACME / SSL Setup ---
   security.acme = {
     acceptTerms = true;
-    defaults.email = identity.email;
+    defaults.email = config.my.identity.email;
   };
 
-  # --- Nix Settings ---
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config = {
     allowUnfree = true;
   };
 
   system.stateVersion = "25.11"; 
-
 }

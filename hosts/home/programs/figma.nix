@@ -1,12 +1,14 @@
-{ pkgs, lib, username, config, dot, ... }:
+{ pkgs, config, ... }:
 
 let
+  user = config.my.identity.username;
+  dot = config.my.identity.dotfilesPath;
   wrapper = config.my.chromium.wrapper;
   url = "https://figma.com";
   name = "Figma";
 in
 {
-  home-manager.users.${username} = { config, ... }: {
+  home-manager.users.${user} = { config, ... }: {
     xdg.desktopEntries.${name} = {
       inherit name;
       genericName = "Graphic Design Tool";

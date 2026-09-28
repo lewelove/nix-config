@@ -5,7 +5,8 @@ let
 in
 {
   imports = [
-    ../../../../../core/identity.nix
+    ../../core/dotfiles.nix
+    ../../core/identity.nix
     ./network.nix
     ./programs.nix
     ./user.nix
