@@ -20,11 +20,12 @@
 
     # Terminal Programs
     starship
+    fastfetch
 
     # Virtualization
-    distrobox
-    runc
-    crun
+    # distrobox
+    # runc
+    # crun
 
     # Rust Utils
     ripgrep

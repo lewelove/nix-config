@@ -7,6 +7,7 @@
     ../../programs/starship.nix
     ../../programs/direnv.nix
     ../../programs/git.nix
+    ../../programs/btop.nix
   ];
 
   my.programs.neovim.enable = true;
@@ -19,5 +20,7 @@
     eza
     yazi
     lazygit
+    rustup
+    python3
   ];
 }

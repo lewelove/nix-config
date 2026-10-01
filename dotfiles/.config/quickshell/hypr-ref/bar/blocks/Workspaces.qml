@@ -6,26 +6,30 @@ import "root:/"
 import "../" 
 
 RowLayout {
+    id: root
     spacing: Theme.get.workspaceSpacing
-    property HyprlandMonitor monitor: Hyprland.monitorFor(screen)
 
     Repeater {
         model: ScriptModel {
             values: [...Hyprland.workspaces.values]
-                // FIX: Named workspaces have negative IDs in Hyprland! 
-                // We filter by name string instead of ws.id > 0
-                .filter(ws => ws.monitor === monitor && !ws.name.startsWith("special:"))
+                .filter(ws => {
+                    if (!ws || !ws.name || ws.name.startsWith("special:")) return false;
+                    const mon = Hyprland.monitorFor(screen);
+                    if (mon && ws.monitor) return ws.monitor === mon || ws.monitor.name === mon.name;
+                    if (screen && ws.monitor) return ws.monitor.name === screen.name;
+                    return true;
+                })
                 .sort((a, b) => a.name.localeCompare(b.name))
         }
 
         BarBlock {
             property HyprlandWorkspace thisWorkspace: modelData
-            property var myWindows: WindowTracker.getWindows(thisWorkspace.id)
+            property var myWindows: WindowTracker.getWindows(thisWorkspace)
             property bool isActive: Hyprland.focusedMonitor?.activeWorkspace?.id === thisWorkspace.id
             
             underline: isActive
             
-            Layout.preferredWidth: Math.max(Theme.get.barHeight, content.implicitWidth)
+            Layout.preferredWidth: Math.max(Theme.get.barHeight, content ? content.implicitWidth : 0)
 
             onClicked: Hyprland.dispatch(`workspace name:${thisWorkspace.name}`)
 
@@ -42,13 +46,11 @@ RowLayout {
                         id: numText
                         text: thisWorkspace.name
                         
-                        // Font
                         fontFamily: Theme.get.fontFaceWorkspaces
                         fontWeight: Theme.get.fontWeightWorkspaces
                         fontSize: Theme.get.fontSizeWorkspaces
                         textColor: isActive ? Theme.get.workspaceColorActive : Theme.get.workspaceColorInactive
                         
-                        // Shadow
                         shadowEnabled: Theme.get.shadowWorkspacesEnabled
                         shadowColor: Theme.get.shadowWorkspacesColor
                         shadowX: Theme.get.shadowWorkspacesX

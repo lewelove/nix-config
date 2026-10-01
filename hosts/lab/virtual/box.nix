@@ -30,6 +30,7 @@ in
 
   microvm.vms.box = {
     autostart = true;
+    specialArgs = { inherit inputs; };
     config = {
       imports = [
         inputs.home-manager.nixosModules.default
@@ -38,7 +39,7 @@ in
 
       microvm = {
         hypervisor = "qemu";
-        vcpu = 2;
+        vcpu = 3;
         mem = 4096;
 
         shares = [

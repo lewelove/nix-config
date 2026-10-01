@@ -1,33 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-
-<svg
-   width="800px"
-   height="800px"
-   viewBox="0 0 15 15"
-   fill="none"
-   version="1.1"
-   id="svg1"
-   sodipodi:docname="8df61d40-78ac-4c3a-ba58-85502c8b0e9d.svg"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs1" />
-  <sodipodi:namedview
-     id="namedview1"
-     pagecolor="#ffffff"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1" />
-  <path
-     fill-rule="evenodd"
-     clip-rule="evenodd"
-     d="M0 2.5C0 1.67157 0.671573 1 1.5 1H13.5C14.3284 1 15 1.67157 15 2.5V12.5C15 13.3284 14.3284 14 13.5 14H1.5C0.671573 14 0 13.3284 0 12.5V2.5ZM5.79293 7.50001L3.14648 4.85356L3.85359 4.14645L7.20714 7.50001L3.85359 10.8536L3.14648 10.1465L5.79293 7.50001ZM12 11H8V10H12V11Z"
-     fill="#000000"
-     id="path1" />
+<svg width="800" height="800" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M80 80.3334H720C749.27 80.3334 773 104.062 773 133.333V666.666C773 695.936 749.27 719.666 720 719.666H80C50.7292 719.666 27 695.936 27 666.666V133.333C27 104.062 50.7289 80.3334 80 80.3334Z" fill="black" stroke="white" stroke-width="54"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M308.956 400.001L167.812 258.857L205.525 221.144L384.381 400.001L205.525 578.859L167.812 541.147L308.956 400.001ZM640 586.667H426.667V533.333H640V586.667Z" fill="black"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M308.956 400.001L167.812 258.857L205.525 221.144L384.381 400.001L205.525 578.859L167.812 541.147L308.956 400.001ZM640 586.667H426.667V533.333H640V586.667Z" fill="black"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M308.956 400.001L167.812 258.857L205.525 221.144L384.381 400.001L205.525 578.859L167.812 541.147L308.956 400.001ZM640 586.667H426.667V533.333H640V586.667Z" fill="white"/>
+<path d="M308.956 400.001L167.812 258.857L205.525 221.144L384.381 400.001L205.525 578.859L167.812 541.147L308.956 400.001ZM640 586.667H426.667V533.333H640V586.667Z" stroke="white" stroke-width="20"/>
 </svg>

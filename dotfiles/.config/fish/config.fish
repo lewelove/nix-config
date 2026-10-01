@@ -6,12 +6,12 @@ if status is-interactive
 
   set -g fish_color_command green
 
-  function starship_newline --on-event fish_prompt
-      if set -q _starship_rendered
-          echo ""
-      end
-      set -g _starship_rendered 1
-  end
+  # function starship_newline --on-event fish_prompt
+  #     if set -q _starship_rendered
+  #         echo ""
+  #     end
+  #     set -g _starship_rendered 1
+  # end
 
   fish_add_path "$HOME/.commands"
   fish_add_path "$HOME/.scripts"
@@ -38,13 +38,17 @@ if status is-interactive
 
   abbr -a b "clr && build && notify-send 'Built!'"
 
+  abbr -a dv "devenv shell"
+
+  abbr -a lab "ssh lab"
+  abbr -a box "ssh box"
+
   alias sync "git-sync-bin"
   alias c "wl-copy"
 
-  abbr -a dv "devenv shell"
-
   if type -q devenv
-    devenv hook fish | sed 's/devenv shell/devenv shell --quiet/g' | source
+    devenv hook fish | source
+    # devenv hook fish | sed 's/devenv shell/devenv shell --quiet/g' | source
   end
 
   function lowmtime

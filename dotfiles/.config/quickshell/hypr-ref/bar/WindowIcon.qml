@@ -1,10 +1,11 @@
 import QtQuick
+import Quickshell
+import Quickshell.Widgets
 import "root:/"
 
 Item {
     id: root
-    
-    // Size determined by Theme
+
     width: Theme.get.iconSize
     height: Theme.get.iconSize
 
@@ -12,53 +13,66 @@ Item {
     implicitHeight: Theme.get.iconSize
 
     property var client: null
-    property bool isValid: client !== null && client !== undefined && client["class"] !== undefined
 
-    property string appClass: {
-        if (!isValid) return "";
-        var c = (client["class"] || "").toString();
-        if (c === "") c = (client.initialClass || "").toString();
-        if (c === "") c = (client.title || "").toString();
-        return c;
+    property string rawAppId: {
+        if (!client) return "";
+        if (typeof client === "string") return client;
+        if (client.appId && client.appId !== "") return client.appId.toString();
+        if (client["class"] && client["class"] !== "") return client["class"].toString();
+        if (client.initialClass && client.initialClass !== "") return client.initialClass.toString();
+        if (client.lastIpcObject) {
+            if (client.lastIpcObject["class"]) return client.lastIpcObject["class"].toString();
+            if (client.lastIpcObject.initialClass) return client.lastIpcObject.initialClass.toString();
+        }
+        if (client.wayland && client.wayland.appId) return client.wayland.appId.toString();
+        return "";
     }
-    
-    property string cleanName: appClass.toLowerCase()
-    property string currentExt: "svg"
-    
-    onCleanNameChanged: root.currentExt = "svg"
-    visible: isValid
 
-    Image {
+    property string windowTitle: {
+        if (!client) return "";
+        if (client.title) return client.title.toString();
+        if (client.lastIpcObject && client.lastIpcObject.title) return client.lastIpcObject.title.toString();
+        return "";
+    }
+
+    property string normalizedId: {
+        var id = rawAppId;
+        if (id.startsWith("chrome-") && id.endsWith("-Default")) {
+            id = id.slice(7, -8);
+            id = id.replace(/__.*$/, "").replace(/\..*$/, "");
+        }
+        return id.toLowerCase();
+    }
+
+    property string resolvedIconPath: IconResolver.resolve(rawAppId, normalizedId, windowTitle)
+
+    onResolvedIconPathChanged: {
+        if (normalizedId !== "") {
+            console.log("[WindowIcon] rawAppId: '" + rawAppId + "' | normalizedId: '" + normalizedId + "' | title: '" + windowTitle + "' | resolvedIcon: '" + resolvedIconPath + "'");
+        }
+    }
+
+    visible: rawAppId !== ""
+
+    IconImage {
         id: icon
         anchors.fill: parent
-        fillMode: Image.PreserveAspectFit
-        mipmap: true
-        smooth: true
-        antialiasing: true
-        
-        // Use Theme values for texture loading to ensure correct scaling/resolution
-        sourceSize.width: Theme.get.iconSize
-        sourceSize.height: Theme.get.iconSize
-        
-        source: root.cleanName 
-                ? `root:/assets/icons/${root.cleanName}.${root.currentExt}` 
-                : ""
-
-        onStatusChanged: {
-            if (status === Image.Error && root.currentExt === "svg") {
-                root.currentExt = "png";
-            }
-        }
+        visible: root.resolvedIconPath !== ""
+        source: root.resolvedIconPath
     }
 
     Rectangle {
         anchors.fill: parent
-        visible: (icon.status === Image.Error || icon.status === Image.Null) && root.cleanName !== ""
+        visible: root.resolvedIconPath === ""
         color: "#333333"
         radius: 3
+
         Text {
             anchors.centerIn: parent
-            text: root.appClass.length > 0 ? root.appClass.charAt(0).toUpperCase() : "?"
+            text: {
+                var display = root.normalizedId || root.rawAppId;
+                return display.length > 0 ? display.charAt(0).toUpperCase() : "?";
+            }
             color: "white"
             font.pixelSize: 10
             font.bold: true

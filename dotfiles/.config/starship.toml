@@ -1,7 +1,7 @@
 add_newline = false
 
 format = """
-[$username](yellow)[@](green)[$hostname](blue) [$directory](purple) $git_branch
+[$hostname](blue) [$directory](purple) $git_branch
 $character
 """
 

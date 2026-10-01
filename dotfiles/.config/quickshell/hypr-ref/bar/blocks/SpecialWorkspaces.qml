@@ -8,7 +8,6 @@ import "../"
 RowLayout {
     id: root
     spacing: Theme.get.workspaceInnerSpacing
-    property HyprlandMonitor monitor: Hyprland.monitorFor(screen)
 
     visible: repeater.count > 0
 
@@ -16,21 +15,26 @@ RowLayout {
         id: repeater
         model: ScriptModel {
             values: [...Hyprland.workspaces.values]
-                // FIX: Catch special workspaces using the name prefix instead of ws.id < 0
-                .filter(ws => ws.monitor === monitor && ws.name.startsWith("special:"))
+                .filter(ws => {
+                    if (!ws || !ws.name || !ws.name.startsWith("special:")) return false;
+                    const mon = Hyprland.monitorFor(screen);
+                    if (mon && ws.monitor) return ws.monitor === mon || ws.monitor.name === mon.name;
+                    if (screen && ws.monitor) return ws.monitor.name === screen.name;
+                    return true;
+                })
                 .sort((a, b) => a.name.localeCompare(b.name))
         }
 
         BarBlock {
             property HyprlandWorkspace thisWorkspace: modelData
-            property var myWindows: WindowTracker.getWindows(thisWorkspace.id)
+            property var myWindows: WindowTracker.getWindows(thisWorkspace)
             property bool isActive: Hyprland.focusedMonitor?.activeWorkspace?.id === thisWorkspace.id
             
             visible: myWindows.length > 0
 
             underline: isActive
             
-            Layout.preferredWidth: content.implicitWidth
+            Layout.preferredWidth: content ? content.implicitWidth : 0
 
             onClicked: Hyprland.dispatch(`togglespecialworkspace ${thisWorkspace.name.replace("special:", "")}`)
 

@@ -3,7 +3,7 @@
 _G.programs = require("tables.programs")
 
 hl.on("hyprland.start", function () 
-  hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+  hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_DATA_DIRS")
   hl.exec_cmd("systemctl --user start hyprland-session.target")
   hl.exec_cmd("systemctl --user restart xdg-desktop-portal-hyprland xdg-desktop-portal")
   hl.dispatch(hl.dsp.focus({ workspace = "name:D" }))

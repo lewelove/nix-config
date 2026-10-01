@@ -1,12 +1,13 @@
-{ config, ... }:
+{ inputs, config, ... }:
 
 let
   user = config.my.identity.username;
 in
 {
   imports = [
-    ../../core/dotfiles.nix
-    ../../core/identity.nix
+    # ../../core/dotfiles.nix
+    # ../../core/identity.nix
+    (inputs.import-tree ../../core)
     ./network.nix
     ./programs.nix
     ./user.nix
