@@ -22,6 +22,7 @@ application/x-sh=nvl.desktop
 inode/directory=thunar.desktop
 x-scheme-handler/tg=userapp-AyuGram Desktop-R9ALQ3.desktop
 x-scheme-handler/tonsite=userapp-AyuGram Desktop-JD9JQ3.desktop
+image/vnd.adobe.photoshop=photocraft.desktop
 
 [Added Associations]
 image/jpeg=imv-dir.desktop
@@ -31,3 +32,4 @@ application/x-cue=nvl.desktop;nvim.desktop;
 application/x-shellscript=nvim.desktop;kitty-open.desktop;
 x-scheme-handler/tg=userapp-AyuGram Desktop-R9ALQ3.desktop;
 x-scheme-handler/tonsite=userapp-AyuGram Desktop-JD9JQ3.desktop;
+image/vnd.adobe.photoshop=photocraft.desktop;

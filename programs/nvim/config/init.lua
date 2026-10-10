@@ -2,6 +2,7 @@ require("options")
 
 require("keymaps")
 require("keymaps-plugins")
+require("clipboard")
 
 require("lazy-init")
 

@@ -15,7 +15,7 @@
     ../../secrets
 
     # Virtual Machines
-    ./virtual/box.nix
+    # ./virtual/box.nix
 
     # Home Manager
     ./modules/home-manager.nix

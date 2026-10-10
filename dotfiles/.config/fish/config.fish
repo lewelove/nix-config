@@ -48,7 +48,7 @@ if status is-interactive
 
   if type -q devenv
     devenv hook fish | source
-    # devenv hook fish | sed 's/devenv shell/devenv shell --quiet/g' | source
+    devenv hook fish | sed 's/devenv shell/devenv shell --quiet/g' | source
   end
 
   function lowmtime

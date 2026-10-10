@@ -16,7 +16,7 @@ local meta_workspaces = {
   },
   Image = {
     key = "I",
-    on_created_empty = programs.photopea,
+    on_created_empty = programs.photoeditor,
   },
   Alarms = {
     key = "F12",

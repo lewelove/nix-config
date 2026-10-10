@@ -18,7 +18,9 @@ return {
    bookmarks = "fuzzel-bookmarks.sh",
 
    steam = "steam-isp",
-   photopea = "chromium-browser --app=https://photopea.com",
+
+   -- photoeditor = "photocraft",
+   photoeditor = "chromium-browser --app=https://photopea.com",
   
    lab_ssh = "ssh lab",
 

@@ -1,37 +1,28 @@
 { pkgs, ... }:
 
 {
+  networking.nameservers = [ "9.9.9.9" ];
+  networking.networkmanager.dns = "none";
   networking.firewall.trustedInterfaces = [ "tun0" ];
 
   services.sing-box = {
     enable = true;
     settings = {
-      log = {
-        level = "info";
-      };
+      log.level = "info";
 
-      # dns = {
-      #   servers = [
-      #     {
-      #       type = "udp";
-      #       tag = "local-adguard";
-      #       server = "192.168.1.100";
-      #     }
-      #     {
-      #       type = "udp";
-      #       tag = "fallback-dns";
-      #       server = "1.1.1.1";
-      #     }
-      #   ];
-      #   rules = [
-      #     {
-      #       action = "route";
-      #       server = "local-adguard";
-      #     }
-      #   ];
-      #   final = "local-adguard";
-      #   strategy = "prefer_ipv4";
-      # };
+      dns = {
+        servers = [
+          {
+            type = "tcp";
+            tag = "quad9";
+            server = "9.9.9.9";
+            server_port = 53;
+            detour = "lab-proxy";
+          }
+        ];
+        final = "quad9";
+        strategy = "prefer_ipv4";
+      };
 
       inbounds = [
         {
@@ -60,8 +51,7 @@
 
       route = {
         auto_detect_interface = true;
-        # default_domain_resolver = "local-adguard";
-        # default_domain_resolver = "fallback-dns";
+        default_domain_resolver = "quad9";
         final = "lab-proxy";
         rules = [
           {

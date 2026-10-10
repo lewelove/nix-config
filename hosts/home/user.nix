@@ -10,6 +10,8 @@ in
 
   users.users.${user} = {
     isNormalUser = true;
+    uid = 1001;
+    group = "users";
     extraGroups = [ "networkmanager" "wheel" "input" "uinput" "novpn" "i2c" ];
     shell = pkgs.fish; 
     autoSubUidGidRange = true;

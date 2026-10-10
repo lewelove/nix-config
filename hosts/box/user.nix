@@ -6,7 +6,7 @@ in
 {
   users.users.${user} = {
     isNormalUser = true;
-    uid = 1000;
+    uid = 1001;
     group = "users";
     shell = pkgs.fish;
     extraGroups = [ "wheel" ];
@@ -19,6 +19,12 @@ in
 
   services.openssh = {
     enable = true;
+    hostKeys = [
+      {
+        path = "/nix/var/ssh/ssh_host_ed25519_key";
+        type = "ed25519";
+      }
+    ];
     settings = {
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
@@ -28,5 +34,6 @@ in
 
   systemd.tmpfiles.rules = [
     "d /home/${user}/.ssh 0700 ${user} users -"
+    "d /nix/var/ssh 0700 root root -"
   ];
 }

@@ -19,9 +19,9 @@ require("libraries.experimental")
 
 require("cabinets.collections")
 
-require("interfaces.default")
+require("interfaces")
 
-require("actions.default")
+require("actions")
 
 dale.config({
   storage = {

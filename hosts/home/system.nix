@@ -12,7 +12,9 @@
   };
 
   services.logrotate.enable = false;
+
   hardware.uinput.enable = true;
+  hardware.ksm.enable = true;
 
   nixpkgs.config = {
     allowUnfree = true;

@@ -13,6 +13,11 @@ nix-config = {
   paste = [ "~/Folders/XML Packed/~-nix-config.xml" ]
 }
 
+"starve!" = {
+  run = "repomix ~/dev/dst_mods/starve! --quiet",
+  paste = [ "~/Folders/XML Packed/~-dev-dst_mods-starve!.xml" ]
+}
+
 album_curation = {
   run = "repomix ~/dev/album_curation --quiet",
   paste = [

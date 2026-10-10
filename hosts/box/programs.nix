@@ -22,5 +22,7 @@
     lazygit
     rustup
     python3
+    fd
+    ripgrep
   ];
 }

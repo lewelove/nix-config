@@ -59,6 +59,7 @@ in
     peazip
     marktext
     zoxide
+    tor-browser
 
     # Terminal Programs
     foot
@@ -79,6 +80,8 @@ in
     eza
     devenv
     yt-dlp
+    monolith
+    android-tools
 
     # Programming Languages
     python3
@@ -140,13 +143,6 @@ in
         "lab" = {
           HostName = "192.168.1.100";
           User = "lewelove";
-        };
-        "box" = {
-          hostname = "192.168.1.100";
-          port = 2223;
-          user = "lewelove";
-          StrictHostKeyChecking = "no";
-          UserKnownHostsFile = "/dev/null";
         };
       };
     };

@@ -13,6 +13,9 @@
     # Secrets
     ../../secrets
 
+    # Virtual Machines
+    ./virtual/box.nix
+
     # Modules
     ./modules/boot.nix
     ./modules/environment.nix

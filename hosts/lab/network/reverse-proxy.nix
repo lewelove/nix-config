@@ -62,6 +62,12 @@ in
         import auth
         reverse_proxy localhost:5030
       }
+
+      dontstarve.${domain} {
+        import logging
+        import drop_scanners
+        reverse_proxy localhost:3005
+      }
     '';
   };
 

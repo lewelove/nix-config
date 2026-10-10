@@ -10,6 +10,11 @@ hl.bind (
   "CONTROL + ALT + Delete",
   hl.dsp.exec_cmd("powermenu.sh") )
 
+-- btop
+hl.bind (
+  "CONTROL + ALT + Insert",
+  hl.dsp.exec_cmd(programs.terminal .. " -e btop") )
+
 -- close window safely
 local safe_kill = require("scripts.safe-kill")
 hl.bind (
@@ -30,10 +35,6 @@ hl.bind (
 hl.bind (
   "SUPER + Tab",
   hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }) )
-
-hl.bind (
-  "CONTROL + Tab",
-  hl.dsp.layout("inhibit_scroll") )
 
 -- pin windows
 hl.bind (

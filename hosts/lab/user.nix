@@ -7,6 +7,7 @@ in
   users.users.${user} = {
     isNormalUser = true;
     uid = 1000;
+    group = "users";
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish; 
     autoSubUidGidRange = true;

@@ -84,14 +84,16 @@ in
     ];
   };
 
-  fileSystems."/home/${user}/virtual/box" = {
-    device = "192.168.1.100:/home/${user}/virtual/box";
-    fsType = "nfs";
-    options = [
-      "x-systemd.automount"
-      "noauto"
-      "x-systemd.idle-timeout=600"
-      "actimeo=1"
-    ];
-  };
+  # DISABLED because we now run box on home
+
+  # fileSystems."/home/${user}/virtual/box" = {
+  #   device = "192.168.1.100:/home/${user}/virtual/box";
+  #   fsType = "nfs";
+  #   options = [
+  #     "x-systemd.automount"
+  #     "noauto"
+  #     "x-systemd.idle-timeout=600"
+  #     "actimeo=1"
+  #   ];
+  # };
 }

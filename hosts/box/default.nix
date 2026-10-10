@@ -13,6 +13,12 @@ in
     ./user.nix
   ];
 
+  boot.kernel.sysctl = {
+    "vm.vfs_cache_pressure" = 300;
+    "vm.dirty_background_ratio" = 5;
+    "vm.dirty_ratio" = 10;
+  };
+
   my.identity.repoPath = "/mnt/nix-config";
   my.identity.dotfilesPath = "/mnt/nix-config/dotfiles";
 
