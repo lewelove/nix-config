@@ -7,6 +7,7 @@
 ; (gtk_accel_path "<Actions>/Thunarwindow/menu" "")
 (gtk_accel_path "<Actions>/ThunarActions/uca-action-1759649936900221-1" "<Primary>t")
 ; (gtk_accel_path "<Actions>/ThunarActionManager/cut" "<Primary>x")
+; (gtk_accel_path "<Actions>/ThunarBookmarks/c61bd72c9f8589c7e10579b8ea295a5e" "")
 (gtk_accel_path "<Actions>/ThunarStandardView/sort-by-size" "Control_L")
 ; (gtk_accel_path "<Actions>/ThunarWindow/file-menu" "")
 ; (gtk_accel_path "<Actions>/ThunarWindow/close-tab" "<Primary>w")

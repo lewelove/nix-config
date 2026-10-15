@@ -4,29 +4,35 @@ local meta_workspaces = {
   },
   Telecom = {
     key = "T",
-    on_created_empty = programs.telegram_client,
+    on_created_empty = x.telegram_client,
   },
   Music = {
     key = "M",
-    on_created_empty = programs.mpd_client,
+    on_created_empty = x.mpd_client,
   },
   Games = {
     key = "G",
-    on_created_empty = programs.steam,
+    on_created_empty = x.steam,
   },
   Image = {
     key = "I",
-    on_created_empty = programs.photoeditor,
+    on_created_empty = x.photoeditor,
   },
   Alarms = {
     key = "F12",
     name = "Alarm",
-    on_created_empty = programs.clock,
+    on_created_empty = x.clock,
+  },
+  Torrent = {
+    key = "O",
+    layout = "dwindle",
+    on_created_empty = x.torrent_client .. " && " .. x.torrent_sources_folder,
   },
   System = {
     key = "Slash",
     name = "/",
-    on_created_empty = programs.vpn,
+    layout = "dwindle",
+    on_created_empty = x.terminal .. " -e dale server & " .. x.terminal .. " -e dale interface dev",
   },
 }
 
@@ -61,10 +67,11 @@ local function move_to_workspace(meta)
 end
 
 for _, meta in pairs(meta_workspaces) do
-  if meta.on_created_empty then
+  if meta.on_created_empty or meta.layout then
     hl.workspace_rule({
       workspace = "name:" .. meta.name,
       on_created_empty = meta.on_created_empty,
+      layout = meta.layout,
     })
   end
 

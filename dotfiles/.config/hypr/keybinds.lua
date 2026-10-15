@@ -13,7 +13,7 @@ hl.bind (
 -- btop
 hl.bind (
   "CONTROL + ALT + Insert",
-  hl.dsp.exec_cmd(programs.terminal .. " -e btop") )
+  hl.dsp.exec_cmd(x.terminal .. " -e btop") )
 
 -- close window safely
 local safe_kill = require("scripts.safe-kill")
@@ -135,39 +135,39 @@ hl.bind (
   "CONTROL + SHIFT + " .. keychron_lock_key,
   hl.dsp.exec_cmd("rmpc single off") )
 
---- Programs ---------------------------------------------------
+--- x ---------------------------------------------------
 
 hl.bind (
   "SUPER + Return",
-  hl.dsp.exec_cmd(programs.terminal) )
+  hl.dsp.exec_cmd(x.terminal) )
 
 hl.bind (
   "SUPER + R",
-  hl.dsp.exec_cmd(programs.menu) )
+  hl.dsp.exec_cmd(x.menu) )
 
 hl.bind (
   "SUPER + SHIFT + E",
-  hl.dsp.exec_cmd(programs.file_manager) )
+  hl.dsp.exec_cmd(x.file_manager) )
 
 hl.bind (
   "SUPER + SHIFT + B",
-  hl.dsp.exec_cmd(programs.browser) )
+  hl.dsp.exec_cmd(x.browser) )
 
 hl.bind (
   "SUPER + KP_Multiply",
-  hl.dsp.exec_cmd(programs.calculator) )
+  hl.dsp.exec_cmd(x.calculator) )
 
 hl.bind (
   "SUPER + SHIFT + P",
-  hl.dsp.exec_cmd(programs.password_manager) )
+  hl.dsp.exec_cmd(x.password_manager) )
 
 hl.bind (
   "SUPER + Grave",
-  hl.dsp.exec_cmd(programs.bookmarks) )
+  hl.dsp.exec_cmd(x.bookmarks) )
 
 hl.bind (
   "SUPER + SHIFT + Return",
-  hl.dsp.exec_cmd(programs.terminal .. " -e " .. programs.lab_ssh) )
+  hl.dsp.exec_cmd(x.terminal .. " -e " .. x.lab_ssh) )
 
 hl.bind (
   "SUPER + SHIFT + S",

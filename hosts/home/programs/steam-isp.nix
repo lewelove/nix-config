@@ -3,7 +3,7 @@
 let
   user = config.my.identity.username;
   steam-isp = pkgs.writeShellScriptBin "steam-isp" ''
-    exec sg novpn -c "steam $*"
+    exec isp steam "$@"
   '';
 in
 {

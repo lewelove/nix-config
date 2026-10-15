@@ -3,12 +3,12 @@
 let
   user = config.my.identity.username;
   chromium-isp = pkgs.writeShellScriptBin "chromium-isp" ''
-    exec sg novpn -c "${config.my.chromium.wrapper}/bin/chromium-browser \
-      --user-data-dir=\$HOME/.config/chromium-isp \
+    exec isp ${config.my.chromium.wrapper}/bin/chromium-browser \
+      --user-data-dir="$HOME/.config/chromium-isp" \
       --disable-background-mode \
       --reduce-user-agent-data-linux-platform-version \
       --remove-client-hints \
-      $*"
+      "$@"
   '';
 in
 {

@@ -48,7 +48,7 @@ let
 
         echo -n "$expanded_path" | ${pkgs.wl-clipboard}/bin/wl-copy -t text/uri-list
         sleep 0.1
-        ${pkgs.wtype}/bin/wtype -M ctrl -M shift v -m shift -m ctrl
+        ${pkgs.wtype}/bin/wtype -M ctrl v -m ctrl
         sleep 0.1
     end
 '';

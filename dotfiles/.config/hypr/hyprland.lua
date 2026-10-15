@@ -1,6 +1,6 @@
 -- lewelove hyprland config --
 
-_G.programs = require("tables.programs")
+_G.x = require("presets")
 
 hl.on("hyprland.start", function () 
   hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_DATA_DIRS")

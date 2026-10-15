@@ -107,9 +107,7 @@ in
     ffmpeg
     intermodal
     aria2
-
-    # Web
-    ayugram-desktop
+    umu-launcher
 
     # Themes and Icons
     nwg-look
@@ -119,6 +117,9 @@ in
     nh
     nvd
     nix-output-monitor
+
+    # Games
+    love
   ];
 
   programs.ssh.startAgent = true;
