@@ -21,8 +21,8 @@ return {
 
    steam = "steam-isp",
 
-   -- photoeditor = "photocraft",
-   photoeditor = "chromium-browser --app=https://photopea.com",
+   photoeditor = "photocraft",
+   -- photoeditor = "chromium-browser --app=https://photopea.com",
   
    lab_ssh = "ssh lab",
 

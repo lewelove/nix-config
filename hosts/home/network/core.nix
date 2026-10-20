@@ -3,10 +3,14 @@
 {
   networking = {
     hostName = "home";
+
     networkmanager.enable = true;
+    nameservers = [ "1.1.1.1" "9.9.9.9" ];
+
     firewall.checkReversePath = "loose";
     firewall.allowedTCPPorts = [ 80 8080 6600 666 2234 2235 ];
     firewall.allowedUDPPorts = [ 9 2234 2235 ];
+    firewall.trustedInterfaces = [ "tun0" ];
 
     interfaces.enp3s0.wakeOnLan.enable = true;
   };

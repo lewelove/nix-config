@@ -13,10 +13,16 @@ in
     ./user.nix
   ];
 
-  boot.kernel.sysctl = {
-    "vm.vfs_cache_pressure" = 300;
-    "vm.dirty_background_ratio" = 5;
-    "vm.dirty_ratio" = 10;
+  boot = { 
+    kernel.sysctl = {
+      "vm.vfs_cache_pressure" = 300;
+      "vm.dirty_background_ratio" = 5;
+      "vm.dirty_ratio" = 10;
+    };
+    tmp = {
+      useTmpfs = false;
+      cleanOnBoot = true;
+    };
   };
 
   my.identity.repoPath = "/mnt/nix-config";

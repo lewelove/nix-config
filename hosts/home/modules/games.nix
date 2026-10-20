@@ -6,6 +6,7 @@
     # lutris
     # luanti
     # rimsort
+    prismlauncher
   ];
 
   programs.gamemode.enable = true;

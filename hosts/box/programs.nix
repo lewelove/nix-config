@@ -24,5 +24,6 @@
     python3
     fd
     ripgrep
+    nh
   ];
 }

@@ -118,6 +118,13 @@ in
             fsType = "ext4";
             autoCreate = true;
           }
+          {
+            image = "/var/lib/microvms/box/box-tmp.img";
+            mountPoint = "/tmp";
+            size = 8192;
+            fsType = "ext4";
+            autoCreate = true;
+          }
         ];
 
         writableStoreOverlay = "/nix/.rw-store";

@@ -3,11 +3,9 @@ import os from 'os';
 import fs from 'fs';
 import process from 'process';
 import { fileURLToPath } from 'url';
-
-// --- CONFIGURATION ---
+import { spawnSync } from 'child_process';
 
 const completelyIgnore = [
-
     '**/*.log', '**/*.lock', '**/node_modules/**',
     '**/.git/**', '**/dist/**', '**/coverage/**',
     '**/tmp/**', '**/.cache/**', '**/.DS_Store',
@@ -28,8 +26,6 @@ const completelyIgnore = [
 const stripExts = [
 ];
 
-// --- PATH LOGIC ---
-
 const args = process.argv.slice(2);
 const targetArg = args.find(arg => !arg.startsWith('-'));
 const cwd = process.cwd();
@@ -44,8 +40,6 @@ if (prettyPath.startsWith(homeDir)) {
     prettyPath = prettyPath.replace(homeDir, '~');
 }
 
-// --- OUTPUT NAMING ---
-
 const dynamicName = prettyPath
     .replace(/^\//, '')
     .replace(/[\/\s]+/g, '-') + '.xml';
@@ -56,8 +50,6 @@ const fullOutputPath = path.join(outputDir, dynamicName);
 if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
 }
-
-// --- POST-PROCESSING HOOK ---
 
 process.on('exit', () => {
     try {
@@ -123,12 +115,19 @@ process.on('exit', () => {
 
         fs.writeFileSync(fullOutputPath, content);
 
+        try {
+            spawnSync('cliphist-copy', [], {
+                input: fullOutputPath + '\n',
+                stdio: ['pipe', 'inherit', 'inherit']
+            });
+        } catch (err) {
+            console.error('Error piping to cliphist-copy:', err);
+        }
+
     } catch (err) {
         console.error('Error post-processing:', err);
     }
 });
-
-// --- EXPORT ---
 
 export default {
     output: {

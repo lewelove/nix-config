@@ -1,10 +1,6 @@
 { pkgs, ... }:
 
 {
-  networking.nameservers = [ "9.9.9.9" ];
-  networking.networkmanager.dns = "none";
-  networking.firewall.trustedInterfaces = [ "tun0" ];
-
   services.sing-box = {
     enable = true;
     settings = {
@@ -19,8 +15,15 @@
             server_port = 53;
             detour = "lab-proxy";
           }
+          {
+            type = "tcp";
+            tag = "cf";
+            server = "1.1.1.1";
+            server_port = 53;
+            detour = "lab-proxy";
+          }
         ];
-        final = "quad9";
+        final = "cf";
         strategy = "prefer_ipv4";
       };
 
@@ -51,7 +54,7 @@
 
       route = {
         auto_detect_interface = true;
-        default_domain_resolver = "quad9";
+        default_domain_resolver = "cf";
         final = "lab-proxy";
         rules = [
           {
